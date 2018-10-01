@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var snack = new Schema({
-    menu_name : String,
+    snack_name : String,
     calories : Number, 
     price : Number,
     protein : Number,
