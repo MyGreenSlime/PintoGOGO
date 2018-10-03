@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import { Button } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom'
 
-import Menu from './component/menu'
+import DemoMenu from './component/demomenu'
+import Addmenu from './component/demoaddmenu'
 const Home = () => <h1>Home</h1>
 
 {/*-------------Add path of page---------------*/}
@@ -14,7 +14,8 @@ class App extends Component {
       <div className="App container">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/about" component={Menu} />
+          <Route path="/demomenu" component={DemoMenu} />
+          <Route path="/demoaddmenu" component={Addmenu} />
         </Switch>
       </div>
     );
