@@ -37,11 +37,10 @@ app.all('/*', function(req, res, next) {
 //var user = require('./routes/user.js');
 var menu = require('./routes/menu.js');
 var user = require('./routes/user.js');
-var address = require('./routes/address.js')
+
 
 app.use('/menus',menu);
 app.use('/users',user);
-app.use('/address',address);
 
 app.listen(4000, function() {
   console.log('Server Running port 4000');

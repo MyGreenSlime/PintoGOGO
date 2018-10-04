@@ -5,7 +5,7 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 var User = require('../models/user');
-
+//show profile
 router.get('/:id', function(request, response){
     User.findById(request.params.id, function(err, profile){
         if(err) {
@@ -16,6 +16,7 @@ router.get('/:id', function(request, response){
     });
 })
 
+//register
 router.post('/register',function(request, response){
     request.checkBody('first_name',"First name is required").notEmpty()
     request.checkBody('last_name',"Last name is required").notEmpty()
@@ -59,7 +60,7 @@ router.post('/register',function(request, response){
         })
     }
 })
-
+//add user address
 router.put('/update/address/:id', function(request, response){
 
     User.update({_id : request.params.id}, {$push : {address :request.body.address}}, function(err, user){
@@ -69,19 +70,6 @@ router.put('/update/address/:id', function(request, response){
             response.json(user);
         }
     })
-    // User.findOne({_id : request.params.id}, function(err, product){
-    //     if(err) {
-    //         response.status(500).send({error : "Could not add item to wishlist"});
-    //     }else {
-    //         WishList.update({_id : request.body.wishListId}, {$addToSet : {products : product._id}} ,function(err, wishList){
-    //             if(err) {
-    //                 response.status(500).send({error : "Could not add item to wishlist"});
-    //             }else {
-    //                 response.send("Succes to add wishlist");
-    //             }
-    //         })
-    //     }
-    // })
 })
 
 module.exports = router;
