@@ -1,12 +1,12 @@
 import React, { Component} from 'react';
-import { postData } from '../api/api'
+import { RestClient } from '../api/api'
 
 class Addmenu extends Component {
     constructor(props){
         super(props);
         this.state = {
             menu: {},
-            status: {}
+            status: 0
         }
     }
     handleSubmit(e){
@@ -50,16 +50,17 @@ class Addmenu extends Component {
                 img_url : this.refs.img_url.value
             }}, function() {
                 console.log(this.state.menu);
-                postData("http://localhost:4000/menus/food/add",this.state.menu)
-                
+                RestClient.post("http://localhost:4000/menus/food/add",this.state.menu)
+                    .then(resstatus => this.setState({status : resstatus}));
             })
         }
         e.preventDefault();
     }    
     render() {
+     const { status } = this.state;
       return (
         <div> 
-            <h3>Add Menu</h3>
+            <h3>Status : {status}</h3>
             <form onSubmit = {this.handleSubmit.bind(this)}>
                 <div>
                     <input ref= "menu_name" type="text" name="menu_name" placeholder="menuname"></input>
