@@ -32,16 +32,27 @@ class Menu extends Component {
       return <div>loading....</div>
     }
       return (
-        <div> 
-          <Row>
-            <Col sm={{ size: 'auto'}}>
+        <div className="menuzone"> 
+          <Row className="firstrow">
+            <Col >
               <CardMenu name={menus[0].menu_name} picture={menus[0].img_url} calories={menus[0].calories}/>
             </Col>
-            <Col sm={{ size: 'auto' }}>
+            <Col >
               <CardMenu name={menus[1].menu_name} picture={menus[1].img_url} calories={menus[1].calories}/>
             </Col>
-            <Col sm={{ size: 'auto'}}>
+            <Col >
             <CardMenu name={menus[2].menu_name} picture={menus[2].img_url} calories={menus[2].calories}/>
+            </Col>
+          </Row>
+          <Row className="secondrow">
+            <Col >
+              <CardMenu name={menus[3].menu_name} picture={menus[3].img_url} calories={menus[3].calories}/>
+            </Col>
+            <Col>
+              <CardMenu name={menus[4].menu_name} picture={menus[4].img_url} calories={menus[4].calories}/>
+            </Col>
+            <Col>
+            <CardMenu name={menus[5].menu_name} picture={menus[5].img_url} calories={menus[5].calories}/>
             </Col>
           </Row>
           

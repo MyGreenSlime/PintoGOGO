@@ -9,7 +9,8 @@ class cardMenu extends Component {
             
             <div>
                 <div className="picture">
-                    <img src={this.props.picture} height="100"/>
+                    {/* change height->auto */}
+                    <CardImg src={this.props.picture} height="170" width="170"/>
                 </div>
                 <div className="textunderpicture">
                     <p>{this.props.name}<br/>
