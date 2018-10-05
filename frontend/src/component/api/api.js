@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-function postData(url = ``, data = {}, status = {}) {
+function postData(url = ``, data = {}) {
     // Default options are marked with *
       return fetch(url, {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -14,9 +14,10 @@ function postData(url = ``, data = {}, status = {}) {
           referrer: "no-referrer", // no-referrer, *client
           body: JSON.stringify(data), // body data type must match "Content-Type" header
       })
-        .then(res => res.json()) // parses response to JSON
-        .then(response => console.log(JSON.stringify(response)))
+        .then(res => res.status)
     }
 
 
-export{postData}
+export const RestClient = {
+    post: postData
+};
