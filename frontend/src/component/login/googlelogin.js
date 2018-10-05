@@ -5,7 +5,9 @@ class Googlelogin extends Component {
     render() { 
         return ( 
             <div>
-                <img src="/img/login/google-sign-in.png" className="google__login--button"/>
+                <a href="./construct">
+                    <img src="/img/login/google-sign-in.png" className="google__login--button"/>
+                </a>
             </div>
          );
     }

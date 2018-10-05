@@ -5,7 +5,7 @@ class Facebooklogin extends Component {
     render() { 
         return( 
         <div>
-            <img src="/img/login/login-face.png" className="facebook__login--button" />
+            <img src="/img/login/login-face.png" className="facebook__login--button" href='./construct'/>
         </div>
         );
     }
