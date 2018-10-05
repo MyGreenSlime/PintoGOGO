@@ -1,0 +1,51 @@
+
+.login__box {
+  background-color: #f3ece7;
+  border-radius: 10px;
+  padding-top: 40px;
+  padding-right: 50px;
+  padding-left: 50px;
+  width: 70%;
+  height: auto;
+  max-width: 450px;
+}
+
+.login__text {
+  margin-bottom: 40px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.submit__login--button {
+  background-color: #ccc0a5;
+  border: none;
+  font-weight: bold;
+  padding: 5px;
+  /* margin-bottom: 5px; */
+  width: 90%;
+}
+
+.submit__login--button:hover {
+  background-color: burlywood;
+}
+
+.google__login--button {
+  margin-top: 10px;
+  max-width: 80%;
+  height: auto;
+}
+
+.google__login--button:hover{
+  filter: grayscale(25%);
+}
+
+.facebook__login--button {
+  margin-top: 10px;
+  max-width: 80%;
+  margin-bottom: 50px;
+  height: auto;
+}
+
+.facebook__login--button:hover{
+  filter: grayscale(25%);
+}
