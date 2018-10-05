@@ -53,7 +53,7 @@ router.post('/register',function(request, response){
                     if(err){
                         response.sendStatus(400);
                     } else {
-                        response.send(newUser);
+                        response.sendStatus(200);
                     }
                 })
             })
@@ -71,5 +71,8 @@ router.put('/update/address/:id', function(request, response){
         }
     })
 })
+
+//login
+
 
 module.exports = router;

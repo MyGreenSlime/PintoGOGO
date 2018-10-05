@@ -1,0 +1,17 @@
+.navbar {
+  background-color: #f9f8f8;
+  opacity: 0.3;
+}
+
+.navbar__link {
+  color: violet;
+}
+
+.navbar__link:hover {
+  color: black;
+}
+
+.navbar__item:hover {
+  color: blueviolet;
+  background-color: #efeeee;
+}

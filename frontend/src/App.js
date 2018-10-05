@@ -1,22 +1,41 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import { Route, Switch } from 'react-router-dom'
-
+//---------------don--------------------------------
 import DemoMenu from './component/demomenu'
 import Addmenu from './component/demoaddmenu'
-const Home = () => <h1>Home</h1>
+//---------------name-------------------------------
+import Navbar from "./component/navbar/navbar";
+import Carousel from "./component/carousel/carousel";
+import Choice from "./component/choice/choice";
+import Recommend from "./component/recommend/recommend";
+//---------------boo---------------------------------
+import Menu from './component/menu/menu.js'
+import cardMenu from './component/cardmenu/cardmenu.js'
+//---------------been-----------------------------------
+import Register from './component/register/register.js'
+import Footer from './component/footer/footer.js'
+
+const Home = () => {
+  return [<Carousel />, <Recommend />, <Choice />, <Menu />];
+};
 
 {/*-------------Add path of page---------------*/}
 class App extends Component {
   render() {
     return (
 
-      <div className="App container">
+      <div className="App">
+        <Navbar />,
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/demomenu" component={DemoMenu} />
           <Route path="/demoaddmenu" component={Addmenu} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/cardmenu" component={cardMenu} />
+          <Route path="/register" component={Register} />
         </Switch>
+        <Footer />
       </div>
     );
   }
