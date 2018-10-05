@@ -1,0 +1,24 @@
+.recommend__block {
+  height: 1000px;
+  position: relative;
+}
+
+.headtext {
+  padding: 20px;
+}
+
+.card {
+  margin-left: 48px;
+  margin-right: 48px;
+  background: transparent;
+  border: 0px;
+}
+
+.card__img {
+  border-radius: 8px;
+}
+
+.img {
+  width: 10rem;
+  height: auto;
+}

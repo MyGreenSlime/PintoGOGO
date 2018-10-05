@@ -1,0 +1,30 @@
+.choice__block {
+  height: 280px;
+  padding-top: 30px;
+  background-color: #f3ece7;
+  position: relative;
+  align-content: center;
+}
+
+.button {
+  border: none;
+  background-color: #e4dac2;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.cardgroup {
+  margin-left: 70px;
+  margin-right: 70px;
+  max-width: 1024px;
+}
+
+.card__img {
+  width: 8rem;
+  align-self: center;
+}
+
+.btn--active,
+.btn:hover {
+  background-color: #d3c4be;
+}
