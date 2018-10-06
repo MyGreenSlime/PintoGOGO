@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "./navbar.js";
-import "../../css/login.css";
 import {
   Col,
   Row,

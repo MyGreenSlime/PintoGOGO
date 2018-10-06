@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import "../../css/login.css";
-import Navbar from "./navbar.js";
-import Userpass from "../login/userpass";
-import Googlelogin from "../login/googlelogin";
-import Facebooklogin from "../login/facebooklogin";
+import Userpass from "../userpass/userpass";
+import Googlelogin from "../google/googlelogin";
+import Facebooklogin from "../facebook/facebooklogin";
+import '../mainlogin/style-login.css'
+import "../google/style-google.css";
+import '../facebook/style-facebook.css'
+import '../userpass/style-userpass.css'
 
 class Login extends Component {
 

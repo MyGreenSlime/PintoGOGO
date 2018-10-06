@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import './css/bootstrap.css';
 import App from './App';
-import Login from './component/login/login.js';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
-import './css/login.css'
 
 const AppWithRouter = () => (
     <BrowserRouter>

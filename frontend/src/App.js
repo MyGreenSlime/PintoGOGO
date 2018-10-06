@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import { Button } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom'
-
-import Menu from './component/menu'
-import Login from './component/login/login'
+//---------------don--------------------------------
+import DemoMenu from './component/demomenu'
+import Addmenu from './component/demoaddmenu'
+//---------------name-------------------------------
+import Navbar from "./component/navbar/navbar";
+import Carousel from "./component/carousel/carousel";
+import Choice from "./component/choice/choice";
+import Recommend from "./component/recommend/recommend";
+//---------------boo---------------------------------
+import Menu from './component/menu/menu.js'
+import cardMenu from './component/cardmenu/cardmenu.js'
+//---------------been-----------------------------------
+import Register from './component/register/register.js'
+import Footer from './component/footer/footer.js'
+//---------------pat------------------------------------
+import Login from './component/login/mainlogin/login'
 import Construct from './component/login/underconstruct'
-const Home = () => <h1>Home</h1>
+const Home = () => {
+  return [<Carousel />, <Recommend />, <Choice />, <Menu />];
+};
 
 {/*-------------Add path of page---------------*/}
 class App extends Component {
   render() {
     return (
-      <div className="App container">
+
+      <div className="App">
+        <Navbar />,
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/about" component={Menu} />
-          {/* <center> */}
-            <Route path="/login" component={Login} />
-          {/* </center> */}
+          <Route path="/demomenu" component={DemoMenu} />
+          <Route path="/demoaddmenu" component={Addmenu} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/cardmenu" component={cardMenu} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
           <Route path="/construct" component={Construct}/>
         </Switch>
+        <Footer />
       </div>
     );
   }
