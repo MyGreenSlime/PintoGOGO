@@ -1,0 +1,21 @@
+.recommend__block {
+  position: relative;
+}
+
+.headtext {
+  padding: 20px;
+}
+
+.card {
+  background: transparent;
+  border: 0px;
+}
+
+.cardgroup {
+  min-width: 768px;
+  flex-direction: row;
+}
+
+.card__img {
+  border-radius: 8px;
+}

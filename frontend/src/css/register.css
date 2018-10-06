@@ -89,3 +89,7 @@ input[type=email] {
 input[type=textarea] {
     border-radius: 8px;
  }
+
+input::placeholder {
+  color: red !important;
+}

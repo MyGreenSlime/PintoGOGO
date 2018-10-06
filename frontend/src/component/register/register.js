@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Container, Col, Row, Button, Form, FormGroup, Label, Input, formText, Alert,ReactDOM } from 'reactstrap';
-import '../../css/register.css';
+import './register.css';
 import { RestClient } from '../api/api'
 import axios from 'axios'
+import { AvForm, AvInput, AvGroup, AvFeedback } from 'availity-reactstrap-validation';
 
 class Register extends Component {
 	constructor(props){
@@ -27,7 +28,7 @@ class Register extends Component {
 		this.onChangePassword2 = this.onChangePassword2.bind(this)
 		this.onChangePhonenumber = this.onChangePhonenumber.bind(this)
 		this.onChangeAddress = this.onChangeAddress.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleValidSubmit = this.handleValidSubmit.bind(this)
   }
   onChangeFirstname(e) {
 		this.setState({
@@ -81,10 +82,7 @@ class Register extends Component {
     this.setState(this.baseState)
   }
 
-	handleSubmit(e) {
-    // if(this.state.first_name === ''){
-    //   alert('required')
-    // }
+	handleValidSubmit(e) {
     const userDetail = {
 			first_name : this.state.first_name,
 			last_name : this.state.last_name,
@@ -108,99 +106,173 @@ class Register extends Component {
         <div className='register-box'> {/*register box*/}
           <h2> SIGN UP </h2>
           <br/>
-          <Form className='form'>
+          <AvForm className='form' onValidSubmit={this.handleValidSubmit}>
           <Row>
             <Col className="col-md-6 col-12">
               <div className='form-left'> {/*left form*/}
-                <FormGroup row>
+                <AvGroup row>
                    <Label className='text-form-left' for="Firstname" >Firstname*</Label> 
     	  	        <Col>  
-						        <Input type="text" id="Firstname" onChange={this.onChangeFirstname} value={this.state.first_name} required/>
-		    	        </Col>  
-                </FormGroup>
-                <FormGroup row>
+						        <AvInput 
+											name="firstname" 
+											type="text" 
+											id="Firstname" 
+											onChange={this.onChangeFirstname} 
+											value={this.state.first_name} 
+											required/>
+										<AvFeedback >Firstname is required!</AvFeedback>
+		    	        </Col> 
+                </AvGroup>
+                <AvGroup row>
 					        <Label className='text-form-left' for="Lastname" >Lastname*</Label>
     	  	        <Col>
-						        <Input type="text" id="Lastname" onChange={this.onChangeLastname} value={this.state.last_name} required/>			    	        
-                  </Col>
-					      </FormGroup>
-                <FormGroup row>
+						        <AvInput 
+											type="text" 
+											name="lastname" 
+											id="Lastname" 
+											onChange={this.onChangeLastname} 
+											value={this.state.last_name} 
+											required/>			    	        
+										<AvFeedback>Lastname is required!</AvFeedback> 
+									</Col>
+					      </AvGroup>
+                <AvGroup row>
 						      <Label className='text-form-left' for="Username" >Username*</Label>
       	  	      <Col>
-							      <Input type="text" id="Username" onChange={this.onChangeUsername} value={this.state.user_name} required/>
+							      <AvInput 
+											type="text" 
+											name="username" 
+											id="Username" 
+											minLength="4"
+											placeholder="at least 4 characters"
+											onChange={this.onChangeUsername} 
+											value={this.state.user_name} 
+											required/>
+										<AvFeedback>Username is required!</AvFeedback>
 			    	      </Col>
-					      </FormGroup>
-					       <FormGroup row>
+					      </AvGroup>
+								<AvGroup row>
 						      <Label className='text-form-left' for="Password">Password*</Label>
       	  	      <Col>
-							      <Input type="password" id="Password" onChange={this.onChangePassword1} value={this.state.password1} reqiured/>
-			    	      </Col>
-					      </FormGroup>
-					      <FormGroup row>
+							      <AvInput 
+											type="password" 
+											name="password" 
+											id="Password" 
+											minLength="8"
+											placeholder="at least 8 characters"
+											onChange={this.onChangePassword1} 
+											value={this.state.password1} 
+											required/>
+										<AvFeedback>Password is required!</AvFeedback>
+      			    	</Col>
+			      		</AvGroup> 
+					      <AvGroup row>
 						      <Label className='text-form-left' for="ConfirmPassword">Confirm Password*</Label>
       	  	      <Col>
-							      <Input type="password" id="ConfirmPassword" onChange={this.onChangePassword2} value={this.state.password2} required/>
+							      <AvInput 
+											type="password" 
+											name="confirmpassword" 
+											id="ConfirmPassword" 
+											minLength="8"
+											placeholder="at least 8 characters"
+											onChange={this.onChangePassword2} 
+											value={this.state.password2} 
+											required/>
+										<AvFeedback>Confirm password is required!</AvFeedback>
       			    	</Col>
-			      		</FormGroup> 
-      					<FormGroup row>
+			      		</AvGroup> 
+      					{/* <AvGroup row>
 			      			<Label className='text-form-left' for="Email">E-mail*</Label>
             	  	<Col>
-			      				<Input type="email" id="Email" onChange={this.onChangeEmail} value={this.state.email} required/>
+			      				<AvInput type="email" id="Email" onChange={this.onChangeEmail} value={this.state.email} required/>
 			    	      </Col>
-      					</FormGroup>
-                <FormGroup row>
+      					</AvGroup>
+                <AvGroup row>
                   <Label className='text-form-left' for="PhoneNumber">Phone Number* &nbsp;&nbsp;</Label>
 						      <Col>
-                    <Input type="text" id="PhoneNumber" onChange={this.onChangePhonenumber} value={this.state.phonenumber} required/>
+                    <AvInput type="text" id="PhoneNumber" onChange={this.onChangePhonenumber} value={this.state.phonenumber} required/>
                   </Col>
-                </FormGroup>
+                </AvGroup> */}
               </div>
             </Col>
             <Col className="col-md-6 col-12">
               <div className='form-right'> {/*right form*/}
-                <FormGroup row>
+								<AvGroup row>
+			      			<Label className='text-form-left' for="Email">E-mail*</Label>
+            	  	<Col>
+			      				<AvInput 
+											type="email" 
+											name="email" 
+											id="Email" 
+											onChange={this.onChangeEmail} 
+											value={this.state.email} 
+											required/>
+										<AvFeedback>Email is required!</AvFeedback>
+			    	      </Col>
+      					</AvGroup>
+                <AvGroup row>
+                  <Label className='text-form-left' for="PhoneNumber">Phone Number* &nbsp;&nbsp;</Label>
+						      <Col>
+                    <AvInput 
+											type="text" 
+											name="phonenumber" 
+											id="PhoneNumber" 
+											maxLength={10}
+											onChange={this.onChangePhonenumber} 
+											value={this.state.phonenumber} 
+											required/>
+										<AvFeedback>PhoneNumber is required!</AvFeedback>
+									</Col>
+                </AvGroup>
+                <AvGroup row>
                   <Label className='text-form-right' for="Address" sm={12}>Address(Default)</Label>
                   <Col>
-						      <Input className='addr' type="textarea" id="Address" onChange={this.onChangeAddress} value={this.state.address}/>
+						      	<AvInput 
+										className='addr' 
+										name="address" 
+										type="textarea" 
+										id="Address" 
+										onChange={this.onChangeAddress} 
+										value={this.state.address}/>
                   </Col>
-                </FormGroup>
-                <FormGroup row> 
+                </AvGroup>
+                {/* <AvGroup row> 
 						      <Label className='text-form-right' className='payment' for="Payment">Payment Method&nbsp;&nbsp;</Label>
                   <Col sm={6}>
-						        <Input type="select" id="Payment">
+						        <AvInput type="select" id="Payment">
                       <option>None</option>
 							        <option>Visa</option>
         			        <option>Mastercard</option>
 						        </Input>
                   </Col>
-					      </FormGroup> 
-                <FormGroup row>
+					      </AvGroup> 
+                <AvGroup row>
 						      <Col className='text-form-right' sm={7}> 
 							      <Label for="CardNumber">Card Number</Label>
-							      <Input type="text" id="CardNumber"/>
+							      <AvInput type="text" id="CardNumber"/>
 						      </Col>
 						      <Col className='text-form-right'sm={3}> 
 							      <Label for="CVV">CVV</Label>
 							      <Input className='input-form-cvv' type="text" id="CVV"/>
 						      </Col>
-                </FormGroup>
-                <FormGroup row>
+                </AvGroup>
+                <AvGroup row>
 						      <Label className='exp' for="EXP">Expired&nbsp;&nbsp;</Label>
                   <Col>
-						      <Input type="text" id="EXPMonth" placeholder="month"/>
+						      <AvInput type="text" id="EXPMonth" placeholder="month"/>
 					        </Col>
                   <Label className='slash'>/</Label>
                   <Col>
-					        <Input type="text" id="EXPYear" placeholder="year"/>
+					        <AvInput type="text" id="EXPYear" placeholder="year"/>
                   </Col>
                   <Label sm={2}>&nbsp;&nbsp;</Label>
-				        </FormGroup>
+				        </AvGroup> */}
               </div>
             </Col>
           </Row>
-          </Form>
-          <br/>
-          <Button width='auto' className='button-confirm' onClick={this.handleSubmit.bind(this)}> COMFIRM </Button>
+					<br/>
+					<Button width='auto' className='button-confirm'> COMFIRM </Button>
+          </AvForm>
         </div>
       </div>
     

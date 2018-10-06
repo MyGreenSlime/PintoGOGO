@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
+import axios from 'axios'
 class DemoMenu extends Component {
   constructor(props) {
     super(props);
@@ -11,14 +12,11 @@ class DemoMenu extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:4000/menus/food')
-    .then(res => res.json())
-    .then(json => {
-      this.setState({
-        isLoaded: true,
-        menus: json,
+    axios.get('http://localhost:4000/menus/food')
+      .then(res => {
+        const allmenus = res.data
+        this.setState({isLoaded: true , menus: allmenus})
       })
-    })
   }
 
   render() {

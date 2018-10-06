@@ -71,6 +71,50 @@ class Addmenu extends Component {
     }
 
     handleSubmit(e) {
+        //var pass = true
+        // if(this.refs.menu_name.value === '') {
+        //     alert('MenuName is required')
+        //     pass = false
+        // }
+        // if(this.refs.price.value === '') {
+        //     alert('Price is required')
+        //     pass = false
+        // }
+        // if(this.refs.carlories.value === '') {
+        //     alert('carlories is required')
+        //     pass = false
+        // }
+        // if(this.refs.protein.value === '') {
+        //     alert('protein is required')
+        //     pass = false
+        // }
+        // if(this.refs.carbohydrate.value === '') {
+        //     alert('carlories is required')
+        //     pass = false
+        // }
+        // if(this.refs.fat.value === '') {
+        //     alert('fat is required')
+        //     pass = false
+        // }
+        // if(this.refs.img_url.value === '') {
+        //     alert('imgurl is required')
+        //     pass = false
+        // }
+        // if(pass) {
+        //     this.setState({menu : {
+        //         menu_name : this.refs.menu_name.value,
+        //         price : this.refs.price.value,
+        //         calories : this.refs.carlories.value,
+        //         protein : this.refs.protein.value,
+        //         carbohydrate : this.refs.carbohydrate.value,
+        //         fat : this.refs.fat.value,
+        //         img_url : this.refs.img_url.value
+        //     }}, function() {
+        //         console.log(this.state.menu);
+        //         RestClient.post("http://localhost:4000/menus/food/add",this.state.menu)
+        //             .then(resstatus => this.setState({status : resstatus}));
+        //     })
+        // }
         const menudetail = {
             menu_name : this.state.menu_name,
             price : this.state.price,
