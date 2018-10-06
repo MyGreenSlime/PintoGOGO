@@ -98,7 +98,7 @@ class Register extends Component {
 		console.log(userDetail)
 		RestClient.post("http://localhost:4000/users/register",userDetail)
 		.then(resstatus => this.setState({status : resstatus}));
-		console.log(this.state.status)
+		//console.log(this.state.status)
         e.preventDefault();
     }    
       
