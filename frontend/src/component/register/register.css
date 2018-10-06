@@ -1,108 +1,62 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
 .set-screen {
-    background: url("./bg.png");
+    background: url("/img/register/bg.png");
     background-size: cover;
-    /* align-self : center; */
-     /* position: fixed;  */
-    padding-top: 10%;
-    padding-bottom: 100px;; 
-    /* width: 100%; */
-    /* height: 100%; */
     background-repeat: no-repeat;
+    padding: 7% 0 10% 0 
 }
 
 .register-box
 {
+    width: 72%;
+    margin: 0 auto 0 auto; 
     background-color: #f3ece7;
     border-radius: 18px;
-    /* margin-top: 10%; */
-    /* margin-bottom: 15%; */
-    padding-top: 50px;
-    padding-bottom: 50px;
-    /* position: absolute;
-    left: 20%;
-    right: 20%;  */
-    max-width: 1100px;  
-    /* max-width: 1000px;  */
-    text-align: center;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
+    /* padding: 20px; */
+    font-family: 'Quicksand', sans-serif; 
+    min-width: 393px;
+    padding: 30px 30px 50px 30px
 }
 
 .form
 {
-    width: 70%;  
-    max-width: 1000px;
+    font-size: 18px;
+}
+
+.form-left
+{
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .text-form-left
 {
-     text-align: right; 
-    /* margin-top: 5px;
-      margin-bottom: 5px;   */
+    width: 40%;
+}
+
+.form-right
+{
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .text-form-right
 {
     text-align: left;
-    /* margin-left: 10px; */
 }
 
-.input-form-left
+.payment
 {
-    margin-top: 5px;
-    margin-bottom: 5px; 
-    margin-right: 15px;  
-    max-width: 95%;
+    width: 41%;
+    text-align: left;
+    padding-left: 15px;
 }
 
-.input-form-right
+.exp
 {
-    margin-bottom: 5px;  
-    margin-left: 5px;
-    max-width: 190px; 
-}
-
-.input-form-card
-{
-    margin-bottom: 5px;  
-    margin-left: 5px;
-    width: 250px;
-}
-
-.input-form-cardno
-{
-    margin-bottom: 5px;  
-    margin-left: 5px;
-    max-width: 300px;
-}
-
-.input-form-cvv
-{
-    margin-bottom: 5px;  
-    margin-left: 5px;
-    max-width: 80px;
-}
-
-
-.input-addr
-{
-    max-width: 350px;
-    margin-left: 5px; 
-    margin-bottom: 10px;
-}
-
- /* input[type=text]:focus {
-    border: 3px solid #555;
-     box-shadow: 3px 5px #555; 
-}  */
-
-.input-form-expired
-{
-    max-width: 50px;
+    width: 20%;
+    padding-left: 15px;
 }
 
 .button-confirm
@@ -112,4 +66,26 @@
     border: solid 0px;
     width: 100px;
     font-weight: bold;
+    /* margin-bottom: 20px; */
 }
+
+.addr
+{
+    height: 110px !important;
+}
+
+input[type=text] {
+    border-radius: 8px;
+ }
+
+input[type=password] {
+    border-radius: 8px;
+ }
+
+input[type=email] {
+    border-radius: 8px;
+ }
+
+input[type=textarea] {
+    border-radius: 8px;
+ }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 //---------------don--------------------------------
 import DemoMenu from './component/demomenu'
 import Addmenu from './component/demoaddmenu'
@@ -24,10 +24,12 @@ const Home = () => {
 
 {/*-------------Add path of page---------------*/}
 class App extends Component {
+ 
   render() {
     return (
 
       <div className="App">
+      
         <Navbar />,
         <Switch>
           <Route exact path="/" component={Home} />
