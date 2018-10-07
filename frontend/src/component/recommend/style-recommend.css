@@ -1,24 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
 .recommend__block {
-  height: 1000px;
   position: relative;
+  overflow: overlay;
+  font-family: "Quicksand", sans-serif;
+  margin-bottom: 30px;
 }
 
 .headtext {
-  padding: 20px;
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
 
-.card {
-  margin-left: 48px;
-  margin-right: 48px;
-  background: transparent;
+.cardgroup__recommend {
+  min-width: 1024px;
+  flex-direction: row;
+}
+
+.card__recommend {
   border: 0px;
+  background: transparent;
+  align-items: center;
 }
 
-.card__img {
+.cardimg__recommend {
+  width: 14rem;
   border-radius: 8px;
-}
-
-.img {
-  width: 10rem;
-  height: auto;
 }

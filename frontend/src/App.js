@@ -1,21 +1,21 @@
 import React, { Component } from "react";
-import "./css/App.css";
 import { Route, Switch } from "react-router-dom";
+import "./css/App.css";
 
 import Navbar from "./component/navbar/navbar";
 import Carousel from "./component/carousel/carousel";
 import Choice from "./component/choice/choice";
+import Recommend from "./component/recommend/recommend";
 
-const Home = () => <h1>Home</h1>;
+const Home = () => {
+  return [<Navbar />, <Carousel />, <Recommend />, <Choice />];
+};
 
 /*-------------Add path of page---------------*/
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
-        <Carousel />
-        <Choice />
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
@@ -23,5 +23,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
