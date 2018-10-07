@@ -96,7 +96,7 @@ class Menu extends Component {
             </div>
 
             <Row className="secondrow">
-              {menus[forthImg] && <CardMenu name={menus[forthImg].menu_name} picture={menus[forthImg].img_url} calories={menus[forthImg].calories}/> } 
+              {menus[forthImg] &&<CardMenu name={menus[forthImg].menu_name} picture={menus[forthImg].img_url} calories={menus[forthImg].calories}/> } 
               
               {menus[fifthImg] &&<CardMenu name={menus[fifthImg].menu_name} picture={menus[fifthImg].img_url} calories={menus[fifthImg].calories}/> }
            
