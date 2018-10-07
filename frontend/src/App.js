@@ -4,6 +4,8 @@ import { Route, Switch } from 'react-router-dom'
 //---------------don--------------------------------
 import DemoMenu from './component/demomenu'
 import Addmenu from './component/demoaddmenu'
+import Addsnack from './component/demoaddsnack';
+import Snack from './component/snack/snack.js'
 //---------------name-------------------------------
 import Navbar from "./component/navbar/navbar";
 import Carousel from "./component/carousel/carousel";
@@ -17,31 +19,29 @@ import Register from './component/register/register.js'
 import Footer from './component/footer/footer.js'
 //---------------pat------------------------------------
 import Login from './component/login/mainlogin/login'
-import Construct from './component/login/underconstruct'
+import Construct from './component/undercontruct/underconstruct'
 const Home = () => {
-  return [<Carousel />, <Recommend />, <Choice />, <Menu />];
+  return [<Carousel />, <Recommend />, <Choice />];
 };
 
 {/*-------------Add path of page---------------*/}
 class App extends Component {
   render() {
-    return (
-
-      <div className="App">
-        <Navbar />,
-        <Switch>
+    return <div className="App">
+        <Navbar />,<Switch>
           <Route exact path="/" component={Home} />
           <Route path="/demomenu" component={DemoMenu} />
           <Route path="/demoaddmenu" component={Addmenu} />
           <Route path="/menu" component={Menu} />
+          <Route path="/demoaddsnack" component={Addsnack} />
           <Route path="/cardmenu" component={cardMenu} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/construct" component={Construct}/>
+          <Route path="/construct" component={Construct} />
+          <Route path="/snack" component={Snack} />
         </Switch>
         <Footer />
-      </div>
-    );
+      </div>;
   }
 }
 

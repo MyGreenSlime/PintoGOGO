@@ -5,6 +5,7 @@ var Menu = require('../models/menu');
 var Snack = require('../models/snack');
 
 //-----------------------------------------------------food-----------------------------------------------
+//find all menu
 router.get('/food',function(request, response) {
     Menu.find({}, function(err, menus){
         if(err) {
@@ -14,22 +15,32 @@ router.get('/food',function(request, response) {
         }
     });
 });
-
+//find single menu
+router.get('/food/:id',function(request, response) {
+    Menu.findById(request.params.id, function(err, menu){
+        if(err) {
+            response.status(500).send({error : "Not found Menu"});
+        } else {
+            response.send(menu);
+        }
+    });
+});
+// add new menu
 router.post('/food/add',function(request, response) {
     var menu = new Menu();
-    menu.menu_name = request.body.menuname,
+    menu.menu_name = request.body.menu_name,
     menu.calories = request.body.calories, 
     menu.price = request.body.price,
     menu.protein = request.body.protein,
     menu.carbohydrate = request.body.carbohydrate,
     menu.fat = request.body.fat,
-    menu.img_url = request.body.imgurl
+    menu.img_url = request.body.img_url
     
     menu.save(function(err, savedMenu){
         if(err) {
-            response.status(500).send({error : "Could not add new menu"});
+            response.sendStatus(500);
         }else {
-            response.send(savedMenu);
+            response.sendStatus(200);
         }
     })
 });
@@ -45,21 +56,31 @@ router.get('/snack',function(request, response) {
     });
 });
 
+router.get('/snack/:id',function(request, response) {
+    Snack.findById(request.params.id, function(err, snack){
+        if(err) {
+            response.status(500).send({error : "Not found Snack"});
+        } else {
+            response.send(snack);
+        }
+    });
+});
+
 router.post('/snack/add',function(request, response) {
     var snack = new Snack();
-    snack.snack_name = request.body.snackname,
+    snack.snack_name = request.body.snack_name,
     snack.calories = request.body.calories, 
     snack.price = request.body.price,
     snack.protein = request.body.protein,
     snack.carbohydrate = request.body.carbohydrate,
     snack.fat = request.body.fat,
-    snack.img_url = request.body.imgurl
+    snack.img_url = request.body.img_url
     
     snack.save(function(err, savedSnack){
-        if(err) {
-            response.status(500).send({error : "Could not add new snack"});
-        }else {
-            response.send(savedSnack);
+        if (err) {
+            response.sendStatus(500);
+        } else {
+            response.sendStatus(200);
         }
     })
 });

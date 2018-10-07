@@ -67,36 +67,35 @@ class Menu extends Component {
     }
       return (
         <div className="menuzone"> 
-        <div className="rightClickMenu"  onClick ={this.rightClick.bind(this)}>
-          <img src={"/img/other/right-arrow.png"} height="20"/>
-        </div>  
+          <div className="rightClickMenu"  onClick ={this.rightClick.bind(this)}>
+            <img src={"/img/other/right-arrow.png"} height="20"/>
+          </div>  
 
-        <div className="leftClickMenu"  onClick ={this.leftClick.bind(this)}>
-          <img src={"/img/other/left-arrow.png"} height="20"/>
-        </div>  
-          <Row className="firstrow">
-            <Col >
-            {menus[firstImg] &&<CardMenu name={menus[firstImg].menu_name} picture={menus[firstImg].img_url} calories={menus[firstImg].calories}/> }
-            </Col>
-            <Col >
-            {menus[secondImg] &&<CardMenu name={menus[secondImg].menu_name} picture={menus[secondImg].img_url} calories={menus[secondImg].calories}/> }
-            </Col>
-            <Col >
-            {menus[thirdImg] && <CardMenu name={menus[thirdImg].menu_name} picture={menus[thirdImg].img_url} calories={menus[thirdImg].calories}/> }
-            </Col>
-          </Row>
-          
-          <Row className="secondrow">
-            <Col >
-            {menus[forthImg] && <CardMenu name={menus[forthImg].menu_name} picture={menus[forthImg].img_url} calories={menus[forthImg].calories}/> } 
-            </Col>
-            <Col>
-            {menus[fifthImg] &&<CardMenu name={menus[fifthImg].menu_name} picture={menus[fifthImg].img_url} calories={menus[fifthImg].calories}/> }
-            </Col>
-            <Col>
-            {menus[sixthImg] &&<CardMenu name={menus[sixthImg].menu_name} picture={menus[sixthImg].img_url} calories={menus[sixthImg].calories}/> }
-            </Col>
-          </Row>
+          <div className="leftClickMenu"  onClick ={this.leftClick.bind(this)}>
+            <img src={"/img/other/left-arrow.png"} height="20"/>
+          </div>  
+            <Row className="firstrow">
+              <Col >
+              {menus[firstImg] &&<CardMenu name={menus[firstImg].menu_name} picture={menus[firstImg].img_url} calories={menus[firstImg].calories}/> }
+              </Col>
+              <Col >
+              {menus[secondImg] &&<CardMenu name={menus[secondImg].menu_name} picture={menus[secondImg].img_url} calories={menus[secondImg].calories}/> }
+              </Col>
+              <Col >
+              {menus[thirdImg] && <CardMenu name={menus[thirdImg].menu_name} picture={menus[thirdImg].img_url} calories={menus[thirdImg].calories}/> }
+              </Col>
+            </Row>
+            <Row className="secondrow">
+              <Col >
+              {menus[forthImg] && <CardMenu name={menus[forthImg].menu_name} picture={menus[forthImg].img_url} calories={menus[forthImg].calories}/> } 
+              </Col>
+              <Col>
+              {menus[fifthImg] &&<CardMenu name={menus[fifthImg].menu_name} picture={menus[fifthImg].img_url} calories={menus[fifthImg].calories}/> }
+              </Col>
+              <Col>
+              {menus[sixthImg] &&<CardMenu name={menus[sixthImg].menu_name} picture={menus[sixthImg].img_url} calories={menus[sixthImg].calories}/> }
+              </Col>
+            </Row>
           
         </div>
       );

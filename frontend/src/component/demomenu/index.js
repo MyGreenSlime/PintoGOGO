@@ -14,8 +14,8 @@ class DemoMenu extends Component {
   componentDidMount() {
     axios.get('http://localhost:4000/menus/food')
       .then(res => {
-        const allmenus = res.data
-        this.setState({isLoaded: true , menus: allmenus})
+        const allsnack = res.data
+        this.setState({isLoaded: true , menus: allsnack})
       })
   }
 
