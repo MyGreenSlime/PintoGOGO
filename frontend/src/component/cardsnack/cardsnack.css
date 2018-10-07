@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
-.textundermenu{
+.textundersnack{
     font-family: 'Quicksand', sans-serif;
     font-size: 15px;
     padding-left: 80px;
 }
 
-.cardmenu__block{    
+.cardsnack__block{    
     grid-column: 1 / 3;
 }
 
-.cardmenu__image{
+.cardsnack__image{
     border-radius: 8px;
 }
 
@@ -19,14 +19,14 @@
     padding-right: 50px;
 }
 
-.undermenu {
+.undersnack {
     display: inline-block;
     /* grid-template-rows: 100% 20px; */
     text-align: center;
     /* vertical-align:top; */
 }
 
-.menu {
+.snack {
     display: grid;
     grid-gap: 5px;
     /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */

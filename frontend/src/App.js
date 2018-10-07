@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './css/App.css';
 import { Route, Switch } from 'react-router-dom'
 //---------------don--------------------------------
-import DemoMenu from './component/demomenu'
 import Addmenu from './component/demoaddmenu'
 import Addsnack from './component/demoaddsnack';
 import Snack from './component/snack/snack.js'
@@ -30,7 +29,6 @@ class App extends Component {
     return <div className="App">
         <Navbar />,<Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/demomenu" component={DemoMenu} />
           <Route path="/demoaddmenu" component={Addmenu} />
           <Route path="/menu" component={Menu} />
           <Route path="/demoaddsnack" component={Addsnack} />

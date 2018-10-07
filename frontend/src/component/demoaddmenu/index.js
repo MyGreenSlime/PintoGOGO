@@ -2,6 +2,16 @@ import React, { Component} from 'react';
 import { RestClient } from '../api/api'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
+import {
+    Row,
+    Col,
+    Button,
+    FormGroup,
+    Input,
+    FormText
+} from "reactstrap";
+import './style-addmenu.css'
+
 class Addmenu extends Component {
     constructor(props){
         super(props);
@@ -136,35 +146,39 @@ class Addmenu extends Component {
     render() {
      const { status } = this.state;
       return (
-        <div> 
-            <h3>Status : {status}</h3>
-            <form onSubmit = {this.handleSubmit.bind(this)}>
-                <div>
-                    <input type="text" name="menu_name" placeholder="menuname" value={this.state.menu_name} onChange={this.onChangeMenuname} required ></input>
+        // <React.Fragment>
+            <div className="setbg__addmenu">
+                <div className="form-group" className="addmenu__box">
+                    <h3>Status : {status}</h3>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <FormGroup>
+                            <Input type="text" name="menu_name" placeholder="menuname" value={this.state.menu_name} onChange={this.onChangeMenuname} required />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input type="number" name="price" placeholder="price" value={this.state.price} onChange={this.onChangePrice} required />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input type="number" name="carlories" placeholder="carlories" value={this.state.calories} onChange={this.onChangeCalories} required />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input type="number" name="protein" placeholder="protein" value={this.state.protein} onChange={this.onChangeProtien} required />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input type="number" name="carbohydrate" placeholder="carbohydrate" value={this.state.carbohydrate} onChange={this.onChangeCarbohydrate} required />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input type="number" name="fat" placeholder="fat" value={this.state.fat} onChange={this.onChangeFat} required />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input type="text" name="img_url" placeholder="url" value={this.state.img_url} onChange={this.onChangeImgurl} required />
+                        </FormGroup>
+                        <Button type="submit" value="submit" className="submit__addmenu--button">
+                            SUBMIT
+                        </Button>
+                    </form>
                 </div>
-                <div>
-                    <input type="number" name="price" placeholder="price" value={this.state.price} onChange={this.onChangePrice} required ></input>
-                </div>
-                <div>
-                    <input type="number" name="carlories" placeholder="carlories" value={this.state.calories} onChange={this.onChangeCalories} required ></input>
-                </div>
-                <div>
-                    <input type="number" name="protein" placeholder="protein" value={this.state.protein} onChange={this.onChangeProtien} required ></input>
-                </div>
-                <div>
-                    <input type="number" name="carbohydrate" placeholder="carbohydrate" value={this.state.carbohydrate} onChange={this.onChangeCarbohydrate} required ></input>
-                </div>
-                <div>
-                    <input type="number" name="fat" placeholder="fat" value={this.state.fat} onChange={this.onChangeFat} required ></input>
-                </div>
-                <div>
-                    <input type="text" name="img_url" placeholder="url" value={this.state.img_url} onChange={this.onChangeImgurl} required ></input>
-                </div>
-                <div>
-                    <input type="submit" value="submit"></input>
-                </div>
-            </form>
-        </div>
+            </div>
+        // </React.Fragment>
       );
     }
     

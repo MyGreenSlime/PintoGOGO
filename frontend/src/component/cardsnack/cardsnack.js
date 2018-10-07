@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import '../cardmenu/cardmenu.css';
+import '../cardsnack/cardsnack.css';
 import { Container, Row, Col} from 'reactstrap';
 
  
@@ -22,11 +22,11 @@ export default class cardMenu extends Component {
     render() { 
         return (
             
-            <section className="menu">
-                <div className="cardmenu__block">
-                    <img src={this.props.picture} width="200px" className="cardmenu__image"/>
+            <section className="snack">
+                <div className="cardsnack__block">
+                    <img src={this.props.picture} width="200px" className="cardsnack__image"/>
                 </div>
-                <div className="textundermenu">
+                <div className="textundersnack">
                         <p>{this.props.name}<br/>
                         {this.props.calories} Kcal</p>
                 </div>
