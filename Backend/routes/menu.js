@@ -78,9 +78,9 @@ router.post('/snack/add',function(request, response) {
     
     snack.save(function(err, savedSnack){
         if(err) {
-            response.status(500).send({status : 0});
+            response.sendStatus(500);
         }else {
-            response.send({status : 1});
+            response.sendStatus(200);
         }
     })
 });

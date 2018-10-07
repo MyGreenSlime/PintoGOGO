@@ -1,0 +1,30 @@
+/* .menu{ */
+    /* display: grid; */
+    /* grid-row: 1/2; */
+/* } */
+.snackzone{
+    display: grid;
+    justify-content: center;  
+    align-content: center; 
+    grid-template-columns: 10% auto 10%;
+    grid-template-rows: 50% 50%;
+    margin-top: 3%;
+}
+
+.mergerow-left__snack{
+    cursor: pointer;
+    grid-area: 1/1/3/2;
+    align-self: center;
+
+}
+
+.mergerow-right__snack{
+    cursor: pointer;
+    grid-area: 1/3/3/4;
+    align-self: center;
+}
+
+/* .secondrow{ */
+    /* display: grid; */
+    /* grid-column: 1 / 4; */
+/* } */

@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
+.login__text {
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 28px;
+  font-family: "Quicksand", sans-serif;
+}
+
+.login__text--box {
+  font-family: "Quicksand", sans-serif;
+}
+
+.submit__login--button {
+  background-color: #ccc0a5;
+  border: none;
+  font-weight: bold;
+  padding: 5px;
+  width: 90%;
+  min-width: 100px;
+  font-family: "Quicksand", sans-serif;
+  /* margin-bottom: 5px; */
+  /* min-width: 90%; */
+  height: auto;
+}
+
+.submit__login--button:hover {
+  background-color: burlywood;
+}

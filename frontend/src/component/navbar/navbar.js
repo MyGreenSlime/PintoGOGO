@@ -36,17 +36,20 @@ export default class Navigationbar extends Component {
             <Nav className="ml-auto">
               <NavItem className="navbar__item">
                 <NavLink href="/" className="navbar__link">
-                  Sign up
+                  SIGN UP
                 </NavLink>
               </NavItem>
               <NavItem className="navbar__item">
                 <NavLink href="/" className="navbar__link">
-                  Log in
+                  LOG IN
                 </NavLink>
               </NavItem>
               <NavItem className="navbar__item">
                 <NavLink href="/" className="navbar__link">
-                  Cart
+                  <img
+                    src="../img/navbar/icon-cart2.png"
+                    className="navbar__icon"
+                  />
                 </NavLink>
               </NavItem>
             </Nav>
