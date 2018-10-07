@@ -14,7 +14,12 @@
     border-radius: 8px;
 }
 
-.cartbutton{
+.cart--menu__button{
+    cursor: pointer;
+    padding-right: 50px;
+}
+
+.delete--menu__button{
     cursor: pointer;
     padding-right: 50px;
 }
@@ -34,3 +39,7 @@
     grid-template-columns: 200px 100px;
     /* grid-template-rows: 85% 15%; */
   }
+
+div.inline{
+    float: left;
+}

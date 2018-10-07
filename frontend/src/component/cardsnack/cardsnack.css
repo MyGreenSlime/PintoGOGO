@@ -14,7 +14,12 @@
     border-radius: 8px;
 }
 
-.cartbutton{
+.cart--snack__button{
+    cursor: pointer;
+    padding-right: 50px;
+}
+
+.delete--snack__button{
     cursor: pointer;
     padding-right: 50px;
 }
