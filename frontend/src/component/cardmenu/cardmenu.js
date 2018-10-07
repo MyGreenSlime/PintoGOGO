@@ -21,33 +21,26 @@ export default class cardMenu extends Component {
     
     render() { 
         return (
-            <div>
-                <section className="menu">
-                    <div className="cardmenu__block">
-                        <img src={this.props.picture} width="200px" className="cardmenu__image"/>
-                    </div>
-                    <div className="textundermenu">
-                            <p>{this.props.name}<br/>
-                            {this.props.calories} Kcal</p>
-                    </div>
-                </section>
-
-                {/* <section className="undermenu">
-                    <div className="cartbutton"  onClick ={this.imageClick.bind(this)}>
-                        <img src={"/img/other/cart.png"} height="20"/> */}
-                            {
-                            // this.state.clicked 
-                            // <div>You clicked me!</div>
-                            }
-                    {/* </div>  
-                    <div className="textundermenu">
-                            <p>{this.props.name}<br/>
-                            {this.props.calories} Kcal</p>
-                    </div> */}
-                        {/* <p>total click: {this.state.clicked}</p> */}
-                {/* </section> */}
+            
+            <section className="menu">
+                <div className="cardmenu__block">
+                    <img src={this.props.picture} width="200px" className="cardmenu__image"/>
+                </div>
+                <div className="textundermenu">
+                        <p>{this.props.name}<br/>
+                        {this.props.calories} Kcal</p>
+                </div>
+                <div className="cartbutton"  onClick ={this.imageClick.bind(this)}>
+                    <img src={"/img/other/cart.png"} height="20"/> 
+                        {
+                        // this.state.clicked 
+                        // <div>You clicked me!</div>
+                        }
+                </div>
+                    {/* <p>total click: {this.state.clicked}</p> */}
+            </section>
                 
-            </div>
+            
         );
     }
 }

@@ -3,7 +3,7 @@
 .textundermenu{
     font-family: 'Quicksand', sans-serif;
     font-size: 15px;
-    float: left;
+    padding-left: 80px;
 }
 
 .cardmenu__block{    
@@ -16,8 +16,7 @@
 
 .cartbutton{
     cursor: pointer;
-    padding-left: 15px;
-    float: left;
+    padding-right: 50px;
 }
 
 .undermenu {
@@ -29,9 +28,9 @@
 
 .menu {
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 5px;
     /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
     
     grid-template-columns: 200px 100px;
-    grid-template-rows: 100% 20px;
+    grid-template-rows: 100% 50px;
   }
