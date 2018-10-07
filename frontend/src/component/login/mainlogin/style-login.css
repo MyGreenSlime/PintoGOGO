@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
+.login__box {
+  background-color: #f3ece7;
+  border-radius: 30px;
+  padding-top: 40px;
+  padding-right: 50px;
+  padding-left: 50px;
+  width: 70%;
+  height: auto;
+  max-width: 450px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login__box__container {
+  position: relative;
+  height: 100vh;
+  /* background: url("img/login/bg.png"); */
+  
+}

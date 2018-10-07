@@ -1,0 +1,10 @@
+.google__login--button {
+  margin-top: 10px;
+  width: 70%;
+  min-width: 150px;
+  height: auto;
+}
+
+.google__login--button:hover {
+  filter: grayscale(25%);
+}
