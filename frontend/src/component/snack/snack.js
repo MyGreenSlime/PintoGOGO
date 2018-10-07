@@ -17,18 +17,19 @@ class Snack extends Component {
       forthImg: 3,
       fifthImg: 4,
       sixthImg: 5,
+      length_snack: 0
     }
+    this.checkFirstSnackSet = this.checkFirstSnackSet.bind(this);
+    this.checkLastSnackSet = this.checkLastSnackSet.bind(this);
   }
 
   componentDidMount() {
-    fetch('http://localhost:4000/menus/snack')
-    .then(res => res.json())
-    .then(json => {
-      this.setState({
-        isLoaded: true,
-        snacks: json,
+    fetch("http://localhost:4000/menus/snack")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ isLoaded: true, snacks: json });
       })
-    })
+      .then((this.state.length_snack = Object.keys(this.state.snacks).length));    
     
   }
 
@@ -60,6 +61,22 @@ class Snack extends Component {
     e.preventDefault();
   }
 
+  checkFirstSnackSet() {
+    let img = "";
+    if (this.state.firstImg - 6 >= 0) {
+      img = <img src={"/img/other/left-arrow.png"} height="20" />;
+    }
+    return img;
+  }
+
+  checkLastSnackSet() {
+    let img = "";
+    if (this.state.firstImg <= this.state.length_snack) {
+      img = <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
+    }
+    return img;
+  }
+
   render() {
     
     var {isLoaded, snacks, firstImg, secondImg, thirdImg, forthImg, fifthImg, sixthImg} = this.state;
@@ -72,7 +89,8 @@ class Snack extends Component {
 
         <div className="mergerow-left__snack">
           <div onClick={this.leftClick.bind(this)} >
-            <img src={"/img/other/left-arrow.png"} height="20" />
+            {this.checkFirstSnackSet()}
+            {/* <img src={"/img/other/left-arrow.png"} height="20" /> */}
           </div>
         </div>
         <Row className="firstrow">
@@ -87,7 +105,8 @@ class Snack extends Component {
 
         <div className="mergerow-right__snack">
           <div onClick={this.rightClick.bind(this)}>
-            <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
+            {this.checkLastSnackSet()}
+            {/* <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" /> */}
           </div>
         </div>
 
