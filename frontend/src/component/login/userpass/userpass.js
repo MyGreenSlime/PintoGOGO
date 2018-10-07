@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { AvForm, AvInput, AvGroup, AvFeedback } from 'availity-reactstrap-validation';
+
 import {
   Col,
   Button,
@@ -22,19 +24,23 @@ class Userpass extends Component {
     return (
       <div className="form-group">
           <div className="login__text">LOGIN</div>
-          <Col>
-            <FormGroup>
-              <Input type="text" placeholder="username" className="login__text--box" />
-            </FormGroup>
-          </Col>
-          <Col>
-            <FormGroup>
-              <Input type="password" placeholder="password" className="login__text--box" />
-            </FormGroup>
-          </Col>
-          <Button href="./" className="submit__login--button">
-            LOGIN
-          </Button>
+          <AvForm>
+            <Col>
+              <AvGroup>
+                <AvInput id="username" name="username" type="text" placeholder="username" className="login__text--box" required/>
+                <AvFeedback> username is required! </AvFeedback>
+              </AvGroup>
+            </Col>
+            <Col>
+              <AvGroup>
+                <AvInput id="password" name="password" type="password" placeholder="password" className="login__text--box" required/>
+                <AvFeedback> password is required! </AvFeedback>
+              </AvGroup>
+            </Col>
+            <Button href="./" className="submit__login--button">
+              LOGIN
+            </Button>
+          </AvForm>
       </div>
     );
   }

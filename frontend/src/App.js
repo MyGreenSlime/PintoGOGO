@@ -16,8 +16,8 @@ import cardMenu from './component/cardmenu/cardmenu.js'
 import Register from './component/register/register.js'
 import Footer from './component/footer/footer.js'
 //---------------pat------------------------------------
-import Login from './component/login/login'
-import Construct from './component/login/underconstruct'
+import Login from './component/login/mainlogin/login'
+// import Construct from './component/login/underconstruct'
 const Home = () => {
   return [<Carousel />, <Recommend />, <Choice />, <Menu />];
 };
@@ -39,7 +39,7 @@ class App extends Component {
           <Route path="/cardmenu" component={cardMenu} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/construct" component={Construct}/>
+          {/* <Route path="/construct" component={Construct}/> */}
         </Switch>
         <Footer />
       </div>

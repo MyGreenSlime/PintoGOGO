@@ -5,7 +5,8 @@
     background-color: #f9f8f8;
     font-family: 'Quicksand', sans-serif;
     height: 170px;
-    position: relative;
+    position: relative; 
+    bottom: 0px;
     padding-left: 30px;
     padding-right: 30px;
     min-width: 393px;
