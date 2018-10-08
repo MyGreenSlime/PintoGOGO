@@ -21,7 +21,7 @@ export default class Recommend extends Component {
           <CardGroup className="cardgroup__recommend">
             <Card className="card__recommend mr-3">
               <CardImg
-                src="\img\foodRecommend\ข้าวหมูอบ.jpg"
+                src="http://images.media-allrecipes.com/userphotos/960x960/5147291.jpg"
                 className="cardimg__recommend"
               />
               <CardBody>
@@ -30,7 +30,7 @@ export default class Recommend extends Component {
             </Card>
             <Card className="card__recommend ml-3 mr-3">
               <CardImg
-                src="img\foodRecommend\แซลมอนย่างเกลือ.jpg"
+                src="https://images.media-allrecipes.com/userphotos/300x300/3749989.jpg"
                 className="cardimg__recommend"
               />
               <CardBody>
@@ -39,7 +39,7 @@ export default class Recommend extends Component {
             </Card>
             <Card className="card__recommend ml-3 mr-3">
               <CardImg
-                src="img\foodRecommend\บะหมี่ผักหมูหวาน.jpg"
+                src="https://images.media-allrecipes.com/userphotos/300x300/3758976.jpg"
                 className="cardimg__recommend"
               />
               <CardBody>
@@ -48,7 +48,7 @@ export default class Recommend extends Component {
             </Card>
             <Card className="card__recommend ml-3">
               <CardImg
-                src="img\foodRecommend\ข้าวกะเพราหมูสับ.jpg"
+                src="https://images.media-allrecipes.com/userphotos/300x300/3759440.jpg"
                 className="cardimg__recommend"
               />
               <CardBody>

@@ -4,10 +4,15 @@ import './register.css';
 import { RestClient } from '../api/api'
 import axios from 'axios'
 import { AvForm, AvInput, AvGroup, AvFeedback } from 'availity-reactstrap-validation';
+import propTypes from 'prop-types';
+import {withRouter} from 'react-router-dom'
+import classnames from 'classnames';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions'
 
 class Register extends Component {
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
     this.state = {
 			first_name : "",
 			last_name : "",
@@ -17,7 +22,7 @@ class Register extends Component {
 			password2 : "",
 			phonenumber : "",
 			address : "",
-      status : {}
+      errors : {}
     }
     this.baseState = this.state
 		this.onChangeFirstname = this.onChangeFirstname.bind(this)
@@ -28,8 +33,23 @@ class Register extends Component {
 		this.onChangePassword2 = this.onChangePassword2.bind(this)
 		this.onChangePhonenumber = this.onChangePhonenumber.bind(this)
 		this.onChangeAddress = this.onChangeAddress.bind(this)
-		this.handleValidSubmit = this.handleValidSubmit.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
+	}
+	
+	componentDidMount() {
+    if(this.props.auth.isAuthenticated) {
+        this.props.history.push('/');
+    }
   }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.errors) {
+        this.setState({errors : nextProps.errors});
+    }
+  }
+
+
+	
   onChangeFirstname(e) {
 		this.setState({
 			first_name : e.target.value 
@@ -82,8 +102,9 @@ class Register extends Component {
     this.setState(this.baseState)
   }
 
-	handleValidSubmit(e) {
-    const userDetail = {
+	handleSubmit(e) {
+		e.preventDefault();
+    const newUser = {
 			first_name : this.state.first_name,
 			last_name : this.state.last_name,
 			user_name : this.state.user_name,
@@ -93,20 +114,19 @@ class Register extends Component {
 			phonenumber : this.state.phonenumber,
 			address : this.state.address
 		}
-		console.log(userDetail)
-		RestClient.post("http://localhost:4000/users/register",userDetail)
-		.then(resstatus => this.setState({status : resstatus}));
-		console.log(this.state.status)
-        e.preventDefault();
-    }    
+		
+		this.props.registerUser(newUser, this.props.history)
+  }    
       
     render() {
+			const {errors} = this.state
+
     return (
       <div className='set-screen'> {/*bg*/}
         <div className='register-box'> {/*register box*/}
           <h2> SIGN UP </h2>
           <br/>
-          <AvForm className='form' onValidSubmit={this.handleValidSubmit}>
+          <AvForm className='form' onSubmit={this.handleSubmit}>
           <Row>
             <Col className="col-md-6 col-12">
               <div className='form-left'> {/*left form*/}
@@ -119,8 +139,8 @@ class Register extends Component {
 											id="Firstname" 
 											onChange={this.onChangeFirstname} 
 											value={this.state.first_name} 
-											required/>
-										<AvFeedback >Firstname is required!</AvFeedback>
+										/>
+										 {errors.first_name && (<div className="invalid-feedback">{errors.first_name}</div>)}
 		    	        </Col> 
                 </AvGroup>
                 <AvGroup row>
@@ -132,8 +152,8 @@ class Register extends Component {
 											id="Lastname" 
 											onChange={this.onChangeLastname} 
 											value={this.state.last_name} 
-											required/>			    	        
-										<AvFeedback>Lastname is required!</AvFeedback> 
+										/>			    	        
+										<AvFeedback>{errors.last_name}</AvFeedback> 
 									</Col>
 					      </AvGroup>
                 <AvGroup row>
@@ -143,12 +163,10 @@ class Register extends Component {
 											type="text" 
 											name="username" 
 											id="Username" 
-											minLength="4"
-											placeholder="at least 4 characters"
 											onChange={this.onChangeUsername} 
 											value={this.state.user_name} 
-											required/>
-										<AvFeedback>Username is required!</AvFeedback>
+										/>
+										<AvFeedback>{errors.user_name}</AvFeedback>
 			    	      </Col>
 					      </AvGroup>
 								<AvGroup row>
@@ -158,12 +176,10 @@ class Register extends Component {
 											type="password" 
 											name="password" 
 											id="Password" 
-											minLength="8"
-											placeholder="at least 8 characters"
 											onChange={this.onChangePassword1} 
 											value={this.state.password1} 
-											required/>
-										<AvFeedback>Password is required!</AvFeedback>
+										/>
+										<AvFeedback>{errors.password1}</AvFeedback>
       			    	</Col>
 			      		</AvGroup> 
 					      <AvGroup row>
@@ -173,26 +189,12 @@ class Register extends Component {
 											type="password" 
 											name="confirmpassword" 
 											id="ConfirmPassword" 
-											minLength="8"
-											placeholder="at least 8 characters"
 											onChange={this.onChangePassword2} 
 											value={this.state.password2} 
-											required/>
-										<AvFeedback>Confirm password is required!</AvFeedback>
+										/>
+										<AvFeedback>{errors.password2}</AvFeedback>
       			    	</Col>
 			      		</AvGroup> 
-      					{/* <AvGroup row>
-			      			<Label className='text-form-left' for="Email">E-mail*</Label>
-            	  	<Col>
-			      				<AvInput type="email" id="Email" onChange={this.onChangeEmail} value={this.state.email} required/>
-			    	      </Col>
-      					</AvGroup>
-                <AvGroup row>
-                  <Label className='text-form-left' for="PhoneNumber">Phone Number* &nbsp;&nbsp;</Label>
-						      <Col>
-                    <AvInput type="text" id="PhoneNumber" onChange={this.onChangePhonenumber} value={this.state.phonenumber} required/>
-                  </Col>
-                </AvGroup> */}
               </div>
             </Col>
             <Col className="col-md-6 col-12">
@@ -206,8 +208,8 @@ class Register extends Component {
 											id="Email" 
 											onChange={this.onChangeEmail} 
 											value={this.state.email} 
-											required/>
-										<AvFeedback>Email is required!</AvFeedback>
+										/>
+										<AvFeedback>{errors.email}</AvFeedback>
 			    	      </Col>
       					</AvGroup>
                 <AvGroup row>
@@ -220,8 +222,8 @@ class Register extends Component {
 											maxLength={10}
 											onChange={this.onChangePhonenumber} 
 											value={this.state.phonenumber} 
-											required/>
-										<AvFeedback>PhoneNumber is required!</AvFeedback>
+										/>
+										<AvFeedback>{errors.phonenumber}</AvFeedback>
 									</Col>
                 </AvGroup>
                 <AvGroup row>
@@ -233,40 +235,11 @@ class Register extends Component {
 										type="textarea" 
 										id="Address" 
 										onChange={this.onChangeAddress} 
-										value={this.state.address}/>
+										value={this.state.address}
+										/>
+										s<AvFeedback>{errors.address}</AvFeedback>
                   </Col>
                 </AvGroup>
-                {/* <AvGroup row> 
-						      <Label className='text-form-right' className='payment' for="Payment">Payment Method&nbsp;&nbsp;</Label>
-                  <Col sm={6}>
-						        <AvInput type="select" id="Payment">
-                      <option>None</option>
-							        <option>Visa</option>
-        			        <option>Mastercard</option>
-						        </Input>
-                  </Col>
-					      </AvGroup> 
-                <AvGroup row>
-						      <Col className='text-form-right' sm={7}> 
-							      <Label for="CardNumber">Card Number</Label>
-							      <AvInput type="text" id="CardNumber"/>
-						      </Col>
-						      <Col className='text-form-right'sm={3}> 
-							      <Label for="CVV">CVV</Label>
-							      <Input className='input-form-cvv' type="text" id="CVV"/>
-						      </Col>
-                </AvGroup>
-                <AvGroup row>
-						      <Label className='exp' for="EXP">Expired&nbsp;&nbsp;</Label>
-                  <Col>
-						      <AvInput type="text" id="EXPMonth" placeholder="month"/>
-					        </Col>
-                  <Label className='slash'>/</Label>
-                  <Col>
-					        <AvInput type="text" id="EXPYear" placeholder="year"/>
-                  </Col>
-                  <Label sm={2}>&nbsp;&nbsp;</Label>
-				        </AvGroup> */}
               </div>
             </Col>
           </Row>
@@ -280,4 +253,16 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+	registerUser: propTypes.func.isRequired,
+	auth: propTypes.object.isRequired,
+	errors: propTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+	auth : state.auth,
+	errors : state.errors
+})
+
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

@@ -45,6 +45,23 @@ router.post('/food/add',function(request, response) {
     })
 });
 
+router.delete('/food/del/:id',function(req, res){
+    let query = {_id:req.params.id}
+
+    Menu.findById(req.params.id, function(err, menu){
+        if(err){
+            res.status(500).send(err);
+        }else{
+            Menu.remove(query, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.send('Success');
+            })
+        }
+    })   
+})
+
 //---------------------------------------------------snack-------------------------------------------------
 router.get('/snack',function(request, response) {
     Snack.find({}, function(err, snacks){
@@ -85,5 +102,21 @@ router.post('/snack/add',function(request, response) {
     })
 });
 
+router.delete('/snack/del/:id',function(req, res){
+    let query = {_id:req.params.id}
+
+    Snack.findById(req.params.id, function(err, snack){
+        if(err){
+            res.status(500).send(err);
+        }else{
+            Snack.remove(query, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.send('Success');
+            })
+        }
+    })   
+})
 
 module.exports = router;

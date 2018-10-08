@@ -112,6 +112,7 @@ class Menu extends Component {
               name={menus[firstImg].menu_name}
               picture={menus[firstImg].img_url}
               calories={menus[firstImg].calories}
+              id = {menus[firstImg]._id}
             />
           )}
 
@@ -120,6 +121,7 @@ class Menu extends Component {
               name={menus[secondImg].menu_name}
               picture={menus[secondImg].img_url}
               calories={menus[secondImg].calories}
+              id = {menus[secondImg]._id}
             />
           )}
 
@@ -128,6 +130,7 @@ class Menu extends Component {
               name={menus[thirdImg].menu_name}
               picture={menus[thirdImg].img_url}
               calories={menus[thirdImg].calories}
+              id = {menus[thirdImg]._id}
             />
           )}
         </Row>
@@ -145,6 +148,7 @@ class Menu extends Component {
               name={menus[forthImg].menu_name}
               picture={menus[forthImg].img_url}
               calories={menus[forthImg].calories}
+              id = {menus[forthImg]._id}
             />
           )}
 
@@ -153,6 +157,7 @@ class Menu extends Component {
               name={menus[fifthImg].menu_name}
               picture={menus[fifthImg].img_url}
               calories={menus[fifthImg].calories}
+              id = {menus[fifthImg]._id}
             />
           )}
 
@@ -161,6 +166,7 @@ class Menu extends Component {
               name={menus[sixthImg].menu_name}
               picture={menus[sixthImg].img_url}
               calories={menus[sixthImg].calories}
+              id = {menus[sixthImg]._id}
             />
           )}
         </Row>

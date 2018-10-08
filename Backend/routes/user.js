@@ -12,32 +12,33 @@ const validationLoginInput = require('../validator/login');
 const User = require('../models/User');
 
 //register
-router.post('/register',function(request, response){
-    const {errors, isValid} = validationRegisterInput(request.body);
+router.post('/register', (req, res) => {
+    const {errors, isValid} = validationRegisterInput(req.body);
     if(!isValid) {
         return res.status(400).json(errors);
     }
-    User.findOne({user_name : request.body.user_name})
+    User.findOne({user_name : req.body.user_name})
         .then(user => {
             if(user){
                 errors.user_name = 'Username already exists'
-                return response.status(400).json(errors)
+                return res.status(400).json(errors)
             } else {
                 const newUser = new User({
-                    first_name : request.body.first_name,
-                    last_name : request.body.last_name,
-                    user_name : request.body.user_name,
-                    email : request.body.email,
-                    password : request.body.password1,
-                    phonenumber : request.body.phonenumber,
-                    address : request.body.address
+                    first_name : req.body.first_name,
+                    last_name : req.body.last_name,
+                    user_name : req.body.user_name,
+                    email : req.body.email,
+                    password : req.body.password1,
+                    phonenumber : req.body.phonenumber,
+                    address : req.body.address,
+                    type : req.body.type
                 })
                 bcrytpt.genSalt(10, (err, salt) => {
                     bcrytpt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
                         newUser.password = hash;
                         newUser.save()
-                            .then(user => response.json(user))
+                            .then(user => res.json(user))
                             .catch(err => console.log(err));
                     })
                 })
@@ -46,21 +47,21 @@ router.post('/register',function(request, response){
 })
 
 //login
-router.post('/login', function(request, response){
-    const {errors, isValid} = validationLoginInput(request.body);
+router.post('/login', function(req, res){
+    const {errors, isValid} = validationLoginInput(req.body);
     //check validation
     if(!isValid) {
-        return response.status(400).json(errors);
+        return res.status(400).json(errors);
     }
-    const user_name = request.body.user_name;
-    const password =  request.body.password;
+    const user_name = req.body.user_name;
+    const password =  req.body.password;
     
     User.findOne({user_name})
     .then(user => {
         //check for user
         if(!user) {
             errors.user_name = 'User not found';
-            return response.status(404).json(errors);
+            return res.status(404).json(errors);
         }
 
         //check password
@@ -78,14 +79,14 @@ router.post('/login', function(request, response){
                     }
                     //sign token
                     jwt.sign(payload, keys.secretOrkey, { expiresIn : 3600 }, (err, token) => {
-                        response.json({
+                        res.json({
                             sucess : true,
                             token : 'Bearer ' + token
                         })
                     });
                 } else {
                     errors.password = 'Password incorrect';
-                    return response.status(400).json(errors);
+                    return res.status(400).json(errors);
                 }
             })
     });

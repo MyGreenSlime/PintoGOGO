@@ -1,13 +1,14 @@
 import React, { Component} from 'react';
 import '../cardsnack/cardsnack.css';
 import { Container, Row, Col} from 'reactstrap';
-
+import axios from 'axios';
  
 export default class cardMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
-          clicked : 0
+          clicked : 0,
+          id : String(this.props.id)
         }
       }
 
@@ -20,10 +21,12 @@ export default class cardMenu extends Component {
     }  
 
     deleteFromDb(){
-        console.log("delete");
+        // axios.delete('http://localhost:4000/menus/snack/del/'+ this.state.id)
+        //     .then(res => console.log(res))
     }
     
     render() { 
+        
         return (
             
             <section className="snack">

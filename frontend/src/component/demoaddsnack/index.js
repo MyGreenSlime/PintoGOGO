@@ -4,6 +4,11 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { Row, Col, Button, FormGroup, Input, FormText } from "reactstrap";
 import "./style-addsnack.css";
+
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authActions';
+import classnames from 'classnames';
 class Addmenu extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +33,13 @@ class Addmenu extends Component {
 
     }
     renderRedirect() {
-        return <Redirect to='/demoaddmenu' />
+        return <Redirect to='/add/snack' />
+    }
+
+    componentDidMount() {
+        if(!this.props.auth.user.type) {
+            window.location.href = '/';
+        }
     }
 
     onChangeSnackname(e) {
@@ -174,5 +185,15 @@ class Addmenu extends Component {
     }
 
 }
+Addmenu.propTypes = {
+    loginUser : propTypes.func.isRequired,
+    auth : propTypes.object.isRequired,
+    errors: propTypes.object.isRequired
+}
 
-export default Addmenu;
+const mapStateToProps = (state) => ({
+    auth : state.auth,
+    errors : state.errors
+});
+
+export default connect(mapStateToProps, {loginUser})(Addmenu);

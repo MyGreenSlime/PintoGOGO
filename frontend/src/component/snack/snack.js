@@ -95,11 +95,11 @@ class Snack extends Component {
         </div>
         <Row className="firstrow">
 
-          {snacks[firstImg] && <CardMenu name={snacks[firstImg].snack_name} picture={snacks[firstImg].img_url} calories={snacks[firstImg].calories} />}
+          {snacks[firstImg] && <CardMenu name={snacks[firstImg].snack_name} picture={snacks[firstImg].img_url} calories={snacks[firstImg].calories} id = {snacks[firstImg]._id}/>}
 
-          {snacks[secondImg] && <CardMenu name={snacks[secondImg].snack_name} picture={snacks[secondImg].img_url} calories={snacks[secondImg].calories} />}
+          {snacks[secondImg] && <CardMenu name={snacks[secondImg].snack_name} picture={snacks[secondImg].img_url} calories={snacks[secondImg].calories} id = {snacks[secondImg]._id} />}
 
-          {snacks[thirdImg] && <CardMenu name={snacks[thirdImg].snack_name} picture={snacks[thirdImg].img_url} calories={snacks[thirdImg].calories} />}
+          {snacks[thirdImg] && <CardMenu name={snacks[thirdImg].snack_name} picture={snacks[thirdImg].img_url} calories={snacks[thirdImg].calories} id = {snacks[thirdImg]._id} />}
 
         </Row>
 
@@ -111,11 +111,11 @@ class Snack extends Component {
         </div>
 
         <Row className="secondrow">
-          {snacks[forthImg] && <CardMenu name={snacks[forthImg].snack_name} picture={snacks[forthImg].img_url} calories={snacks[forthImg].calories} />}
+          {snacks[forthImg] && <CardMenu name={snacks[forthImg].snack_name} picture={snacks[forthImg].img_url} calories={snacks[forthImg].calories} id = {snacks[forthImg]._id}/>}
 
-          {snacks[fifthImg] && <CardMenu name={snacks[fifthImg].snack_name} picture={snacks[fifthImg].img_url} calories={snacks[fifthImg].calories} />}
+          {snacks[fifthImg] && <CardMenu name={snacks[fifthImg].snack_name} picture={snacks[fifthImg].img_url} calories={snacks[fifthImg].calories} id = {snacks[fifthImg]._id}/>}
 
-          {snacks[sixthImg] && <CardMenu name={snacks[sixthImg].snack_name} picture={snacks[sixthImg].img_url} calories={snacks[sixthImg].calories} />}
+          {snacks[sixthImg] && <CardMenu name={snacks[sixthImg].snack_name} picture={snacks[sixthImg].img_url} calories={snacks[sixthImg].calories} id = {snacks[sixthImg]._id}/>}
 
         </Row>
         <div></div>
