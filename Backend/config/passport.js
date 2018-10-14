@@ -1,36 +1,22 @@
-const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user');
-const config = require('../config/database');
-const bcrypt = require('bcryptjs');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const mongoose = require('mongoose');
+const User = mongoose.model('users');
+const keys = require('./keys');
 
-module.exports = function(passport){
-    //local strategy
-    passport.use(new LocalStrategy(function(username, password, done){
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = keys.secretOrkey;
 
-        let query = {username:username};
-        User.findOne(query, function(err, user){
-            if(err) throw err;
-            if(!user){
-                return done(null, false, {message: 'No user found'});
-            }
-
-            bcrypt.compare(password,user.password, function(err, isMacth){
-                if(err) throw err;
-                if(isMacth){
+module.exports = passport => {
+    passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+        User.findById(jwt_payload.id)
+            .then(user => {
+                if(user) {
                     return done(null, user);
-                } else{
-                    return done(null, false, {message: 'Wrong Password'});
                 }
+                return done(null, false);
             })
-        })
-    }))
-    passport.serializeUser(function (user, done) {
-        done(null, user.id);
-    });
-
-    passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err, user) {
-            done(err, user);
-        });
-    });
+            .catch(err => console.log(err));
+    }));
 }

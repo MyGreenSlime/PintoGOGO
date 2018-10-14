@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ObjectId = mongoose.Schema.Types.ObjectId
-var user = new Schema({
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-    type : {type: String, default: "user"},
+const UserSchema = new Schema({
+
+    type : {type: Boolean, default: false},
     first_name : String,
     last_name : String,
     email : String,
@@ -16,4 +16,4 @@ var user = new Schema({
     
 });
 
-module.exports = mongoose.model('User', user);
+module.exports = User = mongoose.model('users', UserSchema);

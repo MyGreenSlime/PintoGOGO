@@ -11,6 +11,10 @@ import {
     FormText
 } from "reactstrap";
 import './style-addmenu.css'
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authActions';
+import classnames from 'classnames';
 
 class Addmenu extends Component {
     constructor(props){
@@ -36,7 +40,13 @@ class Addmenu extends Component {
 
     }
     renderRedirect(){
-        return <Redirect to='/demoaddmenu' />
+        return <Redirect to='/add/menu' />
+    }
+
+    componentDidMount() {
+        if(!this.props.auth.user.type) {
+            window.location.href = '/';
+        }
     }
 
     onChangeMenuname(e){
@@ -183,5 +193,15 @@ class Addmenu extends Component {
     }
     
   }
+Addmenu.propTypes = {
+    loginUser : propTypes.func.isRequired,
+    auth : propTypes.object.isRequired,
+    errors: propTypes.object.isRequired
+}
 
-export default Addmenu;
+const mapStateToProps = (state) => ({
+    auth : state.auth,
+    errors : state.errors
+});
+
+export default connect(mapStateToProps, {loginUser})(Addmenu);

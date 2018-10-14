@@ -2,7 +2,11 @@
 
 .setbg__addsnack{
   /* position: relative; */
+<<<<<<< HEAD
   background: url("/img/addmenu/bg.png");
+=======
+  background: url("/img/register/bg.png");
+>>>>>>> master
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;

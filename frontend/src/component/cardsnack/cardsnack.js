@@ -1,13 +1,17 @@
 import React, { Component} from 'react';
 import '../cardsnack/cardsnack.css';
 import { Container, Row, Col} from 'reactstrap';
+import axios from 'axios';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
 
- 
-export default class cardMenu extends Component {
+class cardMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
-          clicked : 0
+          clicked : 0,
+          id : String(this.props.id)
         }
       }
 
@@ -20,10 +24,19 @@ export default class cardMenu extends Component {
     }  
 
     deleteFromDb(){
-        console.log("delete");
+        // axios.delete('http://localhost:4000/menus/snack/del/'+ this.state.id)
+        //     .then(res => console.log(res))
     }
     
     render() { 
+        const { isAuthenticated, user} = this.props.auth;
+        const admin = (
+            <React.Fragment>
+                <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
+                        <img src={"/img/other/delete.png"} height="20" />
+                    </div>
+            </React.Fragment>
+        )
         return (
             
             <section className="snack">
@@ -38,9 +51,7 @@ export default class cardMenu extends Component {
                     <div className="cart--snack__button" onClick={this.addToCartClick.bind(this)}>
                         <img src={"/img/other/cart.png"} height="20" />
                     </div>
-                    <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
-                        <img src={"/img/other/delete.png"} height="20" />
-                    </div>
+                    {user.type ? admin : ""}
                 </div>
                     {/* <p>total click: {this.state.clicked}</p> */}
             </section>
@@ -49,6 +60,14 @@ export default class cardMenu extends Component {
         );
     }
 }
+cardMenu.propTypes = {
+    logoutUser: propTypes.func.isRequired,
+    auth: propTypes.object.isRequired
+  }
+  
+  const mapStateToProps = (state) => ({
+    auth: state.auth
+  })
+  
 
-
-
+export default connect(mapStateToProps, { logoutUser })(cardMenu);

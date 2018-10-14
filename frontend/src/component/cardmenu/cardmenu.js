@@ -1,9 +1,10 @@
 import React, { Component} from 'react';
 import '../cardmenu/cardmenu.css';
 import { Container, Row, Col} from 'reactstrap';
-
- 
-export default class cardMenu extends Component {
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
+ class cardMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -25,6 +26,14 @@ export default class cardMenu extends Component {
     }
 
     render() { 
+      const { isAuthenticated, user} = this.props.auth;
+        const admin = (
+            <React.Fragment>
+                <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
+                        <img src={"/img/other/delete.png"} height="20" />
+                    </div>
+            </React.Fragment>
+        )
         return <section className="menu">
             <div className="cardmenu__block">
               <img src={this.props.picture} width="200px" className="cardmenu__image" />
@@ -41,9 +50,7 @@ export default class cardMenu extends Component {
               <div className="cart--menu__button" onClick={this.addToCartClick.bind(this)}>
                 <img src={"/img/other/cart.png"} height="20" />
               </div>
-              <div className="delete--menu__button" onClick={this.deleteFromDb.bind(this)}>
-                <img src={"/img/other/delete.png"} height="20" />
-              </div>
+              {user.type? admin : ""}
             </div>
 
             {/* <div className="inline">
@@ -58,5 +65,16 @@ export default class cardMenu extends Component {
     }
 }
 
+cardMenu.propTypes = {
+  logoutUser: propTypes.func.isRequired,
+  auth: propTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+
+export default connect(mapStateToProps, { logoutUser })(cardMenu);
 
 
