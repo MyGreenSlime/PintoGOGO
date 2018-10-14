@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
+.navbar {
+  background-color: rgba(249, 248, 248, 0.3);
+  /* background-color: #f9f8f8; */
+  font-weight: bold;
+  font-family: "Quicksand", sans-serif;
+}
+
+.navbar__link {
+  /* color: #7b7b7b; */
+  color: black;
+  font-weight: bold;
+  font-family: "Quicksand", sans-serif;
+}
+
+.navbar__link:hover {
+  color: black;
+}
+
+.navbar__item:hover {
+  background-color: #efeeee;
+  border-radius: 8px;
+}
+
+.navbar__icon {
+  width: 1.4rem;
+}

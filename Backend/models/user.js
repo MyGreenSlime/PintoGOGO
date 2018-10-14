@@ -1,16 +1,19 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var user = new Schema({
-    type : String,
+const UserSchema = new Schema({
+
+    type : {type: Boolean, default: false},
     first_name : String,
     last_name : String,
     email : String,
     user_name : String,
     password : String,
-    address_id : [{type: ObjectId, ref : 'Address'}],
+    //address_id :String,
+    address : [],
     phonenumber : String,
-    payment : [{type : ObjectId, ref : 'Payment'}]
+    //payment : [{type : ObjectId, ref : 'Payment', default:}]
+    
 });
 
-module.exports = mongoose.model('User', user);
+module.exports = User = mongoose.model('users', UserSchema);

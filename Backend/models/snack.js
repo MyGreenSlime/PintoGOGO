@@ -9,6 +9,7 @@ var snack = new Schema({
     carbohydrate : Number,
     fat : Number,
     img_url : String
+    
 });
 
 module.exports = mongoose.model('Snack', snack);

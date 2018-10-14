@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+.textundersnack{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    padding-left: 80px;
+}
+
+.cardsnack__block{    
+    grid-column: 1 / 3;
+}
+
+.cardsnack__image{
+    border-radius: 8px;
+}
+
+.cart--snack__button{
+    cursor: pointer;
+    padding-right: 50px;
+}
+
+.delete--snack__button{
+    cursor: pointer;
+    padding-right: 50px;
+}
+
+.undersnack {
+    display: inline-block;
+    /* grid-template-rows: 100% 20px; */
+    text-align: center;
+    /* vertical-align:top; */
+}
+
+.snack {
+    display: grid;
+    grid-gap: 5px;
+    /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+    
+    grid-template-columns: 200px 100px;
+    /* grid-template-rows: 85% 15%; */
+  }

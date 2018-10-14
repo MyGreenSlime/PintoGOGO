@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
+.recommend__block {
+  position: relative;
+  overflow: overlay;
+  font-family: "Quicksand", sans-serif;
+  margin-bottom: 30px;
+}
+
+.headtext {
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.cardgroup__recommend {
+  min-width: 1024px;
+  flex-direction: row;
+}
+
+.card__recommend {
+  border: 0px;
+  background: transparent;
+  align-items: center;
+}
+
+.cardimg__recommend {
+  width: 14rem;
+  border-radius: 8px;
+}
