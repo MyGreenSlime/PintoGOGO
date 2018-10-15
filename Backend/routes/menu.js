@@ -34,6 +34,7 @@ router.post('/food/add',function(request, response) {
     menu.protein = request.body.protein,
     menu.carbohydrate = request.body.carbohydrate,
     menu.fat = request.body.fat,
+    menu.description = request.body.description,
     menu.img_url = request.body.img_url
     
     menu.save(function(err, savedMenu){
@@ -91,6 +92,7 @@ router.post('/snack/add',function(request, response) {
     snack.protein = request.body.protein,
     snack.carbohydrate = request.body.carbohydrate,
     snack.fat = request.body.fat,
+    snack.description = request.body.description
     snack.img_url = request.body.img_url
     
     snack.save(function(err, savedSnack){

@@ -17,6 +17,7 @@ class Addmenu extends Component {
             carbohydrate : "",
             fat : "",
             img_url : "",
+            description : "",
             status: 0
         }
         this.handleChange = this.handleChange.bind(this)
@@ -50,6 +51,7 @@ class Addmenu extends Component {
             protein : this.state.protein,
             carbohydrate : this.state.carbohydrate,
             fat : this.state.fat,
+            description : this.state.description,
             img_url : this.state.img_url
         }
         axios.post('http://localhost:4000/menus/food/add', menudetail)
@@ -72,6 +74,9 @@ class Addmenu extends Component {
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <FormGroup>
                                 <Input type="text" name="menu_name" placeholder="menuname" value={this.state.menu_name} onChange={this.handleChange} required />
+                            </FormGroup>
+                            <FormGroup>
+                                <Input type="textarea" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange} required />
                             </FormGroup>
                             <FormGroup>
                                 <Input type="number" name="price" placeholder="price" value={this.state.price} onChange={this.handleChange} required />
