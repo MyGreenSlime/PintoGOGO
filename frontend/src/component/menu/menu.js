@@ -8,9 +8,10 @@ import {
   CardSubtitle,
   Button
 } from "reactstrap";
-import { Container, Row, Col } from "reactstrap";
+import { Row } from "reactstrap";
 import CardMenu from "../cardmenu/cardmenu";
 import "../menu/menu.css";
+import axios from 'axios'
 
 class Menu extends Component {
   constructor(props) {
@@ -28,33 +29,32 @@ class Menu extends Component {
     };
     this.checkFirstMenuSet = this.checkFirstMenuSet.bind(this);
     this.checkLastMenuSet = this.checkLastMenuSet.bind(this);
+    this.leftClick = this.leftClick.bind(this)
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/menus/food")
-      .then(res => res.json())
-      .then(json => {
+    axios.get("http://localhost:4000/menus/food")
+      .then(response => {
         this.setState({
           isLoaded: true,
-          menus: json
+          menus: response.data
         });
       })
-      .then(() => console.log(Object.keys(this.state.menus).length))
-      .then(this.state.length_menu = Object.keys(this.state.menus).length);
+      .then(this.setState({
+        length_menu : Object.keys(this.state.menus).length
+      }));
   }
 
   rightClick(e) {
     console.log("Click!!!!");
-    if (1) {
-      this.setState({
-        firstImg: this.state.firstImg + 6,
-        secondImg: this.state.secondImg + 6,
-        thirdImg: this.state.thirdImg + 6,
-        forthImg: this.state.forthImg + 6,
-        fifthImg: this.state.fifthImg + 6,
-        sixthImg: this.state.sixthImg + 6
-      });
-    }
+    this.setState({
+      firstImg: this.state.firstImg + 6,
+      secondImg: this.state.secondImg + 6,
+      thirdImg: this.state.thirdImg + 6,
+      forthImg: this.state.forthImg + 6,
+      fifthImg: this.state.fifthImg + 6,
+      sixthImg: this.state.sixthImg + 6
+    });
     e.preventDefault();
   }
 
@@ -72,23 +72,19 @@ class Menu extends Component {
   }
 
   checkFirstMenuSet() {
-    let img = "";
     if (this.state.firstImg - 6 >= 0) {
-      img = <img src={"/img/other/left-arrow.png"} height="20" />;
+      return <img src={"/img/other/left-arrow.png"} height="20" />;
     }
-    return img;
   }
 
   checkLastMenuSet() {
-    let img = "";
-    if (this.state.firstImg <= this.state.length_menu ) {
-      img = <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
+    if (this.state.firstImg <= this.state.length_menu) {
+      return <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
     }
-    return img;
   }
 
   render() {
-    var {
+    const {
       isLoaded,
       menus,
       firstImg,
@@ -103,9 +99,11 @@ class Menu extends Component {
     }
     return (
       <div className="menuzone">
+
         <div className="mergerow-left">
-          <div onClick={this.leftClick.bind(this)}>{this.checkFirstMenuSet()}</div>
+          <div onClick={this.leftClick}>{this.checkFirstMenuSet}</div>
         </div>
+
         <Row className="firstrow">
           {menus[firstImg] && (
             <CardMenu
@@ -138,7 +136,6 @@ class Menu extends Component {
         <div className="mergerow-right">
           <div onClick={this.rightClick.bind(this)}>
             {this.checkLastMenuSet()}
-            {/* <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20"/> */}
           </div>
         </div>
 
