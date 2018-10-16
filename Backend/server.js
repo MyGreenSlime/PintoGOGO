@@ -5,6 +5,7 @@ const passport = require('passport')
 
 const users = require('./routes/user.js');
 const menu = require('./routes/menu.js');
+const packages = require('./routes/package.js');
 
 const app = express();
 
@@ -34,8 +35,9 @@ app.all('/*', function(req, res, next) {
 
 //set router
 //var user = require('./routes/user.js');
-app.use('/users',users);
-app.use('/menus',menu);
+app.use('/users', users);
+app.use('/menus', menu);
+app.use('/package', packages);
 
 app.listen(4000, function() {
   console.log('Server Running port 4000');

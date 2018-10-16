@@ -18,6 +18,8 @@ class Addsnack extends Component {
             fat: "",
             img_url: "",
             description : "",
+            sodium : "",
+            cholesterol : "",
             status: 0
         }
 
@@ -54,6 +56,8 @@ class Addsnack extends Component {
             carbohydrate: this.state.carbohydrate,
             fat: this.state.fat,
             description : this.state.description,
+            sodium : this.state.sodium,
+            cholesterol : this.state.cholesterol,
             img_url: this.state.img_url
         }
         axios.post('http://localhost:4000/menus/snack/add', menudetail)
@@ -94,6 +98,12 @@ class Addsnack extends Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <Input type="number" name="fat" placeholder="fat" value={this.state.fat} onChange={this.handleChange} required />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Input type="number" name="sodium" placeholder="sodium" value={this.state.sodium} onChange={this.handleChange} required />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Input type="number" name="cholesterol" placeholder="cholesterol" value={this.state.cholesterol} onChange={this.handleChange} required />
                                 </FormGroup>
                                 <FormGroup>
                                     <Input type="text" name="img_url" placeholder="url" value={this.state.img_url} onChange={this.handleChange} required />

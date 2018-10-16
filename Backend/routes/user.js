@@ -128,7 +128,10 @@ router.put('/add/address', passport.authenticate('jwt',{ session : false }), (re
         address : req.body.address
     }) 
     newAddress.save()
-        .then(address => tmpAddress.id = address._id)
+        .then(address => {
+            tmpAddress.id = address._id
+            console.log(address)
+        })
         .then(() => {
             User.updateOne({_id : req.user.id}, {$push : {address : tmpAddress.id}}, (err, user) => {
             if (err) {
@@ -151,10 +154,13 @@ router.put('/del/address/:id', passport.authenticate('jwt',{ session : false }),
             res.status(400).json(errors)
         } else {
             Address.remove({_id : address_id})
+                .then(console.log("Success"))
+                .catch(err => {
+                    console.log(err)
+                })
             res.json(user)
         }
-    })
-    
+    })  
 })
 
 //add favorite food
@@ -212,9 +218,5 @@ router.put('/del/favorite/snack/:id', passport.authenticate('jwt',{ session : fa
         }
     })
 })
-
-
-
-
 
 module.exports = router;

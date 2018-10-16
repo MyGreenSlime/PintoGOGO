@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     phonenumber : String,
     favorite_food : [{type : ObjectId, ref : "Menu"}],
     favorite_snack : [{type : ObjectId, ref : "Snack"}],
-
+    history_purchase : [{type : ObjectId, ref : "Order"}]
     //payment : [{type : ObjectId, ref : 'Payment', default:}]
     
 });

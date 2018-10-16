@@ -9,6 +9,8 @@ var menu = new Schema({
     carbohydrate : Number,
     fat : Number,
     description : String,
+    cholesterol : String,
+    sodium : String,
     img_url : String
 });
 
