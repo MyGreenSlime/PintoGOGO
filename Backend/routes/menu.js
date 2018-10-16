@@ -46,6 +46,7 @@ router.post('/food/add',function(request, response) {
     })
 });
 
+//delete menu for admin
 router.delete('/food/del/:id',function(req, res){
     let query = {_id:req.params.id}
 
@@ -64,6 +65,8 @@ router.delete('/food/del/:id',function(req, res){
 })
 
 //---------------------------------------------------snack-------------------------------------------------
+
+//find all menu
 router.get('/snack',function(request, response) {
     Snack.find({}, function(err, snacks){
         if(err) {
@@ -74,6 +77,7 @@ router.get('/snack',function(request, response) {
     });
 });
 
+//find single menu
 router.get('/snack/:id',function(request, response) {
     Snack.findById(request.params.id, function(err, snack){
         if(err) {
@@ -84,6 +88,7 @@ router.get('/snack/:id',function(request, response) {
     });
 });
 
+//add new snack
 router.post('/snack/add',function(request, response) {
     var snack = new Snack();
     snack.snack_name = request.body.snack_name,
@@ -104,6 +109,7 @@ router.post('/snack/add',function(request, response) {
     })
 });
 
+//delete snack for addmin
 router.delete('/snack/del/:id',function(req, res){
     let query = {_id:req.params.id}
 
