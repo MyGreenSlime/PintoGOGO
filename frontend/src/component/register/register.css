@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+.set-screen {
+    background: url("/img/register/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 7% 0 10% 0 ;
+    /* margin-bottom: 10%; */
+}
+
+.register-box
+{
+    width: 72%;
+    margin: 0 auto 0 auto; 
+    background-color: #f3ece7;
+    border-radius: 18px;
+    /* padding: 20px; */
+    font-family: 'Quicksand', sans-serif; 
+    min-width: 393px;
+    padding: 30px 30px 50px 30px
+}
+
+.form
+{
+    font-size: 18px;
+}
+
+.form-left
+{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.text-form-left
+{
+    width: 40%;
+}
+
+.form-right
+{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.text-form-right
+{
+    text-align: left;
+}
+
+.payment
+{
+    width: 41%;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.exp
+{
+    width: 20%;
+    padding-left: 15px;
+}
+
+.button-confirm
+{
+    background-color: #e4dac2;
+    color: #7b7b7b;
+    border: solid 0px;
+    width: 100px;
+    font-weight: bold;
+    /* margin-bottom: 20px; */
+}
+
+.addr
+{
+    height: 110px !important;
+}
+
+input[type=text] {
+    border-radius: 8px;
+ }
+
+input[type=password] {
+    border-radius: 8px;
+ }
+
+input[type=email] {
+    border-radius: 8px;
+ }
+
+input[type=textarea] {
+    border-radius: 8px;
+ }

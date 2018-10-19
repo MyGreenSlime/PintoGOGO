@@ -9,18 +9,21 @@ import {
   Button
 } from "reactstrap";
 
+import Menu from "../menu/menu";
+import Snack from "../snack/snack"
+
 import "../choice/style-choice.css";
 
 export default class Choice extends Component {
-  state = {
-    isMenu: true,
-    isPackage: false,
-    isSnack: false
-  };
+  
 
   constructor() {
     super();
-
+    this.state = {
+      isMenu: true,
+      isPackage: false,
+      isSnack: false
+    };
     this.changeRenderToMenu = this.changeRenderToMenu.bind(this);
     this.changeRenderToPackage = this.changeRenderToPackage.bind(this);
     this.changeRenderToSnack = this.changeRenderToSnack.bind(this);
@@ -57,13 +60,36 @@ export default class Choice extends Component {
     return color;
   }
 
+  renderChoice(){
+    if (this.state.isMenu) {
+      return (
+        <div>
+          <Menu />
+        </div>
+      );
+    }
+    else if (this.state.isPackage) {
+      return( <div>
+          <h1>There is no package.</h1>
+      </div>);
+    }
+    else if (this.state.isSnack) {
+      return (
+        <div>
+          <Snack />
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
+      <React.Fragment>
       <section className="choice__block" fluid>
         <Container>
           <CardGroup className="cardgroup__choice">
             <Card className="card__choice">
-              <CardImg src="../img/choice_1.png" className="cardimg__choice" />
+              <CardImg src="../img/choice/choice_1.png" className="cardimg__choice" />
               <CardBody>
                 <Button
                   className={this.setActiveButton(this.state.isMenu)}
@@ -75,7 +101,7 @@ export default class Choice extends Component {
               </CardBody>
             </Card>
             <Card className="card__choice">
-              <CardImg src="../img/choice_2.png" className="cardimg__choice" />
+              <CardImg src="../img/choice/choice_2.png" className="cardimg__choice" />
               <CardBody>
                 <Button
                   className={this.setActiveButton(this.state.isPackage)}
@@ -87,7 +113,7 @@ export default class Choice extends Component {
               </CardBody>
             </Card>
             <Card className="card__choice">
-              <CardImg src="../img/choice_3.png" className="cardimg__choice" />
+              <CardImg src="../img/choice/choice_3.png" className="cardimg__choice" />
               <CardBody>
                 <Button
                   className={this.setActiveButton(this.state.isSnack)}
@@ -101,6 +127,8 @@ export default class Choice extends Component {
           </CardGroup>
         </Container>
       </section>
+      {this.renderChoice()}
+      </React.Fragment>
     );
   }
 }

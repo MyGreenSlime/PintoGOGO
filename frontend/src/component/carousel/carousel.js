@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
 import {
   Carousel,
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption
 } from "reactstrap";
 import "../carousel/style-carousel.css";
 
@@ -70,6 +68,7 @@ export default class CarouselFood extends Component {
     const slides = items.map(item => {
       return (
         <CarouselItem
+          className='carousel-item'
           onExiting={this.onExiting}
           onExited={this.onExited}
           key={item.src}
