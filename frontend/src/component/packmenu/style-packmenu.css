@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+.outside--box{
+  background-color: #f3ece7;
+  margin-top: 75px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  width: 35%;
+  height: 525px;
+  overflow-y: scroll;
+  border-radius: 10px;
+  font-family: 'Quicksand', sans-serif;  
+}
+
+.menu--image{
+  width: 100px;
+  height: 100px;
+  margin: 5%;
+}
+
+.menu--text__topic{
+  margin: 10px;
+  text-align: left;
+  font-weight: bold;
+}
