@@ -9,7 +9,6 @@ import {
   NavLink
 } from "reactstrap";
 import "../navbar/style-navbar.css";
-import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';

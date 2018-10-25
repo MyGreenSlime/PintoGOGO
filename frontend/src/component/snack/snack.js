@@ -1,9 +1,10 @@
 import React, { Component} from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
-import { Container, Row, Col} from 'reactstrap';
+import { Row } from 'reactstrap';
 import CardMenu from '../cardsnack/cardsnack';
 import '../snack/snack.css';
+import axios from 'axios';
 
 class Snack extends Component {
   constructor(props) {
@@ -24,12 +25,16 @@ class Snack extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/menus/snack")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ isLoaded: true, snacks: json });
+    axios.get("http://localhost:4000/menus/snack")
+      .then(response => {
+        this.setState({
+           isLoaded: true, 
+           snacks: response.data
+        });
       })
-      .then((this.state.length_snack = Object.keys(this.state.snacks).length));    
+      .then(this.setState({
+          length_snack : Object.keys(this.state.snacks).length
+      }));    
     
   }
 
@@ -62,24 +67,29 @@ class Snack extends Component {
   }
 
   checkFirstSnackSet() {
-    let img = "";
     if (this.state.firstImg - 6 >= 0) {
-      img = <img src={"/img/other/left-arrow.png"} height="20" />;
+      return <img src={"/img/other/left-arrow.png"} height="20" />;
     }
-    return img;
   }
 
   checkLastSnackSet() {
-    let img = "";
     if (this.state.firstImg <= this.state.length_snack) {
-      img = <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
+      return <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
     }
-    return img;
   }
 
   render() {
     
-    var {isLoaded, snacks, firstImg, secondImg, thirdImg, forthImg, fifthImg, sixthImg} = this.state;
+    const { 
+      isLoaded, 
+      snacks, 
+      firstImg,
+      secondImg, 
+      thirdImg, 
+      forthImg, 
+      fifthImg, 
+      sixthImg
+    } = this.state;
     
     if (!isLoaded) {
       return <div>loading....</div>
@@ -90,32 +100,61 @@ class Snack extends Component {
         <div className="mergerow-left__snack">
           <div onClick={this.leftClick.bind(this)} >
             {this.checkFirstSnackSet()}
-            {/* <img src={"/img/other/left-arrow.png"} height="20" /> */}
           </div>
         </div>
+        
         <Row className="firstrow">
 
-          {snacks[firstImg] && <CardMenu name={snacks[firstImg].snack_name} picture={snacks[firstImg].img_url} calories={snacks[firstImg].calories} id = {snacks[firstImg]._id}/>}
+          {snacks[firstImg] && <CardMenu 
+            name={snacks[firstImg].snack_name} 
+            picture={snacks[firstImg].img_url} 
+            calories={snacks[firstImg].calories} 
+            id = {snacks[firstImg]._id}/>
+          }
 
-          {snacks[secondImg] && <CardMenu name={snacks[secondImg].snack_name} picture={snacks[secondImg].img_url} calories={snacks[secondImg].calories} id = {snacks[secondImg]._id} />}
+          {snacks[secondImg] && <CardMenu 
+            name={snacks[secondImg].snack_name} 
+            picture={snacks[secondImg].img_url} 
+            calories={snacks[secondImg].calories} 
+            id = {snacks[secondImg]._id} />
+          }
 
-          {snacks[thirdImg] && <CardMenu name={snacks[thirdImg].snack_name} picture={snacks[thirdImg].img_url} calories={snacks[thirdImg].calories} id = {snacks[thirdImg]._id} />}
+          {snacks[thirdImg] && <CardMenu 
+            name={snacks[thirdImg].snack_name} 
+            picture={snacks[thirdImg].img_url} 
+            calories={snacks[thirdImg].calories} 
+            id = {snacks[thirdImg]._id} />
+          }
 
         </Row>
 
         <div className="mergerow-right__snack">
           <div onClick={this.rightClick.bind(this)}>
             {this.checkLastSnackSet()}
-            {/* <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" /> */}
           </div>
         </div>
 
         <Row className="secondrow">
-          {snacks[forthImg] && <CardMenu name={snacks[forthImg].snack_name} picture={snacks[forthImg].img_url} calories={snacks[forthImg].calories} id = {snacks[forthImg]._id}/>}
+          {snacks[forthImg] && <CardMenu 
+            name={snacks[forthImg].snack_name} 
+            picture={snacks[forthImg].img_url} 
+            calories={snacks[forthImg].calories} 
+            id = {snacks[forthImg]._id}/>
+          }
 
-          {snacks[fifthImg] && <CardMenu name={snacks[fifthImg].snack_name} picture={snacks[fifthImg].img_url} calories={snacks[fifthImg].calories} id = {snacks[fifthImg]._id}/>}
+          {snacks[fifthImg] && <CardMenu 
+            name={snacks[fifthImg].snack_name} 
+            picture={snacks[fifthImg].img_url} 
+            calories={snacks[fifthImg].calories} 
+            id = {snacks[fifthImg]._id}/>
+          }
 
-          {snacks[sixthImg] && <CardMenu name={snacks[sixthImg].snack_name} picture={snacks[sixthImg].img_url} calories={snacks[sixthImg].calories} id = {snacks[sixthImg]._id}/>}
+          {snacks[sixthImg] && <CardMenu 
+            name={snacks[sixthImg].snack_name} 
+            picture={snacks[sixthImg].img_url} 
+            calories={snacks[sixthImg].calories} 
+            id = {snacks[sixthImg]._id}/>
+          }
 
         </Row>
         <div></div>

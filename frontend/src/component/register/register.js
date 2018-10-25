@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Col, Row, Button, Form, FormGroup, Label, Input, formText, Alert,ReactDOM } from 'reactstrap';
 import './register.css';
-import { RestClient } from '../api/api'
-import axios from 'axios'
-import { AvForm, AvInput, AvGroup, AvFeedback } from 'availity-reactstrap-validation';
 import propTypes from 'prop-types';
 import {withRouter} from 'react-router-dom'
 import classnames from 'classnames';
@@ -11,8 +7,8 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions'
 
 class Register extends Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
     this.state = {
 			first_name : "",
 			last_name : "",
@@ -22,88 +18,31 @@ class Register extends Component {
 			password2 : "",
 			phonenumber : "",
 			address : "",
-      errors : {}
-    }
-    this.baseState = this.state
-		this.onChangeFirstname = this.onChangeFirstname.bind(this)
-		this.onChangeLastname = this.onChangeLastname.bind(this)
-		this.onChangeEmail = this.onChangeEmail.bind(this)
-		this.onChangeUsername = this.onChangeUsername.bind(this)
-		this.onChangePassword1 = this.onChangePassword1.bind(this)
-		this.onChangePassword2 = this.onChangePassword2.bind(this)
-		this.onChangePhonenumber = this.onChangePhonenumber.bind(this)
-		this.onChangeAddress = this.onChangeAddress.bind(this)
+			status : {},
+			errors : {}
+		}
+		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 	}
-	
 	componentDidMount() {
-    if(this.props.auth.isAuthenticated) {
-        this.props.history.push('/');
-    }
-  }
+		if(this.props.auth.isAuthenticated) {
+				this.props.history.push('/');
+		}
+}
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.errors) {
-        this.setState({errors : nextProps.errors});
-    }
-  }
-
-
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.errors) {
+				this.setState({errors : nextProps.errors});
+		}
+}
 	
-  onChangeFirstname(e) {
+	handleChange(e) {
 		this.setState({
-			first_name : e.target.value 
+			[e.target.name] : e.target.value
 		})
 	}
-
-	onChangeLastname(e) {
-		this.setState({
-			last_name : e.target.value 
-		})
-	}
-
-	onChangeEmail(e) {
-		this.setState({
-			email : e.target.value 
-		})
-	}
-	
-	onChangeUsername(e) {
-		this.setState({
-			user_name : e.target.value 
-		})
-	}
-
-	onChangePassword1(e) {
-		this.setState({
-			password1 : e.target.value 
-    })
-	}
-
-	onChangePassword2(e) {
-		this.setState({
-			password2 : e.target.value 
-		})
-	}
-
-	onChangePhonenumber(e) {
-		this.setState({
-			phonenumber : e.target.value 
-		})
-	}
-
-	onChangeAddress(e) {
-		this.setState({
-			address : e.target.value 
-		})
-	}
-
-  resetForm = () => {
-    this.setState(this.baseState)
-  }
 
 	handleSubmit(e) {
-		e.preventDefault();
     const newUser = {
 			first_name : this.state.first_name,
 			last_name : this.state.last_name,
@@ -114,8 +53,8 @@ class Register extends Component {
 			phonenumber : this.state.phonenumber,
 			address : this.state.address
 		}
-		
 		this.props.registerUser(newUser, this.props.history)
+    e.preventDefault();
   }    
       
     render() {
@@ -126,126 +65,156 @@ class Register extends Component {
         <div className='register-box'> {/*register box*/}
           <h2> SIGN UP </h2>
           <br/>
-          <AvForm className='form' onSubmit={this.handleSubmit}>
-          <Row>
-            <Col className="col-md-6 col-12">
+          <form noValidate onSubmit={this.handleSubmit}>
+          <div className='row'>
+            <div className='col-md-6 col-12'>
               <div className='form-left'> {/*left form*/}
-                <AvGroup row>
-                   <Label className='text-form-left' for="Firstname" >Firstname*</Label> 
-    	  	        <Col>  
-						        <AvInput 
-											name="firstname" 
+                <div className='form-group row'>
+                  <label className='control-label text-form-left' htmlFor="Firstname" >Firstname*</label> 
+    	  	        <div className='col'>  
+										<input
+											className= {classnames("form-control",{
+												'is-invalid' : errors.first_name
+											})}
+											name="first_name" 
 											type="text" 
 											id="Firstname" 
-											onChange={this.onChangeFirstname} 
+											placeholder = "Firstname"
+											onChange={this.handleChange} 
 											value={this.state.first_name} 
 										/>
-										 {errors.first_name && (<div className="invalid-feedback">{errors.first_name}</div>)}
-		    	        </Col> 
-                </AvGroup>
-                <AvGroup row>
-					        <Label className='text-form-left' for="Lastname" >Lastname*</Label>
-    	  	        <Col>
-						        <AvInput 
+										{errors.first_name && (<div className="invalid-feedback">{errors.first_name}</div>)}
+		    	        </div> 
+                </div>
+                <div className='form-group row'>
+					        <label className='control-label text-form-left' htmlFor="Lastname" >Lastname*</label>
+    	  	        <div className='col'>
+										<input 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.last_name
+											})}
 											type="text" 
-											name="lastname" 
+											name="last_name" 
 											id="Lastname" 
-											onChange={this.onChangeLastname} 
+											placeholder = "Lastname"
+											onChange={this.handleChange} 
 											value={this.state.last_name} 
 										/>			    	        
-										<AvFeedback>{errors.last_name}</AvFeedback> 
-									</Col>
-					      </AvGroup>
-                <AvGroup row>
-						      <Label className='text-form-left' for="Username" >Username*</Label>
-      	  	      <Col>
-							      <AvInput 
+										{errors.last_name && (<div className="invalid-feedback">{errors.last_name}</div>)}
+									</div>
+					      </div>
+                <div className='form-group row'>
+						      <label className='control-label text-form-left' htmlFor="Username" >Username*</label>
+      	  	      <div className='col'>
+							      <input 
 											type="text" 
-											name="username" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.user_name
+											})}
+											name="user_name" 
 											id="Username" 
-											onChange={this.onChangeUsername} 
+											placeholder = "Username"
+											onChange={this.handleChange} 
 											value={this.state.user_name} 
 										/>
-										<AvFeedback>{errors.user_name}</AvFeedback>
-			    	      </Col>
-					      </AvGroup>
-								<AvGroup row>
-						      <Label className='text-form-left' for="Password">Password*</Label>
-      	  	      <Col>
-							      <AvInput 
-											type="password" 
-											name="password" 
+										{errors.user_name && (<div className="invalid-feedback">{errors.user_name}</div>)}
+			    	      </div>
+					      </div>
+								<div className='form-group row'>
+						      <label className='control-label text-form-left' htmlFor="Password">Password*</label>
+      	  	      <div className='col'>
+							      <input 
+											type="password"
+											className= {classnames("form-control",{
+												'is-invalid' : errors.password1
+											})}
+											name="password1" 
 											id="Password" 
-											onChange={this.onChangePassword1} 
+											placeholder = "password must least 6 character"
+											onChange={this.handleChange} 
 											value={this.state.password1} 
 										/>
-										<AvFeedback>{errors.password1}</AvFeedback>
-      			    	</Col>
-			      		</AvGroup> 
-					      <AvGroup row>
-						      <Label className='text-form-left' for="ConfirmPassword">Confirm Password*</Label>
-      	  	      <Col>
-							      <AvInput 
+										{errors.password1 && (<div className="invalid-feedback">{errors.password1}</div>)}
+      			    	</div>
+			      		</div> 
+					      <div className='form-group row'>
+						      <label className='control-label text-form-left' htmlFor="ConfirmPassword">Confirm Password*</label>
+      	  	      <div className='col'>
+							      <input 
 											type="password" 
-											name="confirmpassword" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.password2
+											})}
+											name="password2" 
 											id="ConfirmPassword" 
-											onChange={this.onChangePassword2} 
+											placeholder = "Comfirm Password must least 6 character"
+											onChange={this.handleChange} 
 											value={this.state.password2} 
 										/>
-										<AvFeedback>{errors.password2}</AvFeedback>
-      			    	</Col>
-			      		</AvGroup> 
+										{errors.password2 && (<div className="invalid-feedback">{errors.password2}</div>)}
+      			    	</div>
+			      		</div> 
               </div>
-            </Col>
-            <Col className="col-md-6 col-12">
+            </div>
+            <div className="col-md-6 col-12">
               <div className='form-right'> {/*right form*/}
-								<AvGroup row>
-			      			<Label className='text-form-left' for="Email">E-mail*</Label>
-            	  	<Col>
-			      				<AvInput 
+								<div className='form-group row'>
+			      			<label className='control-label text-form-left' htmlFor="Email">E-mail*</label>
+            	  	<div className='col'>
+			      				<input 
 											type="email" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.email
+											})} 
 											name="email" 
 											id="Email" 
-											onChange={this.onChangeEmail} 
+											placeholder = "Email"
+											onChange={this.handleChange} 
 											value={this.state.email} 
 										/>
-										<AvFeedback>{errors.email}</AvFeedback>
-			    	      </Col>
-      					</AvGroup>
-                <AvGroup row>
-                  <Label className='text-form-left' for="PhoneNumber">Phone Number* &nbsp;&nbsp;</Label>
-						      <Col>
-                    <AvInput 
+											{errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+			    	      </div>
+      					</div>
+                <div className='form-group row'>
+                  <label className='control-label text-form-left' htmlFor="PhoneNumber">Phone Number* &nbsp;&nbsp;</label>
+						      <div className='col'>
+                    <input 
 											type="text" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.phonenumber
+											})} 
 											name="phonenumber" 
 											id="PhoneNumber" 
-											maxLength={10}
-											onChange={this.onChangePhonenumber} 
+											placeholder = "Phone number"
+											onChange={this.handleChange} 
 											value={this.state.phonenumber} 
+											/>
+											{errors.phonenumber && (<div className="invalid-feedback">{errors.phone}</div>)}
+									</div>
+                </div>
+                <div className='form-group'>
+                  <label className='control-label text-form-right' htmlFor="Address" sm={12}>Address(Default)</label>
+                  <div className='col'>
+										<input 
+											className= {classnames("form-control addr",{
+												'is-invalid' : errors.address
+											})} 
+											name="address" 
+											type="textarea" 
+											id="Address" 
+											placeholder = "Your address"
+											onChange={this.handleChange} 
+											value={this.state.address}
 										/>
-										<AvFeedback>{errors.phonenumber}</AvFeedback>
-									</Col>
-                </AvGroup>
-                <AvGroup row>
-                  <Label className='text-form-right' for="Address" sm={12}>Address(Default)</Label>
-                  <Col>
-						      	<AvInput 
-										className='addr' 
-										name="address" 
-										type="textarea" 
-										id="Address" 
-										onChange={this.onChangeAddress} 
-										value={this.state.address}
-										/>
-										s<AvFeedback>{errors.address}</AvFeedback>
-                  </Col>
-                </AvGroup>
+										{errors.address && (<div className="invalid-feedback">{errors.address}</div>)}
+                  </div>
+                </div>
               </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
 					<br/>
-					<Button width='auto' className='button-confirm'> COMFIRM </Button>
-          </AvForm>
+					<button width='auto' type='submit' className='btn button-confirm'> COMFIRM </button>
+          </form>
         </div>
       </div>
     

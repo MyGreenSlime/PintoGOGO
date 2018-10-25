@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
+.setbg__addmenu{
+  /* position: relative; */
+  background: url("/img/register/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.addmenu__box {
+  background-color: #f3ece7;
+  border-radius: 30px;
+  padding-top: 40px;
+  padding-right: 50px;
+  padding-left: 50px;
+  width: 70%;
+  height: auto;
+  max-width: 450px;
+  position: absolute;
+  left: 50%;
+  top: 50%; 
+  transform: translate(-50%, -50%);
+  font-family: "Quicksand", sans-serif;  
+
+}
+
+.submit__addmenu--button {
+  background-color: #ccc0a5;
+  border: none;
+  font-weight: bold;
+  padding: 5px;
+  width: 90%;
+  min-width: 100px;
+  font-family: "Quicksand", sans-serif;
+  /* margin-bottom: 5px; */
+  /* min-width: 90%; */
+  height: auto;
+  margin-bottom: 10%;
+}
