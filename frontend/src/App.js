@@ -15,6 +15,8 @@ import cardMenu from './component/cardmenu/cardmenu.js'
 //---------------been-----------------------------------
 import Register from './component/register/register.js'
 import Footer from './component/footer/footer.js'
+import Package from './component/package/package.js'
+import PackageManage from './component/packagemanage/packagemanage'
 //---------------pat------------------------------------
 import Login from './component/login/mainlogin/login'
 // import Construct from './component/login/underconstruct'
@@ -30,7 +32,7 @@ class App extends Component {
 
       <div className="App">
       
-        <Navbar />,
+        {/* <Navbar />, */}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/demomenu" component={DemoMenu} />
@@ -39,9 +41,11 @@ class App extends Component {
           <Route path="/cardmenu" component={cardMenu} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/package" component={Package} />
+          <Route path="/packagemanage" component={PackageManage} />
           {/* <Route path="/construct" component={Construct}/> */}
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

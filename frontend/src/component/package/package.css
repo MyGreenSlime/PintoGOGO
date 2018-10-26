@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+
+.button-group
+{
+  margin: 20px 0 0 30px;
+}
+
+.button-set
+{
+  background-color: #f3ece7;
+  font-family: 'Quicksand', sans-serif; 
+  font-size: 19px;
+  width: 100px;
+  color: #7b7b7b; 
+  border: 0ch;
+  border-radius: 10px 12px 0px 0px;
+}
+
+button:active{
+  background-color:olive;
+}
+
+.package-box
+{
+  width: 58%;
+  background-color: #f3ece7;
+  border-radius: 0 12px 12px 12px;
+  font-family: 'Quicksand', sans-serif; 
+  font-size: 19px;
+  color: #7b7b7b; 
+  padding-top: 10px ;
+  padding-left: 40px;
+  padding-right: 40px; 
+  padding-bottom: 17px; 
+  margin-left: 30px;
+  /* margin-top: 30px; */
+  min-width: 362px;
+  align-content: center;
+}
+
+.card-package
+{
+  margin: 12px 10px 12px 10px; 
+  padding: 0 20px 0 20px;
+  
+}
+
+.card-last-package
+{
+  margin: 12px auto 12px auto; 
+  padding: 0 20px 0 20px;
+  width: 50%;
+}
+
+.card-pack-img
+{
+  padding: 0 7px 0 7px;
+}
+
+.card-img
+{
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+}
