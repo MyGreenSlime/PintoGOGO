@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+.choicepackage-box
+{
+  width: 58%;
+  background-color: #f3ece7;
+  border-radius: 12px;
+  font-family: 'Quicksand', sans-serif; 
+  font-size: 20px;
+  height: 60px;
+  padding-top: 16px;
+  margin-left: 30px;
+  margin-top: 70px;
+  min-width: 362px;
+}
+.link-choice{ 
+  color: #7b7b7b; 
+}

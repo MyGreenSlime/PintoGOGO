@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
-.setbg__addmenu{
+.setbg__addmenu {
   /* position: relative; */
   background: url("/img/register/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: auto;
 }
 
 .addmenu__box {
@@ -17,24 +17,26 @@
   width: 70%;
   height: auto;
   max-width: 450px;
-  position: absolute;
+  /*position: absolute;
   left: 50%;
   top: 50%; 
-  transform: translate(-50%, -50%);
-  font-family: "Quicksand", sans-serif;  
-
+  transform: translate(-50%, -50%);*/
+  display: inline-block;
+  font-family: "Quicksand", sans-serif;
+  margin-top: 70px;
+  margin-bottom: 30px; 
 }
 
 .submit__addmenu--button {
+  margin-bottom: 10%;
   background-color: #ccc0a5;
+  color: white;
   border: none;
+  border-radius: 10px;
   font-weight: bold;
   padding: 5px;
   width: 90%;
   min-width: 100px;
   font-family: "Quicksand", sans-serif;
-  /* margin-bottom: 5px; */
-  /* min-width: 90%; */
   height: auto;
-  margin-bottom: 10%;
 }
