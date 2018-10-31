@@ -9,12 +9,11 @@ var package = new Schema({
     day_meal : [{
         meal_1 : {type : ObjectId, ref : "Menu"},
 
-        meal_2 : {type : ObjectId, ref : "Menu"},
-
-        snack : {type : ObjectId, ref : "Snack"}
+        meal_2 : {type : ObjectId, ref : "Menu"}
     }],
-    price : Number
-    
+    price : Number,
+    by_admin : Boolean,
+    owner : {type : String, ref : "users"}
 });
 
 module.exports = mongoose.model('Package', package);

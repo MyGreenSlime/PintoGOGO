@@ -4,7 +4,7 @@ import setAuthToken from '../util/setAuthToken'
 import jwt_decode  from 'jwt-decode'
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-    axios.post('http://localhost:4000/users/register' , userData)
+    axios.post('/api/users/register' , userData)
             .then(res => history.push('/login'))
             .catch(err => 
                 dispatch({
@@ -16,7 +16,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 //login - Get User token
 export const loginUser = (userData) => dispatch => {
-    axios.post('http://localhost:4000/users/login', userData)
+    axios.post('/api/users/login', userData)
         .then(res => {
             const { token } = res.data
             localStorage.setItem('jwtToken', token);

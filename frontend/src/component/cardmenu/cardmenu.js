@@ -20,7 +20,7 @@ class cardMenu extends Component {
   }  
   
   deleteFromDb(){
-    axios.delete('http://localhost:4000/menus/food/del/'+ this.props.id)
+    axios.delete('/api/menus/food/del/'+ this.props.id)
     .then(res => console.log(res))
       
   }
