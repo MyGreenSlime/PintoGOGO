@@ -26,6 +26,7 @@ import Footer from './component/footer/footer.js'
 //---------------pat------------------------------------
 import Login from './component/login/mainlogin/login'
 import Package from './component/packagemanage/packagemanage'
+import Pack from './component/packmenubox/packmenu'
 
 const Home = () => {
   return [ <Carousel />, <Recommend />, <Choice />];
@@ -72,9 +73,10 @@ class App extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/packagemanage" component={Package} />
+                <Route path="/package" component={Pack} />
                 <Route path="*" component={UnderConstruct}/>> 
               </Switch>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </Router>
       </Provider>

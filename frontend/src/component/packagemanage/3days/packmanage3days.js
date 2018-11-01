@@ -1,65 +1,79 @@
 import React, {Component} from 'react';
 import '../packagemanage.css';
-import { DragDropContainer, DropTarget } from "react-drag-drop-container";
 
 class Packagemanage3days extends Component {
-
-	constructor(props){
+  
+  constructor(props) {
     super(props);
-    this.state = { 
-      day1: ["../img/package/blank.PNG", '../img/package/blank.PNG'], 
-      day2: ["../img/package/blank.PNG", '../img/package/blank.PNG'], 
-      day3: ["../img/package/blank.PNG", '../img/package/blank.PNG']
+    this.state = {
+      day1_img: ["../img/package/blank.PNG", '../img/package/blank.PNG'],
+      day2_img: ["../img/package/blank.PNG", '../img/package/blank.PNG'],
+      day3_img: ["../img/package/blank.PNG", '../img/package/blank.PNG'],
+      day1_detail: [],
+      day2_detail: [],
+      day3_detail: [],
     };
     this.setMenuDrop = this.setMenuDrop.bind(this)
   }
 
-  setMenuDrop(){
-		console.log("drop!!")
+  setMenuDrop(dayimg, daydetail, index, e) {
+    console.log(dayimg, index, e);
+    const newDayMealState = this.state[dayimg].slice();
+    const newDayDetailState = this.state[daydetail].slice();
+    newDayMealState[index] = e.dragData.img_url;
+    newDayDetailState[index] = e.dragData;
+    this.setState({
+      [dayimg]: newDayMealState,
+      [daydetail]: newDayDetailState
+    });
+    console.log(newDayDetailState);
   }
 
 	render() {
 		return (
 			<React.Fragment>
-			<div className='packagemanage-box'>
-				<div className='row'>
+				<div className='packagemanage-box '>
+			<div className='row'>
 					<div className='col-sm card-package'>
-						<p>DAY 1</p>
+						DAY 1
 						<div className='row'>
-							<div className='col card-pack-img'>
-                <DropTarget targetKey="menu" onHit={this.setMenuDrop}>
-                    <img className='card-img' src={this.state.day1[0]} />
-                </DropTarget>
+							<div className='col-sm card-pack-img'>
+								<img className='card-img' src='../img/package/blank.PNG' />
 							</div>
-							<div className='col card-pack-img'>
-                  <img className='card-img' src={this.state.day1[1]} />
+							<div className='col-sm card-pack-img'>
+								<img className='card-img' src='../img/package/blank.PNG' />
 							</div>
 						</div>
 					</div>
 					<div className='col-sm card-package'>
-						<p>DAY 2</p>
+						DAY 2
 						<div className='row'>
-							<div className='col card-pack-img'>
-                  <img className='card-img' src={this.state.day2[0]} />
+							<div className='col-sm card-pack-img'>
+								<img className='card-img' src='../img/package/blank.PNG' />
 							</div>
-							<div className='col card-pack-img'>
-                <img className='card-img' src={this.state.day2[1]} />
+							<div className='col-sm card-pack-img'>
+								<img className='card-img' src='../img/package/blank.PNG' />
 							</div>
 						</div>
 					</div>
-				</div>
-				<div className=' card-last-package '>
-					<p>DAY 3</p>
+				</div>	
+				
+        <div className='row'>
+				<div className='col-3-sm col-set'></div>
+				<div className='col-sm card-last-package '>
+					DAY 3
 					<div className='row'>
-						<div className='col card-pack-img'>
-              <img className='card-img' src={this.state.day3[0]} />
+						<div className='col-sm card-pack-img'>
+							<img className='card-img' src='../img/package/blank.PNG' />
 						</div>
-						<div className='col card-pack-img'>
-              <img className='card-img' src={this.state.day3[1]} />
+						<div className='col-sm card-pack-img'>
+							<img className='card-img' src='../img/package/blank.PNG' />
 						</div>
 					</div>
 				</div>
-        <button className='btn-shownutrition'>CLICK TO SHOW NUTRITION</button>
+				<div className='col-3-sm col-set'></div>
+				</div>
+        <button className='btn btn-shownutrition'>CLICK TO SHOW NUTRITION</button>
     	</div>
 			</React.Fragment>
 		);

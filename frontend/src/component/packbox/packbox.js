@@ -60,20 +60,20 @@ class Packbox extends Component {
       </DropTarget>
       <div>
       {/* <Package/> */}
-      <nav className="outside--box">
+      {/* <nav className="outside--box">
         <div className="nav nav-tabs setnavtab" id="nav-tab" role="tablist">
           <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">MENU</a>
           <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">SNACKS</a>
         </div>
         <div className="tab-content" id="nav-tabContent">
-          <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"> */}
             <Pack menus={this.state.menus} target="menu" />
-          </div>
+          {/* </div>
           <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <Pack menus={this.state.snacks} target="snack" />
           </div>
         </div>
-      </nav>
+      </nav> */}
       </div>
     </React.Fragment>);
   }

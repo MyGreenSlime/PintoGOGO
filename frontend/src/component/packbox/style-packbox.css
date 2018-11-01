@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
 .outside--box{
-  /* background-color: #f3ece7; */
+  background-color: #f3ece7;
   position: fixed;
   right: 0px;
   top: -10px;
