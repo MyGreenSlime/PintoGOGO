@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import './register.css';
-import { RestClient } from '../api/api'
+import propTypes from 'prop-types';
+import {withRouter} from 'react-router-dom'
+import classnames from 'classnames';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions'
 
 class Register extends Component {
 	constructor(props){
@@ -14,73 +18,32 @@ class Register extends Component {
 			password2 : "",
 			phonenumber : "",
 			address : "",
-      status : {}
-    }
-    this.baseState = this.state
-		this.onChangeFirstname = this.onChangeFirstname.bind(this)
-		this.onChangeLastname = this.onChangeLastname.bind(this)
-		this.onChangeEmail = this.onChangeEmail.bind(this)
-		this.onChangeUsername = this.onChangeUsername.bind(this)
-		this.onChangePassword1 = this.onChangePassword1.bind(this)
-		this.onChangePassword2 = this.onChangePassword2.bind(this)
-		this.onChangePhonenumber = this.onChangePhonenumber.bind(this)
-		this.onChangeAddress = this.onChangeAddress.bind(this)
-		this.handleValidSubmit = this.handleValidSubmit.bind(this)
-  }
-  onChangeFirstname(e) {
-		this.setState({
-			first_name : e.target.value 
-		})
+			status : {},
+			errors : {}
+		}
+		this.handleChange = this.handleChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
+	componentDidMount() {
+		if(this.props.auth.isAuthenticated) {
+				this.props.history.push('/');
+		}
+}
 
-	onChangeLastname(e) {
-		this.setState({
-			last_name : e.target.value 
-		})
-	}
-
-	onChangeEmail(e) {
-		this.setState({
-			email : e.target.value 
-		})
-	}
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.errors) {
+				this.setState({errors : nextProps.errors});
+		}
+}
 	
-	onChangeUsername(e) {
+	handleChange(e) {
 		this.setState({
-			user_name : e.target.value 
+			[e.target.name] : e.target.value
 		})
 	}
 
-	onChangePassword1(e) {
-		this.setState({
-			password1 : e.target.value 
-    })
-	}
-
-	onChangePassword2(e) {
-		this.setState({
-			password2 : e.target.value 
-		})
-	}
-
-	onChangePhonenumber(e) {
-		this.setState({
-			phonenumber : e.target.value 
-		})
-	}
-
-	onChangeAddress(e) {
-		this.setState({
-			address : e.target.value 
-		})
-	}
-
-  resetForm = () => {
-    this.setState(this.baseState)
-  }
-
-	handleValidSubmit(e) {
-    const userDetail = {
+	handleSubmit(e) {
+    const newUser = {
 			first_name : this.state.first_name,
 			last_name : this.state.last_name,
 			user_name : this.state.user_name,
@@ -90,161 +53,167 @@ class Register extends Component {
 			phonenumber : this.state.phonenumber,
 			address : this.state.address
 		}
-		console.log(userDetail)
-		RestClient.post("http://localhost:4000/users/register",userDetail)
-		.then(resstatus => this.setState({status : resstatus}));
-		console.log(this.state.status)
-        e.preventDefault();
+		this.props.registerUser(newUser, this.props.history)
+    e.preventDefault();
   }    
       
     render() {
+			const {errors} = this.state
+
     return (
       <div className='set-screen'> {/*bg*/}
         <div className='register-box'> {/*register box*/}
           <h2> SIGN UP </h2>
           <br/>
-          <form className="needs-validation form" novalidate >
+          <form noValidate onSubmit={this.handleSubmit}>
           <div className='row'>
             <div className='col-md-6 col-12'>
               <div className='form-left'> {/*left form*/}
                 <div className='form-group row'>
-                  <label className='control-label text-form-left' for="Firstname" >Firstname*</label> 
+                  <label className='control-label text-form-left' htmlFor="Firstname" >Firstname*</label> 
     	  	        <div className='col'>  
 										<input
-											className='form-control' 
-											name="firstname" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.first_name
+											})}
+											name="first_name" 
 											type="text" 
 											id="Firstname" 
-											onChange={this.onChangeFirstname} 
+											placeholder = "Firstname"
+											onChange={this.handleChange} 
 											value={this.state.first_name} 
-											required/>
-										<div className='invalid-tooltip'>
-											Firstname is required!
-										</div>
+										/>
+										{errors.first_name && (<div className="invalid-feedback">{errors.first_name}</div>)}
 		    	        </div> 
                 </div>
                 <div className='form-group row'>
-					        <label className='control-label text-form-left' for="Lastname" >Lastname*</label>
+					        <label className='control-label text-form-left' htmlFor="Lastname" >Lastname*</label>
     	  	        <div className='col'>
 										<input 
-											className='form-control' 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.last_name
+											})}
 											type="text" 
-											name="lastname" 
+											name="last_name" 
 											id="Lastname" 
-											onChange={this.onChangeLastname} 
+											placeholder = "Lastname"
+											onChange={this.handleChange} 
 											value={this.state.last_name} 
-											required/>			    	        
-										<div className='invalid-tooltip'>
-											Lastname is required!
-										</div>
+										/>			    	        
+										{errors.last_name && (<div className="invalid-feedback">{errors.last_name}</div>)}
 									</div>
 					      </div>
                 <div className='form-group row'>
-						      <label className='control-label text-form-left' for="Username" >Username*</label>
+						      <label className='control-label text-form-left' htmlFor="Username" >Username*</label>
       	  	      <div className='col'>
 							      <input 
 											type="text" 
-											className='form-control' 
-											name="username" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.user_name
+											})}
+											name="user_name" 
 											id="Username" 
-											minLength="4"
-											placeholder="at least 4 characters"
-											onChange={this.onChangeUsername} 
+											placeholder = "Username"
+											onChange={this.handleChange} 
 											value={this.state.user_name} 
-											required/>
-										<div className='invalid-tooltip'>
-											Username is required!
-										</div>
+										/>
+										{errors.user_name && (<div className="invalid-feedback">{errors.user_name}</div>)}
 			    	      </div>
 					      </div>
 								<div className='form-group row'>
-						      <label className='control-label text-form-left' for="Password">Password*</label>
+						      <label className='control-label text-form-left' htmlFor="Password">Password*</label>
       	  	      <div className='col'>
 							      <input 
 											type="password"
-											className='form-control'  
-											name="password" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.password1
+											})}
+											name="password1" 
 											id="Password" 
-											minLength="8"
-											placeholder="at least 8 characters"
-											onChange={this.onChangePassword1} 
+											placeholder = "password must least 6 character"
+											onChange={this.handleChange} 
 											value={this.state.password1} 
-											required/>
-										<div className='invalid-tooltip'>
-											Password is required!
-										</div>
+										/>
+										{errors.password1 && (<div className="invalid-feedback">{errors.password1}</div>)}
       			    	</div>
 			      		</div> 
 					      <div className='form-group row'>
-						      <label className='control-label text-form-left' for="ConfirmPassword">Confirm Password*</label>
-      	  	      <div class='col'>
+						      <label className='control-label text-form-left' htmlFor="ConfirmPassword">Confirm Password*</label>
+      	  	      <div className='col'>
 							      <input 
 											type="password" 
-											className='form-control' 
-											name="confirmpassword" 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.password2
+											})}
+											name="password2" 
 											id="ConfirmPassword" 
-											minLength="8"
-											placeholder="at least 8 characters"
-											onChange={this.onChangePassword2} 
+											placeholder = "Comfirm Password must least 6 character"
+											onChange={this.handleChange} 
 											value={this.state.password2} 
-											required/>
-											<div className='invalid-tooltip'>
-												Confirm password is required!
-											</div>
+										/>
+										{errors.password2 && (<div className="invalid-feedback">{errors.password2}</div>)}
       			    	</div>
 			      		</div> 
               </div>
             </div>
             <div className="col-md-6 col-12">
-              <form className='form-right'> {/*right form*/}
+              <div className='form-right'> {/*right form*/}
 								<div className='form-group row'>
-			      			<label className='control-label text-form-left' for="Email">E-mail*</label>
+			      			<label className='control-label text-form-left' htmlFor="Email">E-mail*</label>
             	  	<div className='col'>
 			      				<input 
 											type="email" 
-											className='form-control' 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.email
+											})} 
 											name="email" 
 											id="Email" 
-											onChange={this.onChangeEmail} 
+											placeholder = "Email"
+											onChange={this.handleChange} 
 											value={this.state.email} 
-											required/>
-										<div className='invalid-tooltip'>
-											Email is required!
-										</div>
+										/>
+											{errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
 			    	      </div>
       					</div>
                 <div className='form-group row'>
-                  <label className='control-label text-form-left' for="PhoneNumber">Phone Number* &nbsp;&nbsp;</label>
+                  <label className='control-label text-form-left' htmlFor="PhoneNumber">Phone Number* &nbsp;&nbsp;</label>
 						      <div className='col'>
                     <input 
 											type="text" 
-											className='form-control' 
+											className= {classnames("form-control",{
+												'is-invalid' : errors.phonenumber
+											})} 
 											name="phonenumber" 
 											id="PhoneNumber" 
-											maxLength={10}
-											onChange={this.onChangePhonenumber} 
+											placeholder = "Phone number"
+											onChange={this.handleChange} 
 											value={this.state.phonenumber} 
-											required/>
-											<div className='invalid-tooltip'>Phone Number is required!</div>
+											/>
+											{errors.phonenumber && (<div className="invalid-feedback">{errors.phone}</div>)}
 									</div>
                 </div>
                 <div className='form-group'>
-                  <label className='control-label text-form-right' for="Address" sm={12}>Address(Default)</label>
+                  <label className='control-label text-form-right' htmlFor="Address" sm={12}>Address(Default)</label>
                   <div className='col'>
-						      	<input 
-										className='form-control addr' 
-										name="address" 
-										type="textarea" 
-										id="Address" 
-										onChange={this.onChangeAddress} 
-										value={this.state.address}/>
+										<input 
+											className= {classnames("form-control addr",{
+												'is-invalid' : errors.address
+											})} 
+											name="address" 
+											type="textarea" 
+											id="Address" 
+											placeholder = "Your address"
+											onChange={this.handleChange} 
+											value={this.state.address}
+										/>
+										{errors.address && (<div className="invalid-feedback">{errors.address}</div>)}
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 					<br/>
-					<button width='auto' type='submit' className='btn button-confirm' onValidSubmit={this.handleValidSubmit}> COMFIRM </button>
+					<button width='auto' type='submit' className='btn button-confirm'> COMFIRM </button>
           </form>
         </div>
       </div>
@@ -253,4 +222,16 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+	registerUser: propTypes.func.isRequired,
+	auth: propTypes.object.isRequired,
+	errors: propTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+	auth : state.auth,
+	errors : state.errors
+})
+
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

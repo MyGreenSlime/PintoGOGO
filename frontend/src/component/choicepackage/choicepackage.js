@@ -1,21 +1,31 @@
 import React, {Component} from 'react';
+import Package3days from '../package/3days/A/pack3daysA';
+import Package5daysA from '../package/5days/A/pack5daysA';
 import './choicepackage.css';
 
 class ChoicePackage extends Component {
-	state = {  }
+
+  constructor(props){
+    super(props)
+    
+  }
+
 	render() {
 		return (
-			<div className='choicepackage-box row'>
-        <div className='col'> 
-          <a className='link-choice' href="">3 DAYS</a> 
+      <React.Fragment>
+        <div class="btn-group btn-choice-group" role="group" aria-label="Choice Package">
+          {
+            [3, 5, 7].map(d => (
+              <button 
+                type="button" 
+                class="btn btn-choice-set" 
+                onClick={() => this.props.onSetDay(d)}>
+                  {d} DAYS
+              </button>
+            ))
+          }
         </div>
-        <div className='col'> 
-          <a className='link-choice' href="">5 DAYS</a> 
-        </div>
-        <div className='col'> 
-          <a className='link-choice' href="">7 DAYS</a> 
-        </div>
-      </div>
+      </React.Fragment>
 		);
 	}
 }

@@ -1,19 +1,21 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId
-var user = new Schema({
+const UserSchema = new Schema({
 
-    type : {type: String, default: "user"},
+    type : {type: Boolean, default: false},
     first_name : String,
     last_name : String,
     email : String,
     user_name : String,
     password : String,
-    //address_id :String,
-    address : [],
+    address : [{type : ObjectId, ref : "Address"}],
     phonenumber : String,
+    favorite_food : [{type : ObjectId, ref : "Menu"}],
+    favorite_snack : [{type : ObjectId, ref : "Snack"}],
+    history_purchase : [{type : ObjectId, ref : "Order"}]
     //payment : [{type : ObjectId, ref : 'Payment', default:}]
     
 });
 
-module.exports = mongoose.model('User', user);
+module.exports = User = mongoose.model('users', UserSchema);
