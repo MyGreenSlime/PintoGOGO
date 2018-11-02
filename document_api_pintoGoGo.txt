@@ -326,6 +326,7 @@ Package
 return {
 	_id : String,
 	name_package : String,
+	description : String,
 	type : Number,
 	day_meal : [{
 		meal_1 : Menu,
@@ -345,6 +346,7 @@ return {
 	[{
 		_id : String,
 		name_package : String,
+		description : String,
 		type : Number,
 		day_meal : [{
 			meal_1 : Menu,
@@ -365,6 +367,7 @@ return {
 	[{
 		_id : String,
 		name_package : String,
+		description : String,
 		type : Number,
 		day_meal : [{
 			meal_1 : Menu,
@@ -385,6 +388,7 @@ return {
 	[{
 		_id : String,
 		name_package : String,
+		description : String,
 		type : Number,
 		day_meal : [{
 			meal_1 : Menu,
@@ -405,6 +409,7 @@ return {
 	[{
 		_id : String,
 		name_package : String,
+		description : String,
 		type : Number,
 		day_meal : [{
 			meal_1 : Menu,
@@ -425,6 +430,7 @@ return {
 	[{
 		_id : String,
 		name_package : String,
+		description : String,
 		type : Number,
 		day_meal : [{
 			meal_1 : Menu,
