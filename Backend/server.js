@@ -36,6 +36,7 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
+
 //set router
 //var user = require('./routes/user.js');
 app.use('/api/users', users);

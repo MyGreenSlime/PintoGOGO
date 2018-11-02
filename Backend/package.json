@@ -6,6 +6,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
@@ -24,7 +25,9 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "server": "nodemon server.js",
+    "client" : "cd .. && cd frontend && npm start ",
+    "dev" : "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC"
