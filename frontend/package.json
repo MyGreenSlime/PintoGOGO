@@ -9,11 +9,11 @@
     "classnames": "^2.2.6",
     "jquery": "^3.3.1",
     "jwt-decode": "^2.2.0",
-    "mdbreact": "^4.8.2",
     "popper.js": "^1.14.4",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-drag-drop-container": "^6.1.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.3",
@@ -36,5 +36,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:4000" 
+  "proxy" : "http://localhost:4000"
 }

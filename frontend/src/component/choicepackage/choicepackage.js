@@ -6,8 +6,7 @@ import './choicepackage.css';
 class ChoicePackage extends Component {
 
   constructor(props){
-    super(props)
-    
+    super(props)  
   }
 
 	render() {

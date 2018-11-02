@@ -4,6 +4,7 @@ import PackageManage3days from './3days/packmanage3days.js'
 import PackageManage5days from './5days/packmanage5days.js'
 import PackageManage7days from './7days/packmanage7days.js'
 import '../choicepackage/choicepackage.css'
+import Packbox from '../packmenubox/packmenu'
 
 class PackageManage extends Component {
 
@@ -30,14 +31,14 @@ class PackageManage extends Component {
 	render() {
     const { day } = this.state;
     const PackageManage = this.dayComponents[day];
-		return (
-      <React.Fragment>
-        <div className='set-frame-package'>
+		return(
+       <React.Fragment>
+        <div className="set-frame-package">
           <ChoicePackage onSetDay={this.setDay} />
           <PackageManage />
         </div>
-			</React.Fragment>
-		);
+        <Packbox />
+      </React.Fragment>);
 	}
 }
 
