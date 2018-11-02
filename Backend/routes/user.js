@@ -10,6 +10,7 @@ const validationRegisterInput =  require('../validator/register');
 const validationLoginInput = require('../validator/login');
 
 const User = require('../models/User');
+const Address = require('../models/address');
 
 //register
 router.post('/register', (req, res) => {
@@ -23,6 +24,9 @@ router.post('/register', (req, res) => {
                 errors.user_name = 'Username already exists'
                 return res.status(400).json(errors)
             } else {
+                const newAddress = new Address({
+                    address : req.body.address
+                })
                 const newUser = new User({
                     first_name : req.body.first_name,
                     last_name : req.body.last_name,
@@ -30,9 +34,14 @@ router.post('/register', (req, res) => {
                     email : req.body.email,
                     password : req.body.password1,
                     phonenumber : req.body.phonenumber,
-                    address : req.body.address,
+                    //address : address_id,
                     type : req.body.type
                 })
+                newAddress.save()
+                    .then(address => newUser.address = address._id)
+                    .catch(err => console.log(err));
+                
+                
                 bcrytpt.genSalt(10, (err, salt) => {
                     bcrytpt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
@@ -75,7 +84,9 @@ router.post('/login', function(req, res){
                         first_name: user.first_name, 
                         last_name: user.last_name, 
                         user_name: user.user_name,
-                        type: user.type
+                        type: user.type,
+                        favorite_food : user.favorite_food,
+                        favorite_snack : user.favorite_snack
                     }
                     //sign token
                     jwt.sign(payload, keys.secretOrkey, { expiresIn : 3600 }, (err, token) => {
@@ -92,16 +103,121 @@ router.post('/login', function(req, res){
     });
 })
 
-router.get('/current', passport.authenticate('jwt',{ session : false }), (req,res) => {
-    res.json({
-        id : req.user.id,
-        first_name : req.user.first_name,
-        last_name : req.user.last_name,
-        user_name : req.user.user_name,
-        type : req.user.type
+//profile user data
+router.get('/profile', passport.authenticate('jwt',{ session : false }), (req, res) => {
+    const errors = {}
+    User.findById(req.user.id)
+        .populate({path : "address" , model : "Address"})
+        .populate({path : "favorite_food" , model : "Menu"})
+        .populate({path : "favorite_snack" , model : "Snack"})
+        .exec((err, user) => {
+            if (err) {
+                errors.profile = "Cannot Fetch Your Profile"
+                res.status(400).json(errors)
+            } else {
+                res.json(user)
+            }
+        })
+})
+
+//add new address
+router.put('/add/address', passport.authenticate('jwt',{ session : false }), (req, res) => {
+    const errors = {};
+    const tmpAddress = {};
+    const newAddress = new Address({
+        address : req.body.address
+    }) 
+    newAddress.save()
+        .then(
+            address => {
+            tmpAddress.id = address._id
+            console.log(address)
+        })
+        .then(() => {
+            User.updateOne({_id : req.user.id}, {$push : {address : tmpAddress.id}}, (err, user) => {
+            if (err) {
+                errors.address = "Cannot add new address"
+                res.status(400).json(errors)
+            } else {
+                res.json(user)
+            }
+        })})
+        .catch(err => console.log(err));
+        
+})
+// del some address
+router.put('/del/address/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
+    const errors = {};
+    const address_id = req.params.id
+    User.updateOne({_id : req.user.id}, {$pull : {address : address_id}}, (err, user) => {
+        if (err) {
+            errors.address = "Cannot DELETE Your address"
+            res.status(400).json(errors)
+        } else {
+            Address.remove({_id : address_id})
+                .then(console.log("Success"))
+                .catch(err => {
+                    console.log(err)
+                })
+            res.json(user)
+        }
+    })  
+})
+
+//add favorite food
+router.put('/add/favorite/food/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
+    const errors = {};
+    var foodid =  req.params.id;
+    User.updateOne({_id : req.user.id}, {$push : {favorite_food : foodid}},(err, user) => {
+        if (err) {
+            errors.favorite_food = "Cannot Add Your Favorite Food"
+            res.status(400).json(errors)
+        } else {
+            res.json(user)
+        }
     })
 })
 
+//delete some  favorite food
+router.delete('/del/favorite/food/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
+    const errors = {};
+    var foodid =  req.params.id;
+    User.updateOne({_id : req.user.id},{$pull : {favorite_food : foodid}},(err, user) => {
+        if (err) {
+            errors.favorite_food = "Cannot DELETE Your Favorite Food"
+            res.status(400).json(errors)
+        } else {
+            res.json(user)
+        }
+    })
+})
 
+//add favorite snack
+router.put('/add/favorite/snack/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
+    const errors = {};
+    var snackid =  req.params.id;
+    User.updateOne({_id : req.user.id},{$push : {favorite_snack : snackid}},(err, user) => {
+        if (err) {
+            errors.favorite_snack = "Cannot Add Your Favorite Snack"
+            res.status(400).json(errors)
+        } else {
+            res.json(user)
+        }
+    })
+})
+
+//delete some  favorite snack
+router.delete('/del/favorite/snack/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
+    const errors = {};
+    var snackid =  req.params.id;
+    User.updateOne({_id : req.user.id},{$pull : {favorite_snack : snackid}},(err, user) => {
+        if (err) {
+            errors.favorite_snack = "Cannot DELETE Your Favorite Snack"
+            res.status(400).json(errors)
+        } else {
+            res.json(user)
+        }
+    })
+})
 
 module.exports = router;
