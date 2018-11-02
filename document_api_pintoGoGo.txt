@@ -441,20 +441,20 @@ ________________________________________________________________________________
 @desc    add new package user or admin
 @access  private need login
 
-
-return {
-	[{
-		_id : String,
+#Require Data 
+{
 		name_package : String,
+		description : String,
 		type : Number,
 		day_meal : [{
 			meal_1 : Menu,
 			meal_2 : Menu,
 		}]
-		price : Number,
-		by_admin : Boolean,
-		owner :  nameUser
-	}]
+		price : Number
+}
+
+return {
+	status : ok
 }
 __________________________________________________________________________________________
 
@@ -463,17 +463,6 @@ ________________________________________________________________________________
 @access  private need admin or owner package
 
 return {
-	[{
-		_id : String,
-		name_package : String,
-		type : Number,
-		day_meal : [{
-			meal_1 : Menu,
-			meal_2 : Menu,
-		}]
-		price : Number,
-		by_admin : Boolean,
-		owner :  nameUser
-	}]
+	status : ok
 }
 __________________________________________________________________________________________
