@@ -1,0 +1,17 @@
+
+.box{
+  background-color: #f3ece7;
+  margin: 10%;
+  border-radius: 10px;
+  width: 80%;
+  height: 80%;
+}
+
+.topic--text{
+  font-size: larger;
+  font-weight: bold
+}
+
+.desc--text{
+  margin: 5%;
+}

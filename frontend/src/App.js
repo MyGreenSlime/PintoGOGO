@@ -72,7 +72,7 @@ class App extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/packagemanage" component={Package} />
-                <Route path="*" component={UnderConstruct}/>> 
+                <Route path="*" component={UnderConstruct}/> 
               </Switch>
             {/* <Footer /> */}
           </div>
