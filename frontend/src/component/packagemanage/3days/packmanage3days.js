@@ -47,7 +47,7 @@ class Packagemanage3days extends Component {
 				</div>
 				<div className='col-3-sm col-set'></div>
 				</div>
-        <button className='btn btn-shownutrition'>CLICK TO SHOW NUTRITION</button>
+        <button className='btn btn-shownutrition' >CLICK TO SHOW NUTRITION</button>
     	</div>
 			</React.Fragment>
 		);
