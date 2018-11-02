@@ -1,24 +1,30 @@
-import React, { Component} from 'react';
-import '../cardsnack/cardsnack.css';
-import axios from 'axios';
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import "../cardsnack/cardsnack.css";
+import axios from "axios";
+import propTypes from "prop-types";
+import { connect } from "react-redux";
 
 class cardMenu extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          clicked : 0
-        }
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: 0
+    };
+  }
 
-    addToCartClick(e){
-        console.log('Click!!!!');
-        this.setState({
-            clicked : this.state.clicked+1
-        })
-        e.preventDefault();
-    }  
+  addToCartClick(e) {
+    console.log("Click!!!!");
+    this.setState({
+      clicked: this.state.clicked + 1
+    });
+    e.preventDefault();
+  }
+
+  deleteFromDb() {
+    axios
+      .delete("/api/menus/snack/del/" + this.props.id)
+      .then(res => console.log(res));
+  }
 
     deleteFromDb(){
         axios.delete('/api/menus/snack/del/'+ this.props.id)

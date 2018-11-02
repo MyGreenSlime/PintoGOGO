@@ -8,6 +8,7 @@ var item = new Schema({
     menu_id : {type : ObjectId, ref : "Menu"},
     snack_id : {type : ObjectId, ref : "Snack"},
     timestamp : Date
+    
 });
 
 module.exports = mongoose.model('Item', item);

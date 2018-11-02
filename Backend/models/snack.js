@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var snack = new Schema({
+
     snack_name : String,
     calories : Number, 
     price : Number,

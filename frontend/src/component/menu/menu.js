@@ -72,15 +72,21 @@ class Menu extends Component {
   }
 
   checkFirstMenuSet() {
+    let img=""
     if (this.state.firstImg - 6 >= 0) {
-      return <img src={"/img/other/left-arrow.png"} height="20" />;
+      img = <img src="/img/other/left-arrow.png" height="20" />;
     }
+    console.log("left ",img)
+    return img;
   }
 
   checkLastMenuSet() {
+    let img = "";
     if (this.state.firstImg <= this.state.length_menu) {
-      return <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
+      img = <img className="imgbutton" src="/img/other/right-arrow.png" height="20" />
     }
+    console.log("right ",img)
+    return img;
   }
 
   render() {
@@ -101,7 +107,7 @@ class Menu extends Component {
       <div className="menuzone">
 
         <div className="mergerow-left">
-          <div onClick={this.leftClick}>{this.checkFirstMenuSet}</div>
+          <div onClick={this.leftClick}>{this.checkFirstMenuSet()}</div>
         </div>
 
         <Row className="firstrow">
