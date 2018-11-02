@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+.btn-choice-set
+{
+  background-color: #f3ece7;
+  color: #7b7b7b;
+  width: 100%;
+  font-size: 20px;
+  height: 55px;
+}
+
+.btn-choice-group
+{
+  width: 100%;
+}

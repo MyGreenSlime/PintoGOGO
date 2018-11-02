@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './footer.css';
-import {Container} from 'reactstrap';
 
 class Footer extends Component {
   render() {

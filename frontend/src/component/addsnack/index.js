@@ -78,36 +78,36 @@ class Addsnack extends Component {
                     <div className="form-group" className="addsnack__box">
                         <h3>Status : {status}</h3>
                             <form onSubmit={this.handleSubmit.bind(this)}>
-                                <FormGroup>
-                                    <Input type="text" name="snack_name" placeholder="snackname" value={this.state.snack_name} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="textarea" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="price" placeholder="price" value={this.state.price} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="calories" placeholder="carlories" value={this.state.calories} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="protein" placeholder="protein" value={this.state.protein} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="carbohydrate" placeholder="carbohydrate" value={this.state.carbohydrate} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="fat" placeholder="fat" value={this.state.fat} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="sodium" placeholder="sodium" value={this.state.sodium} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="cholesterol" placeholder="cholesterol" value={this.state.cholesterol} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="text" name="img_url" placeholder="url" value={this.state.img_url} onChange={this.handleChange} required />
-                                </FormGroup>
+                                <div className="form-group">
+                                    <input className="form-control" type="text" name="snack_name" placeholder="snackname" value={this.state.snack_name} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <textarea className="form-control" type="textarea" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="price" placeholder="price" value={this.state.price} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="calories" placeholder="carlories" value={this.state.calories} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="protein" placeholder="protein" value={this.state.protein} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="carbohydrate" placeholder="carbohydrate" value={this.state.carbohydrate} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="fat" placeholder="fat" value={this.state.fat} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="sodium" placeholder="sodium" value={this.state.sodium} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="cholesterol" placeholder="cholesterol" value={this.state.cholesterol} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="text" name="img_url" placeholder="url" value={this.state.img_url} onChange={this.handleChange} required />
+                                </div>
                                 <Button type="submit" value="submit" className="submit__addsnack--button">
                                     SUBMIT
                                 </Button>
