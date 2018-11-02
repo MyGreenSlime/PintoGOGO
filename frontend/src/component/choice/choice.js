@@ -15,15 +15,15 @@ import Snack from "../snack/snack"
 import "../choice/style-choice.css";
 
 export default class Choice extends Component {
-  state = {
-    isMenu: true,
-    isPackage: false,
-    isSnack: false
-  };
+  
 
   constructor() {
     super();
-
+    this.state = {
+      isMenu: true,
+      isPackage: false,
+      isSnack: false
+    };
     this.changeRenderToMenu = this.changeRenderToMenu.bind(this);
     this.changeRenderToPackage = this.changeRenderToPackage.bind(this);
     this.changeRenderToSnack = this.changeRenderToSnack.bind(this);

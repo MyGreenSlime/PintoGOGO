@@ -1,17 +1,14 @@
 import React, { Component} from 'react';
 import '../cardsnack/cardsnack.css';
-import { Container, Row, Col} from 'reactstrap';
 import axios from 'axios';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/authActions';
 
 class cardMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
-          clicked : 0,
-          id : String(this.props.id)
+          clicked : 0
         }
       }
 
@@ -24,8 +21,8 @@ class cardMenu extends Component {
     }  
 
     deleteFromDb(){
-        // axios.delete('http://localhost:4000/menus/snack/del/'+ this.state.id)
-        //     .then(res => console.log(res))
+        axios.delete('/api/menus/snack/del/'+ this.props.id)
+        .then(res => console.log(res))
     }
     
     render() { 
@@ -61,7 +58,6 @@ class cardMenu extends Component {
     }
 }
 cardMenu.propTypes = {
-    logoutUser: propTypes.func.isRequired,
     auth: propTypes.object.isRequired
   }
   
@@ -70,4 +66,4 @@ cardMenu.propTypes = {
   })
   
 
-export default connect(mapStateToProps, { logoutUser })(cardMenu);
+export default connect(mapStateToProps)(cardMenu);

@@ -8,6 +8,9 @@ var snack = new Schema({
     protein : Number,
     carbohydrate : Number,
     fat : Number,
+    description : String,
+    cholesterol : Number,
+    sodium : Number,
     img_url : String
     
 });
