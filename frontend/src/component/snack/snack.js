@@ -25,7 +25,7 @@ class Snack extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:4000/menus/snack")
+    axios.get("/menus/snack")
       .then(response => {
         this.setState({
            isLoaded: true, 

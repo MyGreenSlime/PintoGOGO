@@ -14,7 +14,7 @@ class Package5daysA extends Component {
   }
   
   componentDidMount() {
-    axios.get('http://localhost:4000/menus/food')
+    axios.get('/menus/food')
     .then(res => {
       const allmenus = res.data
       this.setState({ isLoaded: true, menus: allmenus})

@@ -6,19 +6,19 @@ import './choicepackage.css';
 class ChoicePackage extends Component {
 
   constructor(props){
-    super(props)
-    
+    super(props)  
   }
 
 	render() {
 		return (
       <React.Fragment>
-        <div class="btn-group btn-choice-group" role="group" aria-label="Choice Package">
+        <div className="btn-group btn-choice-group" role="group" aria-label="Choice Package">
           {
-            [3, 5, 7].map(d => (
+            [3, 5, 7].map((d,index) => (
               <button 
+                key={index}
                 type="button" 
-                class="btn btn-choice-set" 
+                className="btn btn-choice-set" 
                 onClick={() => this.props.onSetDay(d)}>
                   {d} DAYS
               </button>

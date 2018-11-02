@@ -60,7 +60,7 @@ class Addsnack extends Component {
             cholesterol : this.state.cholesterol,
             img_url: this.state.img_url
         }
-        axios.post('http://localhost:4000/menus/snack/add', menudetail)
+        axios.post('/api/menus/snack/add', menudetail)
             .then(res => {
                 this.setState({ status: res.data })
             })

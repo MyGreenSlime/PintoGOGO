@@ -31,15 +31,14 @@ class PackageManage extends Component {
 	render() {
     const { day } = this.state;
     const PackageManage = this.dayComponents[day];
-		return (
-      <React.Fragment>
-        <div className='set-frame-package'>
+		return(
+       <React.Fragment>
+        <div className="set-frame-package">
           <ChoicePackage onSetDay={this.setDay} />
           <PackageManage />
         </div>
-        <Packbox/>
-			</React.Fragment>
-		);
+        <Packbox />
+      </React.Fragment>);
 	}
 }
 

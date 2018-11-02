@@ -16,18 +16,18 @@ class Packmenu extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/menus/food')
+    axios.get('/api/menus/food')
       .then(res => {
         const allmenus = res.data
         this.setState({ isLoaded: true, menus: allmenus })
-      })
+      }).then(() => {console.log(this.state.menus)})
   }
 
   createDivImage(url, name) {
     let str_name = name;
     let img = "";
-    if(str_name.length > 15){
-      str_name = name.substring(0,15) + "..."
+    if(str_name.length > 17){
+      str_name = name.substring(0,17) + "..."
     }
     img = 
     <figure>
@@ -43,17 +43,21 @@ class Packmenu extends Component {
 
     return img;
   }
-
+  
   render() {
+
+    const img_drag = this.state.menus.map((menu,index) => 
+      <React.Fragment>
+        <img src={menu.img_url} className="menu--image__drop"/>
+      </React.Fragment>
+    );
+
     const listMenus = this.state.menus.map((menu, index) => 
-    <React.Fragment key={index}>
-      {/* <div className="hovereffect"> */}
-        <DragDropContainer dragData={menu} targetKey="menu" dragClone="true">
+      <React.Fragment key={index}>
+        <DragDropContainer dragData={menu} targetKey="menu" dragClone="true" customDragElement={img_drag[index]}> 
           {this.createDivImage(menu.img_url, menu.menu_name)}
         </DragDropContainer>
-      {/* </div> */}
-      
-    </React.Fragment>);
+      </React.Fragment>);
 
     const cols1 = [], cols2 = [];
 
@@ -72,7 +76,7 @@ class Packmenu extends Component {
         <div className="outside--box">
           <h4 className="menu--text">MENU</h4>
           <div className="row justify-content-end">
-            <div className="col ">
+            <div className="col">
               {cols1}
             </div>
             <div className="col">
