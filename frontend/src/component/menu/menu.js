@@ -33,7 +33,7 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:4000/menus/food")
+    axios.get("/api/menus/food")
       .then(response => {
         this.setState({
           isLoaded: true,

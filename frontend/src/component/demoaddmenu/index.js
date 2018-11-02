@@ -111,7 +111,7 @@ class Addmenu extends Component {
         //         img_url : this.refs.img_url.value
         //     }}, function() {
         //         console.log(this.state.menu);
-        //         RestClient.post("http://localhost:4000/menus/food/add",this.state.menu)
+        //         RestClient.post("/api/menus/food/add",this.state.menu)
         //             .then(resstatus => this.setState({status : resstatus}));
         //     })
         // }
@@ -124,7 +124,7 @@ class Addmenu extends Component {
             fat : this.state.fat,
             img_url : this.state.img_url
         }
-        axios.post('http://localhost:4000/menus/food/add', menudetail)
+        axios.post('/api/menus/food/add', menudetail)
         .then(res => {
             this.setState({status : res.data})
         })

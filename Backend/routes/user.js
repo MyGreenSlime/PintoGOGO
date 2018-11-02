@@ -128,7 +128,8 @@ router.put('/add/address', passport.authenticate('jwt',{ session : false }), (re
         address : req.body.address
     }) 
     newAddress.save()
-        .then(address => {
+        .then(
+            address => {
             tmpAddress.id = address._id
             console.log(address)
         })
@@ -178,7 +179,7 @@ router.put('/add/favorite/food/:id', passport.authenticate('jwt',{ session : fal
 })
 
 //delete some  favorite food
-router.put('/del/favorite/food/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
+router.delete('/del/favorite/food/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
     const errors = {};
     var foodid =  req.params.id;
     User.updateOne({_id : req.user.id},{$pull : {favorite_food : foodid}},(err, user) => {
@@ -206,7 +207,7 @@ router.put('/add/favorite/snack/:id', passport.authenticate('jwt',{ session : fa
 })
 
 //delete some  favorite snack
-router.put('/del/favorite/snack/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
+router.delete('/del/favorite/snack/:id', passport.authenticate('jwt',{ session : false }), (req, res) => {
     const errors = {};
     var snackid =  req.params.id;
     User.updateOne({_id : req.user.id},{$pull : {favorite_snack : snackid}},(err, user) => {
