@@ -9,7 +9,9 @@
 
 .topic--text{
   font-size: larger;
-  font-weight: bold
+  font-weight: bold;
+  margin: 5%;
+  background-color: #e4dac2;
 }
 
 .desc--text{
