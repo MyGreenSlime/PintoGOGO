@@ -92,6 +92,7 @@ router.put('/add/snack', passport.authenticate('jwt',{ session : false }), funct
                   error.addamount = "can not add amount"
                   res.sendStatus(400).json(error);
               } else {
+                  
                  if(order.nModified == 0) {
                     Order.updateOne({user_id : req.user.id, isfinish : false},{
                         $push : {snack_order : newsnack_order}
@@ -120,7 +121,52 @@ router.put('/add/snack', passport.authenticate('jwt',{ session : false }), funct
     })
 })
 //add package to order
+router.put('/add/package', passport.authenticate('jwt',{ session : false }), function(req, res){
 
+    const newpackage_order = {
+        package_id : req.body.package_id,
+        package_name : req.body.package_name,
+        price : req.body.price,
+        amount : 1
+    }
+    const error = {}
+    console.log(req.user.id)
+    Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
+        if(order) {
+          Order.updateOne({user_id : req.user.id, isfinish : false , "package_order.package_id" : req.body.package_id},{
+              $inc : { "package_order.$.amount" : 1 }
+          }, (err, order) => {
+              if(err) {
+                  error.addamount = "can not add amount"
+                  res.sendStatus(400).json(error);
+              } else {
+                 if(order.nModified == 0) {
+                    Order.updateOne({user_id : req.user.id, isfinish : false},{
+                        $push : {package_order : newpackage_order}
+                    }, (err, order) => {
+                        if(err) {
+                            error.addneworder = "can not add new menu to order"
+                            res.sendStatus(400).json(error)
+                        } else {
+                            res.json(order)
+                        }
+                    })
+                 } else {
+                     res.json(order)
+                 }
+              }
+          })
+        } else {
+            const newOrder =  new Order({
+                user_id : req.user.id,
+                package_order : newpackage_order
+            });
+            newOrder.save()
+                .then(order => res.json(order))
+                .catch(err => console.log(err));
+        }
+    })
+})
 //update amount food
 
 //update amount snack
