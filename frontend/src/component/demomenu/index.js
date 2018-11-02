@@ -12,7 +12,7 @@ class DemoMenu extends Component {
   }
 
   componentDidMount() {
-    axios.get('/menus/food')
+    axios.get('/api/menus/food')
       .then(res => {
         const allmenus = res.data
         this.setState({isLoaded: true , menus: allmenus})

@@ -8,6 +8,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
+// import "font-awesome/css/font-awesome.min.css";
+// import "mdbreact/dist/css/mdb.css";
 
 // const AppWithRouter = () => (
 //     <BrowserRouter>

@@ -12,13 +12,12 @@ class ChoicePackage extends Component {
 	render() {
 		return (
       <React.Fragment>
-        <div className="btn-group btn-choice-group" role="group" aria-label="Choice Package">
+        <div class="btn-group btn-choice-group" role="group" aria-label="Choice Package">
           {
-            [3, 5, 7].map((d,index) => (
+            [3, 5, 7].map(d => (
               <button 
-                key={index}
                 type="button" 
-                className="btn btn-choice-set" 
+                class="btn btn-choice-set" 
                 onClick={() => this.props.onSetDay(d)}>
                   {d} DAYS
               </button>
