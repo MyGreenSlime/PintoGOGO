@@ -92,7 +92,7 @@ router.put('/add/snack', passport.authenticate('jwt',{ session : false }), funct
                   error.addamount = "can not add amount"
                   res.sendStatus(400).json(error);
               } else {
-                  
+
                  if(order.nModified == 0) {
                     Order.updateOne({user_id : req.user.id, isfinish : false},{
                         $push : {snack_order : newsnack_order}
@@ -167,12 +167,48 @@ router.put('/add/package', passport.authenticate('jwt',{ session : false }), fun
         }
     })
 })
-//update amount food
-
-//update amount snack
-
-//update amount package
-
+//increase amount food
+router.put('/increase/amount/food/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const food_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false , "food_order.food_id" : food_id},{
+        $inc : { "food_order.$.amount" : 1 }
+    }, (err, order) => {
+        if(err) {
+            error.addamount = "can not add amount"
+            res.sendStatus(400).json(error);
+        } else {
+            res.json(order)
+        }
+    })
+})
+//increase amount snack
+router.put('/increase/amount/snack/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const snack_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false , "snack_order.snack_id" : snack_id},{
+        $inc : { "snack_order.$.amount" : 1 }
+    }, (err, order) => {
+        if(err) {
+            error.addamount = "can not add amount"
+            res.sendStatus(400).json(error);
+        } else {
+            res.json(order)
+        }
+    })
+})
+//increase amount package
+router.put('/increase/amount/package/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const package_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false , "package_order.package_id" : package_id},{
+        $inc : { "package_order.$.amount" : 1 }
+    }, (err, order) => {
+        if(err) {
+            error.addamount = "can not add amount"
+            res.sendStatus(400).json(error);
+        } else {
+            res.json(order)
+        }
+    })
+})
 //del food from order
 
 //del snack from order

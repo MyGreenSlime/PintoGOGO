@@ -77,6 +77,14 @@ class Snack extends Component {
       return <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
     }
   }
+  
+  onMenuCardDeleted(index) {
+    const newSnacks = this.state.snacks.slice();
+    newSnacks.splice(index, 1);
+    this.setState({
+      snacks: newSnacks
+    });
+  }
 
   render() {
     
@@ -109,21 +117,28 @@ class Snack extends Component {
             name={snacks[firstImg].snack_name} 
             picture={snacks[firstImg].img_url} 
             calories={snacks[firstImg].calories} 
-            id = {snacks[firstImg]._id}/>
+            id = {snacks[firstImg]._id}
+            onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
+            />
           }
 
           {snacks[secondImg] && <CardMenu 
             name={snacks[secondImg].snack_name} 
             picture={snacks[secondImg].img_url} 
             calories={snacks[secondImg].calories} 
-            id = {snacks[secondImg]._id} />
+            id = {snacks[secondImg]._id} 
+            onMenuCardDeleted={this.onMenuCardDeleted.bind(this, secondImg)}
+            />
           }
 
           {snacks[thirdImg] && <CardMenu 
             name={snacks[thirdImg].snack_name} 
             picture={snacks[thirdImg].img_url} 
             calories={snacks[thirdImg].calories} 
-            id = {snacks[thirdImg]._id} />
+            id = {snacks[thirdImg]._id} 
+            onMenuCardDeleted={this.onMenuCardDeleted.bind(this, thirdImg)}
+            />
+            
           }
 
         </Row>
@@ -139,21 +154,27 @@ class Snack extends Component {
             name={snacks[forthImg].snack_name} 
             picture={snacks[forthImg].img_url} 
             calories={snacks[forthImg].calories} 
-            id = {snacks[forthImg]._id}/>
+            id = {snacks[forthImg]._id}
+            onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
+            />
           }
 
           {snacks[fifthImg] && <CardMenu 
             name={snacks[fifthImg].snack_name} 
             picture={snacks[fifthImg].img_url} 
             calories={snacks[fifthImg].calories} 
-            id = {snacks[fifthImg]._id}/>
+            id = {snacks[fifthImg]._id}
+            onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
+            />
           }
 
           {snacks[sixthImg] && <CardMenu 
             name={snacks[sixthImg].snack_name} 
             picture={snacks[sixthImg].img_url} 
             calories={snacks[sixthImg].calories} 
-            id = {snacks[sixthImg]._id}/>
+            id = {snacks[sixthImg]._id}
+            onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
+            />
           }
 
         </Row>
