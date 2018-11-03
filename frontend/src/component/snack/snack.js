@@ -120,7 +120,7 @@ class Snack extends Component {
     } = this.state;
 
     if (!isLoaded) {
-      return <div class="loader setposition"/>;
+      return <div class="loader"/>;
     }
     return (
       <div className="snackzone">

@@ -106,7 +106,7 @@ class Menu extends Component {
       sixthImg
     } = this.state;
     if (!isLoaded) {
-      return <div class="loader setposition" />;
+      return <div className="loader" />;
     }
     return (
       <div className="menuzone">
