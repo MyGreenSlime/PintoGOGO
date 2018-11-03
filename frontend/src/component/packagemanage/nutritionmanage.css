@@ -23,18 +23,15 @@
     font-family: 'Quicksand', 'Prompt';
 }
 
-.nutrition-box
+.nutritionmanage-box
 {
     background-color: #fff5ee;
-    position: fixed;
-    right: 0;
-    top: 100px;
-    /* height: 70%; */
-    width: 32%;
-    padding: 3%;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 16px;
-    border-radius: 12px 0 0 12px;
+    width: 100%;
+    position: relative;
+    padding: 4%;
+    border-radius: 12px;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .description

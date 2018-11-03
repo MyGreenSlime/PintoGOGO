@@ -18,6 +18,7 @@
   position: relative;
   padding: 17px 5% 17px 5% ;
   margin-top: 30px;
+  margin-bottom: 150px;
 }
 
 .card-package
@@ -55,7 +56,7 @@
     background-color: #e4dac2;
     color: #7b7b7b;
     font-size: 16px;
-    margin: 20px;
+    margin: 20px 10px 20px 10px;
     font-weight: bold;
 }
 

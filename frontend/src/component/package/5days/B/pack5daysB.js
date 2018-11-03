@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../../package.css';
 import Nutrition5B from './nutrition5B';
 import axios from 'axios';
+import NoPackage from '../../nopackage'
 
 export default class Package5daysB extends Component {
 
@@ -22,7 +23,7 @@ export default class Package5daysB extends Component {
 			});
 		})
 		.then(() => {
-			console.log(this.state.packages)
+			console.log(".....",this.state.packages)
 		});
   }
 
@@ -32,6 +33,9 @@ export default class Package5daysB extends Component {
 					} = this.state;
 		if (!!!isLoaded) {
 			return <React.Fragment />
+		}
+		if(packages.length===0) {
+			return <NoPackage />
 		}
 
 		return (

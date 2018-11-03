@@ -1,61 +1,36 @@
 import React, {Component} from 'react';
 // import { Chart } from 'mdbreact';
-import '../../nutrition.css';
+import './nutritionmanage.css';
 import axios from 'axios';
 
-export default class Nutrition5A extends Component {
-	constructor() {
-    super();
+export default class NutritionManage extends Component {
+	constructor(props) {
+	super(props);
+
     this.state = {
-      packages: {},
-			isLoaded: false,
-			daymeal: {}
+      		packages: {},
+			// isLoaded: false,
+			daymeal: this.props.menu_detail.slice()
 		}
 		this.compute = this.compute.bind(this);
+		console.log("this", this.state.daymeal)
   }
-  
-  componentDidMount() {
-    axios.get('/api/packages/system/5days')
-    .then(res => {
-      this.setState({  
-				packages: res.data
-			});
-		})
-		.then(() => {
-			this.setState({
-				daymeal : this.state.packages[0].day_meal,
-				isLoaded: true,
-			})
-		})
-		.then(() => {
-			console.log(this.state.daymeal)
-		});
-	}
 	
 	compute(x) {
 		const daymeal = this.state.daymeal
 		let sum = 0;
-		for (let i = 0; i < 5; i++) {
-			 sum = sum + daymeal[i].meal_1[x] + daymeal[i].meal_2[x]
+		for (let i = 0; i < 3; i++) {
+			 sum = sum + daymeal[i][0][x] + daymeal[i][1][x]
 		}
-		sum = sum/5
+		sum = sum/3
 		return sum;
 	}
 
 	render() {
-		const {	packages,
-						isLoaded, 
-					} = this.state;
-		if (!!!isLoaded) {
-			return <React.Fragment />
-		}
-		
 		return (
 			<React.Fragment>
-			<div className='nutrition-box'>
-				<div className='description'>
-					{packages[0].description}
-				</div>
+				{console.log("this2", this.state.daymeal)}
+			<div className='nutritionmanage-box'>
 				<p className='nutrition-text'>สารอาหารเฉลี่ยต่อวัน</p>
 				<div className='row'>
 					<div className='col-7'>
@@ -74,7 +49,7 @@ export default class Nutrition5A extends Component {
 					<div className='col-7'>
 						<p>CHOLESTEROL</p>
 					</div>
-					<p>{this.compute("calesterol")} g/day</p>
+					<p>{this.compute("cholesterol")} g/day</p>
 				</div>
 				<div className='row'>
 					<div className='col-7'>
@@ -94,7 +69,7 @@ export default class Nutrition5A extends Component {
 					</div>
 					<p>{this.compute("protein")} g/day</p>
 				</div>
-    	</div>
+		</div>
 			</React.Fragment>
 		);
 	}
