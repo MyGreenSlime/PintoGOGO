@@ -82,7 +82,12 @@ class Menu extends Component {
 
   checkLastMenuSet() {
     let img = "";
-    if (this.state.firstImg <= this.state.length_menu) {
+    if (this.state.firstImg <= this.state.menus.length && 
+      this.state.secondImg <= this.state.menus.length && 
+      this.state.thirdImg <= this.state.menus.length && 
+      this.state.forthImg <= this.state.menus.length && 
+      this.state.fifthImg <= this.state.menus.length && 
+      this.state.sixthImg <= this.state.menus.length && this.state.menus.length != 0) {
       img = <img className="imgbutton" src="/img/other/right-arrow.png" height="20" />
     }
     console.log("right ",img)
@@ -101,7 +106,7 @@ class Menu extends Component {
       sixthImg
     } = this.state;
     if (!isLoaded) {
-      return <div>loading....</div>;
+      return <div className="loader" />;
     }
     return (
       <div className="menuzone">

@@ -70,7 +70,9 @@ class Packmenu extends Component {
       }
     })
 
-
+    if(!this.state.isLoaded){
+      return <div className="loader" />;         
+    }
     return (
       <React.Fragment>
         <div className="outside--box">
