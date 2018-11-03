@@ -469,6 +469,26 @@ return {
 	status : ok
 }
 __________________________________________________________________________________________
+@route   POST api/packages/anonymous/addcart
+@desc    add new package to order with anonymous
+@access  private need login
+
+#Require Data 
+{
+		name_package : String, // cannot duplicate please
+		description : String,
+		type : Number,
+		day_meal : [{
+			meal_1 : Menu,
+			meal_2 : Menu,
+		}]
+		price : Number
+}
+
+return {
+	newOrder or modify 
+}
+__________________________________________________________________________________________
 
 @route   POST api/packages/del/:package_id
 @desc    delete some package by id
