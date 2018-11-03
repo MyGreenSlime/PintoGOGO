@@ -9,6 +9,10 @@ const Snack = require('../models/snack');
 //get all order
 router.get('/all', passport.authenticate('jwt',{ session : false }),function(req, res) {
     const error = {}
+    if(!req.user.type) {
+        error.admin = "need admin account"
+        res.status(500).send(error)
+    }
     Order.find({})
         .populate({path : "food_order.food_id", model : "Menu"})
         .populate({path : "snack_order.snack_id", model : "Snack"})
