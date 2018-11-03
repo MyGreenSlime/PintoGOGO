@@ -16,7 +16,7 @@ class Addsnack extends Component {
             protein: "",
             carbohydrate: "",
             fat: "",
-            img_url: "",
+            img: null,
             description : "",
             sodium : "",
             cholesterol : "",
@@ -25,7 +25,7 @@ class Addsnack extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-
+        this.handleChangeImage = this.handleChangeImage.bind(this)
     }
 
     // cannot redirect I don't know why
@@ -47,7 +47,26 @@ class Addsnack extends Component {
         })
     }
 
+    handleChangeImage(e) {
+        this.setState({
+            img : e.target.files[0]
+        },() => {
+            console.log(this.state.img)
+        })
+    }
+
     handleSubmit(e) {
+        const formData = new FormData()
+        formData.append('img',this.state.img, this.state.img.name)
+        formData.append('snack_name',this.state.snack_name)
+        formData.append('calories',this.state.calories)
+        formData.append('price',this.state.price)
+        formData.append('protein',this.state.protein)
+        formData.append('carbohydrate',this.state.carbohydrate)
+        formData.append('fat',this.state.fat)
+        formData.append('cholesterol',this.state.cholesterol)
+        formData.append('sodium',this.state.sodium)
+        formData.append('description',this.state.description)
         const menudetail = {
             snack_name: this.state.snack_name,
             price: this.state.price,
@@ -58,9 +77,9 @@ class Addsnack extends Component {
             description : this.state.description,
             sodium : this.state.sodium,
             cholesterol : this.state.cholesterol,
-            img_url: this.state.img_url
+            img: this.state.img
         }
-        axios.post('/api/menus/snack/add', menudetail)
+        axios.post('/api/menus/snack/add', formData)
             .then(res => {
                 this.setState({ status: res.data })
             })
@@ -106,7 +125,7 @@ class Addsnack extends Component {
                                     <input className="form-control" type="number" name="cholesterol" placeholder="cholesterol" value={this.state.cholesterol} onChange={this.handleChange} required />
                                 </div>
                                 <div className="form-group">
-                                    <input className="form-control" type="text" name="img_url" placeholder="url" value={this.state.img_url} onChange={this.handleChange} required />
+                                    <input className="form-control" type="file" name="img"  onChange={this.handleChangeImage} required />   
                                 </div>
                                 <Button type="submit" value="submit" className="submit__addsnack--button">
                                     SUBMIT

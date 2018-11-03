@@ -29,6 +29,9 @@ class cardMenu extends Component {
     deleteFromDb(){
         axios.delete('/api/menus/snack/del/'+ this.props.id)
         .then(res => console.log(res))
+        .then(() => {
+            this.props.onMenuCardDeleted(this.props.id);
+          });
     }
     
     render() { 

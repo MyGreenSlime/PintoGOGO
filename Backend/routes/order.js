@@ -7,14 +7,20 @@ const Menu = require('../models/menu');
 const Snack = require('../models/snack');
 
 //get all order
-router.get('/all',function(req, res) {
-    Order.find({}, function(err, orders){
-        if(err) {
-            res.status(500).send({error : "Could not fetch orders"});
-        } else {
-            res.send(orders);
-        }
-    });
+router.get('/all', passport.authenticate('jwt',{ session : false }),function(req, res) {
+    const error = {}
+    Order.find({})
+        .populate({path : "food_order.food_id", model : "Menu"})
+        .populate({path : "snack_order.snack_id", model : "Snack"})
+        .populate({path : "package_order.package_id", model : "Package"})
+        .exec((err, order) => {
+            if(err) {
+                error.orders = "Could not fetch current order"
+                res.status(500).send(error)
+            } else {
+                res.send(order)
+            }
+        })
 });
 //get order by id
 
@@ -24,6 +30,22 @@ router.get('/all',function(req, res) {
 
 //get order by unfinish
 
+//get order by current order
+router.get('/current', passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    Order.find({user_id : req.user.id, isfinish : false})
+        .populate({path : "food_order.food_id", model : "Menu"})
+        .populate({path : "snack_order.snack_id", model : "Snack"})
+        .populate({path : "package_order.package_id", model : "Package"})
+        .exec((err, order) => {
+            if(err) {
+                error.orders = "Could not fetch current order"
+                res.status(500).send(error)
+            } else {
+                res.send(order)
+            }
+        })
+})
 //add food to order
 router.put('/add/food', passport.authenticate('jwt',{ session : false }), function(req, res){
 
@@ -92,7 +114,7 @@ router.put('/add/snack', passport.authenticate('jwt',{ session : false }), funct
                   error.addamount = "can not add amount"
                   res.sendStatus(400).json(error);
               } else {
-                  
+
                  if(order.nModified == 0) {
                     Order.updateOne({user_id : req.user.id, isfinish : false},{
                         $push : {snack_order : newsnack_order}
@@ -167,18 +189,186 @@ router.put('/add/package', passport.authenticate('jwt',{ session : false }), fun
         }
     })
 })
-//update amount food
-
-//update amount snack
-
-//update amount package
-
+//increase amount food
+router.put('/increase/amount/food/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const food_id = req.params.id
+    const error = {}
+    Order.updateOne({user_id : req.user.id, isfinish : false , "food_order.food_id" : food_id},{
+        $inc : { "food_order.$.amount" : 1 }
+    }, (err, order) => {
+        if(err) {
+            error.addamount = "can not add amount"
+            res.sendStatus(400).json(error);
+        } else {
+            res.json(order)
+        }
+    })
+})
+//increase amount snack
+router.put('/increase/amount/snack/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const snack_id = req.params.id
+    const error = {}
+    Order.updateOne({user_id : req.user.id, isfinish : false , "snack_order.snack_id" : snack_id},{
+        $inc : { "snack_order.$.amount" : 1 }
+    }, (err, order) => {
+        if(err) {
+            error.addamount = "can not add amount"
+            res.sendStatus(400).json(error);
+        } else {
+            res.json(order)
+        }
+    })
+})
+//increase amount package
+router.put('/increase/amount/package/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const package_id = req.params.id
+    const error = {}
+    Order.updateOne({user_id : req.user.id, isfinish : false , "package_order.package_id" : package_id},{
+        $inc : { "package_order.$.amount" : 1 }
+    }, (err, order) => {
+        if(err) {
+            error.addamount = "can not add amount"
+            res.sendStatus(400).json(error);
+        } else {
+            res.json(order)
+        }
+    })
+})
+//decrease amount food
+router.put('/decrease/amount/food/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    const food_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false , "food_order.food_id" : food_id},{
+        $inc : { "food_order.$.amount" : -1 }
+    }, (err, order) => {
+        if(err) {
+            error.decreaseamount = "can not decrease amount food"
+            res.sendStatus(400).json(error);
+        } else {
+            Order.updateOne({user_id : req.user.id, isfinish : false}, {
+                $pull : { food_order : {
+                    "food_id" : food_id,
+                    "amount" : {$lte : 0}
+                }}  
+            }, (err, order) => {
+                if(err) {
+                    error.deleteorderlist = "cannot delete snack in food"
+                    res.sendStatus(400).json(error)
+                } else {
+                    res.json(order)
+                }
+            })
+        }
+    })
+    
+})
+//decrease amount snack
+router.put('/decrease/amount/snack/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    const snack_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false , "snack_order.snack_id" : snack_id},{
+        $inc : { "snack_order.$.amount" : -1 }
+    }, (err, order) => {
+        if(err) {
+            error.decreaseamount = "can not decrease amount snack"
+            res.sendStatus(400).json(error);
+        } else {
+            Order.updateOne({user_id : req.user.id, isfinish : false}, {
+                $pull : { snack_order : {
+                    "snack_id" : snack_id,
+                    "amount" : {$lte : 0}
+                }}  
+            }, (err, order) => {
+                if(err) {
+                    error.deleteorderlist = "cannot delete snack in order"
+                    res.sendStatus(400).json(error)
+                } else {
+                    res.json(order)
+                }
+            })
+        }
+    })
+    
+})
+//decrease amount package
+router.put('/decrease/amount/package/:id',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    const package_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false , "package_order.package_id" : package_id},{
+        $inc : { "package_order.$.amount" : -1 }
+    }, (err, order) => {
+        if(err) {
+            error.decreaseamount = "can not decrease amount package"
+            res.sendStatus(400).json(error);
+        } else {
+            Order.updateOne({user_id : req.user.id, isfinish : false}, {
+                $pull : { package_order : {
+                    "package_id" : package_id,
+                    "amount" : {$lte : 0}
+                }}  
+            }, (err, order) => {
+                if(err) {
+                    error.deleteorderlist = "cannot delete package in order"
+                    res.sendStatus(400).json(error)
+                } else {
+                    res.json(order)
+                }
+            })
+        }
+    })
+    
+})
 //del food from order
-
+router.delete('/del/food/:id', passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    const food_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false}, {
+        $pull : {food_order : {
+            "food_id" : food_id
+        }}
+    }, (err, order) => {
+        if(err) {
+            error.deleteorderlist = "cannot delete food in order"
+            res.sendStatus(400).json(error)
+        } else {
+            res.json(order)
+        }
+    })
+})
 //del snack from order
-
+router.delete('/del/snack/:id', passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    const snack_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false}, {
+        $pull : {snack_order : {
+            "snack_id" : snack_id
+        }}
+    }, (err, order) => {
+        if(err) {
+            error.deleteorderlist = "cannot delete snack in order"
+            res.sendStatus(400).json(error)
+        } else {
+            res.json(order)
+        }
+    })
+})
 //del package from order
-
+router.delete('/del/package/:id', passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    const package_id = req.params.id
+    Order.updateOne({user_id : req.user.id, isfinish : false}, {
+        $pull : {package_order : {
+            "package_id" : package_id
+        }}
+    }, (err, order) => {
+        if(err) {
+            error.deleteorderlist = "cannot delete package in order"
+            res.sendStatus(400).json(error)
+        } else {
+            res.json(order)
+        }
+    })
+})
 //checkout
 
 module.exports = router;

@@ -106,6 +106,14 @@ class Snack extends Component {
     console.log("right ", img);
     return img;
   }
+  
+  onMenuCardDeleted(index) {
+    const newSnacks = this.state.snacks.slice();
+    newSnacks.splice(index, 1);
+    this.setState({
+      snacks: newSnacks
+    });
+  }
 
   render() {
     const {
