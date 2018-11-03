@@ -25,6 +25,7 @@ import Register from './component/register/register.js'
 import Footer from './component/footer/footer.js'
 import Package from './component/package/package.js'
 import PackageManage from './component/packagemanage/packagemanage.js'
+import Profile from './component/profile/profile'
 //---------------pat------------------------------------
 import Login from './component/login/mainlogin/login'
 
@@ -74,6 +75,7 @@ class App extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/package" component={Package} />
                 <Route path="/packagemanage" component={PackageManage} />
+                <Route path="/profile" component={Profile} />
                 <Route path="*" component={UnderConstruct}/>> 
               </Switch>
             <Footer />
