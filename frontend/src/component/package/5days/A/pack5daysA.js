@@ -34,7 +34,7 @@ export default class Package5daysA extends Component {
 		if (!!!isLoaded) {
 			return <React.Fragment />
 		}
-		if(packages.length===0) {
+		if(!packages[0]) {
 			return <NoPackage />
 		}
 
