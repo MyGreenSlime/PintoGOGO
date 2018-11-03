@@ -1,31 +1,32 @@
-/* .menu{ */
-    /* display: grid; */
-    /* grid-row: 1/2; */
-/* } */
-.menuzone{
-    display: grid;
-    justify-content: center;  
-    align-content: center; 
-    grid-template-columns: 10% auto 10%;
-    grid-template-rows: 50% 50%;
-    margin-top: 3%;
+@media only screen{
+    .menuzone{
+        display: grid;
+        justify-content: center;  
+        align-content: center; 
+        grid-template-columns: 12.5% 25% 25% 25% 12.5%;
+        grid-template-rows: 50% 50%;
+        /* grid-row-gap: 10px; */
+        margin-top: 3%;
+        min-width: 600px;
+    }
+    
+    .mergerow-left{
+        cursor: pointer;
+        grid-area: 1/1/3/2;
+        align-self: center;
+    
+    }
+    
+    .mergerow-right{
+        cursor: pointer;
+        grid-area: 1/5/3/6;
+        /* grid-row: 1/3; */
+        align-self: center;
+    }
+    
+    /* .firstrow{
+        display: grid;
+        grid-gap: 5px;
+    } */
+    
 }
-
-.mergerow-left{
-    cursor: pointer;
-    grid-area: 1/1/3/2;
-    align-self: center;
-
-}
-
-.mergerow-right{
-    cursor: pointer;
-    grid-area: 1/3/3/4;
-    align-self: center;
-}
-
-/* .secondrow{ */
-    /* display: grid; */
-    /* grid-column: 1 / 4; */
-/* } */
-
