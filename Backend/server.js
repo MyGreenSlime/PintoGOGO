@@ -1,26 +1,43 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const dbURI = "mongodb://localhost:27017/PintoGOGO";
+const bodyParser = require('body-parser')
+const passport = require('passport')
 
-const db = mongoose.connect(dbURI, { useNewUrlParser: true }, (err) =>{  
-  console.log("connect to database");
-});
+const users = require('./routes/user.js');
+const menu = require('./routes/menu.js');
+const packages = require('./routes/package.js');
+
 const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
 
+const db = require('./config/keys.js').databaseURI;
+
+mongoose.connect(db,{ useNewUrlParser: true })
+    .then(() => console.log('Connect Database'))
+    .catch(err => console.log(err));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : false}));
+
+//passport middleware
+app.use(passport.initialize());
+//passport config
+require('./config/passport')(passport)
+
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "POST, GET");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
   next();
 });
 
 //set router
 //var user = require('./routes/user.js');
-var menu = require('./routes/menu.js');
-app.use('/menus',menu);
+app.use('/users', users);
+app.use('/menus', menu);
+app.use('/package', packages);
 
 app.listen(4000, function() {
   console.log('Server Running port 4000');

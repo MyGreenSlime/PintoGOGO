@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
+.choice__block {
+  padding-top: 30px;
+  position: relative;
+  overflow: overlay;
+  background-color: #f3ece7;
+  font-family: "Quicksand", sans-serif;
+}
+
+.button {
+  width: 140px;
+  height: 46px;
+  border: none;
+  color: #7b7b7b;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #e4dac2;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.cardgroup__choice {
+  min-width: 1024px;
+  flex-direction: row;
+}
+
+.card__choice {
+  align-items: center;
+  margin-left: 120px;
+  margin-right: 120px;
+  border: 0px;
+  background: transparent;
+}
+
+.cardimg__choice {
+  align-self: center;
+  width: 12rem;
+}
+
+.btn--active,
+.btn:hover {
+  background-color: #d3c4be;
+}
