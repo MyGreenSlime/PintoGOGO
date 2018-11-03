@@ -183,6 +183,7 @@ return
 	[{
 		_id : String,
 		menu_name : String,
+		description : String,
 		calories : Number,
 		price : Number,
 		carbohydrate : Number,
@@ -204,6 +205,7 @@ return
 	{
 		_id : String,
 		menu_name : String,
+		description : String,
 		calories : Number,
 		price : Number,
 		carbohydrate : Number,
@@ -222,6 +224,7 @@ ________________________________________________________________________________
 #Require Data
 {
 	menu_name : String,
+	description : String,
 	calories : Number,
 	price : Number,
 	carbohydrate : Number,
@@ -255,6 +258,7 @@ return
 	[{
 		_id : String,
 		snack_name : String,
+		description : String,
 		calories : Number,
 		price : Number,
 		carbohydrate : Number,
@@ -276,6 +280,7 @@ return
 	{
 		_id : String,
 		snack_name : String,
+		description : String,
 		calories : Number,
 		price : Number,
 		carbohydrate : Number,
@@ -294,6 +299,7 @@ ________________________________________________________________________________
 #Require Data
 {
 	snack_name : String,
+	description : String,
 	calories : Number,
 	price : Number,
 	carbohydrate : Number,
@@ -471,4 +477,374 @@ ________________________________________________________________________________
 return {
 	status : ok
 }
+__________________________________________________________________________________________
+
+Order
+
+@route   GET api/orders/all
+@desc    retrive all order in system
+@access  private need admin
+
+return {
+	[{
+		_id : String,
+		user_id : String,
+		isfinish : Boolean,
+		food_order : [{
+			_id : String,
+			food_id : String,
+			food_name : String,
+			price : Number,
+			amount : Number
+		}],
+		snack_order : [{
+			_id : String,
+			snack_id : String,
+			snack_name : String,
+			price : Number,
+			amount : Number	
+		}],
+		package_order : [{
+			_id : String,
+			package_id : String,
+			package_name : String,
+			price : Number,
+			amount : Number
+		}],
+		totalprice : Number,
+		create_time : Date,
+		update_time : Date
+	}] 
+}	
+__________________________________________________________________________________________
+
+@route   GET api/orders/current
+@desc    retrive current order
+@access  private need login
+
+return {
+	{
+		_id : String,
+		user_id : String,
+		isfinish : Boolean,
+		food_order : [{
+			_id : String,
+			food_id : String,
+			food_name : String,
+			price : Number,
+			amount : Number
+		}],
+		snack_order : [{
+			_id : String,
+			snack_id : String,
+			snack_name : String,
+			price : Number,
+			amount : Number	
+		}],
+		package_order : [{
+			_id : String,
+			package_id : String,
+			package_name : String,
+			price : Number,
+			amount : Number
+		}],
+		totalprice : Number,
+		create_time : Date,
+		update_time : Date
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/add/food
+@desc    add food order or increase amount for main page
+@access  private need login
+
+return {
+	{
+		_id : String,
+		user_id : String,
+		isfinish : Boolean,
+		food_order : [{
+			_id : String,
+			food_id : String,
+			food_name : String,
+			price : Number,
+			amount : Number
+		}],
+		snack_order : [{
+			_id : String,
+			snack_id : String,
+			snack_name : String,
+			price : Number,
+			amount : Number	
+		}],
+		package_order : [{
+			_id : String,
+			package_id : String,
+			package_name : String,
+			price : Number,
+			amount : Number
+		}],
+		totalprice : Number,
+		create_time : Date,
+		update_time : Date
+	}
+
+	or
+ 
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/add/snack
+@desc    add snack order or increase amount for main page
+@access  private need login
+
+return {
+	{
+		_id : String,
+		user_id : String,
+		isfinish : Boolean,
+		food_order : [{
+			_id : String,
+			food_id : String,
+			food_name : String,
+			price : Number,
+			amount : Number
+		}],
+		snack_order : [{
+			_id : String,
+			snack_id : String,
+			snack_name : String,
+			price : Number,
+			amount : Number	
+		}],
+		package_order : [{
+			_id : String,
+			package_id : String,
+			package_name : String,
+			price : Number,
+			amount : Number
+		}],
+		totalprice : Number,
+		create_time : Date,
+		update_time : Date
+	}
+
+	or
+ 
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/add/package
+@desc    add package order or increase amount for main page
+@access  private need login
+
+return {
+	{
+		_id : String,
+		user_id : String,
+		isfinish : Boolean,
+		food_order : [{
+			_id : String,
+			food_id : String,
+			food_name : String,
+			price : Number,
+			amount : Number
+		}],
+		snack_order : [{
+			_id : String,
+			snack_id : String,
+			snack_name : String,
+			price : Number,
+			amount : Number	
+		}],
+		package_order : [{
+			_id : String,
+			package_id : String,
+			package_name : String,
+			price : Number,
+			amount : Number
+		}],
+		totalprice : Number,
+		create_time : Date,
+		update_time : Date
+	}
+
+	or
+ 
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/increase/amount/food/:food_id
+@desc    increase amount each food by food_id for cart page
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/increase/amount/snack/:snack_id
+@desc    increase amount each snack by snack_id for cart page
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/increase/amount/package/:package_id
+@desc    increase amount each package by package_id for cart page
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/decrease/amount/food/:food_id
+@desc    decrease amount each food by food_id for cart page 
+	 if amount food  == 0 then delete this food from order
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/decrease/amount/snack/:snack_id
+@desc    decrease amount each snack by snack_id for cart page
+	 if amount snack  == 0 then delete this snack from order
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   put api/orders/decrease/amount/package/:package_id
+@desc    decrease amount each package by package_id for cart page
+	 if amount package  == 0 then delete this package from order
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   delete api/orders/del/food/:food_id
+@desc    delete this food from order
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   delete api/orders/del/food/:food_id
+@desc    delete this food from order
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   delete api/orders/del/snack/:snack_id
+@desc    delete this snack from order
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
+__________________________________________________________________________________________
+
+@route   delete api/orders/del/package/:package_id
+@desc    delete this package from order
+@access  private need login
+
+return {
+	{
+		"n": 1,
+    
+		"nModified": 1,
+    
+		"ok": 1				
+	}
+}	
 __________________________________________________________________________________________
