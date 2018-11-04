@@ -3,6 +3,8 @@ import '../cardsnack/cardsnack.css';
 import axios from 'axios';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import SnackDetail from "../snackdetail/snackdetail";
 
 class cardMenu extends Component {
     constructor(props){
@@ -24,34 +26,43 @@ class cardMenu extends Component {
         axios.delete('http://localhost:4000/menus/snack/del/'+ this.props.id)
         .then(res => console.log(res))
     }
+
+    sendToMenuDetail(){
+    
+        return <div>
+          <Route path="/snackdetail/:menuId" component={SnackDetail} />
+        </div>
+    }
     
     render() { 
-        const { isAuthenticated, user} = this.props.auth;
-        const admin = (
-            <React.Fragment>
-                <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
-                        <img src={"/img/other/delete.png"} height="20" />
-                    </div>
-            </React.Fragment>
-        )
-        return (
-            
-            <section className="snack">
-                <div className="cardsnack__block">
+    const { isAuthenticated, user} = this.props.auth;
+    const admin = (
+        <React.Fragment>
+            <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
+                    <img src={"/img/other/delete.png"} height="20" />
+                </div>
+        </React.Fragment>
+    )
+    return (
+        
+        <section className="snack">
+            <div className="cardsnack__block">
+                <Link to={'/snackdetail/'+this.props.id}>
                     <img src={this.props.picture} width="200px" className="cardsnack__image"/>
+                </Link>
+            </div>
+            <div className="textundersnack">
+                    <p>{this.props.name}<br/>
+                    {this.props.calories} Kcal</p>
+            </div>
+            <div>
+                <div className="cart--snack__button" onClick={this.addToCartClick.bind(this)}>
+                    <img src={"/img/other/cart.png"} height="20" />
                 </div>
-                <div className="textundersnack">
-                        <p>{this.props.name}<br/>
-                        {this.props.calories} Kcal</p>
-                </div>
-                <div>
-                    <div className="cart--snack__button" onClick={this.addToCartClick.bind(this)}>
-                        <img src={"/img/other/cart.png"} height="20" />
-                    </div>
-                    {user.type ? admin : ""}
-                </div>
-                    {/* <p>total click: {this.state.clicked}</p> */}
-            </section>
+                {user.type ? admin : ""}
+            </div>
+                {/* <p>total click: {this.state.clicked}</p> */}
+        </section>
                 
             
         );

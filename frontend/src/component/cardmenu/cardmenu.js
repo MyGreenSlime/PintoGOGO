@@ -35,10 +35,6 @@ class cardMenu extends Component {
     </div>
   }
 
-  render() {
-
-  }
-
   render() { 
     const { isAuthenticated, user} = this.props.auth;
     const admin = (
