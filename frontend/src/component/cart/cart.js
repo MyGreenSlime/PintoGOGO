@@ -47,21 +47,21 @@ class Cart extends Component {
 
   createCardCartFood() {
     const card_food = this.state.order[0].food_order.map((ord, index) => (
-      <CardCart handlerFromParant={this.handleData} picture={ord.food_id.img_url} name={ord.food_name} price={ord.price} amount={ord.amount} id={ord._id}/>
+      <CardCart handlerFromParant={this.handleData} picture={ord.food_id.img_url} name={ord.food_name} price={ord.price} amount={ord.amount} id={ord.food_id._id} type_order="food"/>
     ));
     return card_food;
   }
 
   createCardCartSnack(){
     const card_snack = this.state.order[0].snack_order.map((ord,index) => (
-      <CardCart handlerFromParant={this.handleData} picture={ord.snack_id.img_url} name={ord.snack_name} price={ord.price} amount={ord.amount} id={ord._id} />      
+      <CardCart handlerFromParant={this.handleData} picture={ord.snack_id.img_url} name={ord.snack_name} price={ord.price} amount={ord.amount} id={ord.snack_id._id} type_order="snack"/>      
     ));
     return card_snack;
   }
 
   createCardPackage(){
     const card_package = this.state.order[0].package_order.map((ord,index) => (
-      <CardCart handlerFromParant={this.handleData} picture={""} name = {ord.package_id.type + "days manage package"} price={ord.package_id.price} amount={ord.amount} id={ord.package_id._id} />      
+      <CardCart handlerFromParant={this.handleData} picture={""} name = {ord.package_id.type + "days package"} price={ord.package_id.price} amount={ord.amount} id={ord.package_id._id} type_order="package"/>      
     ));
     return card_package;
     
@@ -126,6 +126,11 @@ class Cart extends Component {
             <div className="total">
               <p>TOTAL: {this.state.fromChild}</p>
             </div>
+            <a href="/bill">
+              <button className="btn button--confirm">
+                CONFIRM
+              </button>
+            </a>
           </div>
         </div>
       </React.Fragment>
