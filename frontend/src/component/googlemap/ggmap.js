@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./style-ggmap.css";
 
 export default class Map extends Component {
   constructor(props) {
@@ -6,6 +7,13 @@ export default class Map extends Component {
 
     this.divMap = React.createRef();
     this.divSearchBox = React.createRef();
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    // this.state = {
+    //   latitude: [],
+    //   longitude: [],
+    //   destAddr: [],
+    //   kilometer: []
+    // };
   }
 
   componentDidMount() {
@@ -77,6 +85,7 @@ export default class Map extends Component {
     window.marker.addListener("dragend", function() {
       window.lat = window.marker.getPosition().lat();
       window.lng = window.marker.getPosition().lng();
+      this.handleSubmit();
     });
   }
 
@@ -99,25 +108,41 @@ export default class Map extends Component {
           window.distance = response.rows[0].elements[0].distance;
           window.duration = response.rows[0].elements[0].duration;
 
-          // console.log(window.destAddr);
-          // console.log(window.distance);
-          // console.log(window.duration);
+          console.log(window.destAddr);
+          console.log(window.distance);
+          console.log(window.duration);
         }
       }
     );
   }
 
+  // handleSubmit() {
+  //   this.setState({
+  //     latitude: window.lat,
+  //     longitude: window.lng,
+  //     destAddr: window.destAddr,
+  //     kilometer: window.distance
+  //   });
+  // }
+
   render() {
     return (
       <React.Fragment>
-        <input
-          ref={this.divSearchBox}
-          style={{ height: "50px", width: "100px" }}
-        />
-        <div ref={this.divMap} style={{ height: "500px", width: "500px" }} />
-        <button className="btn btn-primary" onClick={this.getDistance}>
-          submit
-        </button>
+        <div className="input-button ">
+          <div className="center row">
+            <input
+              className="form-control input-addr col-10"
+              ref={this.divSearchBox}
+            />
+            <button className="btn btn-warning col" onClick={this.getDistance}>
+              Search
+            </button>
+          </div>
+        </div>
+        <br />
+        <div>
+          <div className="ggmap center" ref={this.divMap} />
+        </div>
       </React.Fragment>
     );
   }
