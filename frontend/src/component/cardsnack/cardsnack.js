@@ -17,6 +17,11 @@ class cardMenu extends Component {
     this.setState({
       clicked: this.state.clicked + 1
     });
+    axios.put('/api/orders/add/snack', {
+        snack_id: this.props.id,
+        snack_name: this.props.name,
+        price: this.props.price
+    })
     e.preventDefault();
   }
 
