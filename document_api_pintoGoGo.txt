@@ -579,6 +579,12 @@ ________________________________________________________________________________
 @desc    add food order or increase amount for main page
 @access  private need login
 
+#require data{
+	food_id : String,
+	food_name : String,
+	price : Number
+}
+
 return {
 	{
 		_id : String,
@@ -626,6 +632,12 @@ ________________________________________________________________________________
 @desc    add snack order or increase amount for main page
 @access  private need login
 
+#require data{
+	food_id : String,
+	food_name : String,
+	price : Number
+}
+
 return {
 	{
 		_id : String,
@@ -672,6 +684,12 @@ ________________________________________________________________________________
 @route   put api/orders/add/package
 @desc    add package order or increase amount for main page
 @access  private need login
+
+#require data{
+	food_id : String,
+	food_name : String,
+	price : Number
+}
 
 return {
 	{
