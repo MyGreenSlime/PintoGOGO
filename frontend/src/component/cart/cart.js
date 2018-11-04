@@ -26,62 +26,64 @@ class Cart extends Component{
     }
     render(){
         return <React.Fragment>
-            <div className="linkbutton">
-                <div className="imgcart">
-                <a href="/"><img src='/img/cart/plan.png' height="40px"/></a>
-                    <p>PLAN</p>
-                    {/* <a href="/">PLAN</a> */}
+            <div className="cartscreen">
+                <div className="linkbutton">
+                    <div className="imgcart">
+                    <a href="/"><img src='/img/cart/plan.png' height="40px"/></a>
+                        <p>PLAN</p>
+                        {/* <a href="/">PLAN</a> */}
+                    </div>
+                    <img src='/img/cart/arrow.png' height="30px"/>
+                    <div className="imgcart">
+                        <img src='/img/cart/cart.png' height="40px"/>
+                        <p>CART</p>
+                    </div>
+                    <img src='/img/cart/arrow.png' height="30px"/>
+                    <div className="imgcart">
+                        <img src='/img/cart/bill.png' height="40px"/>
+                        <p>BILL</p>
+                    </div>
+                    <img src='/img/cart/arrow.png' height="30px"/>
+                    <div className="imgcart">
+                        <img src='/img/cart/payment.png' height="40px"/>
+                        <p>PAYMENT</p>
+                    </div>
+                    <img src='/img/cart/arrow.png' height="30px"/>
+                    <div className="imgcart">
+                        <img src='/img/cart/enjoy.png' height="40px"/>
+                        <p>ENJOY</p>
+                    </div>
                 </div>
-                <img src='/img/cart/arrow.png' height="30px"/>
-                <div className="imgcart">
-                    <img src='/img/cart/cart.png' height="40px"/>
-                    <p>CART</p>
-                </div>
-                <img src='/img/cart/arrow.png' height="30px"/>
-                <div className="imgcart">
-                    <img src='/img/cart/payment.png' height="40px"/>
-                    <p>PAYMENT</p>
-                </div>
-                <img src='/img/cart/arrow.png' height="30px"/>
-                <div className="imgcart">
-                    <img src='/img/cart/delivery.png' height="40px"/>
-                    <p>DELIVERY</p>
-                </div>
-                <img src='/img/cart/arrow.png' height="30px"/>
-                <div className="imgcart">
-                    <img src='/img/cart/enjoy.png' height="40px"/>
-                    <p>ENJOY</p>
-                </div>
-
-            </div>
-
-            <div className="cartbox">
-                
-                <div className="header">
-                    <h4>Cart</h4>
-                </div>
-                <div className="subhead">
-                    <div className="row">
-                        <div className="col-6"></div>
-                        <div className="col-3 amountzone">
-                            AMOUNT
+                {/* ----------------------- */}
+                <div className="cartbox">
+                    
+                    <div className="header">
+                        <h4>Cart</h4>
+                    </div>
+                    <div className="subhead">
+                        <div className="row">
+                            <div className="col-6"></div>
+                            <div className="col-3 amountzone">
+                                AMOUNT
+                            </div>
+                            <div className="col-3">
+                                PRICE
+                            </div>
                         </div>
-                        <div className="col-3">
-                            PRICE
+                    </div>
+                    <div>
+                        <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={100} amount={5} id='01'/>
+                        <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={120} amount={5} id='02'/>
+                    </div>
+                    <hr></hr>
+                    <div>
+                        <div className="total">
+                            <p>TOTAL: {this.state.fromChild}</p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={100} amount={5} id='01'/>
-                    <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={120} amount={5} id='02'/>
-                </div>
-                <hr></hr>
-                <div>
-                    <div className="total">
-                        <p>TOTAL: {this.state.fromChild}</p>
-                    </div>
-                </div>
             </div>
+            
         </React.Fragment>
     }
 }

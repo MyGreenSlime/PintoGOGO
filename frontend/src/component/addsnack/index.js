@@ -16,16 +16,18 @@ class Addsnack extends Component {
             protein: "",
             carbohydrate: "",
             fat: "",
-            img_url: "",
+            img: null,
             description : "",
             sodium : "",
             cholesterol : "",
-            status: 0
+            status: 0,
+            file: "",
+            imagePreviewUrl: ""
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-
+        this.handleChangeImage = this.handleChangeImage.bind(this)
     }
 
     // cannot redirect I don't know why
@@ -47,7 +49,38 @@ class Addsnack extends Component {
         })
     }
 
+    handleChangeImage(e) {
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        
+        this.setState({
+            img : e.target.files[0]
+        },() => {
+            console.log(this.state.img)
+        })
+
+        reader.onloadend = () => {
+            this.setState({
+              file: file,
+              imagePreviewUrl: reader.result
+            });
+          }
+      
+        reader.readAsDataURL(file)
+    }
+
     handleSubmit(e) {
+        const formData = new FormData()
+        formData.append('img',this.state.img, this.state.img.name)
+        formData.append('snack_name',this.state.snack_name)
+        formData.append('calories',this.state.calories)
+        formData.append('price',this.state.price)
+        formData.append('protein',this.state.protein)
+        formData.append('carbohydrate',this.state.carbohydrate)
+        formData.append('fat',this.state.fat)
+        formData.append('cholesterol',this.state.cholesterol)
+        formData.append('sodium',this.state.sodium)
+        formData.append('description',this.state.description)
         const menudetail = {
             snack_name: this.state.snack_name,
             price: this.state.price,
@@ -58,9 +91,9 @@ class Addsnack extends Component {
             description : this.state.description,
             sodium : this.state.sodium,
             cholesterol : this.state.cholesterol,
-            img_url: this.state.img_url
+            img: this.state.img
         }
-        axios.post('http://localhost:4000/menus/snack/add', menudetail)
+        axios.post('/api/menus/snack/add', formData)
             .then(res => {
                 this.setState({ status: res.data })
             })
@@ -71,6 +104,11 @@ class Addsnack extends Component {
         e.preventDefault()
     }
     render() {
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+            $imagePreview = (<img src={imagePreviewUrl} className="imgpreview"/>);
+        }
         const { status } = this.state;
         return (
             <React.Fragment>
@@ -78,39 +116,40 @@ class Addsnack extends Component {
                     <div className="form-group" className="addsnack__box">
                         <h3>Status : {status}</h3>
                             <form onSubmit={this.handleSubmit.bind(this)}>
-                                <FormGroup>
-                                    <Input type="text" name="snack_name" placeholder="snackname" value={this.state.snack_name} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="textarea" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="price" placeholder="price" value={this.state.price} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="calories" placeholder="carlories" value={this.state.calories} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="protein" placeholder="protein" value={this.state.protein} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="carbohydrate" placeholder="carbohydrate" value={this.state.carbohydrate} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="fat" placeholder="fat" value={this.state.fat} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="sodium" placeholder="sodium" value={this.state.sodium} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="number" name="cholesterol" placeholder="cholesterol" value={this.state.cholesterol} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="text" name="img_url" placeholder="url" value={this.state.img_url} onChange={this.handleChange} required />
-                                </FormGroup>
-                                <Button type="submit" value="submit" className="submit__addsnack--button">
+                                <div className="form-group">
+                                    <input className="form-control" type="text" name="snack_name" placeholder="snackname" value={this.state.snack_name} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <textarea className="form-control" type="textarea" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="price" placeholder="price" value={this.state.price} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="calories" placeholder="carlories" value={this.state.calories} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="protein" placeholder="protein" value={this.state.protein} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="carbohydrate" placeholder="carbohydrate" value={this.state.carbohydrate} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="fat" placeholder="fat" value={this.state.fat} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="sodium" placeholder="sodium" value={this.state.sodium} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="number" name="cholesterol" placeholder="cholesterol" value={this.state.cholesterol} onChange={this.handleChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="file" name="img"  onChange={this.handleChangeImage} required />   
+                                </div>
+                                {$imagePreview}
+                                <button type="submit" value="submit" className="submit__addsnack--button">
                                     SUBMIT
-                                </Button>
+                                </button>
                             </form>
                         </div>
                     </div>

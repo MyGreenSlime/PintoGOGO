@@ -118,16 +118,16 @@ class SnackDetail extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-4 bottomrow">
+                <div className="row bottomrow">
+                    <div className="col-4 bottomcol">
                         <p>{this.state.food.protein} G</p>
                         PROTEIN 
                     </div>
-                    <div className="col-4 bottomrow">
+                    <div className="col-4 bottomcol">
                         <p>{this.state.food.calories} G</p>
                         CALORIES 
                     </div>
-                    <div className="col-4 bottomrow">
+                    <div className="col-4 bottomcol">
                         <p> {this.state.food.carbohydrate} G</p>
                         CARBOHYDRATE 
                     </div>

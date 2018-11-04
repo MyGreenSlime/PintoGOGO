@@ -26,6 +26,9 @@ import SnackDetail from './component/snackdetail/snackdetail.js'
 import EditMenuDetail from './component/editmenudetail/editmenudetail.js'
 //---------------been-----------------------------------
 import Register from './component/register/register.js'
+import Package from './component/package/package.js'
+import PackageManage from './component/packagemanage/packagemanage.js'
+import Profile from './component/profile/profile'
 import Footer from './component/footer/footer.js'
 //---------------pat------------------------------------
 import Login from './component/login/mainlogin/login'
@@ -74,6 +77,9 @@ class App extends Component {
                 <Route path="/show/snack" component={Snack} />
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                <Route path="/package" component={Package} />
+                <Route path="/packagemanage" component={PackageManage} />
+                <Route path="/profile" component={Profile} />
                 <Route path="/cart" component={Cart}/>
                 <Route path="/menudetail" component={MenuDetail} />
                 <Route path="/snackdetail" component={SnackDetail} />

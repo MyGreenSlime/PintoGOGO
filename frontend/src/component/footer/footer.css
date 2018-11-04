@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
-.footer-set
+body { min-height: 100%; position: relative; padding-bottom: 220px; }
+
+.footer
 {
     background-color: #f9f8f8;
     font-family: 'Quicksand', sans-serif;
     height: 170px;
-    position: relative; 
+    position: absolute; 
     bottom: 0px;
+    left: 0px;
     padding-left: 30px;
     padding-right: 30px;
     min-width: 393px;
+    width: 100%;
 }
 
 .text-left

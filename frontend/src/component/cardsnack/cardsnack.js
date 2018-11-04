@@ -7,30 +7,39 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SnackDetail from "../snackdetail/snackdetail";
 
 class cardMenu extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          clicked : 0
-        }
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: 0
+    };
+  }
 
-    addToCartClick(e){
-        console.log('Click!!!!');
-        this.setState({
-            clicked : this.state.clicked+1
-        })
-        e.preventDefault();
-    }  
+  addToCartClick(e) {
+    console.log("Click!!!!");
+    this.setState({
+      clicked: this.state.clicked + 1
+    });
+    e.preventDefault();
+  }
+
+  deleteFromDb() {
+    axios
+      .delete("/api/menus/snack/del/" + this.props.id)
+      .then(res => console.log(res));
+  }
 
     deleteFromDb(){
-        axios.delete('http://localhost:4000/menus/snack/del/'+ this.props.id)
+        axios.delete('/api/menus/snack/del/'+ this.props.id)
         .then(res => console.log(res))
+        .then(() => {
+            this.props.onMenuCardDeleted(this.props.id);
+          });
     }
 
     sendToMenuDetail(){
     
         return <div>
-          <Route path="/snackdetail/:menuId" component={SnackDetail} />
+          <Route path="/snackdetail/:snackId" component={SnackDetail} />
         </div>
     }
     
@@ -61,7 +70,6 @@ class cardMenu extends Component {
                 </div>
                 {user.type ? admin : ""}
             </div>
-                {/* <p>total click: {this.state.clicked}</p> */}
         </section>
                 
             

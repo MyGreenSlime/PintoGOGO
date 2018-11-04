@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import './footer.css';
-import {Container} from 'reactstrap';
 
 class Footer extends Component {
   render() {
     return (
-      <div className='footer-set'>
+      <div className='footer'>
 				<div className='text-left'>
 					<p className='p1'>PintoGoGo</p>
 					<p className='p2'>Welcome to PintoGoGo. Here you can find a lot of quality foods. Have a good meal.</p>

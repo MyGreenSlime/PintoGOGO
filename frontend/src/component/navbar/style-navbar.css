@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
 .navbar {
-  background-color: rgba(249, 248, 248, 0.3);
+  background-color: rgba(249, 248, 248, 0.8);
   /* background-color: #f9f8f8; */
   font-weight: bold;
   font-family: "Quicksand", sans-serif;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .navbar__link {

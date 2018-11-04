@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Prompt:300,400');
+
+.nutrition-box
+{
+    background-color: #fff5ee;
+    position: fixed;
+    right: 0;
+    top: 100px;
+    /* height: 70%; */
+    width: 32%;
+    padding: 3%;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    border-radius: 12px 0 0 12px;
+}
+
+.description
+{
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.nutrition-text
+{
+    border-radius: 50px;
+    background-color: #FAE5D3;
+    width: 60%;
+    padding: 5px;
+    margin: 0 auto 20px auto;
+}
+
+p {
+    margin-bottom: 8px; 
+}
+
+hr {
+    margin: 15px 0 15px 0;
+}

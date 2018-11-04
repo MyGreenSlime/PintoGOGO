@@ -14,6 +14,14 @@ class cardMenu extends Component {
       }
     }
 
+  deleteFromDb(){
+    axios.delete('/api/menus/food/del/'+ this.props.id)
+    .then(res => console.log(res))
+    .then(() => {
+      this.props.onMenuCardDeleted(this.props.id);
+    });
+  }
+      
   addToCartClick(id){
       console.log(id);
       
@@ -22,11 +30,6 @@ class cardMenu extends Component {
       })
       console.log(this.state.clicked);
   }  
-  
-  deleteFromDb(){
-    axios.delete('http://localhost:4000/menus/food/del/'+ this.props.id)
-    .then(res => console.log(res))
-  }
 
   sendToMenuDetail(){
     
@@ -54,8 +57,7 @@ class cardMenu extends Component {
 
         <div className="textundermenu">
           <p>
-            {this.props.name}
-            <br />
+            {this.props.name}<br/>
             {this.props.calories} Kcal
           </p>
         </div>

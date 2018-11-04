@@ -9,7 +9,8 @@ class MenuDetail extends Component {
         super(props);
         this.findIdFromUrl = this.findIdFromUrl.bind(this)
         this.state={
-            food: {}
+            food: {},
+            isLoaded : false
         };
 
     }
@@ -17,11 +18,11 @@ class MenuDetail extends Component {
         var url = window.location.href;
         var res = url.split("/");
         // console.log(res[res.length-1]);
-        axios.get("http://localhost:4000/menus/food/" + res[res.length-1])
+        axios.get("/api/menus/food/" + res[res.length-1])
         .then(response => {
             // console.log(response);
             this.setState({
-
+              isLoaded : true,
               food: response.data
             });
             // console.log(this.state.food.menu_name);
@@ -50,6 +51,9 @@ class MenuDetail extends Component {
                 </div>
             </React.Fragment>
         )
+        if(!this.state.isLoaded){
+            return <div className="loader"/>
+        }
         return <React.Fragment>
             <div className="all">
                 <div className="row outside">
@@ -70,7 +74,7 @@ class MenuDetail extends Component {
 
                 <div className="row menudetail">
                     <div className="col-5">
-                        <img src={this.state.food.img_url} width="80%" className="foodimg" />
+                        <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
                         <div className="row justify-content-center">
                             <button type="button" className="addtocartbutton">ADD TO CART</button>
                         </div>
@@ -117,18 +121,24 @@ class MenuDetail extends Component {
                             </div>
                             <p> {this.state.food.protein} g</p>
                         </div>
+                        <div className='row price'>
+                            <div className='col-9'>
+                                <p>PRICE</p>
+                            </div>
+                            <p> {this.state.food.price} ฿</p>
+                        </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-4 bottomrow">
+                <div className="row bottomrow">
+                    <div className="col-4 bottomcol">
                         <p>{this.state.food.protein} G</p>
                         PROTEIN 
                     </div>
-                    <div className="col-4 bottomrow">
+                    <div className="col-4 bottomcol">
                         <p>{this.state.food.calories} G</p>
                         CALORIES 
                     </div>
-                    <div className="col-4 bottomrow">
+                    <div className="col-4 bottomcol">
                         <p> {this.state.food.carbohydrate} G</p>
                         CARBOHYDRATE 
                     </div>

@@ -11,7 +11,7 @@ import {
 
 import Menu from "../menu/menu";
 import Snack from "../snack/snack"
-
+import Package from '../package-home/package-home';
 import "../choice/style-choice.css";
 
 export default class Choice extends Component {
@@ -70,7 +70,7 @@ export default class Choice extends Component {
     }
     else if (this.state.isPackage) {
       return( <div>
-          <h1>There is no package.</h1>
+          <Package/>
       </div>);
     }
     else if (this.state.isSnack) {
@@ -86,6 +86,9 @@ export default class Choice extends Component {
     return (
       <React.Fragment>
       <section className="choice__block" fluid>
+      <div className="row">
+      </div>
+  
         <Container>
           <CardGroup className="cardgroup__choice">
             <Card className="card__choice">

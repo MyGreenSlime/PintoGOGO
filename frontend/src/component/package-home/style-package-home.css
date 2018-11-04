@@ -1,0 +1,26 @@
+
+.box{
+  background-color: #f3ece7;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 10px;
+  width: 80%;
+  height: 80%;
+  /* left: 50%;
+  transform: translateX(-50%); */
+}
+
+.button--pack{
+  font-size: large;
+  font-weight: bold;
+  margin: 5%;
+  background-color: #e4dac2;
+  text-transform: uppercase;
+
+}
+
+.desc--text{
+  margin: 5%;
+}

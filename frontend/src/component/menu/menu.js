@@ -23,7 +23,7 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:4000/menus/food")
+    axios.get("/api/menus/food")
       .then(response => {
         this.setState({
           isLoaded: true,
@@ -36,7 +36,7 @@ class Menu extends Component {
   }
 
   rightClick(e) {
-    // console.log("Click!!!!");
+    console.log("Click!!!!");
     this.setState({
       firstImg: this.state.firstImg + 6,
       secondImg: this.state.secondImg + 6,
@@ -62,15 +62,34 @@ class Menu extends Component {
   }
 
   checkFirstMenuSet() {
+    let img=""
     if (this.state.firstImg - 6 >= 0) {
-      return <img src={"/img/other/left-arrow.png"} height="20" />;
+      img = <img src="/img/other/left-arrow.png" height="20" />;
     }
+    console.log("left ",img)
+    return img;
   }
 
   checkLastMenuSet() {
-    if (this.state.firstImg <= this.state.length_menu) {
-      return <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
+    let img = "";
+    if (this.state.firstImg <= this.state.menus.length && 
+      this.state.secondImg <= this.state.menus.length && 
+      this.state.thirdImg <= this.state.menus.length && 
+      this.state.forthImg <= this.state.menus.length && 
+      this.state.fifthImg <= this.state.menus.length && 
+      this.state.sixthImg <= this.state.menus.length && this.state.menus.length != 0) {
+      img = <img className="imgbutton" src="/img/other/right-arrow.png" height="20" />
     }
+    console.log("right ",img)
+    return img;
+  }
+
+  onMenuCardDeleted(index) {
+    const newMenus = this.state.menus.slice();
+    newMenus.splice(index, 1);
+    this.setState({
+      menus: newMenus
+    });
   }
 
   render() {
@@ -79,13 +98,13 @@ class Menu extends Component {
       menus,
       firstImg,
       secondImg,
-      thirdImg,
+      thirdImg, 
       forthImg,
       fifthImg,
       sixthImg
     } = this.state;
     if (!isLoaded) {
-      return <div>loading....</div>;
+      return <div className="loader" />;
     }
     return (
       <div className="menuzone">
@@ -103,6 +122,7 @@ class Menu extends Component {
               picture={menus[firstImg].img_url}
               calories={menus[firstImg].calories}
               id = {menus[firstImg]._id}
+              onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
             />
           )}
 
@@ -112,6 +132,7 @@ class Menu extends Component {
               picture={menus[secondImg].img_url}
               calories={menus[secondImg].calories}
               id = {menus[secondImg]._id}
+              onMenuCardDeleted={this.onMenuCardDeleted.bind(this, secondImg)}
             />
           )}
 
@@ -121,8 +142,11 @@ class Menu extends Component {
               picture={menus[thirdImg].img_url}
               calories={menus[thirdImg].calories}
               id = {menus[thirdImg]._id}
+              onMenuCardDeleted={this.onMenuCardDeleted.bind(this, thirdImg)}
             />
           )}
+        {/* </Row> */}
+
         {/* </div> */}
         <div className="mergerow-right">
           <div onClick={this.rightClick.bind(this)}>
@@ -137,6 +161,7 @@ class Menu extends Component {
               picture={menus[forthImg].img_url}
               calories={menus[forthImg].calories}
               id = {menus[forthImg]._id}
+              onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
             />
           )}
 
@@ -146,6 +171,7 @@ class Menu extends Component {
               picture={menus[fifthImg].img_url}
               calories={menus[fifthImg].calories}
               id = {menus[fifthImg]._id}
+              onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
             />
           )}
 
@@ -155,12 +181,11 @@ class Menu extends Component {
               picture={menus[sixthImg].img_url}
               calories={menus[sixthImg].calories}
               id = {menus[sixthImg]._id}
+              onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
             />
           )}
         {/* </Row> */}
-        {/* <div /> */}
-        
-
+        <div />
       </div>
     );
   }

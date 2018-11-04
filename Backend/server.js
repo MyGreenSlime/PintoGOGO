@@ -4,10 +4,13 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 
 const users = require('./routes/user.js');
-const menu = require('./routes/menu.js');
+const menus = require('./routes/menu.js');
 const packages = require('./routes/package.js');
+const orders = require('./routes/order.js')
 
 const app = express();
+
+app.use('/public', express.static('public'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -33,11 +36,13 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
+
 //set router
 //var user = require('./routes/user.js');
-app.use('/users', users);
-app.use('/menus', menu);
-app.use('/package', packages);
+app.use('/api/users', users);
+app.use('/api/menus', menus);
+app.use('/api/packages', packages);
+app.use('/api/orders', orders);
 
 app.listen(4000, function() {
   console.log('Server Running port 4000');
