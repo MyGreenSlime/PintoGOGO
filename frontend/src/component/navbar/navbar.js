@@ -52,6 +52,7 @@ class Navigationbar extends Component {
         <React.Fragment>
              <NavItem className="navbar__item">
                 <NavLink href="/profile" className="navbar__link">
+                <img className='userpic-nav' src="/img/navbar/user.PNG" />
                     {user.user_name}
                 </NavLink>
               </NavItem>

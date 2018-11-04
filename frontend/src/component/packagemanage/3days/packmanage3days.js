@@ -17,8 +17,7 @@ class Packagemanage3days extends Component {
       day2_detail: [],
       day3_detail: [],
       all_detail: [],
-      count: 0,
-      isReadyToShow: false
+      isLoaded: false,
     };
     this.send3DaysPackage = this.send3DaysPackage.bind(this)
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this)
@@ -63,7 +62,9 @@ class Packagemanage3days extends Component {
     ];
     this.setState({
       all_detail: newAllDetail,
-    },() => {
+      isLoaded: true,
+    },() => { 
+    console.log("this is from package")
     })
   }
 
@@ -121,12 +122,10 @@ class Packagemanage3days extends Component {
             <div className="col-3-sm col-set" />
           </div>
           <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
-            CLICK TO SHOW NUTRITION
+            CLICK TO SHOW DETAIL
           </button>
-          {/* <button className="btn btn-shownutrition" onClick={this.send3DaysPackage}>Add to cart</button>      */}
-            {/* {nutrition}   */}
             { 
-              (this.state.all_detail && this.state.all_detail.length > 0) && 
+              (this.state.all_detail && this.state.all_detail.length > 0 && this.state.isLoaded) && 
               <React.Fragment>
               <div>
                 <NutritionManage menu_detail={this.state.all_detail} />

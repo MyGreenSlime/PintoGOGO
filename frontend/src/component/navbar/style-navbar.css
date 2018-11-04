@@ -14,6 +14,11 @@
   font-family: "Quicksand", sans-serif;
 }
 
+.userpic-nav {
+  width: 18px;
+  opacity: 0.8;
+}
+
 .navbar__link:hover {
   color: black;
 }
