@@ -12,6 +12,7 @@ import "../navbar/style-navbar.css";
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+
 class Navigationbar extends Component {
   constructor(props) {
     super(props);
