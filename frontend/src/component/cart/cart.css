@@ -1,0 +1,65 @@
+.linkbutton{
+    margin-top: 5%;
+    font-family: 'Quicksand', sans-serif;
+    color: #7b7b7b;
+    font-weight: bold;
+}
+
+.imgcart{
+    display: inline-block;
+    margin: 2%;
+    cursor: pointer;
+}
+.imgcart:hover{
+    opacity: 0.5;
+}
+.cartbox{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    width: 55%;
+    padding: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    color: black;
+    background-color: #f3ece7;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.header{
+    background-color: #ebcfc4;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 1%;
+    padding-right: 70%;
+    font-size: 15px;
+}
+
+.subhead{
+    padding-top: 3%;
+}
+
+.amountzone{
+    min-width: 160px;
+    /* margin-left: 20px; */
+    /* text-align: right; */
+}
+
+.pricezone{
+    /* text-align: right; */
+    /* margin-left: 10%;  */
+    /* margin-right: 5%; */
+}
+
+.total{
+    display: inline-block;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    padding: 1%;
+    padding-right: 70%; 
+    width: 20;
+}
+
+
+

@@ -23,7 +23,7 @@ var order = new Schema({
         price : Number,
         amount : {type : Number, default : 1}
     }],
-    totalprice : Number,
+    totalprice : {type : Number, default : 0},
     create_time : {type : Date, default : Date.now},
     update_time : {type : Date, default : Date.now}
     
