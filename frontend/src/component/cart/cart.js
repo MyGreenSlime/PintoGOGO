@@ -11,7 +11,7 @@ class Cart extends Component {
     this.state = {
       fromChild: "",
       order: [],
-      isLoaded: false
+      isLoaded: false,
     };
     this.createCardCartFood = this.createCardCartFood.bind(this)
     this.createCardCartSnack = this.createCardCartSnack.bind(this)
@@ -46,26 +46,45 @@ class Cart extends Component {
   }
 
   createCardCartFood() {
-    const card_food = this.state.order[0].food_order.map((ord, index) => (
-      <CardCart handlerFromParant={this.handleData} picture={ord.food_id.img_url} name={ord.food_name} price={ord.price} amount={ord.amount} id={ord.food_id._id} type_order="food"/>
-    ));
+    let card_food
+    if(!this.state.order[0].food_order){
+      card_food = <div></div>
+    }
+    else{
+      card_food = this.state.order[0].food_order.map((ord, index) => (
+        <CardCart handlerFromParant={this.handleData} picture={ord.food_id.img_url} name={ord.food_name} price={ord.price} amount={ord.amount} id={ord.food_id._id} type_order="food"/>
+      ));
+    }
     return card_food;
   }
 
   createCardCartSnack(){
-    const card_snack = this.state.order[0].snack_order.map((ord,index) => (
-      <CardCart handlerFromParant={this.handleData} picture={ord.snack_id.img_url} name={ord.snack_name} price={ord.price} amount={ord.amount} id={ord.snack_id._id} type_order="snack"/>      
-    ));
+    let card_snack
+    if(!this.state.order[0].snack_order){
+      card_snack = <div></div>
+    }
+    else{
+      card_snack = this.state.order[0].snack_order.map((ord,index) => (
+        <CardCart handlerFromParant={this.handleData} picture={ord.snack_id.img_url} name={ord.snack_name} price={ord.price} amount={ord.amount} id={ord.snack_id._id} type_order="snack"/>      
+      ));
+    }
     return card_snack;
   }
 
   createCardPackage(){
-    const card_package = this.state.order[0].package_order.map((ord,index) => (
-      <CardCart handlerFromParant={this.handleData} picture={""} name = {ord.package_id.type + "days package"} price={ord.package_id.price} amount={ord.amount} id={ord.package_id._id} type_order="package"/>      
-    ));
+    let card_package
+    if(!this.state.order[0].package_order){
+      card_package = <div></div>
+    }
+    else{
+      card_package = this.state.order[0].package_order.map((ord,index) => (
+        <CardCart handlerFromParant={this.handleData} picture={""} name = {ord.package_id.type + "days package"} price={ord.package_id.price} amount={ord.amount} id={ord.package_id._id} type_order="package"/>      
+      ));
+    }
     return card_package;
     
   }
+
 
   render() {
     if(!this.state.isLoaded){

@@ -293,14 +293,14 @@ class Packagemanage3days extends Component {
                   <NutritionManage menu_detail={this.state.all_detail} />
                 </div>
                 <div>
-                  {/* <a href='/cart'> */}
+                  <a href='/cart'>
                   <button
                     className="btn btn-shownutrition"
                     onClick={this.add3DaysPackageToCart()}
                   >
                     Add to cart
                   </button>
-                  {/* </a> */}
+                  </a>
                   <button
                     className="btn btn-shownutrition"
                     onClick={this.send3DaysPackage()}

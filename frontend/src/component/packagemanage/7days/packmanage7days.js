@@ -309,9 +309,11 @@ export default class PackageManage5days extends Component {
                   <NutritionManage menu_detail={this.state.all_detail} />
                 </div>
                 <div>
+									<a href='/cart'>
                   <button className="btn btn-shownutrition" onClick={this.add7DaysPackageToCart()}>
                     Add to cart
                   </button>
+									</a>
                   <button className="btn btn-shownutrition" onClick={this.send7DaysPackage()}>
                     SAVE PACKAGE
                   </button>

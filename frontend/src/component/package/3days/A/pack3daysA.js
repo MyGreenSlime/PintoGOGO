@@ -113,8 +113,10 @@ export default class Package3daysA extends Component {
 				</div>
 				<div className='col-3-md col-set'></div>
 				</div>
+				<a href="/cart">
         <button className='btn btn-set' onClick={this.addPack3DaysAToCart} data-toggle="tooltip" data-placement="top" title="HAVE A GOOD MEAL :)"> Add to cart </button>
-    		</div>
+    		</a>
+				</div>
         <Nutrition3A />
 			</React.Fragment>
 		);
