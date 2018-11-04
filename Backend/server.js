@@ -8,6 +8,7 @@ const users = require('./routes/user.js');
 const menus = require('./routes/menu.js');
 const packages = require('./routes/package.js');
 const orders = require('./routes/order.js')
+const bills = require('./routes/bill.js')
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/api/users', users);
 app.use('/api/menus', menus);
 app.use('/api/packages', packages);
 app.use('/api/orders', orders);
+app.use('/api/bills', bills);
 
 app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
