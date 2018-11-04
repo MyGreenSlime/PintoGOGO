@@ -1,3 +1,10 @@
+.set-screen-cart {
+    background: url("/img/cart/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 1% 0 10% 0 ;
+}
+
 .linkbutton{
     margin-top: 5%;
     font-family: 'Quicksand', sans-serif;

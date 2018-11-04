@@ -26,6 +26,7 @@ class Cart extends Component{
     }
     render(){
         return <React.Fragment>
+            <div className="set-screen-cart">
             <div className="linkbutton">
                 <div className="imgcart">
                 <a href="/"><img src='/img/cart/plan.png' height="40px"/></a>
@@ -81,6 +82,7 @@ class Cart extends Component{
                         <p>TOTAL: {this.state.fromChild}</p>
                     </div>
                 </div>
+            </div>
             </div>
         </React.Fragment>
     }
