@@ -3,6 +3,7 @@ import '../packagemanage.css';
 import { DropTarget } from "react-drag-drop-container";
 import { setMenuDrop } from '../helper';
 import axios from "axios";
+import NutritionManage from "../nutritionmanage"
 
 
 export default class PackageManage5days extends Component {
@@ -20,8 +21,11 @@ export default class PackageManage5days extends Component {
       day3_detail: [],
       day4_detail: [],
       day5_detail: [],
+      all_detail: [],
+      isLoaded: false,
     };
     this.send5DaysPackage = this.send5DaysPackage.bind(this)
+    this.onSendMenuDetail = this.onSendMenuDetail.bind(this)
   }
 
   send5DaysPackage() {
@@ -63,6 +67,23 @@ export default class PackageManage5days extends Component {
       .catch(function (error) {
         console.log(error);
       });
+  }
+
+  
+  onSendMenuDetail() {
+    const newAllDetail = [ 
+      this.state.day1_detail, 
+      this.state.day2_detail,
+      this.state.day3_detail,
+      this.state.day4_detail,
+      this.state.day5_detail
+    ];
+    this.setState({
+      all_detail: newAllDetail,
+      isLoaded: true,
+    },() => { 
+    console.log("this is from package")
+    })
   }
 
 	render() {
@@ -154,8 +175,21 @@ export default class PackageManage5days extends Component {
           </div>
           <div className='col-3-sm col-set'></div>
 				</div>
-        <button className='btn btn-shownutrition'>CLICK TO SHOW NUTRITION</button>
-        <button onClick={this.send5DaysPackage}>Add to cart</button>          
+        <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
+            CLICK TO SHOW DETAIL
+          </button>
+            { 
+              (this.state.all_detail && this.state.all_detail.length > 0 && this.state.isLoaded) && 
+              <React.Fragment>
+              <div>
+                <NutritionManage menu_detail={this.state.all_detail} />
+              </div>
+              <div>
+                 <button className="btn btn-shownutrition" onClick={this.send3DaysPackage}>Add to cart</button>
+                 <button className="btn btn-shownutrition">SAVE PACKAGE</button>
+              </div>
+              </React.Fragment>
+            }      
     	</div>
 			</React.Fragment>
 		);

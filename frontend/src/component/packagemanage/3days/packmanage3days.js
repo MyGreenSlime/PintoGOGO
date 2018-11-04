@@ -154,6 +154,20 @@ class Packagemanage3days extends Component {
       });
   }
 
+  onSendMenuDetail() {
+    const newAllDetail = [ 
+      this.state.day1_detail, 
+      this.state.day2_detail,
+      this.state.day3_detail
+    ];
+    this.setState({
+      all_detail: newAllDetail,
+      isLoaded: true,
+    },() => { 
+    console.log("this is from package")
+    })
+  }
+
   render() {
     const { nutrition } = this.state;
     return (

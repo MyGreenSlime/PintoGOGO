@@ -49,6 +49,11 @@
     margin: 0 auto 20px auto;
 }
 
+.set-align
+{
+    text-align: center;
+}
+
 p {
     margin-bottom: 8px; 
 }
