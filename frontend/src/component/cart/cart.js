@@ -15,6 +15,7 @@ class Cart extends Component {
     };
     this.createCardCartFood = this.createCardCartFood.bind(this)
     this.createCardCartSnack = this.createCardCartSnack.bind(this)
+    this.createCardPackage = this.createCardPackage.bind(this)
   }
 
   handleData(data, price, id) {
@@ -55,7 +56,15 @@ class Cart extends Component {
     const card_snack = this.state.order[0].snack_order.map((ord,index) => (
       <CardCart handlerFromParant={this.handleData} picture={ord.snack_id.img_url} name={ord.snack_name} price={ord.price} amount={ord.amount} id={ord._id} />      
     ));
-    return card_snack
+    return card_snack;
+  }
+
+  createCardPackage(){
+    const card_package = this.state.order[0].package_order.map((ord,index) => (
+      <CardCart handlerFromParant={this.handleData} picture={""} name = {ord.package_id.type + "days manage package"} price={ord.package_id.price} amount={ord.amount} id={ord.package_id._id} />      
+    ));
+    return card_package;
+    
   }
 
   render() {
@@ -108,6 +117,7 @@ class Cart extends Component {
           <div>
             {this.createCardCartFood()}
             {this.createCardCartSnack()}
+            {this.createCardPackage()}
             {/* <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={100} amount={5} id='01'/>
                     <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={120} amount={5} id='02'/> */}
           </div>
