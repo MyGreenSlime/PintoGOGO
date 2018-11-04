@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import '../../package.css';
 import NutritionA from './nutrition5A';
 import axios from 'axios';
+import NoPackage from '../../nopackage'
 
 export default class Package5daysA extends Component {
 
 	constructor() {
     super();
     this.state = {
-      packages: {},
+      packages: [],
 			isLoaded: false
     }
   }
@@ -32,6 +33,9 @@ export default class Package5daysA extends Component {
 					} = this.state;
 		if (!!!isLoaded) {
 			return <React.Fragment />
+		}
+		if(!packages[0]) {
+			return <NoPackage />
 		}
 
 		return (
@@ -102,9 +106,9 @@ export default class Package5daysA extends Component {
                 </div>
 							</div>
 							<div className='col-sm card-pack-img hovereffect'>
-								<img className='card-img img-responsive' src={packages[1].day_meal[3].meal_2.img_url} />
+								<img className='card-img img-responsive' src={packages[0].day_meal[3].meal_2.img_url} />
                 <div className='overlay'>
-                  <h2>{packages[1].day_meal[3].meal_2.menu_name}</h2>
+                  <h2>{packages[0].day_meal[3].meal_2.menu_name}</h2>
                 </div>
 							</div>
 						</div>

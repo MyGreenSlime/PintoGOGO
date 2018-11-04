@@ -74,7 +74,7 @@ export default class Nutrition7A extends Component {
 					<div className='col-7'>
 						<p>CHOLESTEROL</p>
 					</div>
-					<p>{this.compute("calesterol")} g/day</p>
+					<p>{this.compute("cholesterol")} g/day</p>
 				</div>
 				<div className='row'>
 					<div className='col-7'>

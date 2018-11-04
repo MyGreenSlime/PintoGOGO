@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../../package.css';
 import Nutrition7A from './nutrition7A';
 import axios from 'axios';
+import NoPackage from '../../nopackage'
 
 export default class Package7daysA extends Component {
 
@@ -32,6 +33,10 @@ export default class Package7daysA extends Component {
 					} = this.state;
 		if (!!!isLoaded) {
 			return <React.Fragment />
+		}
+		if(!packages[1]) {
+			console.log("in no pack")
+			return <NoPackage />
 		}
 
 		return (
@@ -102,9 +107,9 @@ export default class Package7daysA extends Component {
                 </div>
 							</div>
 							<div className='col-sm card-pack-img hovereffect'>
-								<img className='card-img img-responsive' src={packages[1].day_meal[3].meal_2.img_url} />
+								<img className='card-img img-responsive' src={packages[0].day_meal[3].meal_2.img_url} />
                 <div className='overlay'>
-                  <h2>{packages[1].day_meal[3].meal_2.menu_name}</h2>
+                  <h2>{packages[0].day_meal[3].meal_2.menu_name}</h2>
                 </div>
 							</div>
 						</div>

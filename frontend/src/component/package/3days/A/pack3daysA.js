@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import '../../package.css';
 import Nutrition3A from './nutrition3A';
 import axios from 'axios';
+import NoPackage from '../../nopackage'
 
 export default class Package3daysA extends Component {
 
 	constructor() {
     super();
     this.state = {
-      packages: {},
+      packages: [],
 			isLoaded: false
     }
   }
@@ -30,8 +31,14 @@ export default class Package3daysA extends Component {
 		const {	packages,
 						isLoaded, 
 					} = this.state;
+
 		if (!!!isLoaded) {
 			return <React.Fragment />
+		}
+
+		if(!packages[0]) {
+			console.log("in no pack")
+			return <NoPackage />
 		}
 
 		return (

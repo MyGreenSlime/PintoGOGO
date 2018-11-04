@@ -1,6 +1,4 @@
 import React, { Component} from 'react';
-import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
 import { Row } from 'reactstrap';
 import CardMenu from '../cardsnack/cardsnack';
 import '../snack/snack.css';
@@ -100,7 +98,7 @@ class Snack extends Component {
     } = this.state;
     
     if (!isLoaded) {
-      return <div>loading....</div>
+      return <div className="loader"/>
     }
     return (
       <div className="snackzone">

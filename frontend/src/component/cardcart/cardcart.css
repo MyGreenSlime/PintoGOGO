@@ -1,0 +1,53 @@
+.cardcartbox{
+    font-weight: bold;
+}
+.img__block{
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+}
+
+.cardcart__image{
+    border-radius: 4px;
+    min-width: 50px;
+}
+
+.rowcaard{
+    min-width: 800px;
+}
+.menuname__block{
+    width: 20%;
+    text-align: center;
+}
+
+.menuprice{
+    /* padding-right: 100%; */
+    text-align: center;
+}
+
+.imgminusbutton{
+    height: 5%;
+}
+
+.editamount{
+    /* text-align: center; */
+    min-width: 160px;
+}
+.minusbutton{
+    cursor: pointer;
+    padding-left: 15%;
+    padding-right: 10%;
+}
+
+.addbutton{
+    cursor: pointer;
+    text-align: left;
+    /* padding-left: 5%; */
+}
+
+.form-group{
+    padding-right: 10%;
+    text-align: center;
+}
+
+
