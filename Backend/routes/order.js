@@ -386,7 +386,7 @@ router.put('/tobill', passport.authenticate('jwt',{ session : false }), function
     Order.updateOne({user_id : req.user.id, isfinish : false},{
         $set : {
             totalprice : req.body.totalprice,
-            update_time  : Date.now()
+            update_time  : Date.now
         }
     })
     Bill.findOne({user : req.user.id, isfinish : false}, function(err, bill) {
