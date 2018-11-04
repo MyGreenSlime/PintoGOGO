@@ -8,11 +8,12 @@ const users = require('./routes/user.js');
 const menus = require('./routes/menu.js');
 const packages = require('./routes/package.js');
 const orders = require('./routes/order.js')
+const bills = require('./routes/bill.js')
 
 const app = express();
 
 app.use('/public', express.static('public'));
-
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -41,13 +42,21 @@ app.all('/*', function(req, res, next) {
 
 //set router
 //var user = require('./routes/user.js');
+
+
+
 app.use('/api/users', users);
 app.use('/api/menus', menus);
 app.use('/api/packages', packages);
 app.use('/api/orders', orders);
+app.use('/api/bills', bills);
+
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 const port = process.env.PORT || 4000
 
 app.listen(port, function() {
-  console.log('Server Running port 4000');
+  console.log('Server Running port', port);
 });

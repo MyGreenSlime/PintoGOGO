@@ -100,6 +100,51 @@ router.post('/food/add',passport.authenticate('jwt',{ session : false }),uploadF
     })
 });
 
+//edit menu fro admin
+router.put('/food/edit/:id',passport.authenticate('jwt',{ session : false }),uploadFood.single('img'),function(req, res){
+    const error = {};
+    if(!req.user.type) {
+        error.admin =  "need admin account"
+        res.status(500).send(error)
+    }
+    const menuEdit = {
+        menu_name : req.body.menu_name,
+        calories : req.body.calories,
+        price : req.body.price,
+        protein : req.body.protein,
+        carbohydrate : req.body.carbohydrate,
+        fat : req.body.fat,
+        description : req.body.description,
+        cholesterol :  req.body.cholesterol,
+        sodium  : req.body.sodium,
+        img_url : req.body.img_url
+    }
+    if(req.file) {
+        menuEdit.img_url = req.file.path
+    }
+    Menu.updateOne({_id : req.params.id},{
+        $set : {
+            menu_name : menuEdit.menu_name,
+            calories : menuEdit.calories,
+            price : menuEdit.price,
+            protein : menuEdit.protein,
+            carbohydrate : menuEdit.carbohydrate,
+            fat : menuEdit.fat,
+            description : menuEdit.description,
+            cholesterol : menuEdit.cholesterol,
+            sodium : menuEdit.sodium,
+            img_url : menuEdit.img_url
+        }
+    },(err, menu) => {
+        if(err) {
+            error.edit = "cannot edit menu"
+            res.sendStatus(500).json(error)
+        } else {
+            res.json(menu) 
+        }
+    })
+})
+
 //delete menu for admin
 router.delete('/food/del/:id',passport.authenticate('jwt',{ session : false }),function(req, res){
     const error = {};
@@ -175,6 +220,52 @@ router.post('/snack/add',passport.authenticate('jwt',{ session : false }), uploa
         }
     })
 });
+
+//edit snack from admin
+router.put('/snack/edit/:id',passport.authenticate('jwt',{ session : false }),uploadSnack.single('img'),function(req, res){
+    const error = {};
+    if(!req.user.type) {
+        error.admin =  "need admin account"
+        res.status(500).send(error)
+    }
+    const snackEdit = {
+        snack_name : req.body.snack_name,
+        calories : req.body.calories,
+        price : req.body.price,
+        protein : req.body.protein,
+        carbohydrate : req.body.carbohydrate,
+        fat : req.body.fat,
+        description : req.body.description,
+        cholesterol :  req.body.cholesterol,
+        sodium  : req.body.sodium,
+        img_url : req.body.img_url
+    }
+    if(req.file) {
+        snackEdit.img_url = req.file.path
+    }
+    Snack.updateOne({_id : req.params.id},{
+        $set : {
+            snack_name : snackEdit.snack_name,
+            calories : snackEdit.calories,
+            price : snackEdit.price,
+            protein : snackEdit.protein,
+            carbohydrate : snackEdit.carbohydrate,
+            fat : snackEdit.fat,
+            description : snackEdit.description,
+            cholesterol : snackEdit.cholesterol,
+            sodium : snackEdit.sodium,
+            img_url : snackEdit.img_url
+        }
+    },(err, snack) => {
+        if(err) {
+            error.edit = "cannot edit snack"
+            res.sendStatus(500).json(error)
+        } else {
+            res.json(snack) 
+        }
+    })
+})
+
 
 //delete snack for admin
 router.delete('/snack/del/:id',passport.authenticate('jwt',{ session : false }) ,function(req, res){

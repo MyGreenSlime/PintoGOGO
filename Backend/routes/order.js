@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-const Order = require("../models/order");
-const Menu = require("../models/menu");
-const Snack = require("../models/snack");
+const Order =  require('../models/order');
+const Menu = require('../models/menu');
+const Snack = require('../models/snack');
+const Bill = require('../models/bill')
 
 //get all order
 router.get("/all", passport.authenticate("jwt", { session: false }), function(
@@ -541,10 +542,44 @@ router.delete(
         } else {
           res.json(order);
         }
-      }
-    );
-  }
-);
+    })
+})
+
+// pass value to bill
+router.put('/tobill', passport.authenticate('jwt',{ session : false }), function(req, res){
+    const error = {}
+    const newBill = new Bill({
+        order : req.body.order_id,
+        user : req.user.id,
+        order_cost : req.body.totalprice,
+    })
+    Order.updateOne({user_id : req.user.id, isfinish : false},{
+        $set : {
+            totalprice : req.body.totalprice,
+            update_time  : Date.now
+        }
+    })
+    Bill.findOne({user : req.user.id, isfinish : false}, function(err, bill) {
+        if(bill) {
+            Bill.updateOne({user : req.user.id, isfinish : false},{
+                $set : {order_cost : req.body.totalprice}
+            }, (err, bill) => {
+                if(err) {
+                    error.order_cost = "cannot set order cost"
+                    res.sendStatus(500).json(error)
+                } else {
+                    res.json(bill)
+                }
+            })
+        } else {
+            newBill.save()
+            .then(bill => res.json(bill))
+            .catch(err => console.log(err));
+        }
+    })
+})
+
+
 //checkout
 
 module.exports = router;
