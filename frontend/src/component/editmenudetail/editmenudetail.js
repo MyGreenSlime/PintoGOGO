@@ -20,6 +20,7 @@ class EditMenuDetail extends Component {
         };
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        // this.handleChangeImage = this.handleChangeImage.bind(this)
     }
     handleChange(e) {
         this.setState({
@@ -40,7 +41,7 @@ class EditMenuDetail extends Component {
             cholesterol : this.state.cholesterol,
             img_url : this.state.img_url
         }
-        axios.post('http://localhost:4000/menus/food/add', menudetail)
+        axios.post('/api/menus/food/add', menudetail)
         .then(res => {
             this.setState({status : res.data})
         })
@@ -54,7 +55,7 @@ class EditMenuDetail extends Component {
     findIdFromUrl(){
         var url = window.location.href;
         var res = url.split("/");
-        axios.get("http://localhost:4000/menus/food/" + res[res.length-1])
+        axios.get("/api/menus/food/" + res[res.length-1])
         .then(response => {
             this.setState({
               food: response.data
@@ -81,16 +82,16 @@ class EditMenuDetail extends Component {
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className ="row">
                         <div className="col menuname">
-                        <input type="text" className="form-control" placeholder={this.state.food.menu_name} 
-                        value={this.state.menu_name} onChange={this.handleChange} style={{width: "50%"}} />
+                        <input type="text" name="menu_name"className="form-control" placeholder={this.state.food.menu_name} 
+                        value={this.state.menu_name} onChange={this.handleChange} style={{width: "50%"}} required />
                         </div>
                     </div>
                     <div className="line" />
 
                     <div className="row menudetail">
                         <div className="col-5">
-                            <img src={this.state.food.img_url} width="80%" className="foodimg" />
-                            <input type="text" className="form-control" placeholder={this.state.food.img_url} 
+                            <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
+                            <input type="text" name="img_url" className="form-control" placeholder={this.state.food.img_url} 
                             value={this.state.img_url} onChange={this.handleChange} style={{width: "100%"}} />
                             <div className="row justify-content-center">
                                 <button type="submit" value="submit" className="addtocartbutton">SAVE CHANGE</button>
@@ -98,14 +99,14 @@ class EditMenuDetail extends Component {
                         </div>
                         <div className="col">
                             <div className="row descript">
-                                <textarea type="text" className="form-control" placeholder={this.state.food.description}
+                                <textarea type="text" name="description" className="form-control" placeholder={this.state.food.description}
                                 value={this.state.description} onChange={this.handleChange}/>
                             </div>
                             <div className='row'>
                                 <div className='col-9 cal'>
                                     <p>CALORIES</p>
                                 </div>
-                                <input type="text" className="form-control" placeholder={this.state.food.calories+" Kcal"} 
+                                <input type="text" name="calories" className="form-control" placeholder={this.state.food.calories+" Kcal"} 
                                 value={this.state.calories} onChange={this.handleChange} style={{width: "20%"}} />
                             </div>
                             <div className="row line" /> 
@@ -113,42 +114,42 @@ class EditMenuDetail extends Component {
                                 <div className='col-9'>
                                     <p>FAT</p>
                                 </div>
-                                <input type="text" className="form-control" placeholder={this.state.food.fat+" mg"} 
+                                <input type="text" name="fat" className="form-control" placeholder={this.state.food.fat+" mg"} 
                                 value={this.state.fat} onChange={this.handleChange} style={{width: "20%"}} />
                             </div>
                             <div className='row'>
                                 <div className='col-9'>
                                     <p>CHOLESTEROL</p>
                                 </div>
-                                <input type="text" className="form-control" placeholder={this.state.food.cholesterol+" g"} 
+                                <input type="text" name="cholesterol" className="form-control" placeholder={this.state.food.cholesterol+" g"} 
                                 value={this.state.cholesterol} onChange={this.handleChange} style={{width: "20%"}} />
                             </div>
                             <div className='row'>
                                 <div className='col-9'>
                                     <p>SODIUM</p>
                                 </div>
-                                <input type="text" className="form-control" placeholder={this.state.food.sodium+" mg"} 
+                                <input type="text" name="sodium" className="form-control" placeholder={this.state.food.sodium+" mg"} 
                                 value={this.state.sodium} onChange={this.handleChange} style={{width: "20%"}} />
                             </div>
                             <div className='row'>
                                 <div className='col-9'>
                                     <p>CARBOHYDRATE</p>
                                 </div>
-                                <input type="text" className="form-control" placeholder={this.state.food.carbohydrate+" g"} 
+                                <input type="text" name="carbohydrate" className="form-control" placeholder={this.state.food.carbohydrate+" g"} 
                                 value={this.state.carbohydrate} onChange={this.handleChange} style={{width: "20%"}} />
                             </div>
                             <div className='row '>
                                 <div className='col-9'>
                                     <p>PROTEIN</p>
                                 </div>
-                                <input type="text" className="form-control" placeholder={this.state.food.protein+" g"} 
+                                <input type="text" name="protein" className="form-control" placeholder={this.state.food.protein+" g"} 
                                 value={this.state.protein} onChange={this.handleChange} style={{width: "20%"}} />
                             </div>
                             <div className='row'>
                                 <div className='col-9'>
                                     <p>PRICE</p>
                                 </div>
-                                <input type="text" className="form-control" placeholder={this.state.food.price+" ฿"} 
+                                <input type="text" name="price" className="form-control" placeholder={this.state.food.price+" ฿"} 
                                 value={this.state.price} onChange={this.handleChange} style={{width: "20%"}} />
                             </div>
                         </div>

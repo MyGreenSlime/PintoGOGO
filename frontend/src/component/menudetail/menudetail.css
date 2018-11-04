@@ -62,8 +62,11 @@
 .cal{
     padding-bottom: 2%;
 }
-
 .bottomrow{
+    padding-top: 2%;
+}
+
+.bottomcol{
     border-right: 2px solid #999999;
     height: 70px;
     font-weight: bold;
@@ -73,6 +76,7 @@ a{
     color: black;
 }
 
-.row{
-    padding-bottom: 2px;
+.price{
+    /* background-color: #efeeee; */
+    font-weight: bold;
 }

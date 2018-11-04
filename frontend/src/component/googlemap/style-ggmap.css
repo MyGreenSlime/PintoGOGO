@@ -1,0 +1,31 @@
+.map__box {
+  width: 500px;
+  height: 500px;
+}
+
+.input-button {
+  margin: 0 auto 0 auto;
+  width: 50%;
+}
+
+.input-addr {
+  margin-right: 5px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.center {
+  margin: 0 auto 0 auto;
+}
+
+.ggmap {
+  width: 80%;
+  height: 400px;
+}
+
+.test {
+  width: 200px;
+  height: 200px;
+}

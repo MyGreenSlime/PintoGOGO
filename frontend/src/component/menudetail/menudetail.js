@@ -121,18 +121,24 @@ class MenuDetail extends Component {
                             </div>
                             <p> {this.state.food.protein} g</p>
                         </div>
+                        <div className='row price'>
+                            <div className='col-9'>
+                                <p>PRICE</p>
+                            </div>
+                            <p> {this.state.food.price} ฿</p>
+                        </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-4 bottomrow">
+                <div className="row bottomrow">
+                    <div className="col-4 bottomcol">
                         <p>{this.state.food.protein} G</p>
                         PROTEIN 
                     </div>
-                    <div className="col-4 bottomrow">
+                    <div className="col-4 bottomcol">
                         <p>{this.state.food.calories} G</p>
                         CALORIES 
                     </div>
-                    <div className="col-4 bottomrow">
+                    <div className="col-4 bottomcol">
                         <p> {this.state.food.carbohydrate} G</p>
                         CARBOHYDRATE 
                     </div>

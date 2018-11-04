@@ -65,15 +65,26 @@ class Snack extends Component {
   }
 
   checkFirstSnackSet() {
+    let img = ""
     if (this.state.firstImg - 6 >= 0) {
-      return <img src={"/img/other/left-arrow.png"} height="20" />;
+      img = <img src="/img/other/left-arrow.png" height="20" />;
     }
+    console.log("left ", img)
+    return img;
   }
 
   checkLastSnackSet() {
-    if (this.state.firstImg <= this.state.length_snack) {
-      return <img className="imgbutton" src={"/img/other/right-arrow.png"} height="20" />
+    let img = "";
+    if (this.state.firstImg <= this.state.snacks.length &&
+      this.state.secondImg <= this.state.snacks.length &&
+      this.state.thirdImg <= this.state.snacks.length &&
+      this.state.forthImg <= this.state.snacks.length &&
+      this.state.fifthImg <= this.state.snacks.length &&
+      this.state.sixthImg <= this.state.snacks.length && this.state.snacks.length != 0) {
+      img = <img className="imgbutton" src="/img/other/right-arrow.png" height="20" />
     }
+    console.log("right ", img)
+    return img;
   }
   
   onMenuCardDeleted(index) {
@@ -116,6 +127,7 @@ class Snack extends Component {
             picture={snacks[firstImg].img_url} 
             calories={snacks[firstImg].calories} 
             id = {snacks[firstImg]._id}
+            price = {snacks[firstImg].price}
             onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
             />
           }
@@ -125,6 +137,7 @@ class Snack extends Component {
             picture={snacks[secondImg].img_url} 
             calories={snacks[secondImg].calories} 
             id = {snacks[secondImg]._id} 
+            price={snacks[secondImg].price}            
             onMenuCardDeleted={this.onMenuCardDeleted.bind(this, secondImg)}
             />
           }
@@ -134,6 +147,7 @@ class Snack extends Component {
             picture={snacks[thirdImg].img_url} 
             calories={snacks[thirdImg].calories} 
             id = {snacks[thirdImg]._id} 
+            price = {snacks[thirdImg].price}
             onMenuCardDeleted={this.onMenuCardDeleted.bind(this, thirdImg)}
             />
             
@@ -153,6 +167,7 @@ class Snack extends Component {
             picture={snacks[forthImg].img_url} 
             calories={snacks[forthImg].calories} 
             id = {snacks[forthImg]._id}
+            price = {snacks[forthImg].price}
             onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
             />
           }
@@ -162,6 +177,7 @@ class Snack extends Component {
             picture={snacks[fifthImg].img_url} 
             calories={snacks[fifthImg].calories} 
             id = {snacks[fifthImg]._id}
+            price = {snacks[fifthImg].price}
             onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
             />
           }
@@ -171,6 +187,7 @@ class Snack extends Component {
             picture={snacks[sixthImg].img_url} 
             calories={snacks[sixthImg].calories} 
             id = {snacks[sixthImg]._id}
+            price = {snacks[sixthImg].price}
             onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
             />
           }

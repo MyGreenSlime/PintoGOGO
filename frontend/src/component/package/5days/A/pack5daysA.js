@@ -11,7 +11,8 @@ export default class Package5daysA extends Component {
     this.state = {
       packages: [],
 			isLoaded: false
-    }
+		}
+		this.addPack5DaysAToCart = this.addPack5DaysAToCart.bind(this)
   }
   
   componentDidMount() {
@@ -25,7 +26,17 @@ export default class Package5daysA extends Component {
 		.then(() => {
 			console.log(this.state.packages)
 		});
-  }
+	}
+	
+	addPack5DaysAToCart() {
+		console.log("add pack")
+		const pack5A = {
+			package_id: this.state.packages[0]._id,
+			name_package: "Package 5 days A",
+			price: this.state.packages[0].price
+		}
+		axios.put("/api/orders/add/package", pack5A);
+	}
 
 	render() {
 		const {	packages,
@@ -136,8 +147,10 @@ export default class Package5daysA extends Component {
 				</div>
 				<div className='col-3-md col-set'></div>
 				</div>
-        <botton className='btn btn-set' data-toggle="tooltip" data-placement="top" title="HAVE A GOOD MEAL :)"> Add to cart </botton>
-    		</div>
+				<a href='/cart'>
+        <button className='btn btn-set' onClick={this.addPack5DaysAToCart} data-toggle="tooltip" data-placement="top" title="HAVE A GOOD MEAL :)"> Add to cart </button>
+    		</a>
+				</div>
         <NutritionA />
 			</React.Fragment>
 		);
