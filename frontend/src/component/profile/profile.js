@@ -39,14 +39,7 @@ class Register extends Component {
         <div className='set-screen'> {/*bg*/}
         <div className='profile-set'>
         <div className='row'>
-        <div className=' choice-profile col-sm-3'>
-        <div class="btn-group-vertical choice-group">
-          <a className='btn choice' href='/profile'>PROFILE</a>
-          <a className='btn choice' href='/history'>PURCHASE HISTORY</a>
-          <a className='btn choice' href='/yourpackage'>YOUR PACKAGE</a>
-        </div>
-        </div>
-        <div className='register-box col-sm'> {/*register box*/}
+        <div className='profile-box col-sm'> {/*register box*/}
         
           <h2> PROFILE </h2>
           {/* <br/> */}

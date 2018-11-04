@@ -1,22 +1,10 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Card,
-  CardGroup,
-  CardImg,
-  CardBody,
-  CardText,
-  Button
-} from "reactstrap";
-
 import Menu from "../menu/menu";
 import Snack from "../snack/snack"
 import Package from '../package-home/package-home';
 import "../choice/style-choice.css";
 
 export default class Choice extends Component {
-  
-
   constructor() {
     super();
     this.state = {
@@ -55,7 +43,7 @@ export default class Choice extends Component {
   }
 
   setActiveButton(isButton) {
-    let color = "button";
+    let color = "btn button";
     color += isButton ? " btn--active" : "";
     return color;
   }
@@ -85,51 +73,34 @@ export default class Choice extends Component {
   render() {
     return (
       <React.Fragment>
-      <section className="choice__block" fluid>
-      <div className="row">
+      <div className="choice-box">
+        <div className="grid-choice">
+          <div className="col">
+            <img className="img-choice" src="../img/choice/choice_1.png" />
+            <button
+              className={this.setActiveButton(this.state.isMenu)}
+              onClick={this.changeRenderToMenu}>
+              MENU
+            </button>
+          </div>
+          <div className="col">
+            <img className="img-choice" src="../img/choice/choice_2.png" />
+            <button
+              className={this.setActiveButton(this.state.isPackage)}
+              onClick={this.changeRenderToPackage}>
+              PACKAGE
+            </button>
+          </div>
+          <div className="col">
+            <img className="img-choice" src="../img/choice/choice_3.png" />
+            <button
+              className={this.setActiveButton(this.state.isSnack)}
+              onClick={this.changeRenderToSnack}>
+              SNACK
+            </button>
+          </div>
+        </div>
       </div>
-  
-        <Container>
-          <CardGroup className="cardgroup__choice">
-            <Card className="card__choice">
-              <CardImg src="../img/choice/choice_1.png" className="cardimg__choice" />
-              <CardBody>
-                <Button
-                  className={this.setActiveButton(this.state.isMenu)}
-                  onClick={this.changeRenderToMenu}
-                >
-                  MENU
-                </Button>
-                <CardText>This is a Menu</CardText>
-              </CardBody>
-            </Card>
-            <Card className="card__choice">
-              <CardImg src="../img/choice/choice_2.png" className="cardimg__choice" />
-              <CardBody>
-                <Button
-                  className={this.setActiveButton(this.state.isPackage)}
-                  onClick={this.changeRenderToPackage}
-                >
-                  PACKAGE
-                </Button>
-                <CardText>This is a Package</CardText>
-              </CardBody>
-            </Card>
-            <Card className="card__choice">
-              <CardImg src="../img/choice/choice_3.png" className="cardimg__choice" />
-              <CardBody>
-                <Button
-                  className={this.setActiveButton(this.state.isSnack)}
-                  onClick={this.changeRenderToSnack}
-                >
-                  SNACK
-                </Button>
-                <CardText>This is a Snack</CardText>
-              </CardBody>
-            </Card>
-          </CardGroup>
-        </Container>
-      </section>
       {this.renderChoice()}
       </React.Fragment>
     );

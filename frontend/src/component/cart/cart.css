@@ -1,9 +1,10 @@
-.cartscreen{
-    background: url("/img/cart/cart_bg.jpg");
+.set-screen-cart {
+    background: url("/img/cart/bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 7% 0 10% 0 ;
+    padding: 1% 0 10% 0 ;
 }
+
 .linkbutton{
     margin-top: 5%;
     font-family: 'Quicksand', sans-serif;
