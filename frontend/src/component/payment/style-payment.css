@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
+.set-screen-payment {
+  padding: 100px 0 100px 0;
+}
+
 .box__content {
   width: 80%;
   margin: auto;

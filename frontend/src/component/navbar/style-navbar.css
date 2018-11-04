@@ -10,14 +10,10 @@
 }
 
 .navbar__link {
+  /* color: #7b7b7b; */
   color: black;
   font-weight: bold;
   font-family: "Quicksand", sans-serif;
-}
-
-.userpic-nav {
-  width: 18px;
-  opacity: 0.8;
 }
 
 .navbar__link:hover {

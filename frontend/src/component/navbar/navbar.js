@@ -12,7 +12,6 @@ import "../navbar/style-navbar.css";
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
-
 class Navigationbar extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +24,7 @@ class Navigationbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser();
-    }
+  }
 
   toggle() {
     this.setState({
@@ -34,58 +33,57 @@ class Navigationbar extends Component {
   }
 
   render() {
-    const { isAuthenticated, user} = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
     const forAdmin = (
       <React.Fragment>
-      <NavItem className="navbar__item">
-         <NavLink href="/add/snack" className="navbar__link">
-           ADD SNACK
+        <NavItem className="navbar__item">
+          <NavLink href="/add/snack" className="navbar__link">
+            ADD SNACK
          </NavLink>
-       </NavItem>
-       <NavItem className="navbar__item">
-         <NavLink href="/add/menu" className="navbar__link">
-           ADD FOOD
+        </NavItem>
+        <NavItem className="navbar__item">
+          <NavLink href="/add/menu" className="navbar__link">
+            ADD FOOD
          </NavLink>
-       </NavItem>
+        </NavItem>
       </React.Fragment>
     )
     const authLinkes = (
-        <React.Fragment>
-             <NavItem className="navbar__item">
-                <NavLink href="/profile" className="navbar__link">
-                <img className='userpic-nav' src="/img/navbar/user.PNG" />
-                    {user.user_name}
+      <React.Fragment>
+        <NavItem className="navbar__item">
+          <NavLink href="/profile" className="navbar__link">
+            {user.user_name}
+          </NavLink>
+        </NavItem>
+        <NavItem className="navbar__item">
+          <NavLink href="#" onClick={this.onLogoutClick.bind(this)} className="navbar__link">
+            LOG OUT
                 </NavLink>
-              </NavItem>
-              <NavItem className="navbar__item">
-                <NavLink href="#" onClick= {this.onLogoutClick.bind(this)} className="navbar__link">
-                    LOG OUT
-                </NavLink>
-              </NavItem>
-              <NavItem className="navbar__item">
-                <NavLink href="/cart" className="navbar__link">
-                  <img
-                    src="../img/navbar/icon-cart2.png"
-                    className="navbar__icon"
-                  />
-                </NavLink>
-              </NavItem>
-        </React.Fragment>
+        </NavItem>
+        <NavItem className="navbar__item">
+          <NavLink href="/cart" className="navbar__link">
+            <img
+              src="../img/navbar/icon-cart2.png"
+              className="navbar__icon"
+            />
+          </NavLink>
+        </NavItem>
+      </React.Fragment>
     )
 
     const guestLinkes = (
-        <React.Fragment>
+      <React.Fragment>
         <NavItem className="navbar__item">
-           <NavLink href="/register" className="navbar__link">
-             SIGN UP
+          <NavLink href="/register" className="navbar__link">
+            SIGN UP
            </NavLink>
-         </NavItem>
-         <NavItem className="navbar__item">
-           <NavLink href="/login" className="navbar__link">
-             LOG IN
+        </NavItem>
+        <NavItem className="navbar__item">
+          <NavLink href="/login" className="navbar__link">
+            LOG IN
            </NavLink>
-         </NavItem>
-        </React.Fragment>
+        </NavItem>
+      </React.Fragment>
     )
     return (
       <div>
@@ -93,7 +91,7 @@ class Navigationbar extends Component {
           <NavbarBrand href="/">PintoGogo</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            
+
             <Nav className="ml-auto">
               {user.type ? forAdmin : ""}
               {isAuthenticated ? authLinkes : guestLinkes}
