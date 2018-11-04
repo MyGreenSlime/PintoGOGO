@@ -48,31 +48,30 @@ class Packagemanage3days extends Component {
   }
   
   send3DaysPackage() {
-    axios
-      .post("/api/packages/add", {
-        name_package: "3days manage package",
-        description: "",
-        type: 3,
-        day_meal: [
-          {
-            meal_1: this.state.day1_detail[0],
-            meal_2: this.state.day1_detail[1]
-          },
-          {
-            meal_1: this.state.day2_detail[0],
-            meal_2: this.state.day2_detail[1]
-          },
-          {
-            meal_1: this.state.day3_detail[0],
-            meal_2: this.state.day3_detail[1]
-          }
-        ],
-        price: this.state.sum_price
-      })
-      .then(function(response) {
+    const newPackage = {
+      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
+      description: "manage 3 days package",
+      type: 3,
+      day_meal: [
+        {
+          meal_1: this.state.day1_detail[0],
+          meal_2: this.state.day1_detail[1]
+        },
+        {
+          meal_1: this.state.day2_detail[0],
+          meal_2: this.state.day2_detail[1]
+        },
+        {
+          meal_1: this.state.day3_detail[0],
+          meal_2: this.state.day3_detail[1]
+        },],
+      price: this.state.sum_price
+    };
+    axios.post("/api/packages/add", newPackage)
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -116,16 +115,27 @@ class Packagemanage3days extends Component {
       );
     }
     console.log("price ", this.state.sum_price)    
-    // return <button className="btn btn-shownutrition" disabled>
-    //   CLICK TO SHOW NUTRITION
-    // </button>
     return <div />;
   }
 
+  // onSendMenuDetail() {
+  //   const newAllDetail = [ 
+  //     this.state.day1_detail, 
+  //     this.state.day2_detail,
+  //     this.state.day3_detail
+  //   ];
+  //   this.setState({
+  //     all_detail: newAllDetail,
+  //     isLoaded: true,
+  //   },() => { 
+  //   console.log("this is from package")
+  //   })
+  // }
+
   add3DaysPackageToCart() {
-    var user;
+    console.log("add to cart")
     const newPackage = {
-      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-') ,
+      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
       description: "manage 3 days package",
       type: 3,
       day_meal: [
@@ -146,26 +156,12 @@ class Packagemanage3days extends Component {
     };
     axios
       .post("/api/packages/anonymous/addcart", newPackage)
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
-  }
-
-  onSendMenuDetail() {
-    const newAllDetail = [ 
-      this.state.day1_detail, 
-      this.state.day2_detail,
-      this.state.day3_detail
-    ];
-    this.setState({
-      all_detail: newAllDetail,
-      isLoaded: true,
-    },() => { 
-    console.log("this is from package")
-    })
   }
 
   render() {
@@ -285,6 +281,7 @@ class Packagemanage3days extends Component {
             </div>
             <div className="col-3-sm col-set" />
           </div>
+          
           {this.checkReady()}
           {/* <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
             CLICK TO SHOW NUTRITION
@@ -299,14 +296,14 @@ class Packagemanage3days extends Component {
                   {/* <a href='/cart'> */}
                   <button
                     className="btn btn-shownutrition"
-                    onClick={this.add3DaysPackageToCart}
+                    onClick={this.add3DaysPackageToCart()}
                   >
                     Add to cart
                   </button>
                   {/* </a> */}
                   <button
                     className="btn btn-shownutrition"
-                    onClick={this.send3DaysPackage}
+                    onClick={this.send3DaysPackage()}
                   >
                     SAVE PACKAGE
                   </button>
