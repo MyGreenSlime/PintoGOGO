@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import axios from 'axios'
 import "../editmenudetail/editmenudetail.css";
-class EditMenuDetail extends Component {
+class EditSnackDetail extends Component {
     constructor(props){
         super(props);
         this.findIdFromUrl = this.findIdFromUrl.bind(this)
@@ -64,7 +64,7 @@ class EditMenuDetail extends Component {
        formData.append('cholesterol',this.state.cholesterol)
        formData.append('sodium',this.state.sodium)
        formData.append('description',this.state.description)
-        axios.post('/api/menus/food/edit/'+this.state.food._id, formData)
+        axios.post('/api/menus/snack/edit/'+this.state.food._id, formData)
         .then(res => {
             this.setState({status : res.data})
         })
@@ -78,7 +78,7 @@ class EditMenuDetail extends Component {
     findIdFromUrl(){
         var url = window.location.href;
         var res = url.split("/");
-        axios.get("/api/menus/food/" + res[res.length-1])
+        axios.get("/api/menus/snack/" + res[res.length-1])
         .then(response => {
             this.setState({
               food: response.data
@@ -190,9 +190,10 @@ class EditMenuDetail extends Component {
                     </div>
                 </div>
             </form>
+                
         </div>
         </React.Fragment>
     }
 }
 
-export default EditMenuDetail;
+export default EditSnackDetail;

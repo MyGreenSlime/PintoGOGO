@@ -16,7 +16,7 @@ class SnackDetail extends Component {
     findIdFromUrl(){
         var url = window.location.href;
         var res = url.split("/");
-        axios.get("http://localhost:4000/menus/snack/" + res[res.length-1])
+        axios.get("/api/menus/snack/" + res[res.length-1])
         .then(response => {
             // console.log(response);
             this.setState({
@@ -69,7 +69,7 @@ class SnackDetail extends Component {
 
                 <div className="row menudetail">
                     <div className="col-5">
-                        <img src={this.state.food.img_url} width="80%" className="foodimg" />
+                        <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
                         <div className="row justify-content-center">
                             <button type="button" className="addtocartbutton">ADD TO CART</button>
                         </div>

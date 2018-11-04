@@ -24,6 +24,7 @@ import Cart from './component/cart/cart.js'
 import MenuDetail from './component/menudetail/menudetail.js'
 import SnackDetail from './component/snackdetail/snackdetail.js'
 import EditMenuDetail from './component/editmenudetail/editmenudetail.js'
+import EditSnackDetail from './component/editsnackdetail/editsnackdetail.js'
 //---------------been-----------------------------------
 import Register from './component/register/register.js'
 import Package from './component/package/package.js'
@@ -84,6 +85,7 @@ class App extends Component {
                 <Route path="/menudetail" component={MenuDetail} />
                 <Route path="/snackdetail" component={SnackDetail} />
                 <Route path="/editmenudetail" component={EditMenuDetail} />
+                <Route path="/editsnackdetail" component={EditSnackDetail} />
                 <Route path="*" component={UnderConstruct}/>
               </Switch>
             <Footer />
