@@ -86,6 +86,9 @@ export default class Choice extends Component {
     return (
       <React.Fragment>
       <section className="choice__block" fluid>
+      <div className="row">
+      </div>
+  
         <Container>
           <CardGroup className="cardgroup__choice">
             <Card className="card__choice">

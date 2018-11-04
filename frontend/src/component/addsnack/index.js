@@ -20,7 +20,9 @@ class Addsnack extends Component {
             description : "",
             sodium : "",
             cholesterol : "",
-            status: 0
+            status: 0,
+            file: "",
+            imagePreviewUrl: ""
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -48,11 +50,23 @@ class Addsnack extends Component {
     }
 
     handleChangeImage(e) {
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        
         this.setState({
             img : e.target.files[0]
         },() => {
             console.log(this.state.img)
         })
+
+        reader.onloadend = () => {
+            this.setState({
+              file: file,
+              imagePreviewUrl: reader.result
+            });
+          }
+      
+        reader.readAsDataURL(file)
     }
 
     handleSubmit(e) {
@@ -90,6 +104,11 @@ class Addsnack extends Component {
         e.preventDefault()
     }
     render() {
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+            $imagePreview = (<img src={imagePreviewUrl} className="imgpreview"/>);
+        }
         const { status } = this.state;
         return (
             <React.Fragment>
@@ -127,9 +146,10 @@ class Addsnack extends Component {
                                 <div className="form-group">
                                     <input className="form-control" type="file" name="img"  onChange={this.handleChangeImage} required />   
                                 </div>
-                                <Button type="submit" value="submit" className="submit__addsnack--button">
+                                {$imagePreview}
+                                <button type="submit" value="submit" className="submit__addsnack--button">
                                     SUBMIT
-                                </Button>
+                                </button>
                             </form>
                         </div>
                     </div>

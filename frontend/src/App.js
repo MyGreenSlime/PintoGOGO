@@ -20,9 +20,10 @@ import Choice from "./component/choice/choice";
 import Recommend from "./component/recommend/recommend";
 //---------------boo---------------------------------
 import Menu from './component/menu/menu.js'
-import Cart from "./component/cart/cart.js";
-import MenuDetail from "./component/menudetail/menudetail.js";
-import EditMenuDetail from "./component/editmenudetail/editmenudetail.js";
+import Cart from './component/cart/cart.js'
+import MenuDetail from './component/menudetail/menudetail.js'
+import SnackDetail from './component/snackdetail/snackdetail.js'
+import EditMenuDetail from './component/editmenudetail/editmenudetail.js'
 //---------------been-----------------------------------
 import Register from './component/register/register.js'
 import Package from './component/package/package.js'
@@ -81,6 +82,7 @@ class App extends Component {
                 <Route path="/profile" component={Profile} />
                 <Route path="/cart" component={Cart}/>
                 <Route path="/menudetail" component={MenuDetail} />
+                <Route path="/snackdetail" component={SnackDetail} />
                 <Route path="/editmenudetail" component={EditMenuDetail} />
                 <Route path="*" component={UnderConstruct}/>
               </Switch>
