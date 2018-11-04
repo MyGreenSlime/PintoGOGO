@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const path = require('path') 
 
 const users = require('./routes/user.js');
 const menus = require('./routes/menu.js');
@@ -11,6 +12,7 @@ const orders = require('./routes/order.js')
 const app = express();
 
 app.use('/public', express.static('public'));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -44,6 +46,8 @@ app.use('/api/menus', menus);
 app.use('/api/packages', packages);
 app.use('/api/orders', orders);
 
-app.listen(4000, function() {
+const port = process.env.PORT || 4000
+
+app.listen(port, function() {
   console.log('Server Running port 4000');
 });
