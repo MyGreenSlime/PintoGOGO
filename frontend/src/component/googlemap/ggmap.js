@@ -7,19 +7,21 @@ export default class Map extends Component {
 
     this.divMap = React.createRef();
     this.divSearchBox = React.createRef();
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.state = {
-    //   latitude: [],
-    //   longitude: [],
-    //   destAddr: [],
-    //   kilometer: []
-    // };
+    this.interval = setInterval(() => this.handleSubmit(), 1000);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      lat: [],
+      lng: [],
+      dest: [],
+      dist: []
+    };
   }
 
   componentDidMount() {
     window.lat = 13.736717;
     window.lng = 100.523186;
     window.initMap = this.initMap.bind(this);
+    // window.handleSubmit = this.handleSubmit.bind(this);
 
     loadJS(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyBKOfI6E4o_jRc1K8qBb63RsUKwZAavGSs&libraries=places&callback=initMap"
@@ -85,8 +87,17 @@ export default class Map extends Component {
     window.marker.addListener("dragend", function() {
       window.lat = window.marker.getPosition().lat();
       window.lng = window.marker.getPosition().lng();
-      this.handleSubmit();
+      // window.handleSubmit();
     });
+  }
+
+  handleSubmit() {
+    this.props.handleFromParent(
+      window.lat,
+      window.lng,
+      window.destAddr,
+      window.distance
+    );
   }
 
   getDistance() {
@@ -115,15 +126,6 @@ export default class Map extends Component {
       }
     );
   }
-
-  // handleSubmit() {
-  //   this.setState({
-  //     latitude: window.lat,
-  //     longitude: window.lng,
-  //     destAddr: window.destAddr,
-  //     kilometer: window.distance
-  //   });
-  // }
 
   render() {
     return (

@@ -20,12 +20,17 @@ class Register extends Component {
       phonenumber: "",
       address: "",
       status: {},
-      errors: {}
+      errors: {},
+      lat_lng: [],
+      // lng: [],
+      dest: [],
+      dist: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleDataFromGmap = this.handleDataFromGmap.bind(this);
+    this.handleData = this.handleData.bind(this);
   }
+
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
@@ -53,13 +58,21 @@ class Register extends Component {
       password1: this.state.password1,
       password2: this.state.password2,
       phonenumber: this.state.phonenumber,
-      address: this.state.address
+      address: this.state.lat_lng
     };
     this.props.registerUser(newUser, this.props.history);
     e.preventDefault();
   }
 
-  // handleDataFromGmap(addr) {}
+  handleData(lat, lng, dest, dist) {
+    this.setState({
+      lat_lng: lat.toString() + ", " + lng.toString(),
+      dest: dest,
+      dist: dist
+    });
+    console.log("lat", this.state.lat_lng);
+    console.log("dest", this.state.dest);
+  }
 
   render() {
     const { errors } = this.state;
@@ -269,7 +282,7 @@ class Register extends Component {
             <div>
               Shipping Address
               <div className="address-box">
-                <GoogleMap />
+                <GoogleMap handleFromParent={this.handleData} />
               </div>
             </div>
             <br />
