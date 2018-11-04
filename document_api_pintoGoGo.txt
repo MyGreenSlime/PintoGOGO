@@ -633,8 +633,8 @@ ________________________________________________________________________________
 @access  private need login
 
 #require data{
-	food_id : String,
-	food_name : String,
+	snack_id : String,
+	snack_name : String,
 	price : Number
 }
 
@@ -686,8 +686,8 @@ ________________________________________________________________________________
 @access  private need login
 
 #require data{
-	food_id : String,
-	food_name : String,
+	package_id : String,
+	package_name : String,
 	price : Number
 }
 
