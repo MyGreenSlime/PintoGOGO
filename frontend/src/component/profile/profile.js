@@ -39,14 +39,19 @@ class Register extends Component {
         <div className='set-screen'> {/*bg*/}
         <div className='profile-set'>
         <div className='row'>
-        <div className=' choice-profile col-sm-3'>
-        <div class="btn-group-vertical choice-group">
-          <a className='btn choice' href='/profile'>PROFILE</a>
-          <a className='btn choice' href='/history'>PURCHASE HISTORY</a>
-          <a className='btn choice' href='/yourpackage'>YOUR PACKAGE</a>
-        </div>
-        </div>
-        <div className='register-box col-sm'> {/*register box*/}
+        {/* <div className=' choice-profile col-sm-3'>
+          <nav className="nav navbar-expand-md flex-column navbar-dark">
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuprofile" aria-controls="menuprofile" aria-expanded="false">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse flex-column menupro" id="menuprofile">
+              <a className='nav-link menulink' href='/profile'>PROFILE</a>
+              <a className='nav-link menulink' href='/history'>PURCHASE HISTORY</a>
+              <a className='nav-link menulink' href='/yourpackage'>YOUR PACKAGE</a>
+            </div>
+          </nav>
+        </div> */}
+        <div className='profile-box col-sm'> {/*register box*/}
         
           <h2> PROFILE </h2>
           {/* <br/> */}
