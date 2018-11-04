@@ -1,3 +1,10 @@
+.set-screen-cart {
+    background: url("/img/cart/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 1% 0 10% 0 ;
+}
+
 .linkbutton{
     margin-top: 5%;
     font-family: 'Quicksand', sans-serif;
@@ -61,5 +68,12 @@
     width: 20;
 }
 
+.button--confirm{
+    background-color: #e4dac2;
+    color: #7b7b7b;
+    /* font-size: 16px;
+    margin: 20px 10px 20px 10px; */
+    font-weight: bold;
+}
 
 

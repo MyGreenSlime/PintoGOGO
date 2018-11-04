@@ -13,7 +13,8 @@ const UserSchema = new Schema({
     phonenumber : String,
     favorite_food : [{type : ObjectId, ref : "Menu"}],
     favorite_snack : [{type : ObjectId, ref : "Snack"}],
-    history_purchase : [{type : ObjectId, ref : "Order"}]
+    history_purchase : [{type : ObjectId, ref : "Order"}],
+    img_url : {type : String, default : "https://raw.githubusercontent.com/MyGreenSlime/PintoGOGO/bibeen/frontend/public/img/navbar/user.png"}
     //payment : [{type : ObjectId, ref : 'Payment', default:}]
     
 });

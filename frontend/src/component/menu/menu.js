@@ -122,6 +122,7 @@ class Menu extends Component {
               picture={menus[firstImg].img_url}
               calories={menus[firstImg].calories}
               id = {menus[firstImg]._id}
+              price = {menus[firstImg].price}
               onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
             />
           )}
@@ -132,6 +133,7 @@ class Menu extends Component {
               picture={menus[secondImg].img_url}
               calories={menus[secondImg].calories}
               id = {menus[secondImg]._id}
+              price={menus[secondImg].price}              
               onMenuCardDeleted={this.onMenuCardDeleted.bind(this, secondImg)}
             />
           )}
@@ -142,6 +144,7 @@ class Menu extends Component {
               picture={menus[thirdImg].img_url}
               calories={menus[thirdImg].calories}
               id = {menus[thirdImg]._id}
+              price = {menus[thirdImg].price}
               onMenuCardDeleted={this.onMenuCardDeleted.bind(this, thirdImg)}
             />
           )}
@@ -161,6 +164,7 @@ class Menu extends Component {
               picture={menus[forthImg].img_url}
               calories={menus[forthImg].calories}
               id = {menus[forthImg]._id}
+              price = {menus[forthImg].price}
               onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
             />
           )}
@@ -171,6 +175,7 @@ class Menu extends Component {
               picture={menus[fifthImg].img_url}
               calories={menus[fifthImg].calories}
               id = {menus[fifthImg]._id}
+              price = {menus[fifthImg].price}
               onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
             />
           )}
@@ -181,6 +186,7 @@ class Menu extends Component {
               picture={menus[sixthImg].img_url}
               calories={menus[sixthImg].calories}
               id = {menus[sixthImg]._id}
+              price = {menus[sixthImg].price}
               onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
             />
           )}

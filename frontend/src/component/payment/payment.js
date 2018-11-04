@@ -9,14 +9,14 @@ export default class Payment extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
+        <div className="container set-screen-payment">
           <div className="box__content">
-            <div class="card card-form card__payment">
-              <div class="card-body">
+            <div className="card card-form card__payment">
+              <div className="card-body">
                 <h2 className="txt__title">Order Summary</h2>
                 <p>Choose Address</p>
 
-                <div class="dropdown box__addr">
+                <div className="dropdown box__addr">
                   <button
                     class="btn btn-block dropdown-toggle dd__addr"
                     type="button"

@@ -5,6 +5,34 @@ const jwt = require('jsonwebtoken')
 const keys = require('../config/keys');
 const passport = require('passport');
 
+const multer = require('multer');
+const storageProfile = multer.diskStorage({
+    destination : function(req, file, cb) {
+        cb(null,'./public/uploads/upload_profile/');
+    },
+    filename : function(req, file, cb) {
+        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
+
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
+
+const uploadProfile = multer({
+   storage : storageProfile,
+   limits: {
+    fileSize: 1024 * 1024 * 10
+  },
+  fileFilter: fileFilter
+});
+
 //load input validation
 const validationRegisterInput =  require('../validator/register');
 const validationLoginInput = require('../validator/login');
@@ -118,6 +146,36 @@ router.get('/profile', passport.authenticate('jwt',{ session : false }), (req, r
                 res.json(user)
             }
         })
+})
+
+//update profile
+router.put('/edit/profile', passport.authenticate('jwt',{ session : false }),uploadProfile.single('img'), (req, res) => {
+    const error = {}
+    const newUpdate = {
+        first_name : req.body.first_name,
+        last_name : req.body.last_name,
+        phonenumber : req.body.phonenumber,
+        img_url : req.body.img_url
+    }
+    if(req.file) {
+        newUpdate.img_url = req.file.path
+    }
+    User.updateOne({_id : req.user.id},{
+        $set : {
+            first_name : newUpdate.first_name,
+            last_name : newUpdate.last_name,
+            phonenumber : newUpdate.phonenumber,
+            img_url : newUpdate.img_url
+        }
+    }, (err, user) => {
+        if(err) {
+            error.edit = "cannot edit update"
+            res.status(500).json(error)
+        } else {
+            res.json(user)
+        }
+    })
+    
 })
 
 //add new address

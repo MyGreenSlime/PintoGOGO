@@ -1,62 +1,61 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardGroup,
-  CardImg,
-  CardText
-} from "reactstrap";
-
 import "../recommend/style-recommend.css";
+import axios from 'axios';
 
 export default class Recommend extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      menus: [],
+			isLoaded: false
+    }
+  }
+
+  componentDidMount() {
+    axios.get('/api/menus/food')
+    .then(res => {
+      this.setState({ 
+				isLoaded: true, 
+				menus: res.data,
+			});
+		})
+		.then(() => {
+			console.log(this.state.menus)
+		});
+  }
   render() {
+    const {	menus,
+      isLoaded, 
+    } = this.state;
+
+    if (!!!isLoaded) {
+      return <React.Fragment />
+    }
+    {console.log("menu:",menus)}
     return (
       <section className="recommend__block" fluid>
-        <Container>
-          <h3 className="headtext">Recommended Menu</h3>
-          <CardGroup className="cardgroup__recommend">
-            <Card className="card__recommend mr-3">
-              <CardImg
-                src="http://images.media-allrecipes.com/userphotos/960x960/5147291.jpg"
-                className="cardimg__recommend"
-              />
-              <CardBody>
-                <CardText>spaghetti salmon steak</CardText>
-              </CardBody>
-            </Card>
-            <Card className="card__recommend ml-3 mr-3">
-              <CardImg
-                src="https://images.media-allrecipes.com/userphotos/300x300/3749989.jpg"
-                className="cardimg__recommend"
-              />
-              <CardBody>
-                <CardText>spaghetti salmon steak</CardText>
-              </CardBody>
-            </Card>
-            <Card className="card__recommend ml-3 mr-3">
-              <CardImg
-                src="https://images.media-allrecipes.com/userphotos/300x300/3758976.jpg"
-                className="cardimg__recommend"
-              />
-              <CardBody>
-                <CardText>spaghetti salmon steak</CardText>
-              </CardBody>
-            </Card>
-            <Card className="card__recommend ml-3">
-              <CardImg
-                src="https://images.media-allrecipes.com/userphotos/300x300/3759440.jpg"
-                className="cardimg__recommend"
-              />
-              <CardBody>
-                <CardText>spaghetti salmon steak</CardText>
-              </CardBody>
-            </Card>
-          </CardGroup>
-        </Container>
+        <div className="set-recommend">
+          <b style={{fontSize: "20px"}}>Recommended</b>
+          <div className="grid-recommend">
+            <div>
+              <img className="img-rec" src={menus[1].img_url} />
+               {menus[1].menu_name}
+            </div>
+            <div>
+              <img className="img-rec" src={menus[3].img_url} />
+              {menus[3].menu_name}
+            </div>
+            <div>
+              <img className="img-rec" src={menus[2].img_url} />
+              {menus[2].menu_name}
+            </div>
+            <div>
+              <img className="img-rec" src={menus[0].img_url} />
+              {menus[0].menu_name}
+            </div>
+          </div>
+        </div>
       </section>
     );
   }

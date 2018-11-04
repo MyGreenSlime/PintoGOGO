@@ -40,3 +40,10 @@
   font-family: "Quicksand", sans-serif;
   height: auto;
 }
+
+.imgpreview{
+  width: 80%;
+  border-radius: 6px;
+  padding-bottom: 8px;
+  padding-right: 10%;
+}

@@ -3,8 +3,8 @@ import '../cardmenu/cardmenu.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import MenuDetail from "../menudetail/menudetail";
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import MenuDetail from '../menudetail/menudetail'
 
 class cardMenu extends Component {
   constructor(props){
@@ -14,31 +14,30 @@ class cardMenu extends Component {
       }
     }
 
-  deleteFromDb(){
-    axios.delete('/api/menus/food/del/'+ this.props.id)
-    .then(res => console.log(res))
-    .then(() => {
-      this.props.onMenuCardDeleted(this.props.id);
-    });
-  }
-      
-  addToCartClick(id){
-      console.log(id);
-      
+  addToCartClick(e){
+      console.log('Click!!!!');
       this.setState({
           clicked : this.state.clicked+1
       })
-      console.log(this.state.clicked);
+      axios.put('/api/orders/add/food',{
+        food_id: this.props.id,
+        food_name: this.props.name,
+        price: this.props.price
+      })
+      e.preventDefault();
   }  
-
-  sendToMenuDetail(){
-    
-    return <div>
-      <Route path="/menudetail/:menuId" component={MenuDetail} />
-    </div>
+  
+  deleteFromDb(){
+    axios.delete('/api/menus/food/del/'+ this.props.id)
+    .then(res => console.log(res))
+      
   }
 
-
+  sendToMenuDetail(){
+    return <div>
+      <Route path="/menudetail/:menuId" component={MenuDetail}/>
+    </div>
+  }
 
   render() { 
     const { isAuthenticated, user} = this.props.auth;
@@ -59,19 +58,27 @@ class cardMenu extends Component {
 
         <div className="textundermenu">
           <p>
-            {this.props.name}
-            <br />
+            {this.props.name}<br/>
             {this.props.calories} Kcal
           </p>
         </div>
 
-        <div>
-          <div className="cart--menu__button" onClick={this.addToCartClick.bind(this,this.props.id)}>
-            <img src={"/img/other/cart.png"} height="20" />
+          <div>
+            <div className="cart--menu__button" onClick={this.addToCartClick.bind(this)}>
+              <img src={"/img/other/cart.png"} height="20" />
+            </div>
+            {user.type? admin : ""}
           </div>
-          {user.type? admin : ""}
-        </div>
-      </section>;
+
+          {/* <div className="inline">
+                  <img src={"/img/other/cart.png"} height="20"/> 
+                      
+              </div> */}
+          {/* <div>
+                  <img src={"/img/other/cart.png"} height="20" /> 
+              </div> */}
+          {/* <p>total click: {this.state.clicked}</p> */}
+        </section>;
   }
 }
 

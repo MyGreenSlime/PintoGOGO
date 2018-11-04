@@ -5,6 +5,7 @@ const passport = require('passport');
 const Package = require('../models/package');
 const Menu = require('../models/menu');
 const Snack = require('../models/snack');
+const Order =  require('../models/order')
 
 router.get('/:id',function(req, res) {
     const errors = {}
@@ -121,7 +122,79 @@ router.post('/add',passport.authenticate('jwt',{ session : false }), function(re
         }
     })
 })
+//add package to cart anonymous
+router.post('/anonymous/addcart',passport.authenticate('jwt',{ session : false }), function(req, res){
+    const name_package = req.body.name_package
+    const error = {}
+    var newPackage =  new Package({
+        name_package : req.body.name_package,
+        description : req.body.description,
+        type : req.body.type,
+        price : req.body.price,
+        day_meal : req.body.day_meal
+    })
+    Package.findOne({name_package : name_package}, function(err, package){
+      if(package) {
+        Order.updateOne({user_id : req.user.id, isfinish : false, "package_order.package_name" : name_package},{
+            $inc : {"package_order.$.amount" : 1}
+        }, (err, order) => {
+            if(err) {
+                error.addamount = "cannot add amount anonymous package"
+                res.sendStatus(500).json(error)
+            } else {
+                res.json(order)
+            }
+        })
+      } else {
+        newPackage.save()
+            .then(package => {
+                Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
+                    const newPackageOrder = {
+                        package_id : package._id,
+                        package_name : package.name_package,
+                        price : package.price,
+                        amount : 1
+                    }
+                    if(order) {
+                        Order.updateOne({user_id : req.user.id, isfinish : false , "package_order.package_id" : newPackageOrder.package_id},{
+                            $inc : { "package_order.$.amount" : 1 }
+                        }, (err, order) => {
+                            if(err) {
+                                error.addamount = "can not add amount"
+                                res.sendStatus(400).json(error);
+                            } else {
+                               if(order.nModified == 0) {
+                                  Order.updateOne({user_id : req.user.id, isfinish : false},{
+                                      $push : {package_order : newPackageOrder}
+                                  }, (err, order) => {
+                                      if(err) {
+                                          error.addneworder = "can not add new menu to order"
+                                          res.sendStatus(400).json(error)
+                                      } else {
+                                          res.json(order)
+                                      }
+                                  })
+                               } else {
+                                   res.json(order)
+                               }
+                            }
+                        })
+                      } else {
+                          const newOrder =  new Order({
+                              user_id : req.user.id,
+                              package_order : newPackageOrder
+                          });
+                          newOrder.save()
+                              .then(order => res.json(order))
+                              .catch(err => console.log(err));
+                      }
+                })
+            })
+            .catch(err => console.log(err));
+      }
+    })
 
+})
 //delete package system
 router.delete('/del/:id',passport.authenticate('jwt',{ session : false }), function(req, res) {
    const error = {};
