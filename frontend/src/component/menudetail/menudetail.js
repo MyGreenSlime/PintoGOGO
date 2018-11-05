@@ -41,6 +41,11 @@ class MenuDetail extends Component {
 
     render(){
         const { isAuthenticated, user} = this.props.auth;
+        const users = (
+            <div className="row justify-content-center">
+                            <button type="button" className="addtocartbutton">ADD TO CART</button>
+            </div>
+        )
         const admin = (
             <React.Fragment>
                 <div className="edit--menu__button">
@@ -75,9 +80,7 @@ class MenuDetail extends Component {
                 <div className="row menudetail">
                     <div className="col-5">
                         <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
-                        <div className="row justify-content-center">
-                            <button type="button" className="addtocartbutton">ADD TO CART</button>
-                        </div>
+                        {isAuthenticated? users : ""}
                         {user.type? admin : ""}
                     </div>
                     <div className="col">

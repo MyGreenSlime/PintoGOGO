@@ -32,6 +32,7 @@ class Packagemanage3days extends Component {
     this.send3DaysPackage = this.send3DaysPackage.bind(this);
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this);
     this.add3DaysPackageToCart = this.add3DaysPackageToCart.bind(this);
+    this.checkReady = this.checkReady.bind(this)
   }
 
   componentDidMount() {
@@ -48,6 +49,7 @@ class Packagemanage3days extends Component {
   }
   
   send3DaysPackage() {
+    console.log("savepackage")
     const newPackage = {
       name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
       description: "manage 3 days package",
@@ -91,8 +93,7 @@ class Packagemanage3days extends Component {
                   this.state.day2_detail[1].price +
                   this.state.day3_detail[0].price +
                   this.state.day3_detail[1].price) * 0.95)
-      },
-      () => {}
+      }
     );
   }
 
@@ -118,19 +119,7 @@ class Packagemanage3days extends Component {
     return <div />;
   }
 
-  // onSendMenuDetail() {
-  //   const newAllDetail = [ 
-  //     this.state.day1_detail, 
-  //     this.state.day2_detail,
-  //     this.state.day3_detail
-  //   ];
-  //   this.setState({
-  //     all_detail: newAllDetail,
-  //     isLoaded: true,
-  //   },() => { 
-  //   console.log("this is from package")
-  //   })
-  // }
+ 
 
   add3DaysPackageToCart() {
     console.log("add to cart")

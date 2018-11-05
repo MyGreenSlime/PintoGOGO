@@ -45,7 +45,7 @@ export default class Package7daysA extends Component {
 		if (!!!isLoaded) {
 			return <React.Fragment />
 		}
-		if(!packages[1]) {
+		if(!packages[0]) {
 			console.log("in no pack")
 			return <NoPackage />
 		}

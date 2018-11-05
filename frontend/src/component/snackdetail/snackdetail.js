@@ -16,12 +16,14 @@ class SnackDetail extends Component {
     findIdFromUrl(){
         var url = window.location.href;
         var res = url.split("/");
-        axios.get("http://localhost:4000/menus/snack/" + res[res.length-1])
+        axios.get("/api/menus/snack/" + res[res.length-1])
         .then(response => {
             // console.log(response);
             this.setState({
 
               food: response.data
+            },()=> {
+                console.log(this.state.food)
             });
             // console.log(this.state.food.menu_name);
         })
@@ -39,6 +41,13 @@ class SnackDetail extends Component {
 
     render(){
         const { isAuthenticated, user} = this.props.auth;
+        const users = (
+            <React.Fragment>
+                <div className="row justify-content-center">
+                            <button type="button" className="addtocartbutton">ADD TO CART</button>
+                </div>
+            </React.Fragment>
+        )
         const admin = (
             <React.Fragment>
                 <div className="edit--menu__button">
@@ -69,10 +78,8 @@ class SnackDetail extends Component {
 
                 <div className="row menudetail">
                     <div className="col-5">
-                        <img src={this.state.food.img_url} width="80%" className="foodimg" />
-                        <div className="row justify-content-center">
-                            <button type="button" className="addtocartbutton">ADD TO CART</button>
-                        </div>
+                        <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
+                        {isAuthenticated? users : ""}
                         {user.type? admin : ""}
                     </div>
                     <div className="col">

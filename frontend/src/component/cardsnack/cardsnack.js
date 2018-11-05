@@ -26,13 +26,6 @@ class cardMenu extends Component {
     })
     e.preventDefault();
   }
-
-  deleteFromDb() {
-    axios
-      .delete("/api/menus/snack/del/" + this.props.id)
-      .then(res => console.log(res));
-  }
-
     deleteFromDb(){
         axios.delete('/api/menus/snack/del/'+ this.props.id)
         .then(res => console.log(res))
@@ -50,6 +43,11 @@ class cardMenu extends Component {
     
     render() { 
     const { isAuthenticated, user} = this.props.auth;
+    const users = (
+        <div className="cart--snack__button" onClick={this.addToCartClick.bind(this)}>
+                    <img src={"/img/other/cart.png"} height="20" />
+        </div>
+    )
     const admin = (
         <React.Fragment>
             <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
@@ -70,9 +68,7 @@ class cardMenu extends Component {
                     {this.props.calories} Kcal</p>
             </div>
             <div>
-                <div className="cart--snack__button" onClick={this.addToCartClick.bind(this)}>
-                    <img src={"/img/other/cart.png"} height="20" />
-                </div>
+                {isAuthenticated ? users : ""}
                 {user.type ? admin : ""}
             </div>
         </section>

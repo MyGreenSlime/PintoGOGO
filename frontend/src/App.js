@@ -34,7 +34,7 @@ import Footer from "./component/footer/footer.js";
 import Login from "./component/login/mainlogin/login";
 
 const Home = () => {
-  return [<Carousel />, <Recommend />, <Choice />];
+  return [<Carousel />, <Choice />];
 };
 
 //Check for token
