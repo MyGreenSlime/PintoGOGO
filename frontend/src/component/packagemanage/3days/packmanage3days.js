@@ -69,6 +69,7 @@ class Packagemanage3days extends Component {
     };
     axios.post("/api/packages/add", newPackage)
       .then(function (response) {
+        console.log("save packages")
         console.log(response);
       })
       .catch(function (error) {
@@ -133,7 +134,6 @@ class Packagemanage3days extends Component {
   // }
 
   add3DaysPackageToCart() {
-    console.log("add to cart")
     const newPackage = {
       name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
       description: "manage 3 days package",
@@ -157,6 +157,7 @@ class Packagemanage3days extends Component {
     axios
       .post("/api/packages/anonymous/addcart", newPackage)
       .then(function (response) {
+        console.log("add to cart")
         console.log(response);
       })
       .catch(function (error) {
