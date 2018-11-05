@@ -61,38 +61,38 @@ export default class Nutrition7B extends Component {
 					<div className='col-7'>
 						CALORIES
 					</div>
-					{this.compute("calories")} kCAL/day
+					{Math.round(this.compute("calories"))} kCAL/day
 				</div>
 				<hr></hr>
 				<div className='row'>
 					<div className='col-7'>
 						<p>FAT</p>
 					</div>
-					<p>{this.compute("fat")} g/day</p>
+					<p>{Math.round(this.compute("fat"))} g/day</p>
 				</div>
 				<div className='row'>
 					<div className='col-7'>
 						<p>CHOLESTEROL</p>
 					</div>
-					<p>{this.compute("cholesterol")} g/day</p>
+					<p>{Math.round(this.compute("cholesterol"))} g/day</p>
 				</div>
 				<div className='row'>
 					<div className='col-7'>
 						<p>SODIUM</p>
 					</div>
-					<p>{this.compute("sodium")} g/day</p>
+					<p>{Math.round(this.compute("sodium"))} g/day</p>
 				</div>
 				<div className='row'>
 					<div className='col-7'>
 						<p>CARBOHYDRATE</p>
 					</div>
-					<p>{this.compute("carbohydrate")} g/day</p>
+					<p>{Math.round(this.compute("carbohydrate"))} g/day</p>
 				</div>
 				<div className='row'>
 					<div className='col-7'>
 						<p>PROTEIN</p>
 					</div>
-					<p>{this.compute("protein")} g/day</p>
+					<p>{Math.round(this.compute("protein"))} g/day</p>
 				</div>
     	</div>
 			</React.Fragment>

@@ -271,10 +271,10 @@ class Packagemanage3days extends Component {
             <div className="col-3-sm col-set" />
           </div>
           
-          {this.checkReady()}
-          {/* <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
+          {/* {this.checkReady()} */}
+          <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
             CLICK TO SHOW NUTRITION
-          </button> */}
+          </button>
           {this.state.all_detail &&
             this.state.all_detail.length > 0 && (
               <React.Fragment>
