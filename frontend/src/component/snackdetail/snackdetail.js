@@ -22,6 +22,8 @@ class SnackDetail extends Component {
             this.setState({
 
               food: response.data
+            },()=> {
+                console.log(this.state.food)
             });
             // console.log(this.state.food.menu_name);
         })
@@ -39,6 +41,13 @@ class SnackDetail extends Component {
 
     render(){
         const { isAuthenticated, user} = this.props.auth;
+        const users = (
+            <React.Fragment>
+                <div className="row justify-content-center">
+                            <button type="button" className="addtocartbutton">ADD TO CART</button>
+                </div>
+            </React.Fragment>
+        )
         const admin = (
             <React.Fragment>
                 <div className="edit--menu__button">
@@ -73,6 +82,7 @@ class SnackDetail extends Component {
                         <div className="row justify-content-center">
                             <button type="button" className="addtocartbutton">ADD TO CART</button>
                         </div>
+                        {isAuthenticated? users : ""}
                         {user.type? admin : ""}
                     </div>
                     <div className="col">
