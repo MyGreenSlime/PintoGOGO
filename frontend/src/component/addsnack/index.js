@@ -32,13 +32,17 @@ class Addsnack extends Component {
 
     // cannot redirect I don't know why
     renderRedirect() {
-        return  <Redirect to = {{
-            pathname : "/add/menu"
-        }}/>
+        return  window.location.href = '/add/snack'
     }
 
     componentDidMount() {
         if(!this.props.auth.user.type) {
+            return  this.props.history.push('/');
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(!nextProps.auth.user.type) {
             return  this.props.history.push('/');
         }
     }
