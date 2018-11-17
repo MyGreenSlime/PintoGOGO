@@ -39,7 +39,7 @@ const validationLoginInput = require('../validator/login');
 
 const User = require('../models/User');
 const Address = require('../models/address');
-
+const Order = require('../models/order')
 //register
 router.post('/register', (req, res) => {
     const {errors, isValid} = validationRegisterInput(req.body);
@@ -118,6 +118,14 @@ router.post('/login', function(req, res){
                     }
                     //sign token
                     jwt.sign(payload, keys.secretOrkey, { expiresIn : 3600 }, (err, token) => {
+                        Order.findOne({user_id : user.id, isfinish : false},function(err, order){
+                            if(!order){
+                                var newOrder = new Order({
+                                    user_id : user.id
+                                })
+                                newOrder.save()
+                            }
+                        })
                         res.json({
                             sucess : true,
                             token : 'Bearer ' + token
@@ -140,7 +148,7 @@ router.get('/profile', passport.authenticate('jwt',{ session : false }), (req, r
         .populate({path : "favorite_snack" , model : "Snack"})
         .exec((err, user) => {
             if (err) {
-                errors.profile = "Cannot Fetch Your Profile"
+                errors.user = "Cannot Fetch Your Profile"
                 res.status(400).json(errors)
             } else {
                 res.json(user)
@@ -169,10 +177,14 @@ router.put('/edit/profile', passport.authenticate('jwt',{ session : false }),upl
         }
     }, (err, user) => {
         if(err) {
-            error.edit = "cannot edit update"
+            error.user = err
             res.status(500).json(error)
         } else {
-            res.json(user)
+            var status = {
+                ok : 1,
+                message : "Ok edit profile finish"
+            }
+            res.json(status)
         }
     })
     
@@ -194,10 +206,14 @@ router.put('/add/address', passport.authenticate('jwt',{ session : false }), (re
         .then(() => {
             User.updateOne({_id : req.user.id}, {$push : {address : tmpAddress.id}}, (err, user) => {
             if (err) {
-                errors.address = "Cannot add new address"
+                errors.user = err
                 res.status(400).json(errors)
             } else {
-                res.json(user)
+                var status = {
+                    ok : 1,
+                    message : "Ok add new address finish"
+                }
+                res.json(status)
             }
         })})
         .catch(err => console.log(err));
@@ -209,7 +225,7 @@ router.put('/del/address/:id', passport.authenticate('jwt',{ session : false }),
     const address_id = req.params.id
     User.updateOne({_id : req.user.id}, {$pull : {address : address_id}}, (err, user) => {
         if (err) {
-            errors.address = "Cannot DELETE Your address"
+            errors.user = err
             res.status(400).json(errors)
         } else {
             Address.remove({_id : address_id})
@@ -217,7 +233,11 @@ router.put('/del/address/:id', passport.authenticate('jwt',{ session : false }),
                 .catch(err => {
                     console.log(err)
                 })
-            res.json(user)
+            var status = {
+                ok : 1,
+                message : "Ok delete some address finish"
+            }
+            res.json(status)
         }
     })  
 })
@@ -228,10 +248,14 @@ router.put('/add/favorite/food/:id', passport.authenticate('jwt',{ session : fal
     var foodid =  req.params.id;
     User.updateOne({_id : req.user.id}, {$push : {favorite_food : foodid}},(err, user) => {
         if (err) {
-            errors.favorite_food = "Cannot Add Your Favorite Food"
+            errors.user = err
             res.status(400).json(errors)
         } else {
-            res.json(user)
+            var status = {
+                ok : 1,
+                message : "Ok add favorite food finish"
+            }
+            res.json(status)
         }
     })
 })
@@ -242,10 +266,15 @@ router.delete('/del/favorite/food/:id', passport.authenticate('jwt',{ session : 
     var foodid =  req.params.id;
     User.updateOne({_id : req.user.id},{$pull : {favorite_food : foodid}},(err, user) => {
         if (err) {
-            errors.favorite_food = "Cannot DELETE Your Favorite Food"
+            errors.user = err
             res.status(400).json(errors)
         } else {
-            res.json(user)
+
+            var status = {
+                ok : 1,
+                message : "Ok remove some favorite finish"
+            }
+            res.json(status)
         }
     })
 })
@@ -256,10 +285,14 @@ router.put('/add/favorite/snack/:id', passport.authenticate('jwt',{ session : fa
     var snackid =  req.params.id;
     User.updateOne({_id : req.user.id},{$push : {favorite_snack : snackid}},(err, user) => {
         if (err) {
-            errors.favorite_snack = "Cannot Add Your Favorite Snack"
+            errors.user = err
             res.status(400).json(errors)
         } else {
-            res.json(user)
+            var status = {
+                ok : 1,
+                message : "Ok add favorite snack finish"
+            }
+            res.json(status)
         }
     })
 })
@@ -270,10 +303,14 @@ router.delete('/del/favorite/snack/:id', passport.authenticate('jwt',{ session :
     var snackid =  req.params.id;
     User.updateOne({_id : req.user.id},{$pull : {favorite_snack : snackid}},(err, user) => {
         if (err) {
-            errors.favorite_snack = "Cannot DELETE Your Favorite Snack"
+            errors.user = err
             res.status(400).json(errors)
         } else {
-            res.json(user)
+            var status = {
+                ok : 1,
+                message : "Ok remove favorite snack finish"
+            }
+            res.json(status)
         }
     })
 })

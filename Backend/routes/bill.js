@@ -16,7 +16,7 @@ router.get('/all', passport.authenticate('jwt',{ session : false }),function(req
         .populate({path : "order", model : "Order" })
         .exec((err, bill) => {
             if(err) {
-                error.bills = "Could not fetch all bills"
+                error.bills = err
                 res.status(500).send(err)
             } else {
                 res.json(bill)
@@ -31,7 +31,7 @@ router.get('/current',  passport.authenticate('jwt',{ session : false }), functi
         .populate({path : "order", model : "Order" })
         .exec((err, bill) => {
             if(err) {
-                error.bills = "Could not fetch curr bills"
+                error.bills = err
                 res.status(500).json(error)
             } else {
                 res.json(bill)
@@ -57,10 +57,14 @@ router.put('/update/current', passport.authenticate('jwt',{ session : false }), 
         }
     }, (err, bill) => {
         if(err) {
-            error.updatebill = "cannot update bill"
+            error.bills = err
             res.status(500).json(error)
         } else {
-            res.json(bill)
+            var status = {
+                ok : 1,
+                message : "update bill finish"
+            }
+            res.json(status)
         }
     })
 })

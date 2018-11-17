@@ -10,7 +10,7 @@ class Cart extends Component {
     this.raw = {};
     this.state = {
       fromChild: "",
-      order: [],
+      order: null,
       isLoaded: false,
     };
     this.createCardCartFood = this.createCardCartFood.bind(this)
@@ -47,11 +47,11 @@ class Cart extends Component {
 
   createCardCartFood() {
     let card_food
-    if(!this.state.order[0].food_order){
+    if(!this.state.order.food_order){
       card_food = <div></div>
     }
     else{
-      card_food = this.state.order[0].food_order.map((ord, index) => (
+      card_food = this.state.order.food_order.map((ord, index) => (
         <CardCart handlerFromParant={this.handleData} picture={ord.food_id.img_url} name={ord.food_name} price={ord.price} amount={ord.amount} id={ord.food_id._id} type_order="food"/>
       ));
     }
@@ -60,11 +60,11 @@ class Cart extends Component {
 
   createCardCartSnack(){
     let card_snack
-    if(!this.state.order[0].snack_order){
+    if(!this.state.order.snack_order){
       card_snack = <div></div>
     }
     else{
-      card_snack = this.state.order[0].snack_order.map((ord,index) => (
+      card_snack = this.state.order.snack_order.map((ord,index) => (
         <CardCart handlerFromParant={this.handleData} picture={ord.snack_id.img_url} name={ord.snack_name} price={ord.price} amount={ord.amount} id={ord.snack_id._id} type_order="snack"/>      
       ));
     }
@@ -73,11 +73,11 @@ class Cart extends Component {
 
   createCardPackage(){
     let card_package
-    if(!this.state.order[0].package_order){
+    if(!this.state.order.package_order){
       card_package = <div></div>
     }
     else{
-      card_package = this.state.order[0].package_order.map((ord,index) => (
+      card_package = this.state.order.package_order.map((ord,index) => (
         <CardCart handlerFromParant={this.handleData} picture={""} name = {ord.package_id.type + "days package"} price={ord.package_id.price} amount={ord.amount} id={ord.package_id._id} type_order="package"/>      
       ));
     }

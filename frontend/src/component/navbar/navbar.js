@@ -24,6 +24,7 @@ class Navigationbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser();
+    window.location.href ="/"
   }
 
   toggle() {

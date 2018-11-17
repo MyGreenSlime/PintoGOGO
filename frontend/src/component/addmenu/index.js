@@ -82,22 +82,9 @@ class Addmenu extends Component {
        formData.append('cholesterol',this.state.cholesterol)
        formData.append('sodium',this.state.sodium)
        formData.append('description',this.state.description)
-       
-        const menudetail = {
-            menu_name : this.state.menu_name,
-            price : this.state.price,
-            calories : this.state.calories,
-            protein : this.state.protein,
-            carbohydrate : this.state.carbohydrate,
-            fat : this.state.fat,
-            description : this.state.description,
-            sodium : this.state.sodium,
-            cholesterol : this.state.cholesterol,
-            img : this.state.img
-        }
         axios.post('/api/menus/food/add', formData)
         .then(res => {
-            this.setState({status : res.data})
+            this.setState({status : res.data.ok})
         })
         .then(() => {
             console.log('redirect');

@@ -24,9 +24,6 @@ mongoose.connect(db,{ useNewUrlParser: true })
     .then(() => console.log('Connect Database'))
     .catch(err => console.log(err));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : false}));
-
 //passport middleware
 app.use(passport.initialize());
 //passport config
