@@ -21,8 +21,8 @@ class Register extends Component {
       address: "",
       status: {},
       errors: {},
-      lat_lng: [],
-      // lng: [],
+      lat: [],
+      lng: [],
       dest: [],
       dist: []
     };
@@ -58,7 +58,7 @@ class Register extends Component {
       password1: this.state.password1,
       password2: this.state.password2,
       phonenumber: this.state.phonenumber,
-      address: this.state.lat_lng
+      address: this.state.dest
     };
     this.props.registerUser(newUser, this.props.history);
     e.preventDefault();
@@ -66,12 +66,12 @@ class Register extends Component {
 
   handleData(lat, lng, dest, dist) {
     this.setState({
-      lat_lng: lat.toString() + ", " + lng.toString(),
+      lat: lat,
+      lng: lng,
       dest: dest,
       dist: dist
     });
-    console.log("lat", this.state.lat_lng);
-    console.log("dest", this.state.dest);
+    // console.log("reg dest: ", this.state.dest);
   }
 
   render() {
