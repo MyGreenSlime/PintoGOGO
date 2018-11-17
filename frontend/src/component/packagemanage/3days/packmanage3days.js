@@ -27,12 +27,12 @@ class Packagemanage3days extends Component {
       all_detail: [],
       sum_price: 0,
       isReadyToShow: [false, false, false, false, false, false],
-      user: null
+      user: null,
+      showNutrition: <div/>
     };
     this.send3DaysPackage = this.send3DaysPackage.bind(this);
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this);
-    this.add3DaysPackageToCart = this.add3DaysPackageToCart.bind(this);
-    this.checkReady = this.checkReady.bind(this)
+    // this.add3DaysPackageToCart = this.add3DaysPackageToCart.bind(this);
   }
 
   componentDidMount() {
@@ -48,11 +48,11 @@ class Packagemanage3days extends Component {
       });
   }
   
-  send3DaysPackage() {
-    console.log("savepackage")
+  send3DaysPackage(path) {
+    console.log(path+" package")
     const newPackage = {
       name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "manage 3 days package",
+      description: "3 days package",
       type: 3,
       day_meal: [
         {
@@ -69,14 +69,17 @@ class Packagemanage3days extends Component {
         },],
       price: this.state.sum_price
     };
-    axios.post("/api/packages/add", newPackage)
+    axios.post("/api/packages/"+path, newPackage)
       .then(function (response) {
-        console.log("save packages")
+        // console.log("save packages")
         console.log(response);
+        if(path == "add"){
+          alert("Save Package");
+        }
       })
       .catch(function (error) {
         console.log(error);
-      });
+      })
   }
 
   onSendMenuDetail() {
@@ -93,7 +96,7 @@ class Packagemanage3days extends Component {
                   this.state.day2_detail[0].price +
                   this.state.day2_detail[1].price +
                   this.state.day3_detail[0].price +
-                  this.state.day3_detail[1].price) * 0.95)
+                  this.state.day3_detail[1].price) * 0.95),
       }
     );
   }
@@ -118,40 +121,6 @@ class Packagemanage3days extends Component {
     }
     console.log("price ", this.state.sum_price)    
     return <div />;
-  }
-
- 
-
-  add3DaysPackageToCart() {
-    const newPackage = {
-      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "manage 3 days package",
-      type: 3,
-      day_meal: [
-        {
-          meal_1: this.state.day1_detail[0],
-          meal_2: this.state.day1_detail[1]
-        },
-        {
-          meal_1: this.state.day2_detail[0],
-          meal_2: this.state.day2_detail[1]
-        },
-        {
-          meal_1: this.state.day3_detail[0],
-          meal_2: this.state.day3_detail[1]
-        }
-      ],
-      price: this.state.sum_price
-    };
-    axios
-      .post("/api/packages/anonymous/addcart", newPackage)
-      .then(function (response) {
-        console.log("add to cart")
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   render() {
@@ -272,10 +241,11 @@ class Packagemanage3days extends Component {
             <div className="col-3-sm col-set" />
           </div>
           
-          {/* {this.checkReady()} */}
-          <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
+          {this.checkReady()}
+          {/* <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
             CLICK TO SHOW NUTRITION
-          </button>
+          </button> */}
+          
           {this.state.all_detail &&
             this.state.all_detail.length > 0 && (
               <React.Fragment>
@@ -284,22 +254,26 @@ class Packagemanage3days extends Component {
                 </div>
                 <div>
                   <a href='/cart'>
-                  <button
-                    className="btn btn-shownutrition"
-                    onClick={this.add3DaysPackageToCart()}
-                  >
-                    Add to cart
-                  </button>
+                    <button
+                      className="btn btn-shownutrition"
+                      onClick={() => this.send3DaysPackage("anonymous/addcart")}
+                    >
+                      Add to cart
+                    </button>
                   </a>
                   <button
                     className="btn btn-shownutrition"
-                    onClick={this.send3DaysPackage()}
+                  // onClick={this.testClick()}
+                  onClick={()=>this.send3DaysPackage("add")}
                   >
                     SAVE PACKAGE
                   </button>
+
                 </div>
               </React.Fragment>
             )}
+
+
         </div>
       </React.Fragment>
     );

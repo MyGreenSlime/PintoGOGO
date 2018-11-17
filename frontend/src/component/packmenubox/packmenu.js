@@ -32,7 +32,7 @@ class Packmenu extends Component {
     img = 
     <figure>
       <div className="hovereffect">
-        <img src={url} className="menu--image" />
+        <img src={url} className="menu--image" alt={name} />
         <div className="overlay">
           <h2>{name}</h2>
           {/* <a class="btn info" href="#">Detail</a> */}

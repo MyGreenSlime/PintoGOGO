@@ -9,6 +9,7 @@
 
 .login__text--box {
   font-family: "Quicksand", sans-serif;
+  width: 100%;
 }
 
 .submit__login--button {
@@ -21,6 +22,7 @@
   min-width: 100px;
   font-family: "Quicksand", sans-serif;
   height: auto;
+  margin: 10%; 
 }
 
 .submit__login--button:hover {

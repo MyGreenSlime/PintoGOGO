@@ -19,8 +19,8 @@ class Login extends Component {
         <div className="login__box__container">
           <div className="login__box">
             <Userpass />
-            <Googlelogin />
-            <Facebooklogin />
+            {/* <Googlelogin /> */}
+            {/* <Facebooklogin /> */}
           </div>
         </div>
       </React.Fragment>

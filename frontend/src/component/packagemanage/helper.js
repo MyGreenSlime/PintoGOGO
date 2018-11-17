@@ -23,24 +23,24 @@ export function setMenuDrop(dayimg, daydetail, ready, index, index_ready, e) {
   console.log(newDayDetailState);
 }
 
-export function checkReady() {
-  let all_ready = true;
-  this.state.isReadyToShow.map((ready, index) => {
-    if (!ready) {
-      all_ready = false;
-    }
-  });
-  console.log(all_ready);
-  if (all_ready) {
-    return (
-      <button
-        className="btn btn-shownutrition"
-        onClick={this.onSendMenuDetail}
-      >
-        CLICK TO SHOW NUTRITION
-        </button>
-    );
-  }
-  // console.log("price ", this.state.sum_price)
-  return <div />;
-}
+// export function checkReady() {
+//   let all_ready = true;
+//   this.state.isReadyToShow.map((ready, index) => {
+//     if (!ready) {
+//       all_ready = false;
+//     }
+//   });
+//   console.log(all_ready);
+//   if (all_ready) {
+//     return (
+//       <button
+//         className="btn btn-shownutrition"
+//         onClick={this.onSendMenuDetail}
+//       >
+//         CLICK TO SHOW NUTRITION
+//         </button>
+//     );
+//   }
+//   // console.log("price ", this.state.sum_price)
+//   return <div />;
+// }

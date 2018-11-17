@@ -63,7 +63,7 @@ class Userpass extends Component {
         <form noValidate onSubmit={this.onSubmit}>
             <div className="form-group col">
               <input
-                className= {classnames("form-control login__texx--box",{
+                className= {classnames("form-control login__text--box",{
                   'is-invalid' : errors.user_name
                 })}
                 id="username"
@@ -77,7 +77,7 @@ class Userpass extends Component {
             </div>
             <div className="form-group col">
               <input
-                className= {classnames("form-control login__texx--box",{
+                className= {classnames("form-control login__text--box",{
                   'is-invalid' : errors.password
                 })}
                 id="password"

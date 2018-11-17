@@ -29,7 +29,7 @@ export default class PackageManage5days extends Component {
     };
     this.send5DaysPackage = this.send5DaysPackage.bind(this)
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this)
-    this.add5DaysPackageToCart = this.add5DaysPackageToCart.bind(this)
+    // this.add5DaysPackageToCart = this.add5DaysPackageToCart.bind(this)
   }
   
   componentDidMount() {
@@ -44,45 +44,6 @@ export default class PackageManage5days extends Component {
         console.log(this.state.user);
       });
   }
-
-  send5DaysPackage() {
-    const newPackage = {
-      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "manage 5 days package",
-      type: 5,
-      day_meal: [
-        {
-          meal_1: this.state.day1_detail[0],
-          meal_2: this.state.day1_detail[1]
-        },
-        {
-          meal_1: this.state.day2_detail[0],
-          meal_2: this.state.day2_detail[1]
-        },
-        {
-          meal_1: this.state.day3_detail[0],
-          meal_2: this.state.day3_detail[1]
-        },
-        {
-          meal_1: this.state.day4_detail[0],
-          meal_2: this.state.day4_detail[1]
-        },
-        {
-          meal_1: this.state.day5_detail[0],
-          meal_2: this.state.day5_detail[1]
-        }],
-      price: this.state.sum_price
-    };
-
-    axios.post("/api/packages/add", newPackage)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   
   onSendMenuDetail() {
     const newAllDetail = [ 
@@ -127,10 +88,11 @@ export default class PackageManage5days extends Component {
     return <div />;
   }
 
-  add5DaysPackageToCart() {
+  send5DaysPackage(path) {
+    console.log(path + " package")
     const newPackage = {
       name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "manage 5 days package",
+      description: "5 days package",
       type: 5,
       day_meal: [
         {
@@ -152,20 +114,21 @@ export default class PackageManage5days extends Component {
         {
           meal_1: this.state.day5_detail[0],
           meal_2: this.state.day5_detail[1]
-        }
-      ],
+        },],
       price: this.state.sum_price
     };
-    axios
-      .post("/api/packages/anonymous/addcart", newPackage)
+    axios.post("/api/packages/" + path, newPackage)
       .then(function (response) {
+        // console.log("save packages")
         console.log(response);
+        if (path == "add") {
+          alert("Save Package");
+        }
       })
       .catch(function (error) {
         console.log(error);
-      });
+      })
   }
-
 
 	render() {
 		return <React.Fragment>
@@ -260,11 +223,17 @@ export default class PackageManage5days extends Component {
                 </div>
                 <div>
                   <a href='/cart'>
-                  <button className="btn btn-shownutrition" onClick={this.add5DaysPackageToCart()}>
-                    Add to cart
-                  </button>
+                    <button
+                      className="btn btn-shownutrition"
+                      onClick={() => this.send5DaysPackage("anonymous/addcart")}
+                    >
+                      Add to cart
+                      </button>
                   </a>
-                  <button className="btn btn-shownutrition" onClick={this.send5DaysPackage()}>
+                  <button
+                    className="btn btn-shownutrition"
+                    onClick={() => this.send5DaysPackage("add")}
+                  >
                     SAVE PACKAGE
                   </button>
                 </div>
