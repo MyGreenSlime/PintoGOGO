@@ -15,8 +15,17 @@ class Register extends Component {
 			currentUser: null
 		}
   }
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.auth.isAuthenticated) {
+        return  this.props.history.push('/');
+    }
+}
     
   componentDidMount() {
+    if(!this.props.auth.isAuthenticated) {
+      return  this.props.history.push('/');
+  }
+
     axios.get('/api/users/profile')
     .then(res => {
       this.setState({  
@@ -28,6 +37,7 @@ class Register extends Component {
       console.log("this", this.state.currentUser)
     });
   }
+
       
     render() {
       if (!!!this.state.isLoaded) {

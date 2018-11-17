@@ -30,6 +30,9 @@ class cardMenu extends Component {
   deleteFromDb(){
     axios.delete('/api/menus/food/del/'+ this.props.id)
     .then(res => console.log(res))
+    .then(() => {
+      this.props.onMenuCardDeleted(this.props.id);
+    });
       
   }
 
@@ -41,6 +44,11 @@ class cardMenu extends Component {
 
   render() { 
     const { isAuthenticated, user} = this.props.auth;
+    const users = (
+      <div className="cartmenu__cart" onClick={this.addToCartClick.bind(this)}>
+              <img src={"/img/other/cart.png"} height="20" />
+      </div>
+    )
     const admin = (
         <React.Fragment>
             <div className="cartmenu__button__delete" onClick={this.deleteFromDb.bind(this)}>
@@ -64,9 +72,7 @@ class cardMenu extends Component {
         </div>
 
         <div>
-          <div className="cartmenu__cart" onClick={this.addToCartClick.bind(this)}>
-            <img src={"/img/other/cart.png"} height="20" />
-          </div>
+          {isAuthenticated? users : ""}
           {user.type? admin : ""}
         </div>
 
