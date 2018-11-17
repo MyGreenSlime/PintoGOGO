@@ -221,7 +221,7 @@ router.delete('/del/:id',passport.authenticate('jwt',{ session : false }), funct
             res.status(500).send(error);
         } else {
             if(package.owner == req.user.user_name || req.user.type){
-                Package.remove(query, function(err){
+                Package.deleteOne(query, function(err){
                     if(err){
                         error.package = err
                         res.status(500).send(error);

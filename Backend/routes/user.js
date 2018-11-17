@@ -228,7 +228,7 @@ router.put('/del/address/:id', passport.authenticate('jwt',{ session : false }),
             errors.user = err
             res.status(400).json(errors)
         } else {
-            Address.remove({_id : address_id})
+            Address.deleteOne({_id : address_id})
                 .then(console.log("Success"))
                 .catch(err => {
                     console.log(err)

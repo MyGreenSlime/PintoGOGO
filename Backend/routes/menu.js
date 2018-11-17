@@ -167,7 +167,7 @@ router.delete('/food/del/:id',passport.authenticate('jwt',{ session : false }),f
         if(err){
             res.status(500).send(err);
         }else{
-            Menu.remove(query, function(err){
+            Menu.deleteOne(query, function(err){
                 if(err){
                     error.food = err
                     res.status(500).send(error)
@@ -303,7 +303,7 @@ router.delete('/snack/del/:id',passport.authenticate('jwt',{ session : false }) 
         if(err){
             res.status(500).send(err);
         }else{
-            Snack.remove(query, function(err){
+            Snack.deleteOne(query, function(err){
                 if(err){
                     error.snack = err
                     res.status(500).send(error)
