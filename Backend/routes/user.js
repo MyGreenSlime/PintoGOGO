@@ -37,7 +37,7 @@ const uploadProfile = multer({
 const validationRegisterInput =  require('../validator/register');
 const validationLoginInput = require('../validator/login');
 
-const User = require('../models/User');
+const User = require('../models/user');
 const Address = require('../models/address');
 const Order = require('../models/order')
 //register
