@@ -35,62 +35,69 @@ class Register extends Component {
       }
       {console.log("....",this.state.currentUser)}
       const {currentUser} = this.state;
-    return (
-      <div className='set-screen'> {/*bg*/}
-        <div className='register-box'> {/*register box*/}
-          <h2> SIGN UP </h2>
+      return (
+        <div className='set-screen'> {/*bg*/}
+        <div className='profile-set'>
+        <div className='row'>
+        <div className='profile-box col-sm'> {/*register box*/}
+        
+          <h2> PROFILE </h2>
+          {/* <br/> */}
+          <img className='userpic' src='/img/navbar/user.PNG' />
           <br/>
+          <br />
           <form noValidate onSubmit={this.handleSubmit}>
-          <div className='row'>
-            <div className='col-md-6 col-12'>
-              <div className='form-left'> {/*left form*/}
-                <div className='form-group row'>
-                  <label className='control-label text-form-left' htmlFor="Firstname" >Firstname*</label> 
-    	  	        <div className='col'>  
-										{currentUser.first_name}
-		    	        </div> 
-                </div>
-                <div className='form-group row'>
-					        <label className='control-label text-form-left' htmlFor="Lastname" >Lastname*</label>
-    	  	        <div className='col'>
-                    {currentUser.last_name}
-                  </div>
-					      </div>
-                <div className='form-group row'>
-						      <label className='control-label text-form-left' htmlFor="Username" >Username*</label>
-      	  	      <div className='col'>
-                  {currentUser.user_name}
-                   </div>
-					      </div>
+            <div className='form-group row'>
+              <label className='control-label text-form-left' htmlFor="Firstname" >Firstname:</label> 
+              <div className='col'>  
+                {currentUser.first_name}
+              </div> 
+            </div>
+            <div className='form-group row'>
+              <label className='control-label text-form-left' htmlFor="Lastname" >Lastname:</label>
+              <div className='col'>
+                {currentUser.last_name}
               </div>
             </div>
-            <div className="col-md-6 col-12">
-
-              <div className='form-right'> {/*right form*/}
-								<div className='form-group row'>
-			      			<label className='control-label text-form-left' htmlFor="Email">E-mail*</label>
-            	  	<div className='col'>
-                    {currentUser.email}
-                  </div>
-      					</div>
-                <div className='form-group row'>
-                  <label className='control-label text-form-left' htmlFor="PhoneNumber">Phone Number* &nbsp;&nbsp;</label>
-						      <div className='col'>
-                    {currentUser.phonenumber}
-                  </div>
+            <div className='form-group row'>
+              <label className='control-label text-form-left' htmlFor="Username" >Username:</label>
+              <div className='col'>
+              {currentUser.user_name}
                 </div>
-                <div className='form-group'>
-                  <label className='control-label text-form-right' htmlFor="Address" sm={12}>Address(Default)</label>
-                  <div className='col'>
-                    { currentUser.address[0].address }
-                  </div>
-                </div>
+            </div>
+            <div className='form-group row'>
+              <label className='control-label text-form-left' htmlFor="Email">E-mail:</label>
+              <div className='col'>
+                {currentUser.email}
               </div>
             </div>
-          </div>
+            <div className='form-group row'>
+              <label className='control-label text-form-left' htmlFor="PhoneNumber">Phone Number: &nbsp;&nbsp;</label>
+              <div className='col'>
+                {currentUser.phonenumber}
+              </div>
+            </div>
+            <div className='form-group row'>
+              <label className='control-label text-form-left' htmlFor="PhoneNumber">Address: &nbsp;&nbsp;</label>
+              <div className='col'>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle addr-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Address
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">{currentUser.address[0].address}</a>
+                  <a class="dropdown-item" href="#">Address 2</a>
+                  <a class="dropdown-item" href="#">Add Address</a>
+                </div>
+              </div> 
+              </div>
+            </div>
+            
 					<br/>
-					<button width='auto' type='submit' className='btn button-confirm'> COMFIRM </button>
+					<button width='auto' type='submit' className='btn button-confirm'> EDIT PROFILE </button>
           </form>
+          </div>
+        </div>
         </div>
       </div>
     

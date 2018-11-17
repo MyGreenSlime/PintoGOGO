@@ -1,9 +1,9 @@
-.all{
+.menudetail{
     font-family: 'Quicksand', sans-serif;
     overflow-x: hidden;
     padding-bottom: 5%;
 }
-.outside{
+.menudetail__outside{
     margin-top: 6%;
 }
 
@@ -13,14 +13,14 @@
     font-weight: bold;
 }
 
-.menuname{
+.menudetail__menuname{
     font-size: 25px;
     font-weight: bold;
     color: #7b7b7b;
     padding-bottom: 2%;
 }
 
-.foodimg{
+.menudetail__detail--foodimg{
     border-radius: 10px;
     text-align: center;
     padding-bottom: 10%;
@@ -32,13 +32,13 @@
     text-align: left;
 }
 
-.menudetail{
+.menudetail__detail{
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 2%;
 }
 
-.addtocartbutton{
+.menudetail__detail--addtocartbutton{
     background-color:#e4dac2;
     border: none;
     border-radius: 4px;
@@ -49,7 +49,7 @@
     cursor: pointer;
 }
 
-.addtocartbutton:hover{
+.menudetail__detail--addtocartbutton:hover{
     opacity: 0.8;
 }
 
@@ -77,6 +77,5 @@ a{
 }
 
 .price{
-    /* background-color: #efeeee; */
     font-weight: bold;
 }

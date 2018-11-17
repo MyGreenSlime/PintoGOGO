@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId
 var order = new Schema({
 
-    user_id : {type : ObjectId, ref : "User"},
+    user_id : {type : ObjectId, ref : "users"},
     isfinish : {type : Boolean, default : false},
     food_order : [{
         food_id : {type : ObjectId, ref : "Menu"},

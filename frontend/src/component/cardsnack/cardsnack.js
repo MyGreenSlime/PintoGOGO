@@ -19,6 +19,11 @@ class cardMenu extends Component {
     this.setState({
       clicked: this.state.clicked + 1
     });
+    axios.put('/api/orders/add/snack', {
+        snack_id: this.props.id,
+        snack_name: this.props.name,
+        price: this.props.price
+    })
     e.preventDefault();
   }
 
@@ -47,7 +52,7 @@ class cardMenu extends Component {
     const { isAuthenticated, user} = this.props.auth;
     const admin = (
         <React.Fragment>
-            <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
+            <div className="cartsnack__button__delete" onClick={this.deleteFromDb.bind(this)}>
                     <img src={"/img/other/delete.png"} height="20" />
                 </div>
         </React.Fragment>
@@ -55,17 +60,17 @@ class cardMenu extends Component {
     return (
         
         <section className="snack">
-            <div className="cardsnack__block">
+            <div className="cardsnack__image">
                 <Link to={'/snackdetail/'+this.props.id}>
-                    <img src={this.props.picture} width="200px" className="cardsnack__image"/>
+                    <img src={this.props.picture} width="70%" className="cardsnack__image--border"/>
                 </Link>
             </div>
-            <div className="textundersnack">
+            <div className="cardsnack__text">
                     <p>{this.props.name}<br/>
                     {this.props.calories} Kcal</p>
             </div>
             <div>
-                <div className="cart--snack__button" onClick={this.addToCartClick.bind(this)}>
+                <div className="cartsnack__cart" onClick={this.addToCartClick.bind(this)}>
                     <img src={"/img/other/cart.png"} height="20" />
                 </div>
                 {user.type ? admin : ""}
