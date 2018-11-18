@@ -52,8 +52,14 @@ router.post('/register', (req, res) => {
                 errors.user_name = 'Username already exists'
                 return res.status(400).json(errors)
             } else {
+                const address = req.body.address
                 const newAddress = new Address({
-                    address : req.body.address
+                    address : address.address,
+                    lat : address.lat,
+                    lng : address.lng,
+                    distance : address.distance,
+                    delivery_fee : address.distance*20,
+                    owner : req.body.user_name
                 })
                 const newUser = new User({
                     first_name : req.body.first_name,
@@ -194,9 +200,15 @@ router.put('/edit/profile', passport.authenticate('jwt',{ session : false }),upl
 router.put('/add/address', passport.authenticate('jwt',{ session : false }), (req, res) => {
     const errors = {};
     const tmpAddress = {};
+    const address = req.body.address
     const newAddress = new Address({
-        address : req.body.address
-    }) 
+        address : address.address,
+        lat : address.lat,
+        lng : address.lng,
+        distance : address.distance,
+        delivery_fee : address.distance*20,
+        owner : req.user.user_name
+    })
     newAddress.save()
         .then(
             address => {
