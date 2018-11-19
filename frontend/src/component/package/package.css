@@ -1,10 +1,48 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
 .set-frame-package
+{ 
+  /* margin-top: 70px  !important; */
+  margin: 70px auto 0 auto;
+  padding: 0 !important;
+}
+
+.set-frame-each-pks
 {
-  width: 64%;
-  padding-left:3%;
-  margin-top: 70px;
+  padding: 0 2% 0 2%;
+}
+
+.set-each-package
+{
+  margin: 30px auto 30px auto;
+  background-color: #f3ece7;
+  color: #7b7b7b;
+  padding: 3%;
+  border-radius: 12px;
+}
+
+.dis-grid
+{
+  display: grid;
+  grid-template-rows: 70% 30%;
+}
+
+.name-each-pks
+{
+  font-weight: bold;
+  margin: 0 auto 15px auto;
+  font-size: 18px;
+  border-radius: 50px;
+  /* background-color: #FAE5D3; */
+  /* width: 80%; */
+  padding: 8px;
+}
+
+.img-pack
+{
+  width: 80%;
+  border-radius: 10px;
+  margin: 10px 0 10px 0;
 }
 
 .nav-setting
@@ -28,16 +66,33 @@ a.active {
   border: 0ch;
 }
 
+.backtopks {
+  margin: 70px 0 0 1%;
+  font-weight: bold;
+}
+
 .package-box
 {
+  /* width: 63%; */
+  margin: 20px 1.5% 70px 1.5%; 
   background-color: #f3ece7;
-  border-radius: 0 12px 12px 12px;
+  border-radius: 12px;
   font-family: 'Quicksand', sans-serif; 
   font-size: 17px;
   color: #7b7b7b; 
   position: relative;
   padding: 17px 5% 17px 5% ;
   align-content: center;
+}
+
+.name-pks {
+  font-weight: bold;
+  margin: 15px auto 15px auto;
+  font-size: 20px;
+  border-radius: 50px;
+  background-color: #FAE5D3;
+  width: 65%;
+  padding: 8px;
 }
 
 .card-package
@@ -68,6 +123,15 @@ a.active {
   border-radius: 12px;
   width: 100%;
   cursor: pointer;
+}
+
+.view-pks
+{
+  color: #7b7b7b;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #e4dac2;
+  
 }
 
 .btn-set

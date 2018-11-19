@@ -118,20 +118,6 @@ class Packagemanage3days extends Component {
     return <div />;
   }
 
-  // onSendMenuDetail() {
-  //   const newAllDetail = [ 
-  //     this.state.day1_detail, 
-  //     this.state.day2_detail,
-  //     this.state.day3_detail
-  //   ];
-  //   this.setState({
-  //     all_detail: newAllDetail,
-  //     isLoaded: true,
-  //   },() => { 
-  //   console.log("this is from package")
-  //   })
-  // }
-
   add3DaysPackageToCart() {
     console.log("add to cart")
     const newPackage = {
@@ -173,7 +159,7 @@ class Packagemanage3days extends Component {
             <div className="col-sm card-package">
               DAY 1
               <div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -188,7 +174,7 @@ class Packagemanage3days extends Component {
                     {this.state.day1_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -208,7 +194,7 @@ class Packagemanage3days extends Component {
             <div className="col-sm card-package">
               DAY 2
               <div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -223,7 +209,7 @@ class Packagemanage3days extends Component {
                     {this.state.day2_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -247,7 +233,7 @@ class Packagemanage3days extends Component {
             <div className="col-sm card-last-package ">
               DAY 3
               <div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -262,7 +248,7 @@ class Packagemanage3days extends Component {
                     {this.state.day3_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(

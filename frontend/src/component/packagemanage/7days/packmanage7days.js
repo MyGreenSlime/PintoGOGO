@@ -192,12 +192,12 @@ export default class PackageManage5days extends Component {
           <div className="row">
             <div className="col-sm card-package">
               DAY 1<div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day1_img", "day1_detail", "isReadyToShow", 0, 0)}>
                     {this.state.day1_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day1_img", "day1_detail", "isReadyToShow", 1, 1)}>
                     {this.state.day1_img[1]}
                   </DropTarget>
@@ -206,12 +206,12 @@ export default class PackageManage5days extends Component {
             </div>
             <div className="col-sm card-package">
               DAY 2<div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 									<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day2_img", "day2_detail", "isReadyToShow", 0, 2)}>
                     {this.state.day2_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day2_img", "day2_detail", "isReadyToShow", 1, 3)}>
                     {this.state.day2_img[1]}
                   </DropTarget>
@@ -223,12 +223,12 @@ export default class PackageManage5days extends Component {
           <div className="row">
             <div className="col-sm card-package">
               DAY 3<div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day3_img", "day3_detail", "isReadyToShow", 0, 4)}>
                     {this.state.day3_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day3_img", "day3_detail", "isReadyToShow", 1, 5)}>
                     {this.state.day3_img[1]}
                   </DropTarget>
@@ -237,12 +237,12 @@ export default class PackageManage5days extends Component {
             </div>
             <div className="col-sm card-package">
               DAY 4<div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day4_img", "day4_detail", "isReadyToShow", 0, 6)}>
                     {this.state.day4_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day4_img", "day4_detail", "isReadyToShow", 1,7)}>
                     {this.state.day4_img[1]}
                   </DropTarget>
@@ -254,12 +254,12 @@ export default class PackageManage5days extends Component {
           <div className="row">
             <div className="col-sm card-package">
               DAY 5<div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day5_img", "day5_detail", "isReadyToShow", 0,8)}>
                     {this.state.day5_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day5_img", "day5_detail", "isReadyToShow", 1,9)}>
                     {this.state.day5_img[1]}
                   </DropTarget>
@@ -268,12 +268,12 @@ export default class PackageManage5days extends Component {
             </div>
             <div className="col-sm card-package">
               DAY 6<div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day6_img", "day6_detail", "isReadyToShow", 0, 10)}>
                     {this.state.day6_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day6_img", "day6_detail", "isReadyToShow", 1, 11)}>
                     {this.state.day6_img[1]}
                   </DropTarget>
@@ -286,12 +286,12 @@ export default class PackageManage5days extends Component {
             <div className="col-3-sm col-set" />
             <div className="col-sm card-last-package ">
               DAY 7<div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day7_img", "day7_detail", "isReadyToShow", 0, 12)}>
                     {this.state.day7_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
 								<DropTarget targetKey="menu" onHit={setMenuDrop.bind(this, "day7_img", "day7_detail", "isReadyToShow", 1, 13)}>
                     {this.state.day7_img[1]}
                   </DropTarget>

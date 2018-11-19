@@ -10,8 +10,8 @@ class Package extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pack: <Package5days/>,
-      day: 5,
+      pack: <Package3days/>,
+      day: 3,
   } 
 
     this.dayComponents = {
