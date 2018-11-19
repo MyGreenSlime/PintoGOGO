@@ -3,13 +3,13 @@
 .login__text {
   margin-bottom: 30px;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 200%;
   font-family: "Quicksand", sans-serif;
 }
 
-.login__text--box {
-  font-family: "Quicksand", sans-serif;
-  width: 100%;
+input[type=text], input[type=password] {
+    left: 50%;
+    width: 105%;
 }
 
 .submit__login--button {
@@ -18,11 +18,11 @@
   border-radius: 10px;
   font-weight: bold;
   padding: 5px;
-  width: 45%;
+  width: 50%;
   min-width: 100px;
   font-family: "Quicksand", sans-serif;
   height: auto;
-  margin: 10%; 
+  margin-bottom: 5%;
 }
 
 .submit__login--button:hover {
