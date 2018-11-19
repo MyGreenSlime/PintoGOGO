@@ -1,12 +1,54 @@
 import React, { Component } from "react";
 import "../payment/style-payment.css";
+import axios from "axios";
 
 export default class Payment extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      bill: null,
+      isLoaded: false
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("/api/bills/current")
+      .then(res => {
+        this.setState({
+          bill: res.data,
+          isLoaded: true
+        });
+      })
+      .then(() => {
+        console.log("whole bill: ", this.state.bill);
+        console.log("order: ", this.state.bill.order);
+        console.log(
+          "food name: ",
+          this.state.bill.order.food_order[0].food_name
+        );
+      });
+  }
+
+  showMenuList() {
+    let items;
+    if (!this.state.bill.order.food_order) {
+      items = <div />;
+    } else {
+      items = this.state.bill.order.food_order;
+      items.map(it => <p>{it.food_name}</p>);
+    }
+    return items;
   }
 
   render() {
+    const { bill, isLoaded } = this.state;
+
+    if (!!!isLoaded) {
+      return <React.Fragment />;
+    }
+
+    console.log("here", this.state.bill);
     return (
       <React.Fragment>
         <div className="container set-screen-payment">
@@ -14,24 +56,52 @@ export default class Payment extends Component {
             <div className="card card-form card__payment">
               <div className="card-body">
                 <h2 className="txt__title">Order Summary</h2>
+                <div className="row">
+                  <div className="col">
+                    <p />
+                  </div>
+                  <div className="col col--middle">
+                    <p>Amount</p>
+                  </div>
+                  <div className="col col--right">
+                    <p>Price (Baht)</p>
+                  </div>
+                </div>
+                <div className="row">
+                  {bill.order.food_order.map(it => (
+                    <div className="row" style={{ width: "100%" }}>
+                      <div className="col">
+                        <p>{it.food_name}</p>
+                      </div>
+                      <div className="col col--middle">
+                        <p>{it.amount}</p>
+                      </div>
+                      <div className="col col--right">
+                        <p>{it.price}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <br />
                 <p>Choose Address</p>
 
                 <div className="dropdown box__addr">
                   <button
-                    class="btn btn-block dropdown-toggle dd__addr"
+                    ref="toggleInput"
+                    className="btn btn-block dropdown-toggle dd__addr"
                     type="button"
                     data-toggle="dropdown"
                   >
                     Selected
                   </button>
-                  <div class="dropdown-menu btn-block">
-                    <a class="dropdown-item" href="#">
+                  <div className="dropdown-menu btn-block">
+                    <a className="dropdown-item" href="#">
                       Link One
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Link Two
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Link Three
                     </a>
                   </div>
@@ -39,10 +109,13 @@ export default class Payment extends Component {
 
                 <div className="row">
                   <div className="col">
-                    <p>food cost</p>
+                    <p>Food cost</p>
+                  </div>
+                  <div className="col col--middle">
+                    <p>{bill.order_cost}</p>
                   </div>
                   <div className="col col--right">
-                    <p>baht</p>
+                    <p>Baht</p>
                   </div>
                 </div>
                 <div className="row">
@@ -50,7 +123,7 @@ export default class Payment extends Component {
                     <p>Distance</p>
                   </div>
                   <div className="col col--right">
-                    <p>kilometer</p>
+                    <p>Kilometer</p>
                   </div>
                 </div>
                 <div className="row">
@@ -58,15 +131,7 @@ export default class Payment extends Component {
                     <p>Delivery Fee</p>
                   </div>
                   <div className="col col--right">
-                    <p>baht</p>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <p>Promo Code</p>
-                  </div>
-                  <div className="col col--right">
-                    <input type="text" class="form-control form-control-lg" />
+                    <p>Baht</p>
                   </div>
                 </div>
                 <div className="row txt__total">
@@ -74,11 +139,11 @@ export default class Payment extends Component {
                     <p>Order Total</p>
                   </div>
                   <div className="col col--right">
-                    <p>baht</p>
+                    <p>Baht</p>
                   </div>
                 </div>
                 <div className="row box__confirm">
-                  <button class="btn btn-lg button__confirm" type="button">
+                  <button className="btn btn-lg button__confirm" type="button">
                     Confirm Order
                   </button>
                 </div>

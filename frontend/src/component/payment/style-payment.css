@@ -41,6 +41,11 @@
   font-weight: bold;
 }
 
+.col--middle {
+  text-align: center;
+  padding-left: 200px;
+}
+
 .col--right {
   text-align: right;
 }
