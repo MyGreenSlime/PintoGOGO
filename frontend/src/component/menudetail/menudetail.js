@@ -39,17 +39,15 @@ class MenuDetail extends Component {
         const { isAuthenticated, user} = this.props.auth;
         const users = (
             <div className="row justify-content-center">
-                            <button type="button" className="addtocartbutton">ADD TO CART</button>
+                <button type="button" className="menudetail__detail--addtocartbutton">ADD TO CART</button>
             </div>
         )
         const admin = (
             <React.Fragment>
-                {/* <div className="menudetail__edit__button edit--menu__button"> */}
-                    <div className="row justify-content-center">
-                        <a href={'/editmenudetail/'+ this.state.food._id}>
-                        <button type="button" className="addtocartbutton">EDIT CART</button></a>
-                    </div>
-                {/* </div> */}
+                <div className="row justify-content-center">
+                    <a href={'/editmenudetail/'+ this.state.food._id}>
+                    <button type="button" className="menudetail__detail--addtocartbutton">EDIT CART</button></a>
+                </div>
             </React.Fragment>
         )
         if(!this.state.isLoaded){
@@ -58,8 +56,8 @@ class MenuDetail extends Component {
         return <React.Fragment>
             <div className="menudetail">
                 <div className="row menudetail__outside">
-                    <div className="col-3 homebutton">
-                        <img src="/img/other/left-arrow.png" height="20px" />
+                    <div className="col-3 menudetail__homebutton">
+                        <img src="/img/other/left-arrow.png" alt="left arrow icon" height="20px" />
                         <a href="/">
                             BACK TO HOMEPAGE
                         </a>
@@ -70,29 +68,24 @@ class MenuDetail extends Component {
                         {this.state.food.menu_name}
                     </div>
                 </div>
-                <div className="line" />
-
+                <div className="menudetail__detail--line" />
                 <div className="row menudetail__detail">
-                    <div className="col-5">
+                    <div className="col-5 ">
                         <img src={"\\"+this.state.food.img_url} width="80%" className="menudetail__detail--foodimg" />
-                        <div className="row justify-content-center">
-                            <button type="button" className="menudetail__detail--addtocartbutton">ADD TO CART</button>
-                        </div>
-                        <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
                         {isAuthenticated? users : ""}
                         {user.type? admin : ""}
                     </div>
                     <div className="col">
-                        <div className="row descript">
+                        <div className="row menudetail_detail_description">
                             <p>{this.state.food.description}</p>
                         </div>
                         <div className='row'>
-                        <div className='col-9 cal'>
+                        <div className='col-9 menudetail__detail__calories'>
                             CALORIES
                         </div>
                             {this.state.food.calories} Kcal
                         </div>
-                        <div className="row line" /> 
+                        <div className="row menudetail__detail--line" /> 
                         <div className='row'>
                             <div className='col-9'>
                                 <p>FAT</p>
@@ -123,7 +116,7 @@ class MenuDetail extends Component {
                             </div>
                             <p> {this.state.food.protein} g</p>
                         </div>
-                        <div className='row price'>
+                        <div className='row menudetail__detail__price'>
                             <div className='col-9'>
                                 <p>PRICE</p>
                             </div>
@@ -131,16 +124,16 @@ class MenuDetail extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row bottomrow">
-                    <div className="col-4 bottomcol">
+                <div className="row menudetaiil__summary--row">
+                    <div className="col-4 menudetaiil__summary--col">
                         <p>{this.state.food.protein} G</p>
                         PROTEIN 
                     </div>
-                    <div className="col-4 bottomcol">
+                    <div className="col-4 menudetaiil__summary--col">
                         <p>{this.state.food.calories} G</p>
                         CALORIES 
                     </div>
-                    <div className="col-4 bottomcol">
+                    <div className="col-4 menudetaiil__summary--col">
                         <p> {this.state.food.carbohydrate} G</p>
                         CARBOHYDRATE 
                     </div>

@@ -46,35 +46,38 @@ class cardMenu extends Component {
     const { isAuthenticated, user} = this.props.auth;
     const users = (
       <div className="cartmenu__cart" onClick={this.addToCartClick.bind(this)}>
-              <img src={"/img/other/cart.png"} height="20" />
+          <img src={"/img/other/cart.png"} alt="cart icon" height="20" />
       </div>
     )
     const admin = (
-        <React.Fragment>
-            <div className="cartmenu__button__delete" onClick={this.deleteFromDb.bind(this)}>
-                <img src={"/img/other/delete.png"} height="20" />
-            </div>
-        </React.Fragment>
+      <React.Fragment>
+          <div className="cartmenu__button__delete" onClick={this.deleteFromDb.bind(this)}>
+              <img src={"/img/other/delete.png"} alt="delete icon" height="20" />
+          </div>
+      </React.Fragment>
     )
     return <section className="menu">
         {/* block__element--modify */}
         <div className="cardmenu__image">
             <Link to={'/menudetail/'+this.props.id}>
-              <img src={this.props.picture} width="70%" className="cardmenu__image--border" onClick={this.sendToMenuDetail.bind(this)} />
+              <img src={this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border" onClick={this.sendToMenuDetail.bind(this)} />
             </Link>
         </div>
 
-        <div className="cardmenu__text">
-          <p>
-            {this.props.name}<br/>
-            {this.props.calories} Kcal
-          </p>
-        </div>
+        <div className="row">
+          <div className="col cardmenu__text">
+            <p>
+              {this.props.name}<br/>
+              {this.props.calories} Kcal
+            </p>
+          </div>
 
-        <div>
-          {isAuthenticated? users : ""}
-          {user.type? admin : ""}
+          <div className="col">
+            {isAuthenticated? users : ""}
+            {user.type? admin : ""}
+          </div>
         </div>
+        
 
       </section>;
   }

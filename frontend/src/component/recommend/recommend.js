@@ -39,7 +39,7 @@ export default class Recommend extends Component {
           <b style={{fontSize: "20px"}}>Recommended</b>
           <div className="grid-recommend">
             <div>
-              <img className="img-rec" src={menus[1].img_url} />
+              <img className="img-rec" src={menus[1].img_url}/>
                {menus[1].menu_name}
             </div>
             <div>

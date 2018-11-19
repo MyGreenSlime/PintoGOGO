@@ -26,6 +26,10 @@ class EditMenuDetail extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChangeImage = this.handleChangeImage.bind(this)
     }
+    renderRedirect(){
+        window.location.reload();
+    }
+    
     handleChange(e) {
         this.setState({
             [e.target.name] : e.target.value
@@ -64,7 +68,7 @@ class EditMenuDetail extends Component {
        formData.append('cholesterol',this.state.cholesterol)
        formData.append('sodium',this.state.sodium)
        formData.append('description',this.state.description)
-        axios.post('/api/menus/food/edit/'+this.state.food._id, formData)
+        axios.put('/api/menus/food/edit/'+this.state.food._id, formData)
         .then(res => {
             this.setState({status : res.data})
         })
@@ -98,13 +102,13 @@ class EditMenuDetail extends Component {
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} className="imgpreview"/>);
+            $imagePreview = (<img src={imagePreviewUrl} className="editmenudetail__imgpreview"/>);
         }
         return <React.Fragment>
         <div className="all">
-            <div className="row outside">
-                <div className="col-3 homebutton">
-                    <img src="/img/other/left-arrow.png" height="20px" />
+            <div className="row menudetail__outside">
+                <div className="col-3 menudetail__homebutton">
+                    <img src="/img/other/left-arrow.png" alt="left arrow icon" height="20px" />
                     <a href="/">
                         BACK TO HOMEPAGE
                     </a>
@@ -113,27 +117,24 @@ class EditMenuDetail extends Component {
             </div>
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <div className ="row">
-                    <div className="col menuname">
-                    <input type="text" name="menu_name"className="form-control" placeholder={this.state.food.menu_name} 
-                    value={this.state.menu_name} onChange={this.handleChange} style={{width: "50%"}} required />
+                    <div className="col menudetail__menuname">
+                    <input type="text" name="menu_name"className="form-control menudetail__menuname--right" placeholder={this.state.food.menu_name} 
+                    value={this.state.menu_name} onChange={this.handleChange} style={{width: "40%"}} required />
                     </div>
                 </div>
                 <div className="line" />
 
-                <div className="row menudetail">
+                <div className="row menudetail__detail">
                     <div className="col-5">
                         {$imagePreview}
-                        {/* <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" /> */}
                         <input type="file" name="img" className="form-control" 
                             onChange={this.handleChangeImage} style={{width: "100%"}} />
                         <div className="row justify-content-center">
-                            <button type="submit" value="submit" className="addtocartbutton">SAVE CHANGE</button>
+                            <button type="submit" value="submit" className="menudetail__detail--addtocartbutton">SAVE CHANGE</button>
                         </div>
                     </div>
-
-                    
                     <div className="col">
-                        <div className="row descript">
+                        <div className="row menudetail_detail_description">
                             <textarea type="text" name="description" className="form-control" placeholder={this.state.food.description}
                             value={this.state.description} onChange={this.handleChange}/>
                         </div>

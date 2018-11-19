@@ -7,7 +7,7 @@
     margin-top: 6%;
 }
 
-.homebutton{
+.menudetail__homebutton{
     padding-left: 1.5%;
     font-size: 12px;
     font-weight: bold;
@@ -26,7 +26,7 @@
     padding-bottom: 10%;
 }
 
-.line{
+.menudetail__detail--line{
     border-top: 2px solid #999999;
     padding-bottom: 2%;
     text-align: left;
@@ -47,26 +47,27 @@
     width: 250px;
     height: 40px;
     cursor: pointer;
+    margin-top : 2%;
 }
 
 .menudetail__detail--addtocartbutton:hover{
     opacity: 0.8;
 }
 
-.descript{
+.menudetail_detail_description{
     text-align: left;
     padding-right: 10%;
     padding-bottom: 2%;
 }
 
-.cal{
+.menudetail__detail__calories{
     padding-bottom: 2%;
 }
-.bottomrow{
+.menudetaiil__summary--row{
     padding-top: 2%;
 }
 
-.bottomcol{
+.menudetaiil__summary--col{
     border-right: 2px solid #999999;
     height: 70px;
     font-weight: bold;
@@ -76,6 +77,6 @@ a{
     color: black;
 }
 
-.price{
+.menudetail__detail__price{
     font-weight: bold;
 }
