@@ -65,7 +65,6 @@ export default class Pack5 extends Component {
 				{this.createDivPackage(pk)}
 			</div>
 		);
-		console.log(typeof this.state.packages.data)
 
 		return (
 			<React.Fragment>

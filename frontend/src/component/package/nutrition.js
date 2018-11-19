@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import { Chart } from 'mdbreact';
 import './nutrition.css';
 import axios from 'axios';
 
@@ -18,10 +17,8 @@ export default class Nutrition extends Component {
     console.log("arrive nutrition")
         var url = window.location.href;
         var res = url.split("/");
-        // console.log(res[res.length-1]);
         axios.get("/api/packages/" + res[res.length-1])
         .then(res => {
-            // console.log(response);
             this.setState({
               isLoaded : true,
               packages: res.data,

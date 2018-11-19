@@ -4,6 +4,7 @@ import Package3days from './3days/pack3'
 import Package5days from './5days/pack5'
 import Package7days from './7days/pack7'
 import '../choicepackage/choicepackage.css'
+import './package.css'
  
 class Package extends Component {
   
@@ -32,7 +33,7 @@ class Package extends Component {
     const Package = this.dayComponents[day];
 		return (
       <React.Fragment>
-        <div className='set-frame-package'>
+        <div className='set-frame-pks'>
           <ChoicePackage onSetDay={this.setDay} />
           <Package />
         </div>
