@@ -9,13 +9,13 @@ export default class PackageManage5days extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			day1_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day2_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day3_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day4_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day5_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day6_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day7_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
+			day1_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank" />, <img className="card-img" src="../img/package/blank.PNG" alt="blank" />],
+			day2_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank" />, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day3_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day4_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day5_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day6_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day7_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
 			day1_detail: [],
 			day2_detail: [],
 			day3_detail: [],
