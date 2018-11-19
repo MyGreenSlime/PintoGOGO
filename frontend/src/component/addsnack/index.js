@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Button, FormGroup, Input} from "reactstrap";
 import "./style-addsnack.css";
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class Addsnack extends Component {
     constructor(props) {
