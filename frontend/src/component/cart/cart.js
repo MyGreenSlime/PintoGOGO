@@ -181,9 +181,6 @@ class Cart extends Component {
                 </button>
               </a>
             </div>
-            <a href="/bill">
-              <button className="btn button--confirm">CONFIRM</button>
-            </a>
           </div>
         </div>
       </React.Fragment>
