@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import Package3days from '../package/3days/A/pack3daysA';
-import Package5daysA from '../package/5days/A/pack5daysA';
 import './choicepackage.css';
 
 class ChoicePackage extends Component {

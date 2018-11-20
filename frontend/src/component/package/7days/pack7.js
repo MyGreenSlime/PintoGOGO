@@ -1,27 +1,75 @@
 import React, {Component} from 'react';
 import '../package.css';
-import Package7daysA from './A/pack7daysA'
-import Package7daysB from './B/pack7daysB'
+import axios from "axios";
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import Package7DaysDetail from './pack7DaysDetail.js'
 
 export default class Pack7 extends Component {
-	state = {  }
+	constructor(props) {
+    super(props);
+    this.state = {
+      packages: [],
+      isLoaded: false, 
+    }
+		this.createDivPackage = this.createDivPackage.bind(this);
+		this.sendToPackageDetail = this.sendToPackageDetail.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('api/packages/system/7days')
+    .then(res => {
+      this.setState ({
+        packages: res,
+        isLoaded: true,
+      });
+    })
+    .then(() => {console.log("package", this.state.packages.data)})
+  }
+
+  createDivPackage(curPack) {
+    let divpk = 
+    <React.Fragment>
+      <div className="set-each-package row">
+			<div className="col-sm-4">
+				<img className="img-pack" src={curPack.day_meal[0].meal_1.img_url} />
+			</div>
+			<div className="col-sm dis-grid">
+				<div>
+					<p className="name-each-pks">{curPack.name_package}</p>
+					<p>{curPack.description}</p>
+				</div>
+				<Link to={'/7days/'+curPack._id}>
+					<button className="btn view-pks" onClick={this.sendToPackageDetail.bind(this)}>VIEW PACKAGE</button>
+				</Link>
+			</div>
+      </div>
+		</React.Fragment>
+		return divpk;
+	}
+	
+	sendToPackageDetail() {	
+		return <div>
+			<Route path='/7days/:packageId' component={Package7DaysDetail} />
+			{console.log("send")}
+		</div>
+	}
+
 	render() {
+
+		if(!this.state.isLoaded){
+      return <div className="loader" />;         
+		}
+
+		const listPackages = this.state.packages.data.map((pk,index) => 
+			<div key={index}>
+				{this.createDivPackage(pk)}
+			</div>
+		);
+		console.log(typeof this.state.packages.data)
+
 		return (
 			<React.Fragment>
-        <nav className='nav-setting'>
-            <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                <a className="nav-item nav-link tab-setting active" id="nav-home-tab" data-toggle="tab" href="#navA" role="tab" aria-controls="nav-A" aria-selected="true">SET A</a>
-                <a className="nav-item nav-link tab-setting" id="nav-profile-tab" data-toggle="tab" href="#navB" role="tab" aria-controls="nav-B" aria-selected="false">SET B</a>
-            </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="navA" role="tabpanel" aria-labelledby="nav-home-tab">
-                <Package7daysA />
-            </div>
-            <div class="tab-pane fade" id="navB" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <Package7daysB />
-            </div>
-        </div>
+				{listPackages}
 			</React.Fragment>
 		);
 	}
