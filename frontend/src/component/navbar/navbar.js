@@ -9,9 +9,9 @@ import {
   NavLink
 } from "reactstrap";
 import "../navbar/style-navbar.css";
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/authActions';
+import propTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 class Navigationbar extends Component {
   constructor(props) {
     super(props);
@@ -39,15 +39,15 @@ class Navigationbar extends Component {
         <NavItem className="navbar__item">
           <NavLink href="/add/snack" className="navbar__link">
             ADD SNACK
-         </NavLink>
+          </NavLink>
         </NavItem>
         <NavItem className="navbar__item">
           <NavLink href="/add/menu" className="navbar__link">
             ADD FOOD
-         </NavLink>
+          </NavLink>
         </NavItem>
       </React.Fragment>
-    )
+    );
     const authLinkes = (
       <React.Fragment>
         <NavItem className="navbar__item">
@@ -56,42 +56,42 @@ class Navigationbar extends Component {
           </NavLink>
         </NavItem>
         <NavItem className="navbar__item">
-          <NavLink href="#" onClick={this.onLogoutClick.bind(this)} className="navbar__link">
+          <NavLink
+            href="#"
+            onClick={this.onLogoutClick.bind(this)}
+            className="navbar__link"
+          >
             LOG OUT
-                </NavLink>
+          </NavLink>
         </NavItem>
         <NavItem className="navbar__item">
           <NavLink href="/cart" className="navbar__link">
-            <img
-              src="../img/navbar/icon-cart2.png"
-              className="navbar__icon"
-            />
+            <img src="../img/navbar/icon-cart2.png" className="navbar__icon" />
           </NavLink>
         </NavItem>
       </React.Fragment>
-    )
+    );
 
     const guestLinkes = (
       <React.Fragment>
         <NavItem className="navbar__item">
           <NavLink href="/register" className="navbar__link">
             SIGN UP
-           </NavLink>
+          </NavLink>
         </NavItem>
         <NavItem className="navbar__item">
           <NavLink href="/login" className="navbar__link">
             LOG IN
-           </NavLink>
+          </NavLink>
         </NavItem>
       </React.Fragment>
-    )
+    );
     return (
       <div>
         <Navbar light expand="md" className="navbar fixed-top">
           <NavbarBrand href="/">PintoGogo</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-
             <Nav className="ml-auto">
               {user.type ? forAdmin : ""}
               {isAuthenticated ? authLinkes : guestLinkes}
@@ -105,11 +105,13 @@ class Navigationbar extends Component {
 Navigationbar.propTypes = {
   logoutUser: propTypes.func.isRequired,
   auth: propTypes.object.isRequired
-}
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth
-})
+});
 
-
-export default connect(mapStateToProps, { logoutUser })(Navigationbar);
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navigationbar);
