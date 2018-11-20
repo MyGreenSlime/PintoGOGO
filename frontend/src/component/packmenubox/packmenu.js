@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import './style-packmenu.css'
-import { DragDropContainer, DropTarget } from "react-drag-drop-container"
+import { DragDropContainer } from "react-drag-drop-container"
 
 class Packmenu extends Component {
 
@@ -47,8 +47,8 @@ class Packmenu extends Component {
   render() {
 
     const img_drag = this.state.menus.map((menu,index) => 
-      <React.Fragment>
-        <img src={menu.img_url} className="menu--image__drop"/>
+      <React.Fragment key={index}>
+        <img src={menu.img_url} className="menu--image__drop" alt={menu.menu_name}/>
       </React.Fragment>
     );
 
