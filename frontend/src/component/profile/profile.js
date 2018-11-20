@@ -38,8 +38,7 @@ class Register extends Component {
       return (
         <div className='set-screen'> {/*bg*/}
         <div className='profile-set'>
-        <div className='row'>
-        <div className='profile-box col-sm'> {/*register box*/}
+        <div className='profile-box'>
         
           <h2> PROFILE </h2>
           {/* <br/> */}
@@ -48,37 +47,49 @@ class Register extends Component {
           <br />
           <form noValidate onSubmit={this.handleSubmit}>
             <div className='form-group row'>
+            <div className='col-sm-6'>
               <label className='control-label text-form-left' htmlFor="Firstname" >Firstname:</label> 
-              <div className='col'>  
+              </div>
+              <div className='col-sm'>  
                 {currentUser.first_name}
               </div> 
             </div>
             <div className='form-group row'>
+            <div className='col-sm-6'>
               <label className='control-label text-form-left' htmlFor="Lastname" >Lastname:</label>
-              <div className='col'>
+              </div>
+              <div className='col-sm'>
                 {currentUser.last_name}
               </div>
             </div>
             <div className='form-group row'>
+            <div className='col-sm-6'>
               <label className='control-label text-form-left' htmlFor="Username" >Username:</label>
-              <div className='col'>
+              </div>
+              <div className='col-sm'>
               {currentUser.user_name}
                 </div>
             </div>
             <div className='form-group row'>
+            <div className='col-sm-6'>
               <label className='control-label text-form-left' htmlFor="Email">E-mail:</label>
+              </div>
               <div className='col'>
                 {currentUser.email}
               </div>
             </div>
             <div className='form-group row'>
+            <div className='col-sm-6'>
               <label className='control-label text-form-left' htmlFor="PhoneNumber">Phone Number: &nbsp;&nbsp;</label>
+              </div>
               <div className='col'>
                 {currentUser.phonenumber}
               </div>
             </div>
             <div className='form-group row'>
+            <div className='col-sm-6'>
               <label className='control-label text-form-left' htmlFor="PhoneNumber">Address: &nbsp;&nbsp;</label>
+              </div>
               <div className='col'>
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle addr-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,7 +108,6 @@ class Register extends Component {
 					<button width='auto' type='submit' className='btn button-confirm'> EDIT PROFILE </button>
           </form>
           </div>
-        </div>
         </div>
       </div>
     

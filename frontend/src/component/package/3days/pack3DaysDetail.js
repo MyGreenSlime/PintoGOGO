@@ -41,6 +41,11 @@ export default class Package3DaysDetail extends Component {
 		axios.put("/api/orders/add/package",pack3A);
 	}
 
+	componentDidUpdate() {
+		const $ = window.$;
+		$('[data-toggle="tooltip"]').tooltip();
+	}
+
 	render() {
 		const {	packages,
 						isLoaded, 
