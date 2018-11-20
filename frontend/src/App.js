@@ -24,6 +24,7 @@ import Cart from './component/cart/cart.js'
 import MenuDetail from './component/menudetail/menudetail.js'
 import SnackDetail from './component/snackdetail/snackdetail.js'
 import EditMenuDetail from './component/editmenudetail/editmenudetail.js'
+import EditSnackDetail from './component/editsnackdetail/editsnackdetail.js'
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
 import Package from "./component/package/package.js";
@@ -37,7 +38,7 @@ import Pack7days from "./component/package/7days/pack7DaysDetail.js"
 import Login from "./component/login/mainlogin/login";
 
 const Home = () => {
-  return [<Carousel />, <Choice />];
+  return [<Carousel />, <Recommend/>, <Choice />];
 };
 
 //Check for token
@@ -90,6 +91,7 @@ class App extends Component {
                 <Route path="/7days" component={Pack7days} />
                 <Route path="/snackdetail" component={SnackDetail} />
                 <Route path="/editmenudetail" component={EditMenuDetail} />
+                <Route path="/editsnackdetail" component={EditSnackDetail} />
                 <Route paht="/bill" component={Payment}/>
                 <Route path="*" component={UnderConstruct}/>
               </Switch>

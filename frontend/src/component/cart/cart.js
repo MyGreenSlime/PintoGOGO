@@ -120,37 +120,36 @@ class Cart extends Component {
     if (!this.state.isLoaded) {
       return <div className="loader" />;
     }
-    return (
-      <React.Fragment>
-        <div className="set-screen-cart">
-          <div className="linkbutton">
-            <div className="imgcart">
-              <a href="/">
-                <img src="/img/cart/plan.png" height="40px" />
-              </a>
-              <p>PLAN</p>
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/cart.png" height="40px" />
-              <p>CART</p>
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/payment.png" height="40px" />
-              <p>PAYMENT</p>
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/delivery.png" height="40px" />
-              <p>DELIVERY</p>
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/enjoy.png" height="40px" />
-              <p>ENJOY</p>
-            </div>
+    return <React.Fragment>
+      <div className="set-screen-cart">
+        <div className="linkbutton">
+          <div className="imgcart">
+            <a href="/">
+              <img src="/img/cart/plan.png" alt="plan icon" height="40px" />
+            </a>
+            <p>PLAN</p>
           </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/cart.png" alt="cart icon" height="40px" />
+            <p>CART</p>
+          </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/payment.png"  alt="payment icon" height="40px" />
+            <p>PAYMENT</p>
+          </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/delivery.png" alt="delivery icon" height="40px" />
+            <p>DELIVERY</p>
+          </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/enjoy.png" alt="enjoy icon" height="40px" />
+            <p>ENJOY</p>
+          </div>
+        </div>
 
           <div className="cartbox">
             <div className="header">
@@ -182,10 +181,13 @@ class Cart extends Component {
                 </button>
               </a>
             </div>
+            <a href="/bill">
+              <button className="btn button--confirm">CONFIRM</button>
+            </a>
           </div>
         </div>
       </React.Fragment>
-    );
+    
   }
 }
 export default Cart;
