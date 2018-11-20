@@ -11,11 +11,12 @@ class Cart extends Component {
     this.state = {
       fromChild: "",
       order: null,
-      isLoaded: false,
+      isLoaded: false
     };
-    this.createCardCartFood = this.createCardCartFood.bind(this)
-    this.createCardCartSnack = this.createCardCartSnack.bind(this)
-    this.createCardPackage = this.createCardPackage.bind(this)
+    this.createCardCartFood = this.createCardCartFood.bind(this);
+    this.createCardCartSnack = this.createCardCartSnack.bind(this);
+    this.createCardPackage = this.createCardPackage.bind(this);
+    this.confirmButtonClicked = this.confirmButtonClicked.bind(this);
   }
 
   handleData(data, price, id) {
@@ -41,86 +42,114 @@ class Cart extends Component {
         });
       })
       .then(() => {
-          console.log("order ", this.state.order);
+        console.log("order ", this.state.order);
       });
   }
 
   createCardCartFood() {
-    let card_food
-    if(!this.state.order.food_order){
-      card_food = <div></div>
-    }
-    else{
+    let card_food;
+    if (!this.state.order.food_order) {
+      card_food = <div />;
+    } else {
       card_food = this.state.order.food_order.map((ord, index) => (
-        <CardCart handlerFromParant={this.handleData} picture={ord.food_id.img_url} name={ord.food_name} price={ord.price} amount={ord.amount} id={ord.food_id._id} type_order="food"/>
+        <CardCart
+          handlerFromParant={this.handleData}
+          picture={ord.food_id.img_url}
+          name={ord.food_name}
+          price={ord.price}
+          amount={ord.amount}
+          id={ord.food_id._id}
+          type_order="food"
+        />
       ));
     }
     return card_food;
   }
 
-  createCardCartSnack(){
-    let card_snack
-    if(!this.state.order.snack_order){
-      card_snack = <div></div>
-    }
-    else{
-      card_snack = this.state.order.snack_order.map((ord,index) => (
-        <CardCart handlerFromParant={this.handleData} picture={ord.snack_id.img_url} name={ord.snack_name} price={ord.price} amount={ord.amount} id={ord.snack_id._id} type_order="snack"/>      
+  createCardCartSnack() {
+    let card_snack;
+    if (!this.state.order.snack_order) {
+      card_snack = <div />;
+    } else {
+      card_snack = this.state.order.snack_order.map((ord, index) => (
+        <CardCart
+          handlerFromParant={this.handleData}
+          picture={ord.snack_id.img_url}
+          name={ord.snack_name}
+          price={ord.price}
+          amount={ord.amount}
+          id={ord.snack_id._id}
+          type_order="snack"
+        />
       ));
     }
     return card_snack;
   }
 
-  createCardPackage(){
-    let card_package
-    if(!this.state.order.package_order){
-      card_package = <div></div>
-    }
-    else{
-      card_package = this.state.order.package_order.map((ord,index) => (
-        <CardCart handlerFromParant={this.handleData} picture={""} name = {ord.package_id.type + "days package"} price={ord.package_id.price} amount={ord.amount} id={ord.package_id._id} type_order="package"/>      
+  createCardPackage() {
+    let card_package;
+    if (!this.state.order.package_order) {
+      card_package = <div />;
+    } else {
+      card_package = this.state.order.package_order.map((ord, index) => (
+        <CardCart
+          handlerFromParant={this.handleData}
+          picture={""}
+          name={ord.package_id.type + "days package"}
+          price={ord.package_id.price}
+          amount={ord.amount}
+          id={ord.package_id._id}
+          type_order="package"
+        />
       ));
     }
     return card_package;
-    
   }
 
+  confirmButtonClicked() {
+    var newBill = {
+      order_id: this.state.order._id,
+      totalprice: this.state.fromChild
+    };
+    axios
+      .put("/api/orders/tobill", newBill)
+      .then(res => console.log("add to bill: ", res));
+  }
 
   render() {
-    if(!this.state.isLoaded){
-      return <div className="loader"/>
+    if (!this.state.isLoaded) {
+      return <div className="loader" />;
     }
     return <React.Fragment>
-        <div className="set-screen-cart">
-          <div className="linkbutton">
-            <div className="imgcart">
-              <a href="/">
-                <img src="/img/cart/plan.png" height="40px" />
-              </a>
-              <p>PLAN</p>
-              {/* <a href="/">PLAN</a> */}
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/cart.png" height="40px" />
-              <p>CART</p>
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/payment.png" height="40px" />
-              <p>PAYMENT</p>
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/delivery.png" height="40px" />
-              <p>DELIVERY</p>
-            </div>
-            <img src="/img/cart/arrow.png" height="30px" />
-            <div className="imgcart">
-              <img src="/img/cart/enjoy.png" height="40px" />
-              <p>ENJOY</p>
-            </div>
+      <div className="set-screen-cart">
+        <div className="linkbutton">
+          <div className="imgcart">
+            <a href="/">
+              <img src="/img/cart/plan.png" alt="plan icon" height="40px" />
+            </a>
+            <p>PLAN</p>
           </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/cart.png" alt="cart icon" height="40px" />
+            <p>CART</p>
+          </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/payment.png"  alt="payment icon" height="40px" />
+            <p>PAYMENT</p>
+          </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/delivery.png" alt="delivery icon" height="40px" />
+            <p>DELIVERY</p>
+          </div>
+          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
+          <div className="imgcart">
+            <img src="/img/cart/enjoy.png" alt="enjoy icon" height="40px" />
+            <p>ENJOY</p>
+          </div>
+        </div>
 
           <div className="cartbox">
             <div className="header">
@@ -137,8 +166,6 @@ class Cart extends Component {
               {this.createCardCartFood()}
               {this.createCardCartSnack()}
               {this.createCardPackage()}
-              {/* <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={100} amount={5} id='01'/>
-                    <CardCart handlerFromParant={this.handleData} picture='/img/food/ข้าวกะเพราหมูสับ.jpg' name="MENU NAME" price={120} amount={5} id='02'/> */}
             </div>
             <hr />
             <div>
@@ -146,12 +173,21 @@ class Cart extends Component {
                 <p>TOTAL: {this.state.fromChild}</p>
               </div>
               <a href="/bill">
-                <button className="btn button--confirm">CONFIRM</button>
+                <button
+                  className="btn button--confirm"
+                  onClick={this.confirmButtonClicked}
+                >
+                  CONFIRM
+                </button>
               </a>
             </div>
+            <a href="/bill">
+              <button className="btn button--confirm">CONFIRM</button>
+            </a>
           </div>
         </div>
-      </React.Fragment>;
+      </React.Fragment>
+    
   }
 }
 export default Cart;

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Menu from "../menu/menu";
-import Snack from "../snack/snack"
-import Package from '../package-home/package-home';
+import Snack from "../snack/snack";
+import Package from "../package-home/package-home";
 import "../choice/style-choice.css";
 
 export default class Choice extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       isMenu: true,
       isPackage: false,
@@ -48,20 +49,20 @@ export default class Choice extends Component {
     return color;
   }
 
-  renderChoice(){
+  renderChoice() {
     if (this.state.isMenu) {
       return (
         <div>
           <Menu />
         </div>
       );
-    }
-    else if (this.state.isPackage) {
-      return( <div>
-          <Package/>
-      </div>);
-    }
-    else if (this.state.isSnack) {
+    } else if (this.state.isPackage) {
+      return (
+        <div>
+          <Package />
+        </div>
+      );
+    } else if (this.state.isSnack) {
       return (
         <div>
           <Snack />
@@ -73,35 +74,38 @@ export default class Choice extends Component {
   render() {
     return (
       <React.Fragment>
-      <div className="choice-box">
-        <div className="grid-choice">
-          <div className="col">
-            <img className="img-choice" src="../img/choice/choice_1.png" />
-            <button
-              className={this.setActiveButton(this.state.isMenu)}
-              onClick={this.changeRenderToMenu}>
-              MENU
-            </button>
-          </div>
-          <div className="col">
-            <img className="img-choice" src="../img/choice/choice_2.png" />
-            <button
-              className={this.setActiveButton(this.state.isPackage)}
-              onClick={this.changeRenderToPackage}>
-              PACKAGE
-            </button>
-          </div>
-          <div className="col">
-            <img className="img-choice" src="../img/choice/choice_3.png" />
-            <button
-              className={this.setActiveButton(this.state.isSnack)}
-              onClick={this.changeRenderToSnack}>
-              SNACK
-            </button>
+        <div className="choice-box">
+          <div className="row">
+            <div className="col-md-4">
+              <img className="img-choice" src="../img/choice/choice_1.png" />
+              <button
+                className={this.setActiveButton(this.state.isMenu)}
+                onClick={this.changeRenderToMenu}
+              >
+                MENU
+              </button>
+            </div>
+            <div className="col-md-4">
+              <img className="img-choice" src="../img/choice/choice_2.png" />
+              <button
+                className={this.setActiveButton(this.state.isPackage)}
+                onClick={this.changeRenderToPackage}
+              >
+                PACKAGE
+              </button>
+            </div>
+            <div className="col-md-4">
+              <img className="img-choice" src="../img/choice/choice_3.png" />
+              <button
+                className={this.setActiveButton(this.state.isSnack)}
+                onClick={this.changeRenderToSnack}
+              >
+                SNACK
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      {this.renderChoice()}
+        {this.renderChoice()}
       </React.Fragment>
     );
   }

@@ -1,7 +1,6 @@
 import React, { Component} from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux';
-
 import '../menudetail/menudetail.css';
 
 class SnackDetail extends Component {
@@ -9,7 +8,8 @@ class SnackDetail extends Component {
         super(props);
         this.findIdFromUrl = this.findIdFromUrl.bind(this)
         this.state={
-            food: {}
+            food: {},
+            isLoaded : false
         };
 
     }
@@ -18,14 +18,10 @@ class SnackDetail extends Component {
         var res = url.split("/");
         axios.get("/api/menus/snack/" + res[res.length-1])
         .then(response => {
-            // console.log(response);
             this.setState({
-
+              isLoaded : true,
               food: response.data
-            },()=> {
-                console.log(this.state.food)
             });
-            // console.log(this.state.food.menu_name);
         })
     }
 
@@ -42,25 +38,24 @@ class SnackDetail extends Component {
     render(){
         const { isAuthenticated, user} = this.props.auth;
         const users = (
-            <React.Fragment>
-                <div className="row justify-content-center">
-                            <button type="button" className="addtocartbutton">ADD TO CART</button>
-                </div>
-            </React.Fragment>
+            <div className="row justify-content-center">
+                <button type="button" className="menudetail__detail--addtocartbutton">ADD TO CART</button>
+            </div>
         )
         const admin = (
             <React.Fragment>
-                <div className="edit--menu__button">
-                    <div className="row justify-content-center">
-                        <a href={'/editmenudetail/'+ this.state.food._id}>
-                        <button type="button" className="addtocartbutton">EDIT CART</button></a>
-                    </div>
+                <div className="row justify-content-center">
+                    <a href={'/editmenudetail/'+ this.state.food._id}>
+                    <button type="button" className="menudetail__detail--addtocartbutton">EDIT CART</button></a>
                 </div>
             </React.Fragment>
         )
+        if(!this.state.isLoaded){
+            return <div className="loader"/>
+        }
         return <React.Fragment>
-            <div className="all">
-                <div className="row outside">
+            <div className="menudetail">
+                <div className="row menudetail__outside">
                     <div className="col-3 homebutton">
                         <img src="/img/other/left-arrow.png" height="20px" />
                         <a href="/">
@@ -70,23 +65,19 @@ class SnackDetail extends Component {
                     </div>
                 </div>
                 <div className ="row">
-                    <div className="col menuname">
+                    <div className="col menudetail__menuname">
                         {this.state.food.snack_name}
                     </div>
                 </div>
-                <div className="line" />
-
-                <div className="row menudetail">
+                <div className="menudetail__detail--line" />
+                <div className="row menudetail__detail">
                     <div className="col-5">
-                        <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
-                        <div className="row justify-content-center">
-                            <button type="button" className="addtocartbutton">ADD TO CART</button>
-                        </div>
+                        <img src={"\\"+this.state.food.img_url} width="80%" className="menudetail__detail--foodimg" />
                         {isAuthenticated? users : ""}
                         {user.type? admin : ""}
                     </div>
                     <div className="col">
-                        <div className="row descript">
+                        <div className="row menudetail_detail_description">
                             <p>{this.state.food.description}</p>
                         </div>
                         <div className='row'>
@@ -95,7 +86,7 @@ class SnackDetail extends Component {
                         </div>
                             {this.state.food.calories} Kcal
                         </div>
-                        <div className="row line" /> 
+                        <div className="row menudetail__detail--line" /> 
                         <div className='row'>
                             <div className='col-9'>
                                 <p>FAT</p>
@@ -126,18 +117,24 @@ class SnackDetail extends Component {
                             </div>
                             <p> {this.state.food.protein} g</p>
                         </div>
+                        <div className='row menudetail__detail__price'>
+                            <div className='col-9'>
+                                <p>PRICE</p>
+                            </div>
+                            <p> {this.state.food.price} ฿</p>
+                        </div>
                     </div>
                 </div>
-                <div className="row bottomrow">
-                    <div className="col-4 bottomcol">
+                <div className="row menudetaiil__summary--row">
+                    <div className="col-4 menudetaiil__summary--col">
                         <p>{this.state.food.protein} G</p>
                         PROTEIN 
                     </div>
-                    <div className="col-4 bottomcol">
+                    <div className="col-4 menudetaiil__summary--col">
                         <p>{this.state.food.calories} G</p>
                         CALORIES 
                     </div>
-                    <div className="col-4 bottomcol">
+                    <div className="col-4 menudetaiil__summary--col">
                         <p> {this.state.food.carbohydrate} G</p>
                         CARBOHYDRATE 
                     </div>

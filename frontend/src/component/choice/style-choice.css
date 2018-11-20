@@ -1,20 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
+.choice-box {
+  background-color: #f3ece7;
+  padding: 20px 14% 20px 14%;
+}
+
 .button {
-  width: 140px;
+  width: 60%;
   height: 46px;
   border: none;
   color: #7b7b7b;
+  margin-bottom: 20px;
   font-size: 20px;
   font-weight: bold;
   background-color: #e4dac2;
   cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.grid-choice {
-  display: grid;
-  grid-template-columns: auto auto auto;
 }
 
 .btn--active,
@@ -22,12 +22,7 @@
   background-color: #d3c4be;
 }
 
-.choice-box {
-  background-color: #f3ece7;
-  padding: 20px 14% 20px 14%;
-}
-
 .img-choice {
-  width: 75%;
+  width: 60%;
   margin: 7%;
 }
