@@ -75,22 +75,21 @@ class CardCart extends Component {
         <div className="cardcartbox">
           <hr />
           <div className="row rowcard">
-            <div className="col-3 img__block">
+            <div className="col-md-3 col-5 img__block">
               <img
                 src={this.props.picture}
                 width="60%"
                 className="cardcart__image"
               />
             </div>
-            <div className="col-3 menuname__block">
+            <div className="col-md-3 col-7 menuname__block">
               <p>{this.props.name}</p>
             </div>
-            <div className="col-3 editamount">
+            <div className="col-md-3 col-9 editamount">
               <div className="row">
                 <div
                   className="minusbutton "
-                  onClick={this.decrement.bind(this)}
-                >
+                  onClick={this.decrement.bind(this)}>
                   <img src={"/img/cart/minus.png"} width="20px" />
                 </div>
                 <div className="form-group">
@@ -100,7 +99,7 @@ class CardCart extends Component {
                     placeholder={this.state.inputField}
                     value={this.state.inputField}
                     onChange={this.handleChange}
-                    style={{ width: "50px", height: "30px" }}
+                    style={{ width: "2rem", height: "30px" }}
                   />
                 </div>
                 <div className="addbutton" onClick={this.increment.bind(this)}>
@@ -108,7 +107,7 @@ class CardCart extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-3">
+            <div className="col-md-3 col-3 cardcart__editamount__price">
               <div className="menuprice">
                 <p>{this.props.price}</p>
               </div>

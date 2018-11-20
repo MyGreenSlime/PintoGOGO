@@ -30,6 +30,9 @@ class cardMenu extends Component {
   deleteFromDb(){
     axios.delete('/api/menus/food/del/'+ this.props.id)
     .then(res => console.log(res))
+    .then(() => {
+      this.props.onMenuCardDeleted(this.props.id);
+    });
       
   }
 
@@ -41,44 +44,42 @@ class cardMenu extends Component {
 
   render() { 
     const { isAuthenticated, user} = this.props.auth;
+    const users = (
+      <div className="cartmenu__cart" onClick={this.addToCartClick.bind(this)}>
+          <img src={"/img/other/cart.png"} alt="cart icon" height="20" />
+      </div>
+    )
     const admin = (
-        <React.Fragment>
-            <div className="delete--snack__button" onClick={this.deleteFromDb.bind(this)}>
-                <img src={"/img/other/delete.png"} height="20" />
-            </div>
-        </React.Fragment>
+      <React.Fragment>
+          <div className="cartmenu__button__delete" onClick={this.deleteFromDb.bind(this)}>
+              <img src={"/img/other/delete.png"} alt="delete icon" height="20" />
+          </div>
+      </React.Fragment>
     )
     return <section className="menu">
-        
-        <div className="cardmenu__block">
+        {/* block__element--modify */}
+        <div className="cardmenu__image">
             <Link to={'/menudetail/'+this.props.id}>
-              <img src={this.props.picture} width="70%" className="cardmenu__image" onClick={this.sendToMenuDetail.bind(this)} />
+              <img src={this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border" onClick={this.sendToMenuDetail.bind(this)} />
             </Link>
         </div>
 
-        <div className="textundermenu">
-          <p>
-            {this.props.name}<br/>
-            {this.props.calories} Kcal
-          </p>
-        </div>
-
-          <div>
-            <div className="cart--menu__button" onClick={this.addToCartClick.bind(this)}>
-              <img src={"/img/other/cart.png"} height="20" />
-            </div>
-            {user.type? admin : ""}
+        <div className="row">
+          <div className="col cardmenu__text">
+            <p>
+              {this.props.name}<br/>
+              {this.props.calories} Kcal
+            </p>
           </div>
 
-          {/* <div className="inline">
-                  <img src={"/img/other/cart.png"} height="20"/> 
-                      
-              </div> */}
-          {/* <div>
-                  <img src={"/img/other/cart.png"} height="20" /> 
-              </div> */}
-          {/* <p>total click: {this.state.clicked}</p> */}
-        </section>;
+          <div className="col">
+            {isAuthenticated? users : ""}
+            {user.type? admin : ""}
+          </div>
+        </div>
+        
+
+      </section>;
   }
 }
 

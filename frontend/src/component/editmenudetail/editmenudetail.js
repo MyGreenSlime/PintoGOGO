@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import axios from 'axios'
+import "../editmenudetail/editmenudetail.css";
 class EditMenuDetail extends Component {
     constructor(props){
         super(props);
@@ -13,35 +14,61 @@ class EditMenuDetail extends Component {
             carbohydrate : "",
             fat : "",
             img_url : "",
+            img : null,
             description : "",
             sodium : "",
             cholesterol : "",
-            status: 0
+            status: 0,
+            file: "",
+            imagePreviewUrl: ""
         };
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        // this.handleChangeImage = this.handleChangeImage.bind(this)
+        this.handleChangeImage = this.handleChangeImage.bind(this)
     }
+    renderRedirect(){
+        window.location.reload();
+    }
+    
     handleChange(e) {
         this.setState({
             [e.target.name] : e.target.value
         })
     }
+    handleChangeImage(e) {
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        
+        this.setState({
+            img : e.target.files[0]
+        },() => {
+            console.log(this.state.img)
+        })
+
+        reader.onloadend = () => {
+            this.setState({
+              file: file,
+              imagePreviewUrl: reader.result
+            });
+          }
+      
+        reader.readAsDataURL(file)
+    }
     
     handleSubmit(e) {
-        const menudetail = {
-            menu_name : this.state.menu_name,
-            price : this.state.price,
-            calories : this.state.calories,
-            protein : this.state.protein,
-            carbohydrate : this.state.carbohydrate,
-            fat : this.state.fat,
-            description : this.state.description,
-            sodium : this.state.sodium,
-            cholesterol : this.state.cholesterol,
-            img_url : this.state.img_url
-        }
-        axios.post('/api/menus/food/add', menudetail)
+        const formData = new FormData()
+       formData.append('img',this.state.img, this.state.img.name)
+       formData.append('img_url',this.state.food.img_url)
+       formData.append('menu_name',this.state.menu_name)
+       formData.append('calories',this.state.calories)
+       formData.append('price',this.state.price)
+       formData.append('protein',this.state.protein)
+       formData.append('carbohydrate',this.state.carbohydrate)
+       formData.append('fat',this.state.fat)
+       formData.append('cholesterol',this.state.cholesterol)
+       formData.append('sodium',this.state.sodium)
+       formData.append('description',this.state.description)
+        axios.put('/api/menus/food/edit/'+this.state.food._id, formData)
         .then(res => {
             this.setState({status : res.data})
         })
@@ -60,6 +87,10 @@ class EditMenuDetail extends Component {
             this.setState({
               food: response.data
             });
+        }).then(() => {
+            this.setState({
+                imagePreviewUrl : "\\"+this.state.food.img_url
+            })
         })
     }
 
@@ -68,109 +99,99 @@ class EditMenuDetail extends Component {
     }
 
     render(){
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+            $imagePreview = (<img src={imagePreviewUrl} className="editmenudetail__imgpreview"/>);
+        }
         return <React.Fragment>
         <div className="all">
-                <div className="row outside">
-                    <div className="col-3 homebutton">
-                        <img src="/img/other/left-arrow.png" height="20px" />
-                        <a href="/">
-                            BACK TO HOMEPAGE
-                        </a>
-                        
+            <div className="row menudetail__outside">
+                <div className="col-3 menudetail__homebutton">
+                    <img src="/img/other/left-arrow.png" alt="left arrow icon" height="20px" />
+                    <a href="/">
+                        BACK TO HOMEPAGE
+                    </a>
+                    
+                </div>
+            </div>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+                <div className ="row">
+                    <div className="col menudetail__menuname">
+                    <input type="text" name="menu_name"className="form-control menudetail__menuname--right" placeholder={this.state.food.menu_name} 
+                    value={this.state.menu_name} onChange={this.handleChange} style={{width: "40%"}} required />
                     </div>
                 </div>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div className ="row">
-                        <div className="col menuname">
-                        <input type="text" name="menu_name"className="form-control" placeholder={this.state.food.menu_name} 
-                        value={this.state.menu_name} onChange={this.handleChange} style={{width: "50%"}} required />
-                        </div>
-                    </div>
-                    <div className="line" />
+                <div className="line" />
 
-                    <div className="row menudetail">
-                        <div className="col-5">
-                            <img src={"\\"+this.state.food.img_url} width="80%" className="foodimg" />
-                            <input type="text" name="img_url" className="form-control" placeholder={this.state.food.img_url} 
-                            value={this.state.img_url} onChange={this.handleChange} style={{width: "100%"}} />
-                            <div className="row justify-content-center">
-                                <button type="submit" value="submit" className="addtocartbutton">SAVE CHANGE</button>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="row descript">
-                                <textarea type="text" name="description" className="form-control" placeholder={this.state.food.description}
-                                value={this.state.description} onChange={this.handleChange}/>
-                            </div>
-                            <div className='row'>
-                                <div className='col-9 cal'>
-                                    <p>CALORIES</p>
-                                </div>
-                                <input type="text" name="calories" className="form-control" placeholder={this.state.food.calories+" Kcal"} 
-                                value={this.state.calories} onChange={this.handleChange} style={{width: "20%"}} />
-                            </div>
-                            <div className="row line" /> 
-                            <div className='row'>
-                                <div className='col-9'>
-                                    <p>FAT</p>
-                                </div>
-                                <input type="text" name="fat" className="form-control" placeholder={this.state.food.fat+" mg"} 
-                                value={this.state.fat} onChange={this.handleChange} style={{width: "20%"}} />
-                            </div>
-                            <div className='row'>
-                                <div className='col-9'>
-                                    <p>CHOLESTEROL</p>
-                                </div>
-                                <input type="text" name="cholesterol" className="form-control" placeholder={this.state.food.cholesterol+" g"} 
-                                value={this.state.cholesterol} onChange={this.handleChange} style={{width: "20%"}} />
-                            </div>
-                            <div className='row'>
-                                <div className='col-9'>
-                                    <p>SODIUM</p>
-                                </div>
-                                <input type="text" name="sodium" className="form-control" placeholder={this.state.food.sodium+" mg"} 
-                                value={this.state.sodium} onChange={this.handleChange} style={{width: "20%"}} />
-                            </div>
-                            <div className='row'>
-                                <div className='col-9'>
-                                    <p>CARBOHYDRATE</p>
-                                </div>
-                                <input type="text" name="carbohydrate" className="form-control" placeholder={this.state.food.carbohydrate+" g"} 
-                                value={this.state.carbohydrate} onChange={this.handleChange} style={{width: "20%"}} />
-                            </div>
-                            <div className='row '>
-                                <div className='col-9'>
-                                    <p>PROTEIN</p>
-                                </div>
-                                <input type="text" name="protein" className="form-control" placeholder={this.state.food.protein+" g"} 
-                                value={this.state.protein} onChange={this.handleChange} style={{width: "20%"}} />
-                            </div>
-                            <div className='row'>
-                                <div className='col-9'>
-                                    <p>PRICE</p>
-                                </div>
-                                <input type="text" name="price" className="form-control" placeholder={this.state.food.price+" ฿"} 
-                                value={this.state.price} onChange={this.handleChange} style={{width: "20%"}} />
-                            </div>
+                <div className="row menudetail__detail">
+                    <div className="col-5">
+                        {$imagePreview}
+                        <input type="file" name="img" className="form-control" 
+                            onChange={this.handleChangeImage} style={{width: "100%"}} />
+                        <div className="row justify-content-center">
+                            <button type="submit" value="submit" className="menudetail__detail--addtocartbutton">SAVE CHANGE</button>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-4 bottomrow">
-                            <p>{this.state.food.protein} G</p>
-                            PROTEIN 
+                    <div className="col">
+                        <div className="row menudetail_detail_description">
+                            <textarea type="text" name="description" className="form-control" placeholder={this.state.food.description}
+                            value={this.state.description} onChange={this.handleChange}/>
                         </div>
-                        <div className="col-4 bottomrow">
-                            <p>{this.state.food.calories} G</p>
-                            CALORIES 
+                        <div className='row'>
+                            <div className='col-9 cal'>
+                                <p>CALORIES</p>
+                            </div>
+                            <input type="text" name="calories" className="form-control" placeholder={this.state.food.calories+" Kcal"} 
+                            value={this.state.calories} onChange={this.handleChange} style={{width: "20%"}} />
                         </div>
-                        <div className="col-4 bottomrow">
-                            <p> {this.state.food.carbohydrate} G</p>
-                            CARBOHYDRATE 
+                        <div className="row line" /> 
+                        <div className='row'>
+                            <div className='col-9'>
+                                <p>FAT</p>
+                            </div>
+                            <input type="text" name="fat" className="form-control" placeholder={this.state.food.fat+" mg"} 
+                            value={this.state.fat} onChange={this.handleChange} style={{width: "20%"}} />
+                        </div>
+                        <div className='row'>
+                            <div className='col-9'>
+                                <p>CHOLESTEROL</p>
+                            </div>
+                            <input type="text" name="cholesterol" className="form-control" placeholder={this.state.food.cholesterol+" g"} 
+                            value={this.state.cholesterol} onChange={this.handleChange} style={{width: "20%"}} />
+                        </div>
+                        <div className='row'>
+                            <div className='col-9'>
+                                <p>SODIUM</p>
+                            </div>
+                            <input type="text" name="sodium" className="form-control" placeholder={this.state.food.sodium+" mg"} 
+                            value={this.state.sodium} onChange={this.handleChange} style={{width: "20%"}} />
+                        </div>
+                        <div className='row'>
+                            <div className='col-9'>
+                                <p>CARBOHYDRATE</p>
+                            </div>
+                            <input type="text" name="carbohydrate" className="form-control" placeholder={this.state.food.carbohydrate+" g"} 
+                            value={this.state.carbohydrate} onChange={this.handleChange} style={{width: "20%"}} />
+                        </div>
+                        <div className='row '>
+                            <div className='col-9'>
+                                <p>PROTEIN</p>
+                            </div>
+                            <input type="text" name="protein" className="form-control" placeholder={this.state.food.protein+" g"} 
+                            value={this.state.protein} onChange={this.handleChange} style={{width: "20%"}} />
+                        </div>
+                        <div className='row'>
+                            <div className='col-9'>
+                                <p>PRICE</p>
+                            </div>
+                            <input type="text" name="price" className="form-control" placeholder={this.state.food.price+" ฿"} 
+                            value={this.state.price} onChange={this.handleChange} style={{width: "20%"}} />
                         </div>
                     </div>
-                </form>
-                
-            </div>
+                </div>
+            </form>
+        </div>
         </React.Fragment>
     }
 }

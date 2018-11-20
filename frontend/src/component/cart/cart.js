@@ -48,10 +48,10 @@ class Cart extends Component {
 
   createCardCartFood() {
     let card_food;
-    if (!this.state.order[0].food_order) {
+    if (!this.state.order.food_order) {
       card_food = <div />;
     } else {
-      card_food = this.state.order[0].food_order.map((ord, index) => (
+      card_food = this.state.order.food_order.map((ord, index) => (
         <CardCart
           handlerFromParant={this.handleData}
           picture={ord.food_id.img_url}
@@ -68,10 +68,10 @@ class Cart extends Component {
 
   createCardCartSnack() {
     let card_snack;
-    if (!this.state.order[0].snack_order) {
+    if (!this.state.order.snack_order) {
       card_snack = <div />;
     } else {
-      card_snack = this.state.order[0].snack_order.map((ord, index) => (
+      card_snack = this.state.order.snack_order.map((ord, index) => (
         <CardCart
           handlerFromParant={this.handleData}
           picture={ord.snack_id.img_url}
@@ -88,10 +88,10 @@ class Cart extends Component {
 
   createCardPackage() {
     let card_package;
-    if (!this.state.order[0].package_order) {
+    if (!this.state.order.package_order) {
       card_package = <div />;
     } else {
-      card_package = this.state.order[0].package_order.map((ord, index) => (
+      card_package = this.state.order.package_order.map((ord, index) => (
         <CardCart
           handlerFromParant={this.handleData}
           picture={""}
@@ -108,7 +108,7 @@ class Cart extends Component {
 
   confirmButtonClicked() {
     var newBill = {
-      order_id: this.state.order[0]._id,
+      order_id: this.state.order._id,
       totalprice: this.state.fromChild
     };
     axios
@@ -126,28 +126,36 @@ class Cart extends Component {
           <div className="linkbutton">
             <div className="imgcart">
               <a href="/">
-                <img src="/img/cart/plan.png" height="40px" />
+                <img src="/img/cart/plan.png" alt="plan icon" height="40px" />
               </a>
               <p>PLAN</p>
             </div>
-            <img src="/img/cart/arrow.png" height="30px" />
+            <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
             <div className="imgcart">
-              <img src="/img/cart/cart.png" height="40px" />
+              <img src="/img/cart/cart.png" alt="cart icon" height="40px" />
               <p>CART</p>
             </div>
-            <img src="/img/cart/arrow.png" height="30px" />
+            <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
             <div className="imgcart">
-              <img src="/img/cart/payment.png" height="40px" />
+              <img
+                src="/img/cart/payment.png"
+                alt="payment icon"
+                height="40px"
+              />
               <p>PAYMENT</p>
             </div>
-            <img src="/img/cart/arrow.png" height="30px" />
+            <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
             <div className="imgcart">
-              <img src="/img/cart/delivery.png" height="40px" />
+              <img
+                src="/img/cart/delivery.png"
+                alt="delivery icon"
+                height="40px"
+              />
               <p>DELIVERY</p>
             </div>
-            <img src="/img/cart/arrow.png" height="30px" />
+            <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
             <div className="imgcart">
-              <img src="/img/cart/enjoy.png" height="40px" />
+              <img src="/img/cart/enjoy.png" alt="enjoy icon" height="40px" />
               <p>ENJOY</p>
             </div>
           </div>

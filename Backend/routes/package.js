@@ -16,7 +16,7 @@ router.get('/:id',function(req, res) {
         .populate({path : "day_meal.snack", model : "Snack"})
         .exec((err, packages) => {
             if (err) {
-                errors.package = "Cannot Fetch Package"
+                errors.package = err
                 res.status(400).json(errors)
             } else {
                 res.json(packages)
@@ -32,7 +32,7 @@ router.get('/user/all',passport.authenticate('jwt',{ session : false }),function
         .populate({path : "day_meal.snack", model : "Snack"})
         .exec((err, packages) => {
             if (err) {
-                errors.package = "Cannot Fetch Package"
+                errors.package = err
                 res.status(400).json(errors)
             } else {
                 res.json(packages)
@@ -48,7 +48,7 @@ router.get('/system/all',function(req, res) {
         .populate({path : "day_meal.snack", model : "Snack"})
         .exec((err, packages) => {
             if (err) {
-                errors.package = "Cannot Fetch Package"
+                errors.package = err
                 res.status(400).json(errors)
             } else {
                 res.json(packages)
@@ -64,7 +64,7 @@ router.get('/system/3days',function(req, res) {
         .populate({path : "day_meal.snack", model : "Snack"})
         .exec((err, packages) => {
             if (err) {
-                errors.package = "Cannot Fetch Package"
+                errors.package = err
                 res.status(400).json(errors)
             } else {
                 res.json(packages)
@@ -80,7 +80,7 @@ router.get('/system/5days',function(req, res) {
         .populate({path : "day_meal.snack", model : "Snack"})
         .exec((err, packages) => {
             if (err) {
-                errors.package = "Cannot Fetch Package"
+                errors.package = err
                 res.status(400).json(errors)
             } else {
                 res.json(packages)
@@ -96,7 +96,7 @@ router.get('/system/7days',function(req, res) {
         .populate({path : "day_meal.snack", model : "Snack"})
         .exec((err, packages) => {
             if (err) {
-                errors.package = "Cannot Fetch Package"
+                errors.package = err
                 res.status(400).json(errors)
             } else {
                 res.json(packages)
@@ -105,6 +105,11 @@ router.get('/system/7days',function(req, res) {
 });
 
 router.post('/add',passport.authenticate('jwt',{ session : false }), function(req, res) {
+    const error = {}
+    var status = {
+        ok : 1,
+        message : err
+    }
     var package = new Package({
         name_package : req.body.name_package,
         description : req.body.description,
@@ -116,16 +121,24 @@ router.post('/add',passport.authenticate('jwt',{ session : false }), function(re
     })
     package.save(function(err, savedPackage){
         if (err) {
-            res.send(err);
+            error.package = err
+            res.stauts(500).send(error);
         } else {
-            res.sendStatus(200);
+            res.sendStatus(status);
         }
     })
 })
+// bug**
 //add package to cart anonymous
 router.post('/anonymous/addcart',passport.authenticate('jwt',{ session : false }), function(req, res){
-    const name_package = req.body.name_package
+    const package_id = req.body.package_id
     const error = {}
+    var status = {
+        ok : 1,
+        message : "add new package finish",
+        data : null
+    }
+    
     var newPackage =  new Package({
         name_package : req.body.name_package,
         description : req.body.description,
@@ -133,65 +146,97 @@ router.post('/anonymous/addcart',passport.authenticate('jwt',{ session : false }
         price : req.body.price,
         day_meal : req.body.day_meal
     })
-    Package.findOne({name_package : name_package}, function(err, package){
+    Package.findOne({_id : req.body.package_id}, function(err, package){
       if(package) {
-        Order.updateOne({user_id : req.user.id, isfinish : false, "package_order.package_name" : name_package},{
-            $inc : {"package_order.$.amount" : 1}
-        }, (err, order) => {
-            if(err) {
-                error.addamount = "cannot add amount anonymous package"
-                res.sendStatus(500).json(error)
-            } else {
-                res.json(order)
+        var isInc = true
+        for(var i = 0; i < newPackage.type; i++){
+            if(String(package.day_meal[i].meal_1) != String(newPackage.day_meal[i].meal_1)){
+                isInc = !isInc;
+                console.log(package.day_meal[i].meal_1, newPackage.day_meal[i].meal_1)
+                break;
             }
-        })
-      } else {
-        newPackage.save()
-            .then(package => {
-                Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
-                    const newPackageOrder = {
-                        package_id : package._id,
-                        package_name : package.name_package,
-                        price : package.price,
-                        amount : 1
+            if(String(package.day_meal[i].meal_2)  != String(newPackage.day_meal[i].meal_2)){
+                isInc = !isInc;
+                console.log(package.day_meal[i].meal_2, newPackage.day_meal[i].meal_2)
+                break;
+            }
+        }
+        if(isInc){
+            Order.updateOne({user_id : req.user.id, isfinish : false, "package_order.package_id" : req.body.package_id},{
+                $inc : {"package_order.$.amount" : 1}
+            }, (err, order) => {
+                if(err) {
+                    error.package = err
+                    res.sendStatus(500).json(error)
+                } else {
+                    staus.message = "increase amount finish"
+                    status.data = {
+                        package_id : req.body.package_id
                     }
-                    if(order) {
-                        Order.updateOne({user_id : req.user.id, isfinish : false , "package_order.package_id" : newPackageOrder.package_id},{
-                            $inc : { "package_order.$.amount" : 1 }
+                    res.json(status)
+                }
+            })
+        } else {
+            newPackage.save()
+                .then(package => {
+                    Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
+                        const newPackageOrder = {
+                            package_id : package._id,
+                            package_name : package.name_package,
+                            price : package.price,
+                            amount : 1
+                        }
+                        Order.updateOne({user_id : req.user.id, isfinish : false},{
+                            $push : {package_order : newPackageOrder}
                         }, (err, order) => {
                             if(err) {
-                                error.addamount = "can not add amount"
-                                res.sendStatus(400).json(error);
+                                error.package = err
+                                res.sendStatus(400).json(error)
                             } else {
-                               if(order.nModified == 0) {
-                                  Order.updateOne({user_id : req.user.id, isfinish : false},{
-                                      $push : {package_order : newPackageOrder}
-                                  }, (err, order) => {
-                                      if(err) {
-                                          error.addneworder = "can not add new menu to order"
-                                          res.sendStatus(400).json(error)
-                                      } else {
-                                          res.json(order)
-                                      }
-                                  })
-                               } else {
-                                   res.json(order)
-                               }
+                                status.data = {
+                                package_id : newPackageOrder.package_id
+                                }
+                                res.json(status)
                             }
                         })
-                      } else {
-                          const newOrder =  new Order({
-                              user_id : req.user.id,
-                              package_order : newPackageOrder
-                          });
-                          newOrder.save()
-                              .then(order => res.json(order))
-                              .catch(err => console.log(err));
-                      }
+                    })
                 })
-            })
-            .catch(err => console.log(err));
-      }
+                .catch((err) => {
+                    error.package = err
+                    res.status(500).send(error)
+                });
+        }
+        
+      } else {
+            newPackage.save()
+                .then(package => {
+                    Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
+                        const newPackageOrder = {
+                            package_id : package._id,
+                            package_name : package.name_package,
+                            price : package.price,
+                            amount : 1
+                        }
+                        Order.updateOne({user_id : req.user.id, isfinish : false},{
+                            $push : {package_order : newPackageOrder}
+                        }, (err, order) => {
+                            if(err) {
+                                error.package = err
+                                res.sendStatus(400).json(error)
+                            } else {
+                                status.data = {
+                                package_id : newPackageOrder.package_id
+                                }
+                                res.json(status)
+                            }
+                        })
+                    })
+                })
+                .catch((err) => {
+                    error.package = err
+                    res.status(500).send(error)
+                });
+        }
     })
 
 })
@@ -201,18 +246,20 @@ router.delete('/del/:id',passport.authenticate('jwt',{ session : false }), funct
    const query = {_id : req.params.id}
     Package.findById(req.params.id, function(err, package){
         if(err){
-            res.status(500).send(err);
+            error.package = err
+            res.status(500).send(error);
         } else {
             if(package.owner == req.user.user_name || req.user.type){
-                Package.remove(query, function(err){
+                Package.deleteOne(query, function(err){
                     if(err){
-                        console.log(err);
+                        error.package = err
+                        res.status(500).send(error);
                     } else {
                         res.sendStatus(200);
                     }
                 })
             } else {
-                error.delete_package = " Admin or Owner"
+                error.package = " Admin or Owner"
                 res.json(error)
             }
         }

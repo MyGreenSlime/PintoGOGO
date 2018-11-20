@@ -54,9 +54,11 @@ const Snack = require('../models/snack');
 //-----------------------------------------------------food-----------------------------------------------
 //find all menu
 router.get('/food',function(req, res) {
+    const error = {}
     Menu.find({}, function(err, menus){
         if(err) {
-            res.status(500).send({error : "Could not fetch menu"});
+            error.food = err
+            res.status(500).send(error);
         } else {
             res.send(menus);
         }
@@ -64,9 +66,11 @@ router.get('/food',function(req, res) {
 });
 //find single menu
 router.get('/food/:id',function(req, res) {
+    const error = {}
     Menu.findById(req.params.id, function(err, menu){
         if(err) {
-            res.status(500).send({error : "Not found Menu"});
+            error.food = err
+            res.status(500).send(error);
         } else {
             res.send(menu);
         }
@@ -93,7 +97,8 @@ router.post('/food/add',passport.authenticate('jwt',{ session : false }),uploadF
     
     menu.save(function(err, savedMenu){
         if(err) {
-            res.sendStatus(500);
+            error.food = err
+            res.status(500).send(error);
         }else {
             res.sendStatus(200);
         }
@@ -137,10 +142,14 @@ router.put('/food/edit/:id',passport.authenticate('jwt',{ session : false }),upl
         }
     },(err, menu) => {
         if(err) {
-            error.edit = "cannot edit menu"
+            error.food = err
             res.sendStatus(500).json(error)
         } else {
-            res.json(menu) 
+            var status = {
+                ok : 1,
+                message : "edit menu finish"
+            }
+            res.json(status) 
         }
     })
 })
@@ -158,11 +167,16 @@ router.delete('/food/del/:id',passport.authenticate('jwt',{ session : false }),f
         if(err){
             res.status(500).send(err);
         }else{
-            Menu.remove(query, function(err){
+            Menu.deleteOne(query, function(err){
                 if(err){
-                    console.log(err);
+                    error.food = err
+                    res.status(500).send(error)
                 } else {
-                    res.sendStatus(200);
+                    var status = {
+                        ok : 1,
+                        message : "delete menu finish"
+                    }
+                    res.json(status);
                 }
             })
         }
@@ -173,9 +187,11 @@ router.delete('/food/del/:id',passport.authenticate('jwt',{ session : false }),f
 
 //find all menu
 router.get('/snack',function(req, res) {
+    const error = {}
     Snack.find({}, function(err, snacks){
         if(err) {
-            res.status(500).send({error : "Could not fetch snack"});
+            error.snack = err
+            res.status(500).send(error);
         } else {
             res.send(snacks);
         }
@@ -184,9 +200,11 @@ router.get('/snack',function(req, res) {
 
 //find single menu
 router.get('/snack/:id',function(req, res) {
+    const error = {}
     Snack.findById(req.params.id, function(err, snack){
         if(err) {
-            res.status(500).send({error : "Not found Snack"});
+            error.snack = err
+            res.status(500).send(error);
         } else {
             res.send(snack);
         }
@@ -214,7 +232,8 @@ router.post('/snack/add',passport.authenticate('jwt',{ session : false }), uploa
     
     snack.save(function(err, savedSnack){
         if(err) {
-            res.sendStatus(500);
+            error.snack = err
+            res.status(500).send(error);
         }else {
             res.sendStatus(200);
         }
@@ -258,10 +277,14 @@ router.put('/snack/edit/:id',passport.authenticate('jwt',{ session : false }),up
         }
     },(err, snack) => {
         if(err) {
-            error.edit = "cannot edit snack"
+            error.snack = err
             res.sendStatus(500).json(error)
         } else {
-            res.json(snack) 
+            var status = {
+                ok : 1,
+                message : "edit snack finish"
+            }
+            res.json(status) 
         }
     })
 })
@@ -280,10 +303,15 @@ router.delete('/snack/del/:id',passport.authenticate('jwt',{ session : false }) 
         if(err){
             res.status(500).send(err);
         }else{
-            Snack.remove(query, function(err){
+            Snack.deleteOne(query, function(err){
                 if(err){
-                    console.log(err);
+                    error.snack = err
+                    res.status(500).send(error)
                 } else {
+                    var status = {
+                        ok : 1,
+                        message : "edit menu finish"
+                    }
                     res.sendStatus(200);
                 }
             })

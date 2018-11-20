@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
 .login__text {
-  margin-bottom: 30px;
+  margin-bottom: 3%;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 125%;
   font-family: "Quicksand", sans-serif;
 }
 
-.login__text--box {
-  font-family: "Quicksand", sans-serif;
+input[type=text], input[type=password] {
+  left: 50%;
+  width: 105%;
 }
 
 .submit__login--button {
@@ -17,10 +18,11 @@
   border-radius: 10px;
   font-weight: bold;
   padding: 5px;
-  width: 45%;
+  width: 50%;
   min-width: 100px;
   font-family: "Quicksand", sans-serif;
   height: auto;
+  margin-bottom: 5%;
 }
 
 .submit__login--button:hover {
