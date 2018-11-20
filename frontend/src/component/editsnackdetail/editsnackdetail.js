@@ -98,7 +98,8 @@ class EditSnackDetail extends Component {
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} className="imgpreview"/>);
+            $imagePreview = (<img src={imagePreviewUrl} className="editmenudetail__imgpreview"/>);
+            // 
         }
         return <React.Fragment>
         <div className="all">
