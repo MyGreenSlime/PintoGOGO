@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../packagemanage.css";
 import { DropTarget } from "react-drag-drop-container";
-import { setMenuDrop, checkReady } from "../helper";
+import { setMenuDrop } from "../helper";
 import axios from "axios";
 import NutritionManage from "../nutritionmanage";
 
