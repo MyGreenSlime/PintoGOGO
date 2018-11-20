@@ -128,14 +128,17 @@ router.post('/add',passport.authenticate('jwt',{ session : false }), function(re
         }
     })
 })
+// bug**
 //add package to cart anonymous
 router.post('/anonymous/addcart',passport.authenticate('jwt',{ session : false }), function(req, res){
-    const name_package = req.body.name_package
+    const package_id = req.body.package_id
     const error = {}
     var status = {
         ok : 1,
-        message : "add new package finish"
+        message : "add new package finish",
+        data : null
     }
+    
     var newPackage =  new Package({
         name_package : req.body.name_package,
         description : req.body.description,
@@ -143,71 +146,97 @@ router.post('/anonymous/addcart',passport.authenticate('jwt',{ session : false }
         price : req.body.price,
         day_meal : req.body.day_meal
     })
-    Package.findOne({name_package : name_package}, function(err, package){
+    Package.findOne({_id : req.body.package_id}, function(err, package){
       if(package) {
-        Order.updateOne({user_id : req.user.id, isfinish : false, "package_order.package_name" : name_package},{
-            $inc : {"package_order.$.amount" : 1}
-        }, (err, order) => {
-            if(err) {
-                error.package = err
-                res.sendStatus(500).json(error)
-            } else {
-                res.json(status)
+        var isInc = true
+        for(var i = 0; i < newPackage.type; i++){
+            if(String(package.day_meal[i].meal_1) != String(newPackage.day_meal[i].meal_1)){
+                isInc = !isInc;
+                console.log(package.day_meal[i].meal_1, newPackage.day_meal[i].meal_1)
+                break;
             }
-        })
-      } else {
-        newPackage.save()
-            .then(package => {
-                Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
-                    const newPackageOrder = {
-                        package_id : package._id,
-                        package_name : package.name_package,
-                        price : package.price,
-                        amount : 1
+            if(String(package.day_meal[i].meal_2)  != String(newPackage.day_meal[i].meal_2)){
+                isInc = !isInc;
+                console.log(package.day_meal[i].meal_2, newPackage.day_meal[i].meal_2)
+                break;
+            }
+        }
+        if(isInc){
+            Order.updateOne({user_id : req.user.id, isfinish : false, "package_order.package_id" : req.body.package_id},{
+                $inc : {"package_order.$.amount" : 1}
+            }, (err, order) => {
+                if(err) {
+                    error.package = err
+                    res.sendStatus(500).json(error)
+                } else {
+                    staus.message = "increase amount finish"
+                    status.data = {
+                        package_id : req.body.package_id
                     }
-                    if(order) {
-                        Order.updateOne({user_id : req.user.id, isfinish : false , "package_order.package_id" : newPackageOrder.package_id},{
-                            $inc : { "package_order.$.amount" : 1 }
+                    res.json(status)
+                }
+            })
+        } else {
+            newPackage.save()
+                .then(package => {
+                    Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
+                        const newPackageOrder = {
+                            package_id : package._id,
+                            package_name : package.name_package,
+                            price : package.price,
+                            amount : 1
+                        }
+                        Order.updateOne({user_id : req.user.id, isfinish : false},{
+                            $push : {package_order : newPackageOrder}
                         }, (err, order) => {
                             if(err) {
-                                error.addamount = "can not add amount"
-                                res.sendStatus(400).json(error);
+                                error.package = err
+                                res.sendStatus(400).json(error)
                             } else {
-                               if(order.nModified == 0) {
-                                  Order.updateOne({user_id : req.user.id, isfinish : false},{
-                                      $push : {package_order : newPackageOrder}
-                                  }, (err, order) => {
-                                      if(err) {
-                                          error.package = err
-                                          res.sendStatus(400).json(error)
-                                      } else {
-                                          res.json(status)
-                                      }
-                                  })
-                               } else {
-                                   res.json(status)
-                               }
+                                status.data = {
+                                package_id : newPackageOrder.package_id
+                                }
+                                res.json(status)
                             }
                         })
-                      } else {
-                          const newOrder =  new Order({
-                              user_id : req.user.id,
-                              package_order : newPackageOrder
-                          });
-                          newOrder.save()
-                              .then(order => res.json(status))
-                              .catch((err) => {
-                                  error.package = err
-                                  res.status(500).send(error)
-                              });
-                      }
+                    })
                 })
-            })
-            .catch((err) => {
-                error.package = err
-                res.status(500).send(error)
-            });
-      }
+                .catch((err) => {
+                    error.package = err
+                    res.status(500).send(error)
+                });
+        }
+        
+      } else {
+            newPackage.save()
+                .then(package => {
+                    Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
+                        const newPackageOrder = {
+                            package_id : package._id,
+                            package_name : package.name_package,
+                            price : package.price,
+                            amount : 1
+                        }
+                        Order.updateOne({user_id : req.user.id, isfinish : false},{
+                            $push : {package_order : newPackageOrder}
+                        }, (err, order) => {
+                            if(err) {
+                                error.package = err
+                                res.sendStatus(400).json(error)
+                            } else {
+                                status.data = {
+                                package_id : newPackageOrder.package_id
+                                }
+                                res.json(status)
+                            }
+                        })
+                    })
+                })
+                .catch((err) => {
+                    error.package = err
+                    res.status(500).send(error)
+                });
+        }
     })
 
 })
