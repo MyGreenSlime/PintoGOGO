@@ -10,16 +10,16 @@ class Packagemanage3days extends Component {
     super(props);
     this.state = {
       day1_img: [
-        <img className="card-img" src="../img/package/blank.PNG" />,
-        <img className="card-img" src="../img/package/blank.PNG" />
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>,
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>
       ],
       day2_img: [
-        <img className="card-img" src="../img/package/blank.PNG" />,
-        <img className="card-img" src="../img/package/blank.PNG" />
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>,
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>
       ],
       day3_img: [
-        <img className="card-img" src="../img/package/blank.PNG" />,
-        <img className="card-img" src="../img/package/blank.PNG" />
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>,
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>
       ],
       day1_detail: [],
       day2_detail: [],
@@ -27,12 +27,12 @@ class Packagemanage3days extends Component {
       all_detail: [],
       sum_price: 0,
       isReadyToShow: [false, false, false, false, false, false],
-      user: null
+      user: null,
+      show_nutrition: <div/>
     };
     this.send3DaysPackage = this.send3DaysPackage.bind(this);
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this);
-    this.add3DaysPackageToCart = this.add3DaysPackageToCart.bind(this);
-    this.checkReady = this.checkReady.bind(this)
+    // this.add3DaysPackageToCart = this.add3DaysPackageToCart.bind(this);
   }
 
   componentDidMount() {
@@ -48,11 +48,11 @@ class Packagemanage3days extends Component {
       });
   }
   
-  send3DaysPackage() {
-    console.log("savepackage")
+  send3DaysPackage(path) {
+    console.log(path+" package")
     const newPackage = {
       name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "manage 3 days package",
+      description: "3 days package",
       type: 3,
       day_meal: [
         {
@@ -69,13 +69,17 @@ class Packagemanage3days extends Component {
         },],
       price: this.state.sum_price
     };
-    axios.post("/api/packages/add", newPackage)
+    axios.post("/api/packages/"+path, newPackage)
       .then(function (response) {
+        // console.log("save packages")
         console.log(response);
+        if(path == "add"){
+          alert("Save Package");
+        }
       })
       .catch(function (error) {
         console.log(error);
-      });
+      })
   }
 
   onSendMenuDetail() {
@@ -92,7 +96,7 @@ class Packagemanage3days extends Component {
                   this.state.day2_detail[0].price +
                   this.state.day2_detail[1].price +
                   this.state.day3_detail[0].price +
-                  this.state.day3_detail[1].price) * 0.95)
+                  this.state.day3_detail[1].price) * 0.95),
       }
     );
   }
@@ -119,50 +123,15 @@ class Packagemanage3days extends Component {
     return <div />;
   }
 
- 
-
-  add3DaysPackageToCart() {
-    console.log("add to cart")
-    const newPackage = {
-      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "manage 3 days package",
-      type: 3,
-      day_meal: [
-        {
-          meal_1: this.state.day1_detail[0],
-          meal_2: this.state.day1_detail[1]
-        },
-        {
-          meal_1: this.state.day2_detail[0],
-          meal_2: this.state.day2_detail[1]
-        },
-        {
-          meal_1: this.state.day3_detail[0],
-          meal_2: this.state.day3_detail[1]
-        }
-      ],
-      price: this.state.sum_price
-    };
-    axios
-      .post("/api/packages/anonymous/addcart", newPackage)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   render() {
     const { nutrition } = this.state;
-    return (
-      <React.Fragment>
+    return <React.Fragment>
         <div className="packagemanage-box ">
           <div className="row">
             <div className="col-sm card-package">
               DAY 1
               <div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -177,7 +146,7 @@ class Packagemanage3days extends Component {
                     {this.state.day1_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -197,7 +166,7 @@ class Packagemanage3days extends Component {
             <div className="col-sm card-package">
               DAY 2
               <div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -212,7 +181,7 @@ class Packagemanage3days extends Component {
                     {this.state.day2_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -236,7 +205,7 @@ class Packagemanage3days extends Component {
             <div className="col-sm card-last-package ">
               DAY 3
               <div className="row">
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -251,7 +220,7 @@ class Packagemanage3days extends Component {
                     {this.state.day3_img[0]}
                   </DropTarget>
                 </div>
-                <div className="col-sm card-pack-img">
+                <div className="col card-pack-img">
                   <DropTarget
                     targetKey="menu"
                     onHit={setMenuDrop.bind(
@@ -270,38 +239,30 @@ class Packagemanage3days extends Component {
             </div>
             <div className="col-3-sm col-set" />
           </div>
-          
-          {/* {this.checkReady()} */}
-          <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
+
+          {this.checkReady()}
+          {/* <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
             CLICK TO SHOW NUTRITION
-          </button>
-          {this.state.all_detail &&
-            this.state.all_detail.length > 0 && (
-              <React.Fragment>
-                <div>
-                  <NutritionManage menu_detail={this.state.all_detail} />
-                </div>
-                <div>
-                  <a href='/cart'>
-                  <button
-                    className="btn btn-shownutrition"
-                    onClick={this.add3DaysPackageToCart()}
-                  >
+          </button> */}
+
+          {this.state.all_detail && this.state.all_detail.length > 0 && <React.Fragment>
+              <div>
+                <NutritionManage menu_detail={this.state.all_detail} />
+              </div>
+              <div>
+                <a href="/cart">
+                  <button className="btn btn-shownutrition" onClick={() => this.send3DaysPackage("anonymous/addcart")}>
                     Add to cart
                   </button>
-                  </a>
-                  <button
-                    className="btn btn-shownutrition"
-                    onClick={this.send3DaysPackage()}
-                  >
-                    SAVE PACKAGE
-                  </button>
-                </div>
-              </React.Fragment>
-            )}
+                </a>
+                <button className="btn btn-shownutrition" // onClick={this.testClick()}
+                  onClick={() => this.send3DaysPackage("add")}>
+                  SAVE PACKAGE
+                </button>
+              </div>
+            </React.Fragment>}
         </div>
-      </React.Fragment>
-    );
+      </React.Fragment>;
   }
 }
 

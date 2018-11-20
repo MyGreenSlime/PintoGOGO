@@ -10,7 +10,7 @@ module.exports = function validatorRegisterInput(data) {
     data.email = !isEmpty(data.email) ? data.email : '';
     data.password1 = !isEmpty(data.password1) ? data.password1 : '';
     data.password2 = !isEmpty(data.password2) ? data.password2 : '';
-    data.address = !isEmpty(data.address) ? data.address : '';
+    data.address.address = !isEmpty(data.address.address) ? data.address.address : '';
     data.phonenumber = !isEmpty(data.phonenumber) ? data.phonenumber : '';
     
     if(!Validator.isLength(data.first_name, { min : 2, max : 30 })){
@@ -45,7 +45,7 @@ module.exports = function validatorRegisterInput(data) {
         errors.phonenumber = 'Phonenumber field is required';
     }
 
-    if(Validator.isEmpty(data.address)) {
+    if(Validator.isEmpty(data.address.address)) {
         errors.address = 'Address field is required';
     }
     

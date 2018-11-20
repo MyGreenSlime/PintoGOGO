@@ -23,7 +23,7 @@ router.get("/all", passport.authenticate("jwt", { session: false }), function(
     .populate({ path: "package_order.package_id", model: "Package" })
     .exec((err, order) => {
       if (err) {
-        error.orders = "Could not fetch current order";
+        error.orders = err
         res.status(500).send(error);
       } else {
         res.json(order);
@@ -44,13 +44,13 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   function(req, res) {
     const error = {};
-    Order.find({ user_id: req.user.id, isfinish: false })
+    Order.findOne({ user_id: req.user.id, isfinish: false })
       .populate({ path: "food_order.food_id", model: "Menu" })
       .populate({ path: "snack_order.snack_id", model: "Snack" })
       .populate({ path: "package_order.package_id", model: "Package" })
       .exec((err, order) => {
         if (err) {
-          error.orders = "Could not fetch current order";
+          error.orders = err
           res.status(500).send(error);
         } else {
           res.json(order);
@@ -59,22 +59,20 @@ router.get(
   }
 );
 //add food to order
-router.put(
-  "/add/food",
-  passport.authenticate("jwt", { session: false }),
-  function(req, res) {
+router.put("/add/food",passport.authenticate("jwt", { session: false }),function(req, res) {
     const newfood_order = {
       food_id: req.body.food_id,
       food_name: req.body.food_name,
       price: req.body.price,
       amount: 1
     };
+    var status = {
+      ok : 1,
+      status : "can add new food to order"
+    }
     const error = {};
     console.log(req.user.id);
-    Order.findOne({ user_id: req.user.id, isfinish: false }, function(
-      err,
-      order
-    ) {
+    Order.findOne({ user_id: req.user.id, isfinish: false }, function(err,order) {
       if (order) {
         Order.updateOne(
           {
@@ -87,7 +85,7 @@ router.put(
           },
           (err, order) => {
             if (err) {
-              error.addamount = "can not add amount";
+              error.orders = err
               res.sendStatus(400).json(error);
             } else {
               if (order.nModified == 0) {
@@ -98,15 +96,15 @@ router.put(
                   },
                   (err, order) => {
                     if (err) {
-                      error.addneworder = "can not add new menu to order";
+                      error.orders = err;
                       res.sendStatus(400).json(error);
                     } else {
-                      res.json(order);
+                      res.json(status);
                     }
                   }
                 );
               } else {
-                res.json(order);
+                res.json(status);
               }
             }
           }
@@ -118,30 +116,31 @@ router.put(
         });
         newOrder
           .save()
-          .then(order => res.json(order))
-          .catch(err => console.log(err));
+          .then(order => res.json(status))
+          .catch((err) => {
+            error.orders = err
+            res.status(500).send(error)
+          });
       }
     });
   }
 );
 
 //add snack to order
-router.put(
-  "/add/snack",
-  passport.authenticate("jwt", { session: false }),
-  function(req, res) {
+router.put("/add/snack",passport.authenticate("jwt", { session: false }),function(req, res) {
     const newsnack_order = {
       snack_id: req.body.snack_id,
       snack_name: req.body.snack_name,
       price: req.body.price,
       amount: 1
     };
+    var status = {
+      ok : 1,
+      status : "can add new snack to order"
+    }
     const error = {};
     console.log(req.user.id);
-    Order.findOne({ user_id: req.user.id, isfinish: false }, function(
-      err,
-      order
-    ) {
+    Order.findOne({ user_id: req.user.id, isfinish: false }, function(err,order) {
       if (order) {
         Order.updateOne(
           {
@@ -154,7 +153,7 @@ router.put(
           },
           (err, order) => {
             if (err) {
-              error.addamount = "can not add amount";
+              error.orders = err;
               res.sendStatus(400).json(error);
             } else {
               if (order.nModified == 0) {
@@ -165,15 +164,15 @@ router.put(
                   },
                   (err, order) => {
                     if (err) {
-                      error.addneworder = "can not add new menu to order";
+                      error.orders = err;
                       res.sendStatus(400).json(error);
                     } else {
-                      res.json(order);
+                      res.json(status);
                     }
                   }
                 );
               } else {
-                res.json(order);
+                res.json(status);
               }
             }
           }
@@ -185,8 +184,11 @@ router.put(
         });
         newOrder
           .save()
-          .then(order => res.json(order))
-          .catch(err => console.log(err));
+          .then(order => res.json(status))
+          .catch((err) => {
+            error.orders = err
+            res.status(500).send(error)
+          });
       }
     });
   }
@@ -202,6 +204,10 @@ router.put(
       price: req.body.price,
       amount: 1
     };
+    var status = {
+      ok : 1,
+      status : "can add new package to order"
+    }
     const error = {};
     console.log(req.user.id);
     Order.findOne({ user_id: req.user.id, isfinish: false }, function(
@@ -220,7 +226,7 @@ router.put(
           },
           (err, order) => {
             if (err) {
-              error.addamount = "can not add amount";
+              error.orders = err;
               res.sendStatus(400).json(error);
             } else {
               if (order.nModified == 0) {
@@ -231,15 +237,15 @@ router.put(
                   },
                   (err, order) => {
                     if (err) {
-                      error.addneworder = "can not add new menu to order";
+                      error.orders = err;
                       res.sendStatus(400).json(error);
                     } else {
-                      res.json(order);
+                      res.json(status);
                     }
                   }
                 );
               } else {
-                res.json(order);
+                res.json(status);
               }
             }
           }
@@ -251,8 +257,11 @@ router.put(
         });
         newOrder
           .save()
-          .then(order => res.json(order))
-          .catch(err => console.log(err));
+          .then(order => res.json(status))
+          .catch((err) => {
+            error.orders = err
+            res.status(500).send(error)
+          });
       }
     });
   }
@@ -262,8 +271,13 @@ router.put(
   "/increase/amount/food/:id",
   passport.authenticate("jwt", { session: false }),
   function(req, res) {
+    
     const food_id = req.params.id;
     const error = {};
+    var status = {
+      ok : 1,
+      status : "can add amount"
+    }
     Order.updateOne(
       { user_id: req.user.id, isfinish: false, "food_order.food_id": food_id },
       {
@@ -271,10 +285,10 @@ router.put(
       },
       (err, order) => {
         if (err) {
-          error.addamount = "can not add amount";
+          error.orders = err;
           res.sendStatus(400).json(error);
         } else {
-          res.json(order);
+          res.json(status);
         }
       }
     );
@@ -287,6 +301,10 @@ router.put(
   function(req, res) {
     const snack_id = req.params.id;
     const error = {};
+    var status = {
+      ok : 1,
+      status : "can add amount"
+    }
     Order.updateOne(
       {
         user_id: req.user.id,
@@ -298,10 +316,10 @@ router.put(
       },
       (err, order) => {
         if (err) {
-          error.addamount = "can not add amount";
+          error.orders = err;
           res.sendStatus(400).json(error);
         } else {
-          res.json(order);
+          res.json(status);
         }
       }
     );
@@ -314,6 +332,10 @@ router.put(
   function(req, res) {
     const package_id = req.params.id;
     const error = {};
+    var status = {
+      ok : 1,
+      status : "can add amount"
+    }
     Order.updateOne(
       {
         user_id: req.user.id,
@@ -325,10 +347,10 @@ router.put(
       },
       (err, order) => {
         if (err) {
-          error.addamount = "can not add amount";
+          error.orders = err;
           res.sendStatus(400).json(error);
         } else {
-          res.json(order);
+          res.json(status);
         }
       }
     );
@@ -341,6 +363,10 @@ router.put(
   function(req, res) {
     const error = {};
     const food_id = req.params.id;
+    var status = {
+      ok : 1,
+      status : "can decrease amount"
+    }
     Order.updateOne(
       { user_id: req.user.id, isfinish: false, "food_order.food_id": food_id },
       {
@@ -348,7 +374,7 @@ router.put(
       },
       (err, order) => {
         if (err) {
-          error.decreaseamount = "can not decrease amount food";
+          error.orders = "can not decrease amount food";
           res.sendStatus(400).json(error);
         } else {
           Order.updateOne(
@@ -363,10 +389,10 @@ router.put(
             },
             (err, order) => {
               if (err) {
-                error.deleteorderlist = "cannot delete snack in food";
+                error.orders = err;
                 res.sendStatus(400).json(error);
               } else {
-                res.json(order);
+                res.json(status);
               }
             }
           );
@@ -382,6 +408,10 @@ router.put(
   function(req, res) {
     const error = {};
     const snack_id = req.params.id;
+    var status = {
+      ok : 1,
+      status : "can decrease amount"
+    }
     Order.updateOne(
       {
         user_id: req.user.id,
@@ -393,7 +423,7 @@ router.put(
       },
       (err, order) => {
         if (err) {
-          error.decreaseamount = "can not decrease amount snack";
+          error.orders = err;
           res.sendStatus(400).json(error);
         } else {
           Order.updateOne(
@@ -408,10 +438,10 @@ router.put(
             },
             (err, order) => {
               if (err) {
-                error.deleteorderlist = "cannot delete snack in order";
+                error.err = err;
                 res.sendStatus(400).json(error);
               } else {
-                res.json(order);
+                res.json(status);
               }
             }
           );
@@ -427,6 +457,10 @@ router.put(
   function(req, res) {
     const error = {};
     const package_id = req.params.id;
+    var status = {
+      ok : 1,
+      status : "can decrease amount"
+    }
     Order.updateOne(
       {
         user_id: req.user.id,
@@ -438,7 +472,7 @@ router.put(
       },
       (err, order) => {
         if (err) {
-          error.decreaseamount = "can not decrease amount package";
+          error.orders = err;
           res.sendStatus(400).json(error);
         } else {
           Order.updateOne(
@@ -453,10 +487,10 @@ router.put(
             },
             (err, order) => {
               if (err) {
-                error.deleteorderlist = "cannot delete package in order";
+                error.orders = err;
                 res.sendStatus(400).json(error);
               } else {
-                res.json(order);
+                res.json(status);
               }
             }
           );
@@ -472,6 +506,10 @@ router.delete(
   function(req, res) {
     const error = {};
     const food_id = req.params.id;
+    var status = {
+      ok : 1,
+      status : "delete food from order"
+    }
     Order.updateOne(
       { user_id: req.user.id, isfinish: false },
       {
@@ -483,10 +521,10 @@ router.delete(
       },
       (err, order) => {
         if (err) {
-          error.deleteorderlist = "cannot delete food in order";
+          error.orders = err;
           res.sendStatus(400).json(error);
         } else {
-          res.json(order);
+          res.json(status);
         }
       }
     );
@@ -499,6 +537,10 @@ router.delete(
   function(req, res) {
     const error = {};
     const snack_id = req.params.id;
+    var status = {
+      ok : 1,
+      status : "delete snack from order"
+    }
     Order.updateOne(
       { user_id: req.user.id, isfinish: false },
       {
@@ -510,10 +552,10 @@ router.delete(
       },
       (err, order) => {
         if (err) {
-          error.deleteorderlist = "cannot delete snack in order";
+          error.order = err;
           res.sendStatus(400).json(error);
         } else {
-          res.json(order);
+          res.json(status);
         }
       }
     );
@@ -526,6 +568,10 @@ router.delete(
   function(req, res) {
     const error = {};
     const package_id = req.params.id;
+    var status = {
+      ok : 1,
+      status : "delete package from order"
+    }
     Order.updateOne(
       { user_id: req.user.id, isfinish: false },
       {
@@ -537,10 +583,10 @@ router.delete(
       },
       (err, order) => {
         if (err) {
-          error.deleteorderlist = "cannot delete package in order";
+          error.orders = err;
           res.sendStatus(400).json(error);
         } else {
-          res.json(order);
+          res.json(status);
         }
     })
 })
@@ -553,6 +599,10 @@ router.put('/tobill', passport.authenticate('jwt',{ session : false }), function
         user : req.user.id,
         order_cost : req.body.totalprice,
     })
+    var status = {
+      ok : 1,
+      status : "create bill"
+    }
     Order.updateOne({user_id : req.user.id, isfinish : false},{
         $set : {
             totalprice : req.body.totalprice,
@@ -565,16 +615,20 @@ router.put('/tobill', passport.authenticate('jwt',{ session : false }), function
                 $set : {order_cost : req.body.totalprice}
             }, (err, bill) => {
                 if(err) {
-                    error.order_cost = "cannot set order cost"
+                    error.orders = err
                     res.sendStatus(500).json(error)
                 } else {
-                    res.json(bill)
+                  status.message = "update bill"
+                    res.json(status)
                 }
             })
         } else {
             newBill.save()
-            .then(bill => res.json(bill))
-            .catch(err => console.log(err));
+            .then(bill => res.json(status))
+            .catch((err) => {
+              error.bills = err
+              res.status(500).send(error)
+            });
         }
     })
 })

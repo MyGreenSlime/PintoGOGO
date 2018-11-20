@@ -7,6 +7,17 @@
   font-family: "Quicksand", sans-serif;
 }
 
+.txt__slide {
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+.linebreak {
+  width: 158%;
+  height: 6px;
+  background-color: white;
+}
+
 .carousel-item {
   height: 400px;
 }

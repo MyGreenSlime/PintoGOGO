@@ -1,15 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
-.set-recommend {
-  padding: 30px 7% 20px 7%;
+.recommend__block {
+  padding: 40px 18% 20px 18%;
+  font-size: 20px;
+  font-family: "Quicksand", sans-serif;
 }
 
-.grid-recommend {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+.txt__rec {
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .img-rec {
-  width: 75%;
+  width: 70%;
   margin: 7%;
   border-radius: 10px;
+}
+
+.nopadding {
+  padding: 0;
+  margin: 0;
 }
