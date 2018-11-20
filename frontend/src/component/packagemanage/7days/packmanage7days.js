@@ -9,13 +9,13 @@ export default class PackageManage5days extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			day1_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day2_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day3_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day4_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day5_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day6_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
-			day7_img: [<img className="card-img" src="../img/package/blank.PNG" />, <img className="card-img" src="../img/package/blank.PNG" />],
+			day1_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank" />, <img className="card-img" src="../img/package/blank.PNG" alt="blank" />],
+			day2_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank" />, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day3_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day4_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day5_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day6_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
+			day7_img: [<img className="card-img" src="../img/package/blank.PNG" alt="blank"/>, <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>],
 			day1_detail: [],
 			day2_detail: [],
 			day3_detail: [],
@@ -29,7 +29,7 @@ export default class PackageManage5days extends Component {
 		};
 		this.send7DaysPackage = this.send7DaysPackage.bind(this)
 		this.onSendMenuDetail = this.onSendMenuDetail.bind(this)
-		this.add7DaysPackageToCart = this.add7DaysPackageToCart.bind(this)
+		// this.add7DaysPackageToCart = this.add7DaysPackageToCart.bind(this)
 	}
 
 	componentDidMount() {
@@ -45,11 +45,11 @@ export default class PackageManage5days extends Component {
 			});
 	}
 
-	send7DaysPackage() {
-
-		axios.post("/api/packages/add", {
-			name_package: "7days manage package",
-			description: "",
+	send7DaysPackage(path) {
+		console.log(path + " package")
+		const newPackage = {
+			name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
+			description: "7 days package",
 			type: 7,
 			day_meal: [
 				{
@@ -79,15 +79,20 @@ export default class PackageManage5days extends Component {
 				{
 					meal_1: this.state.day7_detail[0],
 					meal_2: this.state.day7_detail[1]
-				}],
+				},],
 			price: this.state.sum_price
-		})
+		};
+		axios.post("/api/packages/" + path, newPackage)
 			.then(function (response) {
+				// console.log("save packages")
 				console.log(response);
+				if (path == "add") {
+					alert("Save Package");
+				}
 			})
 			.catch(function (error) {
 				console.log(error);
-			});
+			})
 	}
 
 
@@ -137,53 +142,6 @@ export default class PackageManage5days extends Component {
 		}
 		console.log("price ", this.state.sum_price)
 		return <div />;
-	}
-
-	add7DaysPackageToCart() {
-		const newPackage = {
-			name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-			description: "manage 7 days package",
-			type: 7,
-			day_meal: [
-				{
-					meal_1: this.state.day1_detail[0],
-					meal_2: this.state.day1_detail[1]
-				},
-				{
-					meal_1: this.state.day2_detail[0],
-					meal_2: this.state.day2_detail[1]
-				},
-				{
-					meal_1: this.state.day3_detail[0],
-					meal_2: this.state.day3_detail[1]
-				},
-				{
-					meal_1: this.state.day4_detail[0],
-					meal_2: this.state.day4_detail[1]
-				},
-				{
-					meal_1: this.state.day5_detail[0],
-					meal_2: this.state.day5_detail[1]
-				},
-				{
-					meal_1: this.state.day6_detail[0],
-					meal_2: this.state.day6_detail[1]
-				},
-				{
-					meal_1: this.state.day7_detail[0],
-					meal_2: this.state.day7_detail[1]
-				}
-			],
-			price: this.state.sum_price
-		};
-		axios
-			.post("/api/packages/anonymous/addcart", newPackage)
-			.then(function (response) {
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
 	}
 
 	render() {
@@ -309,12 +267,18 @@ export default class PackageManage5days extends Component {
                   <NutritionManage menu_detail={this.state.all_detail} />
                 </div>
                 <div>
-									<a href='/cart'>
-                  <button className="btn btn-shownutrition" onClick={this.add7DaysPackageToCart()}>
-                    Add to cart
-                  </button>
-									</a>
-                  <button className="btn btn-shownutrition" onClick={this.send7DaysPackage()}>
+                  <a href='/cart'>
+                    <button
+                      className="btn btn-shownutrition"
+                      onClick={() => this.send7DaysPackage("anonymous/addcart")}
+                    >
+                      Add to cart
+                      </button>
+                  </a>
+                  <button
+                    className="btn btn-shownutrition"
+                    onClick={() => this.send7DaysPackage("add")}
+                  >
                     SAVE PACKAGE
                   </button>
                 </div>
