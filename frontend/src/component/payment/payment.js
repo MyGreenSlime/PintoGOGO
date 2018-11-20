@@ -9,6 +9,8 @@ export default class Payment extends Component {
       bill: null,
       isLoaded: false
     };
+
+    this.ddDOM = React.createRef();
   }
 
   componentDidMount() {
@@ -28,6 +30,15 @@ export default class Payment extends Component {
           this.state.bill.order.food_order[0].food_name
         );
       });
+  }
+
+  componentDidUpdate() {
+    if (this.state.isLoaded) {
+      const $ = window.$;
+      this.ddDOM = $(this.ddDOM.current);
+      this.ddDOM.dropdown();
+      console.log(this.ddDOM);
+    }
   }
 
   showMenuList() {
@@ -84,10 +95,9 @@ export default class Payment extends Component {
                 </div>
                 <br />
                 <p>Choose Address</p>
-
                 <div className="dropdown box__addr">
                   <button
-                    ref="toggleInput"
+                    ref={this.ddDOM}
                     className="btn btn-block dropdown-toggle dd__addr"
                     type="button"
                     data-toggle="dropdown"
@@ -106,7 +116,6 @@ export default class Payment extends Component {
                     </a>
                   </div>
                 </div>
-
                 <div className="row">
                   <div className="col">
                     <p>Food cost</p>
