@@ -7,8 +7,7 @@ export default class Map extends Component {
 
     this.divMap = React.createRef();
     this.divSearchBox = React.createRef();
-    this.interval = setInterval(() => this.handleSubmit(), 1000);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleData = this.handleData.bind(this);
     this.state = {
       lat: [],
       lng: [],
@@ -21,7 +20,8 @@ export default class Map extends Component {
     window.lat = 13.736717;
     window.lng = 100.523186;
     window.initMap = this.initMap.bind(this);
-    // window.handleSubmit = this.handleSubmit.bind(this);
+    window.getDistance = this.getDistance.bind(this);
+    window.handleSubmit = this.handleSubmit.bind(this);
 
     loadJS(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyBKOfI6E4o_jRc1K8qBb63RsUKwZAavGSs&libraries=places&callback=initMap"
@@ -36,8 +36,6 @@ export default class Map extends Component {
       center: { lat: 13.736717, lng: 100.523186 },
       zoom: 13
     });
-
-    // console.log(window.myGMap);
 
     // CREATE AUTO-COMPLETE
     window.input = this.divSearchBox.current;
@@ -75,23 +73,28 @@ export default class Map extends Component {
         window.myGMap.setCenter(place.geometry.location);
         window.myGMap.setZoom(17);
       }
-      // console.log("place change");
-      window.lat = window.autocomplete.getPlace().geometry.location.lat();
-      window.lng = window.autocomplete.getPlace().geometry.location.lng();
 
-      window.latlng = new window.google.maps.LatLng(window.lat, window.lng);
-      window.marker.setPosition(window.latlng);
+      var autolat = window.autocomplete.getPlace().geometry.location.lat();
+      var autolng = window.autocomplete.getPlace().geometry.location.lng();
+      console.log("latlng from autocomp: ", autolat, autolng);
+
+      var latlng = new window.google.maps.LatLng(autolat, autolng);
+      window.marker.setPosition(latlng);
     });
 
     // WHEN DRAGEND MARKER
     window.marker.addListener("dragend", function() {
       window.lat = window.marker.getPosition().lat();
       window.lng = window.marker.getPosition().lng();
-      // window.handleSubmit();
     });
   }
 
-  handleSubmit() {
+  async handleSubmit() {
+    // get lat,lng from marker before send data
+    window.lat = window.marker.getPosition().lat();
+    window.lng = window.marker.getPosition().lng();
+
+    // send data to field address
     this.props.handleFromParent(
       window.lat,
       window.lng,
@@ -100,9 +103,13 @@ export default class Map extends Component {
     );
   }
 
-  getDistance() {
+  async getDistance() {
+    // calculate distance from @Computer Building, Kasetsart University
     window.origin = { lat: 13.845955, lng: 100.568674 };
-    window.dest = { lat: window.lat, lng: window.lng };
+    window.dest = {
+      lat: window.marker.getPosition().lat(),
+      lng: window.marker.getPosition().lng()
+    };
 
     window.service = new window.google.maps.DistanceMatrixService();
     window.service.getDistanceMatrix(
@@ -118,13 +125,18 @@ export default class Map extends Component {
           window.destAddr = response.destinationAddresses;
           window.distance = response.rows[0].elements[0].distance;
           window.duration = response.rows[0].elements[0].duration;
-
-          console.log(window.destAddr);
-          console.log(window.distance);
-          console.log(window.duration);
+          // console.log("get dist: ", window.destAddr);
         }
       }
     );
+  }
+
+  async handleData() {
+    const distPromise = window.getDistance();
+    await distPromise;
+    setTimeout(() => {
+      window.handleSubmit();
+    }, 1000);
   }
 
   render() {
@@ -136,7 +148,7 @@ export default class Map extends Component {
               className="form-control input-addr col-8"
               ref={this.divSearchBox}
             />
-            <button className="btn btn-warning col" onClick={this.getDistance}>
+            <button className="btn btn-warning col" onClick={this.handleData}>
               Search
             </button>
           </div>
