@@ -108,7 +108,7 @@ router.post('/add',passport.authenticate('jwt',{ session : false }), function(re
     const error = {}
     var status = {
         ok : 1,
-        message : err
+        message : "add package finish"
     }
     var package = new Package({
         name_package : req.body.name_package,
@@ -122,9 +122,9 @@ router.post('/add',passport.authenticate('jwt',{ session : false }), function(re
     package.save(function(err, savedPackage){
         if (err) {
             error.package = err
-            res.stauts(500).send(error);
+            res.status(500).send(error);
         } else {
-            res.sendStatus(status);
+            res.json(status);
         }
     })
 })
@@ -169,7 +169,7 @@ router.post('/anonymous/addcart',passport.authenticate('jwt',{ session : false }
                     error.package = err
                     res.sendStatus(500).json(error)
                 } else {
-                    staus.message = "increase amount finish"
+                    status.message = "increase amount finish"
                     status.data = {
                         package_id : req.body.package_id
                     }

@@ -16,7 +16,6 @@ export default class NutritionManage extends Component {
 	this.setState({
 		daymeal: nextProps.menu_detail.slice()
 	  }, () => {
-		console.log("this from nutrition22", this.state.daymeal)
 	  })
   }
   
@@ -43,7 +42,6 @@ export default class NutritionManage extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{console.log("this is from render", this.compute("calories"))}
 			<div className='nutritionmanage-box'>
 			price: {Math.round(this.sumprice("price")*0.95)} BAHT ( ลดจาก {this.sumprice("price")})
 			<br/>
@@ -99,7 +97,6 @@ export default class NutritionManage extends Component {
 					</div>
 				</div>
 		</div>
-		{console.log("this is from render2222")}
 			</React.Fragment>
 		);
 	}

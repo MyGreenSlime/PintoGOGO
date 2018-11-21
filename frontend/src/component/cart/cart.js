@@ -95,8 +95,8 @@ class Cart extends Component {
         <CardCart
           handlerFromParant={this.handleData}
           picture={""}
-          name={ord.package_id.type + "days package"}
-          price={ord.package_id.price}
+          name={ord.package_name}
+          price={ord.price}
           amount={ord.amount}
           id={ord.package_id._id}
           type_order="package"
@@ -181,9 +181,6 @@ class Cart extends Component {
                 </button>
               </a>
             </div>
-            <a href="/bill">
-              <button className="btn button--confirm">CONFIRM</button>
-            </a>
           </div>
         </div>
       </React.Fragment>

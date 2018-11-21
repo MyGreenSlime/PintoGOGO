@@ -4,6 +4,8 @@ import { DropTarget } from "react-drag-drop-container";
 import { setMenuDrop } from "../helper";
 import axios from "axios";
 import NutritionManage from "../nutritionmanage";
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class Packagemanage3days extends Component {
   constructor(props) {
@@ -28,11 +30,14 @@ class Packagemanage3days extends Component {
       sum_price: 0,
       isReadyToShow: [false, false, false, false, false, false],
       user: null,
-      show_nutrition: <div/>
+      show_nutrition: <div/>,
+      name_package: "",
+      description: "",
+      package_id: "",
     };
     this.send3DaysPackage = this.send3DaysPackage.bind(this);
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this);
-    // this.add3DaysPackageToCart = this.add3DaysPackageToCart.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -48,11 +53,20 @@ class Packagemanage3days extends Component {
       });
   }
   
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
   send3DaysPackage(path) {
     console.log(path+" package")
     const newPackage = {
-      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "3 days package",
+      package_id: this.state.package_id,
+      // name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
+      name_package: this.state.name_package,
+      // description: "3 days package",
+      description: this.state.description,
       type: 3,
       day_meal: [
         {
@@ -70,9 +84,12 @@ class Packagemanage3days extends Component {
       price: this.state.sum_price
     };
     axios.post("/api/packages/"+path, newPackage)
-      .then(function (response) {
-        // console.log("save packages")
-        console.log(response);
+      .then(response => {
+        console.log("res",response);
+        this.setState({
+          package_id: response.data.data.package_id
+        })
+        console.log("id",this.state.package_id)
         if(path == "add"){
           alert("Save Package");
         }
@@ -124,7 +141,27 @@ class Packagemanage3days extends Component {
   }
 
   render() {
-    const { nutrition } = this.state;
+    const { isAuthenticated, user} = this.props.auth;
+    const users = (
+      <div></div>
+    )
+    const admin = (
+      <div className="row">
+                  <label className="col-sm-4">
+                    Description:
+                  </label>
+                  <div className="col-sm-6">
+                    <textarea className="form-control"
+                    placeholder="description"
+                    type="text"
+                    name="description"
+                    id="description"
+                    onChange={this.handleChange}
+                    value={this.state.description}/>
+                  </div>
+                </div>
+    )
+
     return <React.Fragment>
         <div className="packagemanage-box ">
           <div className="row">
@@ -246,15 +283,38 @@ class Packagemanage3days extends Component {
           </button> */}
 
           {this.state.all_detail && this.state.all_detail.length > 0 && <React.Fragment>
+            <div>
+              <form>
+                <div className="row">
+                  <label className="col-sm-4">
+                    Package name:
+                  </label>
+                  <div className="col-sm-6">
+                    <input className="form-control"
+                    placeholder="Please name your package before save"
+                    type="text"
+                    name="name_package"
+                    id="name_package"
+                    onChange={this.handleChange}
+                    value={this.state.name_package}/>
+                  </div>
+                </div>
+                <br/>
+                <div>
+                  {isAuthenticated? users : ""}
+                  {user.type? admin : ""}
+                </div>
+              </form>
+            </div>
               <div>
                 <NutritionManage menu_detail={this.state.all_detail} />
               </div>
               <div>
-                <a href="/cart">
+                {/* <a href="/cart"> */}
                   <button className="btn btn-shownutrition" onClick={() => this.send3DaysPackage("anonymous/addcart")}>
                     Add to cart
                   </button>
-                </a>
+                {/* </a> */}
                 <button className="btn btn-shownutrition" // onClick={this.testClick()}
                   onClick={() => this.send3DaysPackage("add")}>
                   SAVE PACKAGE
@@ -266,4 +326,12 @@ class Packagemanage3days extends Component {
   }
 }
 
-export default Packagemanage3days;
+Packagemanage3days.propTypes = {
+  auth: propTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(Packagemanage3days);

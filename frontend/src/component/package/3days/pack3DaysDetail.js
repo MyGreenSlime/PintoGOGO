@@ -133,9 +133,9 @@ export default class Package3DaysDetail extends Component {
 				</div>
 				<div className='col-3-sm col-set'></div>
 				</div>
-				<a href="/cart">
+				{/* <a href="/cart"> */}
         <button className='btn btn-set' onClick={this.addPack3DaysAToCart} data-toggle="tooltip" data-placement="top" title="HAVE A GOOD MEAL :)"> Add to cart </button>
-    		</a>
+    		{/* </a> */}
 				</div>
 				</div>
 				<div className='col-md'>

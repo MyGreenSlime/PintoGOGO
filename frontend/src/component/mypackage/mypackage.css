@@ -1,0 +1,48 @@
+.set-frame-pks
+{ 
+  /* margin-top: 70px  !important; */
+  margin: 70px auto 0 auto;
+  padding: 0 !important;
+  width: 65%;
+}
+
+.set-frame-each-pks
+{
+  padding: 0 2% 0 2%;
+}
+
+.set-each-package
+{
+  margin: 30px auto 30px auto;
+  background-color: #f3ece7;
+  color: #7b7b7b;
+  padding: 3%;
+  border-radius: 12px;
+}
+
+.name-each-pks
+{
+  font-weight: bold;
+  margin: 0 auto 15px auto;
+  font-size: 18px;
+  border-radius: 50px;
+  /* background-color: #FAE5D3; */
+  /* width: 80%; */
+  padding: 8px;
+}
+
+.img-pack
+{
+  width: 80%;
+  border-radius: 10px;
+  margin: 10px 0 10px 0;
+}
+
+.view-pks
+{
+  color: #7b7b7b;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #e4dac2;
+  
+}
