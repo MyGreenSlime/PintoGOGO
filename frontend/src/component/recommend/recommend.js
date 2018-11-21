@@ -30,6 +30,13 @@ export default class Recommend extends Component {
     if (!!!isLoaded) {
       return <React.Fragment />;
     }
+    if (!!!menus[0]) {
+      return (
+        <div>
+          
+        </div>
+      )
+    }
 
     return (
       <section className="recommend__block">
