@@ -55,8 +55,9 @@
 {
     background-color: #e4dac2;
     color: #7b7b7b;
-    font-size: 16px;
-    margin: 20px 10px 20px 10px;
+    /* font-size: 16px; */
+    font-size: 1.35vw;
+    margin: 0 10px 20px 10px;
     font-weight: bold;
 }
 

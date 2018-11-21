@@ -63,9 +63,7 @@ class Packagemanage3days extends Component {
     console.log(path+" package")
     const newPackage = {
       package_id: this.state.package_id,
-      // name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
       name_package: this.state.name_package,
-      // description: "3 days package",
       description: this.state.description,
       type: 3,
       day_meal: [
@@ -86,12 +84,15 @@ class Packagemanage3days extends Component {
     axios.post("/api/packages/"+path, newPackage)
       .then(response => {
         console.log("res",response);
-        this.setState({
-          package_id: response.data.data.package_id
-        })
-        console.log("id",this.state.package_id)
         if(path == "add"){
-          alert("Save Package");
+          console.log("save")
+          alert("Save Package Success!");
+        }
+        else if(path == "anonymous/addcart") {
+          this.setState({
+            package_id: response.data.data.package_id
+          })
+          alert("Add to cart success!")
         }
       })
       .catch(function (error) {
@@ -278,9 +279,6 @@ class Packagemanage3days extends Component {
           </div>
 
           {this.checkReady()}
-          {/* <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
-            CLICK TO SHOW NUTRITION
-          </button> */}
 
           {this.state.all_detail && this.state.all_detail.length > 0 && <React.Fragment>
             <div>
@@ -312,7 +310,7 @@ class Packagemanage3days extends Component {
               <div>
                 {/* <a href="/cart"> */}
                   <button className="btn btn-shownutrition" onClick={() => this.send3DaysPackage("anonymous/addcart")}>
-                    Add to cart
+                    ADD TO CART
                   </button>
                 {/* </a> */}
                 <button className="btn btn-shownutrition" // onClick={this.testClick()}

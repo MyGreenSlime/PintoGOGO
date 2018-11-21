@@ -10,7 +10,8 @@ export default class Package3DaysDetail extends Component {
     super(props);
     this.state = {
       packages: [],
-			isLoaded: false
+			isLoaded: false,
+			option: "/package"
 		}
 		this.addPack3DaysAToCart = this.addPack3DaysAToCart.bind(this)
   }
@@ -19,16 +20,22 @@ export default class Package3DaysDetail extends Component {
     console.log("arrive")
         var url = window.location.href;
         var res = url.split("/");
-        // console.log(res[res.length-1]);
         axios.get("/api/packages/" + res[res.length-1])
         .then(res => {
-            // console.log(response);
             this.setState({
               isLoaded : true,
               packages: res.data
             });
             console.log("from package detail",this.state.packages);
-        })
+				})
+				.then(() => {
+					console.log("props", this.props)
+					if (this.props.option === "/mypackage") {
+						this.setState({
+							option: "/mypackage"
+						})
+					}
+			})
 	}
 	
 	addPack3DaysAToCart(){
@@ -65,8 +72,8 @@ export default class Package3DaysDetail extends Component {
 				<div className='set-frame-each-pks'>
 				<div className="backtopks row">
 					<img src="/img/other/left-arrow.png" height="25px" />
-					<a href="/package">
-						BACK TO PACKAGES
+					<a href={this.state.option}>
+						BACK
 					</a>
 				</div>
 				

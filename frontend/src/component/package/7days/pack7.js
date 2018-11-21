@@ -3,6 +3,7 @@ import '../package.css';
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Package7DaysDetail from './pack7DaysDetail.js'
+import NoPackage from '../nopackage';
 
 export default class Pack7 extends Component {
 	constructor(props) {
@@ -59,6 +60,9 @@ export default class Pack7 extends Component {
 		if(!this.state.isLoaded){
       return <div className="loader" />;         
 		}
+		if(!this.state.packages.data[0]) {
+      return <NoPackage />
+    }
 
 		const listPackages = this.state.packages.data.map((pk,index) => 
 			<div key={index}>
