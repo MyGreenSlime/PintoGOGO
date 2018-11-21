@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import './style-packmenu.css'
 import { DragDropContainer } from "react-drag-drop-container"
-import { getMenu } from '../api/api';
+import { getFoodOrSnack } from '../api/api';
 
 class Packmenu extends Component {
 
@@ -18,8 +18,8 @@ class Packmenu extends Component {
   }
 
   componentDidMount() {
-    const newGetMenu = getMenu.bind(this,"menus","isLoaded","")
-    newGetMenu()
+    const newGetFood = getFoodOrSnack.bind(this,"menus","isLoaded","food")
+    newGetFood()
   }
 
   createDivImage(url, name) {

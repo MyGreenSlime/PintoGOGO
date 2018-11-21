@@ -23,14 +23,14 @@
 // };
 import axios from 'axios'
 
-export function getMenu(all_menus, isLoaded, path) {
+export function getFoodOrSnack(menu, isLoaded, path) {
   console.log("get menu outside axios")
-  axios.get("/api/menus/food" + path).then(res => {
+  axios.get("/api/menus/" + path).then(res => {
     console.log("get menu inside axios")
-    const menu = res.data
     this.setState({
-      [all_menus]: menu,
+      [menu]: res.data,
       [isLoaded]: true
     });
-  }).then(()=>{console.log("allmenus ",this.state[all_menus])})
+  }).then(()=>{console.log("allmenus ",this.state[menu])})
 }
+
