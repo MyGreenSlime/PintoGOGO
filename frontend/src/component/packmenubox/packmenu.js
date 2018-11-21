@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import './style-packmenu.css'
 import { DragDropContainer } from "react-drag-drop-container"
+import { getMenu } from '../api/api';
 
 class Packmenu extends Component {
 
@@ -13,14 +14,12 @@ class Packmenu extends Component {
       isLoaded: false,
     }
     this.createDivImage = this.createDivImage.bind(this);
+    
   }
 
   componentDidMount() {
-    axios.get('/api/menus/food')
-      .then(res => {
-        const allmenus = res.data
-        this.setState({ isLoaded: true, menus: allmenus })
-      }).then(() => {console.log(this.state.menus)})
+    const newGetMenu = getMenu.bind(this,"menus","isLoaded","")
+    newGetMenu()
   }
 
   createDivImage(url, name) {
@@ -48,7 +47,7 @@ class Packmenu extends Component {
 
     const img_drag = this.state.menus.map((menu,index) => 
       <React.Fragment key={index}>
-        <img src={menu.img_url} className="menu--image__drop" alt={menu.menu_name}/>
+        <img src={menu.img_url} className="menu--image__drag" alt={menu.menu_name}/>
       </React.Fragment>
     );
 
