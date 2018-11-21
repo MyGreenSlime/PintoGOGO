@@ -53,6 +53,7 @@ class Cart extends Component {
     } else {
       card_food = this.state.order.food_order.map((ord, index) => (
         <CardCart
+          key = {index}
           handlerFromParant={this.handleData}
           picture={ord.food_id.img_url}
           name={ord.food_name}
@@ -73,6 +74,7 @@ class Cart extends Component {
     } else {
       card_snack = this.state.order.snack_order.map((ord, index) => (
         <CardCart
+          key = {index}
           handlerFromParant={this.handleData}
           picture={ord.snack_id.img_url}
           name={ord.snack_name}
@@ -93,6 +95,7 @@ class Cart extends Component {
     } else {
       card_package = this.state.order.package_order.map((ord, index) => (
         <CardCart
+          key = {index}
           handlerFromParant={this.handleData}
           picture={""}
           name={ord.package_id.type + "days package"}
