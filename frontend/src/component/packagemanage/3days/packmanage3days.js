@@ -36,8 +36,7 @@ class Packagemanage3days extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("/api/users/profile")
+    axios.get("/api/users/profile")
       .then(res => {
         this.setState({
           user: res.data.user_name
