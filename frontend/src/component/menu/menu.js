@@ -114,7 +114,7 @@ class Menu extends Component {
 
         <div className="row">
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-4">
               {menus[firstImg] && (
                 <CardMenu
                   name={menus[firstImg].menu_name}
@@ -127,7 +127,7 @@ class Menu extends Component {
               )}
             </div>
             
-            <div className="col-md-4">
+            <div className="col-4">
               {menus[secondImg] && (
                 <CardMenu
                   name={menus[secondImg].menu_name}
@@ -140,7 +140,7 @@ class Menu extends Component {
               )}
             </div>
             
-            <div className="col-md-4">
+            <div className="col-4">
               {menus[thirdImg] && (
                 <CardMenu
                   name={menus[thirdImg].menu_name}
