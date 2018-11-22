@@ -33,9 +33,11 @@ class Package extends Component {
     const Package = this.dayComponents[day];
 		return (
       <React.Fragment>
-        <div className='set-frame-pks'>
-          <ChoicePackage onSetDay={this.setDay} />
-          <Package />
+        <div className='set-screen-pack'>
+          <div className='set-frame-pks'>
+            <ChoicePackage onSetDay={this.setDay} />
+            <Package />
+          </div>
         </div>
 			</React.Fragment>
 		);

@@ -30,9 +30,10 @@ import Package from "./component/package/package.js";
 import PackageManage from "./component/packagemanage/packagemanage.js";
 import Profile from "./component/profile/profile";
 import Footer from "./component/footer/footer.js";
-import Pack3days from "./component/package/3days/pack3DaysDetail.js";
-import Pack5days from "./component/package/5days/pack5DaysDetail.js";
-import Pack7days from "./component/package/7days/pack7DaysDetail.js";
+import Pack3days from "./component/package/3days/pack3DaysDetail.js"
+import Pack5days from "./component/package/5days/pack5DaysDetail.js"
+import Pack7days from "./component/package/7days/pack7DaysDetail.js"
+import MyPackage from "./component/mypackage/mypackage.js"
 //---------------pat------------------------------------
 import Login from "./component/login/mainlogin/login";
 
@@ -71,29 +72,31 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              {/* <Route path="/demomenu" component={DemoMenu} /> */}
-              <Route path="/add/menu" component={Addmenu} />
-              <Route path="/add/snack" component={Addsnack} />
-              <Route path="/show/menu" component={Menu} />
-              <Route path="/show/snack" component={Snack} />
-              <Route path="/register" component={Register} />
-              <Route path="/login" component={Login} />
-              <Route path="/package" component={Package} />
-              <Route path="/packagemanage" component={PackageManage} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/cart" component={Cart} />
-              <Route path="/menudetail" component={MenuDetail} />
-              <Route path="/3days" component={Pack3days} />
-              <Route path="/5days" component={Pack5days} />
-              <Route path="/7days" component={Pack7days} />
-              <Route path="/snackdetail" component={SnackDetail} />
-              <Route path="/editmenudetail" component={EditMenuDetail} />
-              {/* <Route path="/editsnackdetail" component={EditSnackDetail} /> */}
-              <Route paht="/bill" component={Payment} />
-              <Route path="*" component={UnderConstruct} />
-            </Switch>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                {/* <Route path="/demomenu" component={DemoMenu} /> */}
+                <Route path="/add/menu" component={Addmenu} />
+                <Route path="/add/snack" component={Addsnack} />
+                <Route path="/show/menu" component={Menu} />
+                <Route path="/show/snack" component={Snack} />
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/package" component={Package} />
+                <Route path="/packagemanage" component={PackageManage} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/cart" component={Cart}/>
+                <Route path="/menudetail" component={MenuDetail} />
+                <Route path="/3days" component={Pack3days} />
+                {/* <Route path="/3days" render={props => (<Pack3days {...props} />)} /> */}
+                <Route path="/5days" component={Pack5days} />
+                <Route path="/7days" component={Pack7days} />
+                <Route path="/mypackage" component={MyPackage} />
+                <Route path="/snackdetail" component={SnackDetail} />
+                <Route path="/editmenudetail" component={EditMenuDetail} />
+                {/* <Route path="/editsnackdetail" component={EditSnackDetail} /> */}
+                <Route paht="/bill" component={Payment}/>
+                <Route path="*" component={UnderConstruct}/>
+              </Switch>
             <Footer />
           </div>
         </Router>

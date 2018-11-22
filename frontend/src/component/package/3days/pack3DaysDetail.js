@@ -10,7 +10,8 @@ export default class Package3DaysDetail extends Component {
     super(props);
     this.state = {
       packages: [],
-			isLoaded: false
+			isLoaded: false,
+			option: "/package"
 		}
 		this.addPack3DaysAToCart = this.addPack3DaysAToCart.bind(this)
   }
@@ -19,16 +20,22 @@ export default class Package3DaysDetail extends Component {
     console.log("arrive")
         var url = window.location.href;
         var res = url.split("/");
-        // console.log(res[res.length-1]);
         axios.get("/api/packages/" + res[res.length-1])
         .then(res => {
-            // console.log(response);
             this.setState({
               isLoaded : true,
               packages: res.data
             });
             console.log("from package detail",this.state.packages);
-        })
+				})
+				.then(() => {
+					console.log("props", this.props)
+					if (this.props.option === "/mypackage") {
+						this.setState({
+							option: "/mypackage"
+						})
+					}
+			})
 	}
 	
 	addPack3DaysAToCart(){
@@ -62,11 +69,12 @@ export default class Package3DaysDetail extends Component {
 
 		return (
 			<React.Fragment>
+				<div className='set-screen-pack'>
 				<div className='set-frame-each-pks'>
 				<div className="backtopks row">
 					<img src="/img/other/left-arrow.png" height="25px" />
-					<a href="/package">
-						BACK TO PACKAGES
+					<a href={this.props.location.state.prevLocation}>
+						BACK
 					</a>
 				</div>
 				
@@ -133,13 +141,14 @@ export default class Package3DaysDetail extends Component {
 				</div>
 				<div className='col-3-sm col-set'></div>
 				</div>
-				<a href="/cart">
+				{/* <a href="/cart"> */}
         <button className='btn btn-set' onClick={this.addPack3DaysAToCart} data-toggle="tooltip" data-placement="top" title="HAVE A GOOD MEAL :)"> Add to cart </button>
-    		</a>
+    		{/* </a> */}
 				</div>
 				</div>
 				<div className='col-md'>
         	<Nutrition />
+				</div>
 				</div>
 				</div>
 				</div>

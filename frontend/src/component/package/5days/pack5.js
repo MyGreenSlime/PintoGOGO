@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import '../package.css';
 import axios from "axios";
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import Package5DaysDetail from './pack5DaysDetail.js'
+import NoPackage from '../nopackage';
+import LinkWithPrev from '../../LinkWithPrev/linkwithprev.js'
 
 export default class Pack5 extends Component {
 	constructor(props) {
@@ -12,7 +12,6 @@ export default class Pack5 extends Component {
       isLoaded: false, 
     }
 		this.createDivPackage = this.createDivPackage.bind(this);
-		this.sendToPackageDetail = this.sendToPackageDetail.bind(this);
   }
 
   componentDidMount() {
@@ -38,20 +37,13 @@ export default class Pack5 extends Component {
 					<p className="name-each-pks">{curPack.name_package}</p>
 					<p>{curPack.description}</p>
 				</div>
-				<Link to={'/5days/'+curPack._id}>
-					<button className="btn view-pks" onClick={this.sendToPackageDetail.bind(this)}>VIEW PACKAGE</button>
-				</Link>
+				<LinkWithPrev to={"/5days/"+curPack._id}>
+					<button className="btn view-pks">View Package</button>
+				</LinkWithPrev>
 			</div>
       </div>
 		</React.Fragment>
 		return divpk;
-	}
-	
-	sendToPackageDetail() {	
-		return <div>
-			<Route path='/5days/:packageId' component={Package5DaysDetail} />
-			{console.log("send")}
-		</div>
 	}
 
 	render() {
@@ -59,6 +51,9 @@ export default class Pack5 extends Component {
 		if(!this.state.isLoaded){
       return <div className="loader" />;         
 		}
+		if(!this.state.packages.data[0]) {
+      return <NoPackage />
+    }
 
 		const listPackages = this.state.packages.data.map((pk,index) => 
 			<div key={index}>

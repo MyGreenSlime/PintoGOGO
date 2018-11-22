@@ -4,9 +4,11 @@ import { DropTarget } from "react-drag-drop-container";
 import { setMenuDrop } from '../helper';
 import axios from "axios";
 import NutritionManage from "../nutritionmanage"
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 
-export default class PackageManage5days extends Component {
+class Packagemanage5days extends Component {
 
   constructor(props) {
     super(props);
@@ -25,11 +27,14 @@ export default class PackageManage5days extends Component {
       isLoaded: false,
       sum_price: 0,
       isReadyToShow: [false, false, false, false, false, false, false, false, false, false],
-      user: null
+      user: null,
+      name_package: "",
+      description: "",
+      package_id: "",
     };
     this.send5DaysPackage = this.send5DaysPackage.bind(this)
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this)
-    // this.add5DaysPackageToCart = this.add5DaysPackageToCart.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
   
   componentDidMount() {
@@ -65,6 +70,12 @@ export default class PackageManage5days extends Component {
     })
   }
 
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
   checkReady() {
     let all_ready = true;
     this.state.isReadyToShow.map((ready, index) => {
@@ -90,8 +101,9 @@ export default class PackageManage5days extends Component {
   send5DaysPackage(path) {
     console.log(path + " package")
     const newPackage = {
-      name_package: this.state.user + new Date().toISOString().replace(/:/g, '-'),
-      description: "5 days package",
+      package_id: this.state.package_id,
+      name_package: this.state.name_package,
+      description: this.state.description,
       type: 5,
       day_meal: [
         {
@@ -117,19 +129,45 @@ export default class PackageManage5days extends Component {
       price: this.state.sum_price
     };
     axios.post("/api/packages/" + path, newPackage)
-      .then(function (response) {
-        // console.log("save packages")
-        console.log(response);
-        if (path == "add") {
-          alert("Save Package");
-        }
-      })
+      .then(response => {
+        console.log("res",response);
+        if(path == "add"){
+					console.log("save")
+					alert("Save Package success!");
+				}
+				else if(path == "anonymous/addcart") {
+					this.setState({
+						package_id: response.data.data.package_id
+					})
+					alert("Add to cart success!")
+				}
+			})
       .catch(function (error) {
         console.log(error);
       })
   }
 
 	render() {
+    const { isAuthenticated, user} = this.props.auth;
+    const users = (
+      <div></div>
+    )
+    const admin = (
+      <div className="row">
+                  <label className="col-sm-4">
+                    Description:
+                  </label>
+                  <div className="col-sm-6">
+                    <textarea className="form-control"
+                    placeholder="description"
+                    type="text"
+                    name="description"
+                    id="description"
+                    onChange={this.handleChange}
+                    value={this.state.description}/>
+                  </div>
+                </div>
+    )
 		return <React.Fragment>
         <div className="packagemanage-box ">
           <div className="row">
@@ -213,22 +251,41 @@ export default class PackageManage5days extends Component {
             <div className="col-3-sm col-set" />
           </div>
           {this.checkReady()}
-          {/* <button className="btn btn-shownutrition" onClick={this.onSendMenuDetail}>
-            CLICK TO SHOW DETAIL
-          </button> */}
+
           {this.state.all_detail && this.state.all_detail.length > 0 && this.state.isLoaded && <React.Fragment>
+            <div>
+              <form>
+                <div className="row">
+                  <label className="col-sm-4">
+                    Package name:
+                  </label>
+                  <div className="col-sm-6">
+                    <input className="form-control"
+                    placeholder="Please name your package before save"
+                    type="text"
+                    name="name_package"
+                    id="name_package"
+                    onChange={this.handleChange}
+                    value={this.state.name_package}/>
+                  </div>
+                </div>
+                <br/>
+                <div>
+                  {isAuthenticated? users : ""}
+                  {user.type? admin : ""}
+                </div>
+              </form>
+            </div>
                 <div>
                   <NutritionManage menu_detail={this.state.all_detail} />
                 </div>
                 <div>
-                  <a href='/cart'>
                     <button
                       className="btn btn-shownutrition"
                       onClick={() => this.send5DaysPackage("anonymous/addcart")}
                     >
-                      Add to cart
+                      ADD TO CART
                       </button>
-                  </a>
                   <button
                     className="btn btn-shownutrition"
                     onClick={() => this.send5DaysPackage("add")}
@@ -241,3 +298,13 @@ export default class PackageManage5days extends Component {
       </React.Fragment>;
 	}
 }
+
+Packagemanage5days.propTypes = {
+  auth: propTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(Packagemanage5days);

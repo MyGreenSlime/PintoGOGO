@@ -166,7 +166,7 @@ class Register extends Component {
                         })}
                         name="password1"
                         id="Password"
-                        placeholder="password must least 6 character"
+                        placeholder="password must least 6 characters"
                         onChange={this.handleChange}
                         value={this.state.password1}
                       />

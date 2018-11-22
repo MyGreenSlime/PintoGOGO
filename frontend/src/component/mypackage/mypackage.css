@@ -1,0 +1,79 @@
+
+.set-screen-mypack {
+    background: url("/img/cart/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 1% 0 5% 0 ;
+    min-height: 40vw;
+    /* font-size: 2vw; */
+}
+
+.nomypack{
+    margin: 30px auto 30px auto;
+  background-color: #f3ece7;
+  color: #7b7b7b;
+  padding: 3%;
+  border-radius: 12px;
+}
+
+.set-frame-mypks
+{ 
+  /* margin-top: 70px  !important; */
+  margin: 70px auto 0 auto;
+  padding: 0 !important;
+  width: 60%;
+}
+
+.set-frame-each-mypks
+{
+  padding: 0 2% 0 2%;
+}
+
+.set-each-mypackage
+{
+  margin: 30px auto 30px auto;
+  background-color: #f3ece7;
+  color: #7b7b7b;
+  padding: 3%;
+  border-radius: 12px;
+}
+
+.dis-grid
+{
+  display: grid;
+  grid-template-rows: 70% 50%;
+}
+
+.detail 
+{
+    margin-bottom: 8%;
+}
+
+.name-each-mypks
+{
+  font-weight: bold;
+  margin: 0 auto 15px auto;
+  font-size: 20px;
+  border-radius: 50px;
+  /* background-color: #FAE5D3; */
+  /* width: 80%; */
+  padding: 8px;
+}
+
+.img-mypack
+{
+  width: 70%;
+  border-radius: 10px;
+  margin: 10px 0 10px 0;
+}
+
+.view-mypks
+{
+  color: #7b7b7b;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e4dac2;
+  width: auto;
+  margin: 5px;
+  
+}
