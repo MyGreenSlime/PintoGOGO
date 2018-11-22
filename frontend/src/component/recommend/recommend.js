@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../recommend/style-recommend.css";
 import axios from "axios";
 import {Link} from 'react-router-dom'
+import { getFoodOrSnack } from "../api/api";
 
 export default class Recommend extends Component {
   constructor() {
@@ -13,17 +14,8 @@ export default class Recommend extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("/api/menus/food")
-      .then(res => {
-        this.setState({
-          isLoaded: true,
-          menus: res.data
-        });
-      })
-      .then(() => {
-        console.log("menu: ", this.state.menus);
-      });
+    const get_food = getFoodOrSnack.bind(this,"menus","isLoaded","food");
+    get_food();
   }
   render() {
     const { menus, isLoaded } = this.state;
