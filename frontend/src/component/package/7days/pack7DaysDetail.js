@@ -55,6 +55,7 @@ export default class Package7DaysDetail extends Component {
 
 		return (
 			<React.Fragment>
+				<div className='set-screen-pack'>
 				<div className='set-frame-each-pks'>
 				<div className="backtopks row">
 					<img src="/img/other/left-arrow.png" height="25px" />
@@ -207,6 +208,7 @@ export default class Package7DaysDetail extends Component {
 				</div>
 				<div className='col-md'>
         	<Nutrition />
+				</div>
 				</div>
 				</div>
 				</div>

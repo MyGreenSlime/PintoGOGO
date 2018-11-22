@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
+.set-screen-pack {
+  background: url("/img/cart/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 1% 0 5% 0 ;
+  min-height: 40vw;
+  /* font-size: 2vw; */
+}
+
 .set-frame-pks
 { 
   /* margin-top: 70px  !important; */

@@ -37,7 +37,7 @@ export default class Pack7 extends Component {
 					<p className="name-each-pks">{curPack.name_package}</p>
 					<p>{curPack.description}</p>
 				</div>
-				<LinkWithPrev to={"/3days/"+curPack._id}>
+				<LinkWithPrev to={"/7days/"+curPack._id}>
 					<button className="btn view-pks">View Package</button>
 				</LinkWithPrev>
 			</div>
