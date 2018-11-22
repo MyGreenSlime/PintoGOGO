@@ -29,5 +29,5 @@ export function getProfile(profile, isLoaded) {
         [profile]: res.data,
         [isLoaded]: true
       });
-  }).then( () => {console.log(this.state[profile])});
+  }).then( () => {console.log("user ",this.state[profile])});
 }
