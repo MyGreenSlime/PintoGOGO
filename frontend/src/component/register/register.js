@@ -65,13 +65,20 @@ class Register extends Component {
   }
 
   handleData(lat, lng, dest, dist) {
-    this.setState({
-      lat: lat,
-      lng: lng,
-      dest: dest,
-      dist: dist
-    });
-    // console.log("reg dest: ", this.state.dest);
+    this.setState(
+      {
+        lat: lat,
+        lng: lng,
+        dest: dest,
+        dist: dist
+      },
+      () => {
+        console.log("reg lat: ", this.state.lat);
+        console.log("reg lng: ", this.state.lng);
+        console.log("reg dest: ", this.state.dest);
+        console.log("reg dist: ", this.state.dist);
+      }
+    );
   }
 
   render() {
@@ -287,8 +294,7 @@ class Register extends Component {
             </div>
             <br />
             <button width="auto" type="submit" className="btn button-confirm">
-              {" "}
-              CONFIRM{" "}
+              {/* onClick={() => this.props.handleDataFromGmap */} CONFIRM{" "}
             </button>
           </form>
         </div>
