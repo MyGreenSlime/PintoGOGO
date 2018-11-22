@@ -36,10 +36,10 @@ class EditProfile extends Component {
 
   handleSubmit(e) {
     const editUser = {
-      first_name: this.state.currentUser.first_name,
-      last_name: this.state.currentUser.last_name,
-      email: this.state.currentUser.email,
-      phonenumber: this.state.currentUser.phonenumber
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      email: this.state.email,
+      phonenumber: this.state.phonenumber
     };
     axios.put("api/users/edit/profile", editUser).then(response => {
       console.log("res", response);
