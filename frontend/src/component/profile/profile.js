@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import axios from "axios";
 
-class Register extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -157,7 +157,7 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
+Profile.propTypes = {
   registerUser: propTypes.func.isRequired,
   auth: propTypes.object.isRequired,
   errors: propTypes.object.isRequired
@@ -171,4 +171,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { registerUser }
-)(withRouter(Register));
+)(withRouter(Profile));

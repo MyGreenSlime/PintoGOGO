@@ -34,6 +34,7 @@ import Pack3days from "./component/package/3days/pack3DaysDetail.js"
 import Pack5days from "./component/package/5days/pack5DaysDetail.js"
 import Pack7days from "./component/package/7days/pack7DaysDetail.js"
 import MyPackage from "./component/mypackage/mypackage.js"
+import EditProfile from "./component/editprofile/editprofile.js"
 //---------------pat------------------------------------
 import Login from "./component/login/mainlogin/login";
 
@@ -84,6 +85,7 @@ class App extends Component {
                 <Route path="/package" component={Package} />
                 <Route path="/packagemanage" component={PackageManage} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/editprofile" component={EditProfile} />
                 <Route path="/cart" component={Cart}/>
                 <Route path="/menudetail" component={MenuDetail} />
                 <Route path="/3days" component={Pack3days} />
