@@ -7,28 +7,31 @@ export default class Map extends Component {
 
     this.divMap = React.createRef();
     this.divSearchBox = React.createRef();
-    this.handleData = this.handleData.bind(this);
+    this.handleDataFromGmap = this.handleDataFromGmap.bind(this);
     this.state = {
-      lat: [],
-      lng: [],
-      dest: [],
-      dist: []
+      lat: "",
+      lng: "",
+      dest: "",
+      dist: ""
     };
   }
 
   componentDidMount() {
     window.lat = 13.736717;
     window.lng = 100.523186;
+    window.stateChange = false;
     window.initMap = this.initMap.bind(this);
+    window.getPlaceId = this.getPlaceId.bind(this);
     window.getDistance = this.getDistance.bind(this);
     window.handleSubmit = this.handleSubmit.bind(this);
+    window.handleDataFromGmap = this.handleDataFromGmap.bind(this);
 
     loadJS(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyBKOfI6E4o_jRc1K8qBb63RsUKwZAavGSs&libraries=places&callback=initMap"
     );
   }
 
-  initMap(position) {
+  initMap() {
     // console.log(this.divMap.current);
 
     // CREATE MAP
@@ -48,13 +51,14 @@ export default class Map extends Component {
     window.marker = new window.google.maps.Marker({
       position: new window.google.maps.LatLng(window.lat, window.lng),
       map: window.myGMap,
-      label: {
-        text: "pick up here",
-        color: "white",
-        fontSize: "9px"
-      },
       draggable: true
     });
+
+    // CREATE INFOWINDOW
+    window.infowindow = new window.google.maps.InfoWindow({
+      maxWidth: 180
+    });
+    window.getPlaceId();
 
     // WHEN PLACE CHANGED
     window.autocomplete.addListener("place_changed", function() {
@@ -74,37 +78,37 @@ export default class Map extends Component {
         window.myGMap.setZoom(17);
       }
 
-      var autolat = window.autocomplete.getPlace().geometry.location.lat();
-      var autolng = window.autocomplete.getPlace().geometry.location.lng();
-      console.log("latlng from autocomp: ", autolat, autolng);
+      window.lat = window.autocomplete.getPlace().geometry.location.lat();
+      window.lng = window.autocomplete.getPlace().geometry.location.lng();
+      // console.log("latlng from autocomp: ", window.lat, window.lng);
 
-      var latlng = new window.google.maps.LatLng(autolat, autolng);
+      var latlng = new window.google.maps.LatLng(window.lat, window.lng);
       window.marker.setPosition(latlng);
+
+      window.getPlaceId();
+      window.handleDataFromGmap();
     });
 
     // WHEN DRAGEND MARKER
     window.marker.addListener("dragend", function() {
       window.lat = window.marker.getPosition().lat();
       window.lng = window.marker.getPosition().lng();
+      window.getPlaceId();
+      window.getDistance();
+      window.handleDataFromGmap();
+    });
+
+    // WHEN MOUSEOVER MARKER & MOUSEOUT
+    window.marker.addListener("mouseover", function() {
+      window.infowindow.open(window.myGMap, window.marker);
+    });
+    window.marker.addListener("mouseout", function() {
+      window.infowindow.close(window.myGMap, window.marker);
     });
   }
 
-  async handleSubmit() {
-    // get lat,lng from marker before send data
-    window.lat = window.marker.getPosition().lat();
-    window.lng = window.marker.getPosition().lng();
-
-    // send data to field address
-    this.props.handleFromParent(
-      window.lat,
-      window.lng,
-      window.destAddr,
-      window.distance
-    );
-  }
-
   async getDistance() {
-    // calculate distance from @Computer Building, Kasetsart University
+    // Calculate distance from @Computer Building, Kasetsart University
     window.origin = { lat: 13.845955, lng: 100.568674 };
     window.dest = {
       lat: window.marker.getPosition().lat(),
@@ -131,12 +135,73 @@ export default class Map extends Component {
     );
   }
 
-  async handleData() {
+  getPlaceId() {
+    // Find a place id from GoogleMap Geocoder
+    window.geocoder = new window.google.maps.Geocoder();
+    window.latlng = {
+      lat: parseFloat(window.lat),
+      lng: parseFloat(window.lng)
+    };
+
+    window.geocoder.geocode({ location: window.latlng }, function(
+      results,
+      status
+    ) {
+      if (status === window.google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          window.placeid = results[1].place_id;
+          // console.log("place id: ", results[1].place_id);
+        } else {
+          window.alert("No results found");
+        }
+      } else {
+        window.alert("Geocoder failed due to: " + status);
+      }
+    });
+
+    // Get a place name from place id
+    setTimeout(() => {
+      window.service = new window.google.maps.places.PlacesService(
+        window.myGMap
+      );
+      window.service.getDetails(
+        {
+          placeId: window.placeid
+        },
+        function(place) {
+          window.infowindow.setContent(
+            "<div><strong>" +
+              place.name +
+              "</strong>" +
+              place.formatted_address +
+              "</div>"
+          );
+        }
+      );
+    }, 1000);
+  }
+
+  async handleSubmit() {
+    // Get lat,lng from marker before send data
+    window.lat = window.marker.getPosition().lat();
+    window.lng = window.marker.getPosition().lng();
+
+    // Send data to field address
+    this.props.handleFromParent(
+      window.lat,
+      window.lng,
+      window.destAddr,
+      window.distance
+    );
+  }
+
+  async handleDataFromGmap() {
     const distPromise = window.getDistance();
     await distPromise;
     setTimeout(() => {
       window.handleSubmit();
     }, 1000);
+    console.log("func handleDataFromGmap worked");
   }
 
   render() {
@@ -145,12 +210,9 @@ export default class Map extends Component {
         <div className="input-button ">
           <div className="center row">
             <input
-              className="form-control input-addr col-8"
+              className="form-control input-addr"
               ref={this.divSearchBox}
             />
-            <button className="btn btn-warning col" onClick={this.handleData}>
-              Search
-            </button>
           </div>
         </div>
         <br />
