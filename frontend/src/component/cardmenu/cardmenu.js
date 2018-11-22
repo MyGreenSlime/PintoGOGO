@@ -64,7 +64,7 @@ class cardMenu extends Component {
             </Link>
         </div>
 
-        <div className="row">
+        <div className="row cardmenu__undermenu--minwidth">
           <div className="col cardmenu__text">
             <p>
               {this.props.name}<br/>

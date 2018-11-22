@@ -53,7 +53,6 @@ class Cart extends Component {
     } else {
       card_food = this.state.order.food_order.map((ord, index) => (
         <CardCart
-          key = {index}
           handlerFromParant={this.handleData}
           picture={ord.food_id.img_url}
           name={ord.food_name}
@@ -74,7 +73,6 @@ class Cart extends Component {
     } else {
       card_snack = this.state.order.snack_order.map((ord, index) => (
         <CardCart
-          key = {index}
           handlerFromParant={this.handleData}
           picture={ord.snack_id.img_url}
           name={ord.snack_name}
@@ -95,7 +93,6 @@ class Cart extends Component {
     } else {
       card_package = this.state.order.package_order.map((ord, index) => (
         <CardCart
-          key = {index}
           handlerFromParant={this.handleData}
           picture={""}
           name={ord.package_id.type + "days package"}
@@ -126,32 +123,45 @@ class Cart extends Component {
     return <React.Fragment>
       <div className="set-screen-cart">
         <div className="linkbutton">
-          <div className="imgcart">
-            <a href="/">
-              <img src="/img/cart/plan.png" alt="plan icon" height="40px" />
-            </a>
-            <p>PLAN</p>
+          <div className="row cart__menubar">
+            <div className="col-1"></div>
+            <div className="col-1">
+              <a href="/">
+                <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
+              </a>
+              <p>PLAN</p>
+            </div>
+            <div className="col-1">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+            
+            <div className="col-1">
+              <img src="/img/cart/cart.png" alt="cart icon" width="50%" />
+              <p>CART</p>
+            </div>
+            <div className="col-1">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+            <div className="col-1">
+              <img src="/img/cart/payment.png"  alt="payment icon" width="50%" />
+              <p>PAYMENT</p>
+            </div>
+            <div className="col-1">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+            <div className="col-1">
+              <img src="/img/cart/delivery.png" alt="delivery icon" width="50%" />
+              <p>DELIVERY</p>
+            </div>
+            <div className="col-1">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+            <div className="col-1">
+              <img src="/img/cart/enjoy.png" alt="enjoy icon" width="50%" />
+              <p>ENJOY</p>
+            </div>
           </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/cart.png" alt="cart icon" height="40px" />
-            <p>CART</p>
-          </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/payment.png"  alt="payment icon" height="40px" />
-            <p>PAYMENT</p>
-          </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/delivery.png" alt="delivery icon" height="40px" />
-            <p>DELIVERY</p>
-          </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/enjoy.png" alt="enjoy icon" height="40px" />
-            <p>ENJOY</p>
-          </div>
+          
         </div>
 
           <div className="cartbox">
@@ -160,9 +170,9 @@ class Cart extends Component {
             </div>
             <div className="subhead">
               <div className="row">
-                <div className="col-6" />
-                <div className="col-3 amountzone">AMOUNT</div>
-                <div className="col-3">PRICE</div>
+                <div className="col-md-6" />
+                <div className="col-md-3 col-6 amountzone">AMOUNT</div>
+                <div className="col-md-3 col-6">PRICE</div>
               </div>
             </div>
             <div>

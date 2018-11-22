@@ -75,7 +75,7 @@ class CardCart extends Component {
         <div className="cardcartbox">
           <hr />
           <div className="row rowcard">
-            <div className="col-md-3 col-5 img__block">
+            <div className="col-md-2 d-none d-sm-block img__block">
               <img
                 src={this.props.picture}
                 width="60%"
@@ -85,7 +85,10 @@ class CardCart extends Component {
             <div className="col-md-3 col-7 menuname__block">
               <p>{this.props.name}</p>
             </div>
-            <div className="col-md-3 col-9 editamount">
+            <div className="col-md-1 col-5">
+              DELETE
+            </div>
+            <div className="col-md-3 col-8 editamount">
               <div className="row">
                 <div
                   className="minusbutton "
@@ -99,7 +102,7 @@ class CardCart extends Component {
                     placeholder={this.state.inputField}
                     value={this.state.inputField}
                     onChange={this.handleChange}
-                    style={{ width: "2rem", height: "30px" }}
+                    style={{ width: "3rem", height: "30px" }}
                   />
                 </div>
                 <div className="addbutton" onClick={this.increment.bind(this)}>

@@ -18,6 +18,8 @@
     
     .cardmenu__image{    
         cursor: pointer;
+        width: 17em;
+        text-align: center;
         /* grid-column: 1 / 3; */
     }
     
@@ -41,4 +43,7 @@
         float: left;
     }
     
+    .cardmenu__undermenu--minwidth{
+        width: 280px;
+    }
 }

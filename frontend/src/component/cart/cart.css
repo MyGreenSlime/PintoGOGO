@@ -3,6 +3,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     padding: 1% 0 10% 0 ;
+    font-size: 11px;
 }
 
 .linkbutton{
@@ -12,9 +13,12 @@
     font-weight: bold;
 }
 
+.cart__menubar{
+    padding-top: 10%;
+    margin-right: 0;
+}
+
 .imgcart{
-    display: inline-block;
-    margin: 2%;
     cursor: pointer;
 }
 .imgcart:hover{
@@ -23,7 +27,7 @@
 .cartbox{
     font-family: 'Quicksand', sans-serif;
     font-size: 12px;
-    width: 55%;
+    width: 80%;
     padding: auto;
     margin-left: auto;
     margin-right: auto;

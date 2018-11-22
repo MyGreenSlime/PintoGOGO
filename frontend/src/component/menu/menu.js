@@ -36,7 +36,6 @@ class Menu extends Component {
   }
 
   rightClick(e) {
-    console.log("Click!!!!");
     this.setState({
       firstImg: this.state.firstImg + 6,
       secondImg: this.state.secondImg + 6,
@@ -49,7 +48,6 @@ class Menu extends Component {
   }
 
   leftClick(e) {
-    console.log("Click!!!!");
     this.setState({
       firstImg: this.state.firstImg - 6,
       secondImg: this.state.secondImg - 6,
@@ -78,7 +76,7 @@ class Menu extends Component {
       this.state.forthImg <= this.state.menus.length && 
       this.state.fifthImg <= this.state.menus.length && 
       this.state.sixthImg <= this.state.menus.length && this.state.menus.length != 0) {
-      img = <img className="imgbutton" src="/img/other/right-arrow.png" alt="right arrow icon" height="20" />
+      img = <img src="/img/other/right-arrow.png" alt="right arrow icon" height="20" />
     }
     console.log("right ",img)
     return img;
@@ -156,45 +154,42 @@ class Menu extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="row">
-              <div className="col-md-4">
-                {menus[forthImg] && (
+            <div className="col-md-4">
+              {menus[forthImg] && (
+                <CardMenu
+                  name={menus[forthImg].menu_name}
+                  picture={menus[forthImg].img_url}
+                  calories={menus[forthImg].calories}
+                  id = {menus[forthImg]._id}
+                  price = {menus[forthImg].price}
+                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
+                />
+              )}
+            </div>
+            <div className="col-md-4">
+              {menus[fifthImg] && (
                   <CardMenu
-                    name={menus[forthImg].menu_name}
-                    picture={menus[forthImg].img_url}
-                    calories={menus[forthImg].calories}
-                    id = {menus[forthImg]._id}
-                    price = {menus[forthImg].price}
-                    onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
+                    name={menus[fifthImg].menu_name}
+                    picture={menus[fifthImg].img_url}
+                    calories={menus[fifthImg].calories}
+                    id = {menus[fifthImg]._id}
+                    price = {menus[fifthImg].price}
+                    onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
                   />
                 )}
-              </div>
-              <div className="col-md-4">
-                {menus[fifthImg] && (
-                    <CardMenu
-                      name={menus[fifthImg].menu_name}
-                      picture={menus[fifthImg].img_url}
-                      calories={menus[fifthImg].calories}
-                      id = {menus[fifthImg]._id}
-                      price = {menus[fifthImg].price}
-                      onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
-                    />
-                  )}
-              </div>
-                
-              <div className="col-md-4">
-                {menus[sixthImg] && (
-                  <CardMenu
-                    name={menus[sixthImg].menu_name}
-                    picture={menus[sixthImg].img_url}
-                    calories={menus[sixthImg].calories}
-                    id = {menus[sixthImg]._id}
-                    price = {menus[sixthImg].price}
-                    onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
-                  />
-                )}
-              </div>
-                
+            </div>
+              
+            <div className="col-md-4">
+              {menus[sixthImg] && (
+                <CardMenu
+                  name={menus[sixthImg].menu_name}
+                  picture={menus[sixthImg].img_url}
+                  calories={menus[sixthImg].calories}
+                  id = {menus[sixthImg]._id}
+                  price = {menus[sixthImg].price}
+                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -202,8 +197,7 @@ class Menu extends Component {
 
         <div className="mergerow--right">
           <div onClick={this.rightClick.bind(this)}>
-            {this.checkLastMenuSet()}
-          </div>
+          {this.checkLastMenuSet()}</div>
         </div>
         {/* <div /> */}
         
