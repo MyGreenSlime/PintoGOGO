@@ -6,6 +6,7 @@ import axios from "axios";
 import NutritionManage from "../nutritionmanage"
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getProfile } from '../../api/api';
 
 
 class Packagemanage5days extends Component {
@@ -38,15 +39,8 @@ class Packagemanage5days extends Component {
   }
   
   componentDidMount() {
-    axios.get("/api/users/profile")
-      .then(res => {
-        this.setState({
-          user: res.data.user_name
-        });
-      })
-      .then(() => {
-        console.log(this.state.user);
-      });
+    const get_user = getProfile.bind(this, "user", "");
+    get_user();
   }
   
   onSendMenuDetail() {

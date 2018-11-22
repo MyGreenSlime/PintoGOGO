@@ -44,15 +44,6 @@ class Packagemanage3days extends Component {
   componentDidMount() {
       const get_user = getProfile.bind(this,"user","");
       get_user();
-    // axios.get("/api/users/profile")
-    //   .then(res => {
-    //     this.setState({
-    //       user: res.data.user_name
-    //     });
-    //   })
-    //   .then(() => {
-    //     console.log(this.state.user);
-    //   });
   }
   
   handleChange(e) {
