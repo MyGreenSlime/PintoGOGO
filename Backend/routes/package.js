@@ -127,14 +127,14 @@ router.post("/add", passport.authenticate("jwt", { session: false }), function(
     by_admin: req.user.type,
     owner: req.user.user_name
   });
-  package.save(function(err, savedPackage) {
+  package.save(function (err, savedPackage) {
     if (err) {
-      errors.package = err;
-      res.status(500).send(err);
+      error.package = err
+      res.status(500).send(error);
     } else {
       res.json(status);
     }
-  });
+  })
 });
 // bug**
 //add package to cart anonymous
