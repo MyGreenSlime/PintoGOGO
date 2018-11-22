@@ -72,7 +72,7 @@ export default class Package3DaysDetail extends Component {
 				<div className='set-frame-each-pks'>
 				<div className="backtopks row">
 					<img src="/img/other/left-arrow.png" height="25px" />
-					<a href={this.state.option}>
+					<a href={this.props.location.state.prevLocation}>
 						BACK
 					</a>
 				</div>

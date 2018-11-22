@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import './mypackage.css';
 import axios from "axios";
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import Package3DaysDetail from '../package/3days/pack3DaysDetail'
-import Package5DaysDetail from '../package/3days/pack3DaysDetail'
-import Package7DaysDetail from '../package/7days/pack7DaysDetail'
 import NoPackage from '../package/nopackage';
+import LinkWithPrev from '../LinkWithPrev/linkwithprev.js'
 
 export default class MyPackage extends Component {
 	constructor(props) {
@@ -13,11 +10,9 @@ export default class MyPackage extends Component {
     this.state = {
       packages: [],
       isLoaded: false,
-      option: "/mypackage" 
     }
 		this.createDivPackage = this.createDivPackage.bind(this);
-        this.sendToPackageDetail = this.sendToPackageDetail.bind(this);
-        this.deleteFromDb = this.deleteFromDb.bind(this);
+    this.deleteFromDb = this.deleteFromDb.bind(this);
   }
 
   deleteFromDb(curPack){
@@ -52,31 +47,20 @@ export default class MyPackage extends Component {
 					<div className="name-each-mypks">{curPack.name_package}</div>
 					<p>{curPack.type} day package</p>
 				</div>
-                <div className="row">
-                <div className="col-sm">
-				<Link to={path+curPack._id}>
-					<button className="btn view-mypks" onClick={this.sendToPackageDetail(curPack)}>View Package</button>
-				</Link> 
-                </div>
-                <div className="col-sm">
-                <button className="btn view-mypks" onClick={() => this.deleteFromDb(curPack)}>Delete Package</button>
-                </div>
-                </div>
+          <div className="row">
+            <div className="col-sm">
+              <LinkWithPrev to={path+curPack._id}>
+                <button className="btn view-mypks">View Package</button>
+              </LinkWithPrev>
+            </div>
+            <div className="col-sm">
+              <button className="btn view-mypks" onClick={() => this.deleteFromDb(curPack)}>Delete Package</button>
+            </div>
+          </div>
 			</div>
       </div>
 		</React.Fragment>
 		return divpk;
-	}
-	
-	sendToPackageDetail(curPack) {	
-        var path = "/"+curPack.type+"days/:packageId";
-        var type = {Package3DaysDetail};
-        if (curPack.type === 5) type = {Package5DaysDetail};
-        else if (curPack.type === 7) type= {Package7DaysDetail};
-		return <div>
-			<Route path={path} component={type} option={this.state.option} />
-			{console.log("send")}
-		</div>
 	}
 
 	render() {
