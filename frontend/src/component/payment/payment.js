@@ -41,16 +41,16 @@ export default class Payment extends Component {
     }
   }
 
-  showMenuList() {
-    let items;
-    if (!this.state.bill.order.food_order) {
-      items = <div />;
-    } else {
-      items = this.state.bill.order.food_order;
-      items.map(it => <p>{it.food_name}</p>);
-    }
-    return items;
-  }
+  // showMenuList() {
+  //   let items_food;
+  //   if (!this.state.bill.order.food_order) {
+  //     items_food = <div />;
+  //   } else {
+  //     items_food = this.state.bill.order.food_order;
+  //     items_food.map(it => <p>{it.food_name}</p>);
+  //   }
+  //   return items_food;
+  // }
 
   render() {
     const { bill, isLoaded } = this.state;
@@ -83,6 +83,32 @@ export default class Payment extends Component {
                     <div className="row" style={{ width: "100%" }}>
                       <div className="col">
                         <p>{it.food_name}</p>
+                      </div>
+                      <div className="col col--middle">
+                        <p>{it.amount}</p>
+                      </div>
+                      <div className="col col--right">
+                        <p>{it.price}</p>
+                      </div>
+                    </div>
+                  ))}
+                  {bill.order.snack_order.map(it => (
+                    <div className="row" style={{ width: "100%" }}>
+                      <div className="col">
+                        <p>{it.snack_name}</p>
+                      </div>
+                      <div className="col col--middle">
+                        <p>{it.amount}</p>
+                      </div>
+                      <div className="col col--right">
+                        <p>{it.price}</p>
+                      </div>
+                    </div>
+                  ))}
+                  {bill.order.package_order.map(it => (
+                    <div className="row" style={{ width: "100%" }}>
+                      <div className="col">
+                        <p>Package</p>
                       </div>
                       <div className="col col--middle">
                         <p>{it.amount}</p>

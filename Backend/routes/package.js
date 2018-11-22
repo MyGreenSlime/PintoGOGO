@@ -112,8 +112,7 @@ router.post("/add", passport.authenticate("jwt", { session: false }), function(
   req,
   res
 ) {
-  console.log("inin");
-  const errors = {};
+  const error = {};
   var status = {
     ok: 1,
     message: "add package finish"
@@ -127,14 +126,14 @@ router.post("/add", passport.authenticate("jwt", { session: false }), function(
     by_admin: req.user.type,
     owner: req.user.user_name
   });
-  package.save(function (err, savedPackage) {
+  package.save(function(err, savedPackage) {
     if (err) {
-      error.package = err
+      error.package = err;
       res.status(500).send(error);
     } else {
       res.json(status);
     }
-  })
+  });
 });
 // bug**
 //add package to cart anonymous

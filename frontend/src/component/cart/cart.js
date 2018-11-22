@@ -120,7 +120,7 @@ class Cart extends Component {
     if (!this.state.isLoaded) {
       return <div className="loader" />;
     }
-    return <React.Fragment>
+    return( <React.Fragment>
       <div className="set-screen-cart">
         <div className="linkbutton">
           <div className="row cart__menubar">
@@ -197,7 +197,7 @@ class Cart extends Component {
           </div>
         </div>
       </React.Fragment>
-    
+    );
   }
 }
 export default Cart;

@@ -7,11 +7,11 @@
 
 .button {
   width: 60%;
-  height: 46px;
+  height: 2em;
   border: none;
   color: #7b7b7b;
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 1em;
   font-weight: bold;
   background-color: #e4dac2;
   cursor: pointer;

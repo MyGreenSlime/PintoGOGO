@@ -35,19 +35,19 @@ export default class Recommend extends Component {
       <section className="recommend__block">
         <p className="txt__rec">Recommended</p>
         <div className="row">
-          <div className="col-lg-3 col-md-6 nopadding">
+          <div className="col-lg-3 col-md-6 col-6 nopadding">
             <img className="img-rec" src={menus[1].img_url} />
             <p>{menus[1].menu_name}</p>
           </div>
-          <div className="col-lg-3 col-md-6 nopadding">
+          <div className="col-lg-3 col-md-6 col-6 nopadding">
             <img className="img-rec" src={menus[3].img_url} />
             <p>{menus[3].menu_name}</p>
           </div>
-          <div className="col-lg-3 col-md-6 nopadding">
+          <div className="col-lg-3 col-md-6 col-6 nopadding">
             <img className="img-rec" src={menus[2].img_url} />
             <p>{menus[2].menu_name}</p>
           </div>
-          <div className="col-lg-3 col-md-6 nopadding">
+          <div className="col-lg-3 col-md-6 col-6 nopadding">
             <img className="img-rec" src={menus[0].img_url} />
             <p>{menus[0].menu_name}</p>
           </div>

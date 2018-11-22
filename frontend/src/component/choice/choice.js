@@ -76,7 +76,7 @@ export default class Choice extends Component {
       <React.Fragment>
         <div className="choice-box">
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-4 col-6">
               <img className="img-choice" src="../img/choice/choice_1.png" />
               <button
                 className={this.setActiveButton(this.state.isMenu)}
@@ -85,7 +85,7 @@ export default class Choice extends Component {
                 MENU
               </button>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 col-6">
               <img className="img-choice" src="../img/choice/choice_2.png" />
               <button
                 className={this.setActiveButton(this.state.isPackage)}
@@ -94,7 +94,7 @@ export default class Choice extends Component {
                 PACKAGE
               </button>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 col-6 center">
               <img className="img-choice" src="../img/choice/choice_3.png" />
               <button
                 className={this.setActiveButton(this.state.isSnack)}
