@@ -5,39 +5,12 @@ const passport = require('passport');
 const Order =  require('../models/order');
 const Bill = require('../models/bill');
 
+const billControl = require('../controllers/bill_control');
 //get all bill
-router.get('/all', passport.authenticate('jwt',{ session : false }),function(req, res) {
-    const error = {}
-    if(!req.user.type) {
-        error.admin = "need admin account"
-        res.status(500).send(error)
-    }
-    Bill.find({})
-        .populate({path : "order", model : "Order" })
-        .exec((err, bill) => {
-            if(err) {
-                error.bills = err
-                res.status(500).send(err)
-            } else {
-                res.json(bill)
-            }
-        })       
-});
+router.get('/all', passport.authenticate('jwt',{ session : false }), billControl.getAllBill);
 
 //get current bill
-router.get('/current',  passport.authenticate('jwt',{ session : false }), function(req, res){
-    const error = {}
-    Bill.findOne({user : req.user.id, isfinish : false})
-        .populate({path : "order", model : "Order" })
-        .exec((err, bill) => {
-            if(err) {
-                error.bills = err
-                res.status(500).json(error)
-            } else {
-                res.json(bill)
-            }
-        })
-});
+router.get('/current',  passport.authenticate('jwt',{ session : false }), billControl.getCurrentBill);
 
 //update bill
 router.put('/update/current', passport.authenticate('jwt',{ session : false }), function(req, res){

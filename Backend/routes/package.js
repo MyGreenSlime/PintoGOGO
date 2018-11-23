@@ -18,7 +18,7 @@ router.get('/system/7days', packageControl.getSystem7DayPackage);
 
 router.post('/add',passport.authenticate('jwt',{ session : false }), packageControl.addPackage);
 //add package to cart anonymous
-router.post('/anonymous/addcart',passport.authenticate('jwt',{ session : false }), packageControl.anonymousAddCart);
+router.post('/addcart',passport.authenticate('jwt',{ session : false }), packageControl.addCart);
 //delete package system
 router.delete('/del/:id',passport.authenticate('jwt',{ session : false }), packageControl.delPackage);
 
