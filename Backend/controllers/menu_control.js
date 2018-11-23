@@ -104,7 +104,7 @@ exports.editFood = (req, res) => {
     })
 }
 
-exports.delFood = (req, res) => {
+exports.delFood = async (req, res) => {
     const error = {}
     const food_id = req.params.id
     if(!req.user.type){
@@ -113,14 +113,14 @@ exports.delFood = (req, res) => {
     }
     let query = {_id:req.params.id}
 
-    Menu.findById(req.params.id, (err, menu) => {
+    await Menu.findById(req.params.id, async (err, menu) => {
         if(err){
             res.status(500).send(err);
         }else{
-            User.updateMany({},{$pull : {favorite_food : food_id}}, (err, user) => {
+            await User.updateMany({},{$pull : {favorite_food : food_id}}, (err, user) => {
                 console.log("del in user");
             });
-            Order.updateMany({ },
+            await Order.updateMany({ },
             {
                 $pull: {
                     food_order: {
@@ -131,16 +131,16 @@ exports.delFood = (req, res) => {
                 console.log("del in food order");
             });
 
-            Package.find({
+            await Package.find({
                 $or : [
                     {"day_meal.meal_1" : food_id},
                     {"day_meal.meal_2" : food_id}
                 ]
-            }, (err, packages) => {
+            }, async (err, packages) => {
                 var len = Object.keys(packages).length
                 for(var i = 0; i < len; i++){
                     var package_id = packages[i]._id
-                    Order.updateMany({},
+                    await Order.updateMany({},
                     {
                         $pull : {
                             package_order : {
@@ -149,30 +149,30 @@ exports.delFood = (req, res) => {
                         }
                     }, (err, order) => {
                         console.log("del in package order");
-
-                        Package.deleteMany({
-                            $or : [
-                                {"day_meal.meal_1" : food_id},
-                                {"day_meal.meal_2" : food_id}
-                            ]
-                        }, (err) => {
-                            console.log("del in package")
-
-                            Menu.deleteOne(query, function(err){
-                                if(err){
-                                    error.food = err
-                                    res.status(500).send(error)
-                                } else {
-                                    var status = {
-                                        ok : 1,
-                                        message : "delete menu finish"
-                                    }
-                                    console.log("del menu");
-                                    res.json(status);
-                                }
-                            })
-                        })
                     })
+                }
+
+            })
+            await Package.deleteMany({
+                $or : [
+                    {"day_meal.meal_1" : food_id},
+                    {"day_meal.meal_2" : food_id}
+                ]
+            }, (err) => {
+                console.log("del in package")
+            })
+
+            await Menu.deleteOne(query, function(err){
+                if(err){
+                    error.food = err
+                    res.status(500).send(error)
+                } else {
+                    var status = {
+                        ok : 1,
+                        message : "delete menu finish"
+                    }
+                    console.log("del menu");
+                    res.json(status);
                 }
             })
         }
@@ -279,7 +279,7 @@ exports.editSnack = (req, res) => {
     })
 }
 
-exports.delSnack = (req, res) => {
+exports.delSnack = async (req, res) => {
     const error = {};
     const snack_id = req.params.id;
     if(!req.user.type){
@@ -288,14 +288,14 @@ exports.delSnack = (req, res) => {
     }
     let query = {_id:req.params.id}
 
-    Snack.findById(req.params.id, function(err, snack){
+    await Snack.findById(req.params.id, async (err, snack) => {
         if(err){
             res.status(500).send(err);
         }else{
-            User.updateMany({}, {$pull : {favorite_snack : snack_id}}, (err, user) => {
+            await User.updateMany({}, {$pull : {favorite_snack : snack_id}}, (err, user) => {
                 console.log("del in user");
             })
-            Order.updateMany({ },
+            await Order.updateMany({ },
                 {
                     $pull: {
                         snack_order: {
@@ -304,21 +304,20 @@ exports.delSnack = (req, res) => {
                     }
                 },(err, order) => {
                     console.log("del in snack order");
-
-                    Snack.deleteOne(query, function(err){
-                        if(err){
-                            error.snack = err
-                            res.status(500).send(error)
-                        } else {
-                            var status = {
-                                ok : 1,
-                                message : "delete snack finish"
-                            }
-                            console.log("del snack")
-                            res.json(status);
-                        }
-                    })
                 });
+            await Snack.deleteOne(query, function(err){
+                    if(err){
+                        error.snack = err
+                        res.status(500).send(error)
+                    } else {
+                        var status = {
+                            ok : 1,
+                            message : "delete snack finish"
+                        }
+                        console.log("del snack")
+                        res.json(status);
+                    }
+                })
         }
     })
 }

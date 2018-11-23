@@ -13,7 +13,8 @@ var package = new Schema({
     }],
     price : Number,
     by_admin : Boolean,
-    owner : {type : String, ref : "users"}
+    owner : {type : String, ref : "users"},
+    saved : {type : Boolean, default : true }
 });
 
 module.exports = mongoose.model('Package', package);
