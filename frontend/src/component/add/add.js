@@ -30,7 +30,7 @@ class Add extends Component {
   }
   // cannot redirect I don't know why
   renderRedirect() {
-    return (window.location.href = "/add/"+this.props.path_add);
+    return (window.location.href = "/add/"+this.props.path);
   }
 
   componentDidMount() {
@@ -86,7 +86,7 @@ class Add extends Component {
     formData.append("sodium", this.state.sodium);
     formData.append("description", this.state.description);
 
-    const add_menu = addFoodOrSnack.bind(this, formData, "status", this.props.path_add)
+    const add_menu = addFoodOrSnack.bind(this, formData, "status", this.props.path)
     add_menu();
     e.preventDefault();
   }
