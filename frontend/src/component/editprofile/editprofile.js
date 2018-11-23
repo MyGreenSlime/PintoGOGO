@@ -17,18 +17,18 @@ class EditProfile extends Component {
       phonenumber: "",
       profilepic: null,
       imagePreviewUrl: null,
-      status: {},
+      checkimg: null,
       errors: {},
       lat: [],
       lng: [],
       dest: [],
       dist: [],
       isLoaded: false,
-      currentUser: null,
+      currentUser: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeImage = this.handleChangeImage.bind(this)
+    this.handleChangeImage = this.handleChangeImage.bind(this);
   }
 
   handleChange(e) {
@@ -41,34 +41,50 @@ class EditProfile extends Component {
     let reader = new FileReader();
     let file = e.target.files[0];
     reader.onloadend = () => {
-      this.setState({
-        profilepic: file,
-      },
-      () => {
-            console.log("pic",this.state.profilepic);
-          }
+      this.setState(
+        {
+          profilepic: file,
+          imagePreviewUrl: reader.result
+        },
+        () => {
+          console.log("pic", this.state.profilepic);
+        }
       );
     };
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
+  }
+
+  renderRedirect() {
+    return (window.location.href = "profile");
   }
 
   handleSubmit(e) {
     const formData = new FormData();
-    formData.append("img", this.state.profilepic, this.state.profilepic.name);
+    if (this.state.imagePreviewUrl != this.state.checkimg) {
+      formData.append("img", this.state.profilepic, this.state.profilepic.name);
+    } else {
+      formData.append("img_url", this.state.imagePreviewUrl);
+    }
     formData.append("first_name", this.state.first_name);
     formData.append("last_name", this.state.last_name);
     formData.append("email", this.state.email);
     formData.append("phonenumber", this.state.phonenumber);
-    axios.put("api/users/edit/profile", formData).then(response => {
+    console.log(formData)
+    axios.put("api/users/edit/profile", formData)
+    .then(response => {
       console.log("res", response);
+    })
+    .then(() => {
+      console.log("redirect");
+      this.renderRedirect();
     });
+    e.preventDefault();
   }
 
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       return this.props.history.push("/");
     }
-
     axios
       .get("/api/users/profile")
       .then(res => {
@@ -87,7 +103,8 @@ class EditProfile extends Component {
           last_name: this.state.currentUser.last_name,
           email: this.state.currentUser.email,
           phonenumber: this.state.currentUser.phonenumber,
-          profilepic: this.state.currentUser.img_url,
+          imagePreviewUrl: this.state.currentUser.img_url,
+          checkimg: this.state.currentUser.img_url,
           isLoaded: true
         })
       );
@@ -110,7 +127,7 @@ class EditProfile extends Component {
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>
             <div className="profilepic-edit center">
-              <img className="userpic" src={this.state.profilepic} />
+              <img className="userpic" src={this.state.imagePreviewUrl} />
               <input
                 // className="form-control-file"
                 type="file"

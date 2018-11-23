@@ -7,12 +7,9 @@ import {
   Nav,
   NavItem,
   NavLink,
-  ButtonDropdown,
   DropdownItem,
   DropdownToggle,
   DropdownMenu,
-  ListGroup,
-  ListGroupItem,
   UncontrolledDropdown
 } from "reactstrap";
 import "../navbar/style-navbar.css";
@@ -26,10 +23,11 @@ class Navigationbar extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      dropdownOpen: false
+      dropdownOpen: false,
+      currentUser: []
     };
-    this.userChoice = this.userChoice.bind(this);
   }
+
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser();
@@ -43,21 +41,9 @@ class Navigationbar extends Component {
     });
   }
 
-  userChoice() {
-    {
-      console.log("userchoice");
-    }
-    return (
-      <ListGroup>
-        <ListGroupItem>Item 1</ListGroupItem>
-        <ListGroupItem>Item 2</ListGroupItem>
-        <ListGroupItem>...</ListGroupItem>
-      </ListGroup>
-    );
-  }
-
   render() {
     const { isAuthenticated, user } = this.props.auth;
+    {console.log("nav",user)}
     const forAdmin = (
       <React.Fragment>
         <NavItem className="navbar__item">
