@@ -7,7 +7,8 @@ class Addsnack extends Component {
       <React.Fragment>
           <Add
               name="snack_name"
-              path="snack" />
+              path="snack" 
+              redirect = "snack"/>
       </React.Fragment>
     );
   }
