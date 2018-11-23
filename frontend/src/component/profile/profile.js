@@ -57,7 +57,7 @@ class Profile extends Component {
         {/*bg*/}
         <div className="profile-box">
           <h2> PROFILE </h2>
-          <img className="userpic" src="/img/navbar/user.PNG" />
+          <img className="userpic" src={currentUser.img_url} />
           <br />
           <div className=" addmargin row">
             <div className="col-sm-6">

@@ -15,6 +15,7 @@ class EditProfile extends Component {
       last_name: "",
       email: "",
       phonenumber: "",
+      profilepic: "",
       status: {},
       errors: {},
       lat: [],
@@ -34,12 +35,35 @@ class EditProfile extends Component {
     });
   }
 
+  handleChangeImage(e) {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    this.setState(
+      {
+        img: e.target.files[0]
+      },
+      () => {
+        console.log(this.state.img);
+      }
+    );
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      });
+    };
+
+    reader.readAsDataURL(file);
+  }
+
   handleSubmit(e) {
     const editUser = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
-      phonenumber: this.state.phonenumber
+      phonenumber: this.state.phonenumber,
     };
     axios.put("api/users/edit/profile", editUser).then(response => {
       console.log("res", response);
@@ -56,7 +80,7 @@ class EditProfile extends Component {
       .then(res => {
         this.setState(
           {
-            currentUser: res.data,
+            currentUser: res.data
           },
           () => {
             console.log("curUser ", this.state.currentUser);
@@ -69,7 +93,8 @@ class EditProfile extends Component {
           last_name: this.state.currentUser.last_name,
           email: this.state.currentUser.email,
           phonenumber: this.state.currentUser.phonenumber,
-          isLoaded: true,
+          profilepic: this.state.currentUser.img_url,
+          isLoaded: true
         })
       );
   }
@@ -90,7 +115,17 @@ class EditProfile extends Component {
         <div className="editprofile-box">
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>
-            <img className="userpic" src="/img/navbar/user.PNG" />
+            <div className="profilepic-edit center">
+              <img className="userpic" src={this.state.profilepic} />
+              <input
+                // className="form-control-file"
+                type="file"
+                name="img"
+                accept="image/jpg"
+                onChange={this.handleChangeImage}
+                required
+              />
+            </div>
             <br />
             <div className=" addmargin row">
               <div className="col-sm-6">

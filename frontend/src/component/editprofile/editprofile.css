@@ -14,6 +14,14 @@
     margin: 15px 0 15px 0;
 }
 
+.center {
+  margin: 0 auto 0 auto;
+}
+
+.profilepic-edit {
+  width: 40%;
+}
+
 .userpic {
   width: 120px; 
   margin: 2%
