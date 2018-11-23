@@ -18,7 +18,7 @@ export function getFoodOrSnack(menu, isLoaded, path) {
 
 export function getPackage(pack, isLoaded, path) {
   axios
-    .get("api/packages" + path)
+    .get("api/packages/" + path)
     .then(res => {
       console.log("get package");
       this.setState({
