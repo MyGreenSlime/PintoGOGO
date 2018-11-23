@@ -116,7 +116,7 @@ class Menu extends Component {
 
         <div className="row">
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-4 menuzone__image--fix">
               {menus[firstImg] && (
                 <CardMenu
                   name={menus[firstImg].menu_name}
