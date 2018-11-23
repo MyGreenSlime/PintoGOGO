@@ -147,10 +147,12 @@ class Profile extends Component {
             </div>
           </div>
           <br />
+          <a href="/editprofile">
           <button width="auto" type="submit" className="btn button-confirm">
             {" "}
             EDIT PROFILE{" "}
           </button>
+          </a>
         </div>
       </div>
     );

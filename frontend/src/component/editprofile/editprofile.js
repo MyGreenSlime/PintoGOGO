@@ -57,7 +57,6 @@ class EditProfile extends Component {
         this.setState(
           {
             currentUser: res.data,
-            // isLoaded: true,
           },
           () => {
             console.log("curUser ", this.state.currentUser);
