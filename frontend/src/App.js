@@ -8,8 +8,8 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import store from "./store";
 
 //---------------don--------------------------------
-import Addmenu from "./component/addmenu";
-import Addsnack from "./component/addsnack";
+import Addmenu from "./component/add/addmenu";
+import Addsnack from "./component/add/addsnack";
 import Snack from "./component/snack/snack.js";
 import UnderConstruct from "./component/underconstruct/";
 //---------------name-------------------------------
