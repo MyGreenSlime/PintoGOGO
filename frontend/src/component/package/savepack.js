@@ -16,14 +16,8 @@ export default class Savepack extends Component {
   }
 
   componentDidMount() {
-    axios.get('api/packages/system/'+this.props.path)
-      .then(res => {
-          this.setState({
-              packages: res,
-              isLoaded: true,
-          });
-      })
-      .then(() => { console.log("package", this.state.packages.data) })
+    const get_package = getPackage.bind(this, "packages", "isLoaded", "system/"+this.props.path);
+    get_package()
   }
 
   createDivPackage(curPack) {

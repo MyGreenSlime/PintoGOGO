@@ -20,11 +20,12 @@ export function getPackage(pack, isLoaded, path) {
   axios
     .get("api/packages/" + path)
     .then(res => {
-      console.log("get package");
+      console.log("api get package");
       this.setState({
-        [pack]: res.data,
+        [pack]: res,
         [isLoaded]: true
       });
+      console.log("set ",this.state[pack])
     })
     .then(() => {
       console.log("package ", this.state[pack]);
