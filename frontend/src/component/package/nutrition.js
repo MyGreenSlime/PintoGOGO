@@ -46,6 +46,8 @@ export default class Nutrition extends Component {
     return (
       <React.Fragment>
         <div className="nutrition-box">
+          <p>price: {packages[0].price} BAHT 
+          <br/>( ลดจาก{" "}{Math.round(packages[0].price*100/95,2)}{" "})</p>
           <div className="description">{packages[0].description}</div>
           <p className="nutrition-text">สารอาหารเฉลี่ยต่อวัน</p>
           <div className="row">

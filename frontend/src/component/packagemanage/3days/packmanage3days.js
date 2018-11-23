@@ -95,7 +95,7 @@ class Packagemanage3days extends Component {
           this.setState({
             save: true
           });
-          // alert("Save Package Success!");
+          alert("Save Package Success!");
         } else if (path == "addcart") {
           alert("Add to cart success!");
         }
@@ -103,25 +103,6 @@ class Packagemanage3days extends Component {
       .catch(function(error) {
         console.log(error);
       });
-  }
-
-  alert() {
-    console.log("path", this.state.path)
-    if (this.state.path == "add" && !this.state.save) {
-      return (
-        <div class="alert alert-success" role="alert">
-          This is a success alert—check it out!
-        </div>
-      );
-    }
-    else if(this.state.path == "addcart") {
-      return (
-        <div class="alert alert-success" role="alert">
-          This is aalert—check it out!
-        </div>
-      );
-    }
-    else return(<div> hello</div>)
   }
 
   onSendMenuDetail() {
@@ -188,7 +169,6 @@ class Packagemanage3days extends Component {
 
     return (
       <React.Fragment>
-        {this.alert()}
         <div className="packagemanage-box ">
           <div className="row">
             <div className="col-sm card-package">
