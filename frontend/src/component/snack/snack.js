@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-import { Row } from 'reactstrap';
 import CardMenu from '../cardsnack/cardsnack';
 import '../snack/snack.css';
 import axios from 'axios';

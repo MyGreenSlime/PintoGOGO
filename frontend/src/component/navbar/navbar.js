@@ -6,7 +6,14 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  ButtonDropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu,
+  ListGroup,
+  ListGroupItem,
+  UncontrolledDropdown
 } from "reactstrap";
 import "../navbar/style-navbar.css";
 import propTypes from "prop-types";
@@ -18,19 +25,35 @@ class Navigationbar extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      dropdownOpen: false
     };
+    this.userChoice = this.userChoice.bind(this);
   }
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser();
-    window.location.href ="/"
+    window.location.href = "/";
   }
 
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
+      dropdownOpen: !this.state.dropdownOpen
     });
+  }
+
+  userChoice() {
+    {
+      console.log("userchoice");
+    }
+    return (
+      <ListGroup>
+        <ListGroupItem>Item 1</ListGroupItem>
+        <ListGroupItem>Item 2</ListGroupItem>
+        <ListGroupItem>...</ListGroupItem>
+      </ListGroup>
+    );
   }
 
   render() {
@@ -51,11 +74,22 @@ class Navigationbar extends Component {
     );
     const authLinkes = (
       <React.Fragment>
-        <NavItem className="navbar__item">
-          <NavLink href="/profile" className="navbar__link">
-            {user.user_name}
-          </NavLink>
-        </NavItem>
+        <NavItem className="navbar__item" onClick={this.userChoice} />
+        <UncontrolledDropdown nav inNavbar>
+          <NavItem className="navbar__item">
+            <DropdownToggle className="navbar__link" nav caret>
+              {user.user_name}
+            </DropdownToggle>
+            <DropdownMenu>
+                <NavLink href="/profile" className="navbar__link">
+                  <DropdownItem>Profile</DropdownItem>
+                </NavLink>
+                <NavLink href="/mypackage" className="navbar__link">
+                  <DropdownItem>My Package</DropdownItem>
+                </NavLink>
+            </DropdownMenu>
+          </NavItem>
+        </UncontrolledDropdown>
         <NavItem className="navbar__item">
           <NavLink
             href="#"

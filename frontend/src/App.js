@@ -8,8 +8,8 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import store from "./store";
 
 //---------------don--------------------------------
-import Addmenu from "./component/addmenu";
-import Addsnack from "./component/addsnack";
+import Addmenu from "./component/add/addmenu";
+import Addsnack from "./component/add/addsnack";
 import Snack from "./component/snack/snack.js";
 import UnderConstruct from "./component/underconstruct/";
 //---------------name-------------------------------
@@ -21,8 +21,8 @@ import Payment from "./component/payment/payment";
 //---------------boo---------------------------------
 import Menu from "./component/menu/menu.js";
 import Cart from "./component/cart/cart.js";
-import MenuDetail from "./component/menudetail/menudetail.js";
-import SnackDetail from "./component/snackdetail/snackdetail.js";
+import MenuDetail from "./component/detail/menudetail.js";
+import SnackDetail from "./component/detail/snackdetail.js";
 import EditMenuDetail from "./component/editmenudetail/editmenudetail.js";
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
@@ -34,6 +34,7 @@ import Pack3days from "./component/package/3days/pack3DaysDetail.js"
 import Pack5days from "./component/package/5days/pack5DaysDetail.js"
 import Pack7days from "./component/package/7days/pack7DaysDetail.js"
 import MyPackage from "./component/mypackage/mypackage.js"
+import EditProfile from "./component/editprofile/editprofile.js"
 //---------------pat------------------------------------
 import Login from "./component/login/mainlogin/login";
 
@@ -84,6 +85,7 @@ class App extends Component {
                 <Route path="/package" component={Package} />
                 <Route path="/packagemanage" component={PackageManage} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/editprofile" component={EditProfile} />
                 <Route path="/cart" component={Cart}/>
                 <Route path="/menudetail" component={MenuDetail} />
                 <Route path="/3days" component={Pack3days} />

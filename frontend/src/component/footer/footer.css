@@ -13,8 +13,8 @@ body {
   position: absolute;
   bottom: 0px;
   left: 0px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 3%;
+  padding-right: 3%;
   /* min-width: 393px; */
   width: 100%;
 }
@@ -23,7 +23,7 @@ body {
   font: #7b7b7b;
   width: 220px;
   top: 20px;
-  left: 30px;
+  left: 3%;
   position: relative;
   padding-bottom: 8px;
 }
@@ -40,14 +40,14 @@ body {
 .topright {
   position: absolute;
   top: 20px;
-  right: 60px;
+  right: 3%;
   font-size: 14px;
 }
 
 .bottomright {
   position: absolute;
   bottom: 0px;
-  right: 60px;
+  right: 3%;
   font-size: 12px;
 }
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './linkwithprev.css';
 import {Link} from 'react-router-dom'
 
 export default class LinkWithPrev extends Component {

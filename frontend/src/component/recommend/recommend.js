@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../recommend/style-recommend.css";
 import axios from "axios";
 import {Link} from 'react-router-dom'
+import { getFoodOrSnack } from "../api/api";
 
 export default class Recommend extends Component {
   constructor() {
@@ -13,17 +14,8 @@ export default class Recommend extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("/api/menus/food")
-      .then(res => {
-        this.setState({
-          isLoaded: true,
-          menus: res.data
-        });
-      })
-      .then(() => {
-        console.log("menu: ", this.state.menus);
-      });
+    const get_food = getFoodOrSnack.bind(this,"menus","isLoaded","food");
+    get_food();
   }
   render() {
     const { menus, isLoaded } = this.state;
@@ -32,11 +24,7 @@ export default class Recommend extends Component {
       return <React.Fragment />;
     }
     if (!!!menus[0] || !menus[1] || !menus[2] || !menus[3]) {
-      return (
-        <div>
-          
-        </div>
-      )
+      return <div />;
     }
 
     return (
@@ -44,25 +32,25 @@ export default class Recommend extends Component {
         <p className="txt__rec">Recommended</p>
         <div className="row">
           <div className="col-lg-3 col-md-6 nopadding">
-            <Link to={'/menudetail/'+menus[1]._id}>
+            <Link to={"/menudetail/" + menus[1]._id}>
               <img className="img-rec" src={menus[1].img_url} />
             </Link>
             <p>{menus[1].menu_name}</p>
           </div>
           <div className="col-lg-3 col-md-6 nopadding">
-            <Link to={'/menudetail/'+menus[1]._id}>
+            <Link to={"/menudetail/" + menus[1]._id}>
               <img className="img-rec" src={menus[3].img_url} />
             </Link>
             <p>{menus[3].menu_name}</p>
           </div>
           <div className="col-lg-3 col-md-6 nopadding">
-            <Link to={'/menudetail/'+menus[1]._id}>
+            <Link to={"/menudetail/" + menus[1]._id}>
               <img className="img-rec" src={menus[2].img_url} />
             </Link>
             <p>{menus[2].menu_name}</p>
           </div>
           <div className="col-lg-3 col-md-6 nopadding">
-            <Link to={'/menudetail/'+menus[1]._id}>
+            <Link to={"/menudetail/" + menus[1]._id}>
               <img className="img-rec" src={menus[0].img_url} />
             </Link>
             <p>{menus[0].menu_name}</p>

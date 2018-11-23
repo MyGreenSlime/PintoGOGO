@@ -4,7 +4,7 @@ import axios from 'axios';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import SnackDetail from "../snackdetail/snackdetail";
+import SnackDetail from "../detail/snackdetail";
 
 class cardMenu extends Component {
   constructor(props) {

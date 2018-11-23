@@ -6,22 +6,23 @@ import axios from "axios";
 import NutritionManage from "../nutritionmanage";
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getProfile } from "../../api/api";
 
 class Packagemanage3days extends Component {
   constructor(props) {
     super(props);
     this.state = {
       day1_img: [
-        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>,
-        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank" />,
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank" />
       ],
       day2_img: [
-        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>,
-        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank" />,
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank" />
       ],
       day3_img: [
-        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>,
-        <img className="card-img" src="../img/package/blank.PNG" alt="blank"/>
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank" />,
+        <img className="card-img" src="../img/package/blank.PNG" alt="blank" />
       ],
       day1_detail: [],
       day2_detail: [],
@@ -30,10 +31,10 @@ class Packagemanage3days extends Component {
       sum_price: 0,
       isReadyToShow: [false, false, false, false, false, false],
       user: null,
-      show_nutrition: <div/>,
+      show_nutrition: <div />,
       name_package: "",
       description: "",
-      package_id: "",
+      package_id: ""
     };
     this.send3DaysPackage = this.send3DaysPackage.bind(this);
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this);
@@ -41,17 +42,10 @@ class Packagemanage3days extends Component {
   }
 
   componentDidMount() {
-    axios.get("/api/users/profile")
-      .then(res => {
-        this.setState({
-          user: res.data.user_name
-        });
-      })
-      .then(() => {
-        console.log(this.state.user);
-      });
+      const get_user = getProfile.bind(this,"user","");
+      get_user();
   }
-  
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -59,7 +53,7 @@ class Packagemanage3days extends Component {
   }
 
   send3DaysPackage(path) {
-    console.log(path+" package")
+    console.log(path + " package");
     const newPackage = {
       package_id: this.state.package_id,
       name_package: this.state.name_package,
@@ -77,26 +71,27 @@ class Packagemanage3days extends Component {
         {
           meal_1: this.state.day3_detail[0],
           meal_2: this.state.day3_detail[1]
-        },],
+        }
+      ],
       price: this.state.sum_price
     };
-    axios.post("/api/packages/"+path, newPackage)
+    axios
+      .post("/api/packages/" + path, newPackage)
       .then(response => {
-        console.log("res",response);
-        if(path == "add"){
-          console.log("save")
+        console.log("res", response);
+        if (path == "add") {
+          console.log("save");
           alert("Save Package Success!");
-        }
-        else if(path == "anonymous/addcart") {
+        } else if (path == "anonymous/addcart") {
           this.setState({
             package_id: response.data.data.package_id
-          })
-          alert("Add to cart success!")
+          });
+          alert("Add to cart success!");
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
-      })
+      });
   }
 
   onSendMenuDetail() {
@@ -105,17 +100,18 @@ class Packagemanage3days extends Component {
       this.state.day2_detail,
       this.state.day3_detail
     ];
-    this.setState(
-      {
-        all_detail: newAllDetail,
-        sum_price: Math.round((this.state.day1_detail[0].price +
-                  this.state.day1_detail[1].price +
-                  this.state.day2_detail[0].price +
-                  this.state.day2_detail[1].price +
-                  this.state.day3_detail[0].price +
-                  this.state.day3_detail[1].price) * 0.95),
-      }
-    );
+    this.setState({
+      all_detail: newAllDetail,
+      sum_price: Math.round(
+        (this.state.day1_detail[0].price +
+          this.state.day1_detail[1].price +
+          this.state.day2_detail[0].price +
+          this.state.day2_detail[1].price +
+          this.state.day3_detail[0].price +
+          this.state.day3_detail[1].price) *
+          0.95
+      )
+    });
   }
 
   checkReady() {
@@ -136,33 +132,32 @@ class Packagemanage3days extends Component {
         </button>
       );
     }
-    console.log("price ", this.state.sum_price)    
+    console.log("price ", this.state.sum_price);
     return <div />;
   }
 
   render() {
-    const { isAuthenticated, user} = this.props.auth;
-    const users = (
-      <div></div>
-    )
+    const { isAuthenticated, user } = this.props.auth;
+    const users = <div />;
     const admin = (
       <div className="row">
-                  <label className="col-sm-4">
-                    Description:
-                  </label>
-                  <div className="col-sm-6">
-                    <textarea className="form-control"
-                    placeholder="description"
-                    type="text"
-                    name="description"
-                    id="description"
-                    onChange={this.handleChange}
-                    value={this.state.description}/>
-                  </div>
-                </div>
-    )
+        <label className="col-sm-4">Description:</label>
+        <div className="col-sm-6">
+          <textarea
+            className="form-control"
+            placeholder="description"
+            type="text"
+            name="description"
+            id="description"
+            onChange={this.handleChange}
+            value={this.state.description}
+          />
+        </div>
+      </div>
+    );
 
-    return <React.Fragment>
+    return (
+      <React.Fragment>
         <div className="packagemanage-box ">
           <div className="row">
             <div className="col-sm card-package">
@@ -279,56 +274,64 @@ class Packagemanage3days extends Component {
 
           {this.checkReady()}
 
-          {this.state.all_detail && this.state.all_detail.length > 0 && <React.Fragment>
-            <div>
-              <form>
-                <div className="row">
-                  <label className="col-sm-4">
-                    Package name:
-                  </label>
-                  <div className="col-sm-6">
-                    <input className="form-control"
-                    placeholder="Please name your package before save"
-                    type="text"
-                    name="name_package"
-                    id="name_package"
-                    onChange={this.handleChange}
-                    value={this.state.name_package}/>
+          {this.state.all_detail && this.state.all_detail.length > 0 && (
+            <React.Fragment>
+              <div>
+                <form>
+                  <div className="row">
+                    <label className="col-sm-4">Package name:</label>
+                    <div className="col-sm-6">
+                      <input
+                        className="form-control"
+                        placeholder="Please name your package before save"
+                        type="text"
+                        name="name_package"
+                        id="name_package"
+                        onChange={this.handleChange}
+                        value={this.state.name_package}
+                      />
+                    </div>
                   </div>
-                </div>
-                <br/>
-                <div>
-                  {isAuthenticated? users : ""}
-                  {user.type? admin : ""}
-                </div>
-              </form>
-            </div>
+                  <br />
+                  <div>
+                    {isAuthenticated ? users : ""}
+                    {user.type ? admin : ""}
+                  </div>
+                </form>
+              </div>
               <div>
                 <NutritionManage menu_detail={this.state.all_detail} />
               </div>
               <div>
                 {/* <a href="/cart"> */}
-                  <button className="btn btn-shownutrition" onClick={() => this.send3DaysPackage("anonymous/addcart")}>
-                    ADD TO CART
-                  </button>
+                <button
+                  className="btn btn-shownutrition"
+                  onClick={() => this.send3DaysPackage("anonymous/addcart")}
+                >
+                  ADD TO CART
+                </button>
                 {/* </a> */}
-                <button className="btn btn-shownutrition" // onClick={this.testClick()}
-                  onClick={() => this.send3DaysPackage("add")}>
+                <button
+                  className="btn btn-shownutrition" // onClick={this.testClick()}
+                  onClick={() => this.send3DaysPackage("add")}
+                >
                   SAVE PACKAGE
                 </button>
               </div>
-            </React.Fragment>}
+            </React.Fragment>
+          )}
         </div>
-      </React.Fragment>;
+      </React.Fragment>
+    );
   }
 }
 
 Packagemanage3days.propTypes = {
   auth: propTypes.object.isRequired
-}
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth
-})
+});
 
 export default connect(mapStateToProps)(Packagemanage3days);
