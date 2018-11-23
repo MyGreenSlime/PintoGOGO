@@ -7,6 +7,7 @@ class Menudetail extends Component {
         <React.Fragment>
             <Detail 
              name = "menu_name"
+             type = "MENU"
              path_get_data = "food/"
              path_to_edit = "editmenudetail"/>
         </React.Fragment>

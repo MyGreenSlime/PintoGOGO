@@ -24,12 +24,6 @@ class SnackDetail extends Component {
         this.findIdFromUrl();
     }
 
-    editMenu() {
-        // axios.post('http://localhost:4000/menus/food/add/' + this.state.food._id)
-        // .then(res => console.log(res))
-
-    }
-
     render() {
         const { isAuthenticated, user } = this.props.auth;
         const users = (
@@ -40,8 +34,8 @@ class SnackDetail extends Component {
         const admin = (
             <React.Fragment>
                 <div className="row justify-content-center">
-                    <a href={this.props.path_to_edit + this.state.menu._id}>
-                        <button type="button" className="menudetail__detail--addtocartbutton">EDIT CART</button></a>
+                    <a href={"/"+ this.props.path_to_edit + "/" + this.state.menu._id}>
+                        <button type="button" className="menudetail__detail--addtocartbutton">{"EDIT "+this.props.type}</button></a>
                 </div>
             </React.Fragment>
         )
