@@ -9,10 +9,10 @@ export default class Map extends Component {
     this.divSearchBox = React.createRef();
     this.handleDataFromGmap = this.handleDataFromGmap.bind(this);
     this.state = {
-      lat: "",
-      lng: "",
-      dest: "",
-      dist: ""
+      lat: null,
+      lng: null,
+      dest: null,
+      dist: null
     };
   }
 
@@ -127,9 +127,9 @@ export default class Map extends Component {
           alert("Error was: " + status);
         } else {
           window.destAddr = response.destinationAddresses;
-          window.distance = response.rows[0].elements[0].distance;
+          window.distance = response.rows[0].elements[0].distance.value;
           window.duration = response.rows[0].elements[0].duration;
-          // console.log("get dist: ", window.destAddr);
+          console.log("get distance (m): ", window.distance);
         }
       }
     );
