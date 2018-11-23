@@ -4,8 +4,8 @@ import { DropTarget } from "react-drag-drop-container";
 import { setMenuDrop } from "../helper";
 import axios from "axios";
 import NutritionManage from "../nutritionmanage";
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
+import propTypes from "prop-types";
+import { connect } from "react-redux";
 import { getProfile } from "../../api/api";
 
 class Packagemanage3days extends Component {
@@ -34,7 +34,9 @@ class Packagemanage3days extends Component {
       show_nutrition: <div />,
       name_package: "",
       description: "",
-      package_id: ""
+      package_id: "",
+      save: false,
+      path: ""
     };
     this.send3DaysPackage = this.send3DaysPackage.bind(this);
     this.onSendMenuDetail = this.onSendMenuDetail.bind(this);
@@ -42,8 +44,8 @@ class Packagemanage3days extends Component {
   }
 
   componentDidMount() {
-      const get_user = getProfile.bind(this,"user","");
-      get_user();
+    const get_user = getProfile.bind(this, "user", "");
+    get_user();
   }
 
   handleChange(e) {
@@ -54,6 +56,12 @@ class Packagemanage3days extends Component {
 
   send3DaysPackage(path) {
     console.log(path + " package");
+    if (this.state.save && path == "add") {
+      alert("your package is already save!");
+    }
+    this.setState({
+      path: path
+    });
     const newPackage = {
       package_id: this.state.package_id,
       name_package: this.state.name_package,
@@ -79,19 +87,41 @@ class Packagemanage3days extends Component {
       .post("/api/packages/" + path, newPackage)
       .then(response => {
         console.log("res", response);
-        if (path == "add") {
+        this.setState({
+          package_id: response.data.data.package_id
+        });
+        if (path == "add" && !this.state.save) {
           console.log("save");
-          alert("Save Package Success!");
-        } else if (path == "anonymous/addcart") {
           this.setState({
-            package_id: response.data.data.package_id
+            save: true
           });
+          // alert("Save Package Success!");
+        } else if (path == "addcart") {
           alert("Add to cart success!");
         }
       })
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  alert() {
+    console.log("path", this.state.path)
+    if (this.state.path == "add" && !this.state.save) {
+      return (
+        <div class="alert alert-success" role="alert">
+          This is a success alert—check it out!
+        </div>
+      );
+    }
+    else if(this.state.path == "addcart") {
+      return (
+        <div class="alert alert-success" role="alert">
+          This is aalert—check it out!
+        </div>
+      );
+    }
+    else return(<div> hello</div>)
   }
 
   onSendMenuDetail() {
@@ -158,6 +188,7 @@ class Packagemanage3days extends Component {
 
     return (
       <React.Fragment>
+        {this.alert()}
         <div className="packagemanage-box ">
           <div className="row">
             <div className="col-sm card-package">
@@ -306,7 +337,7 @@ class Packagemanage3days extends Component {
                 {/* <a href="/cart"> */}
                 <button
                   className="btn btn-shownutrition"
-                  onClick={() => this.send3DaysPackage("anonymous/addcart")}
+                  onClick={() => this.send3DaysPackage("addcart")}
                 >
                   ADD TO CART
                 </button>

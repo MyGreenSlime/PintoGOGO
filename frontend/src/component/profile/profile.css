@@ -15,8 +15,12 @@
 }
 
 .userpic {
-  width: 120px; 
-  margin: 2%
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 2%;
+  object-fit: cover;
 }
 
 .choice-group {

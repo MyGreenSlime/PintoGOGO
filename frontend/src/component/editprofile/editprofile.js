@@ -15,7 +15,8 @@ class EditProfile extends Component {
       last_name: "",
       email: "",
       phonenumber: "",
-      profilepic: "",
+      profilepic: null,
+      imagePreviewUrl: null,
       status: {},
       errors: {},
       lat: [],
@@ -23,10 +24,11 @@ class EditProfile extends Component {
       dest: [],
       dist: [],
       isLoaded: false,
-      currentUser: null
+      currentUser: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this)
   }
 
   handleChange(e) {
@@ -38,34 +40,26 @@ class EditProfile extends Component {
   handleChangeImage(e) {
     let reader = new FileReader();
     let file = e.target.files[0];
-
-    this.setState(
-      {
-        img: e.target.files[0]
-      },
-      () => {
-        console.log(this.state.img);
-      }
-    );
-
     reader.onloadend = () => {
       this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
+        profilepic: file,
+      },
+      () => {
+            console.log("pic",this.state.profilepic);
+          }
+      );
     };
-
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   }
 
   handleSubmit(e) {
-    const editUser = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      email: this.state.email,
-      phonenumber: this.state.phonenumber,
-    };
-    axios.put("api/users/edit/profile", editUser).then(response => {
+    const formData = new FormData();
+    formData.append("img", this.state.profilepic, this.state.profilepic.name);
+    formData.append("first_name", this.state.first_name);
+    formData.append("last_name", this.state.last_name);
+    formData.append("email", this.state.email);
+    formData.append("phonenumber", this.state.phonenumber);
+    axios.put("api/users/edit/profile", formData).then(response => {
       console.log("res", response);
     });
   }
