@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import './profile.css';
 import propTypes from 'prop-types';
 import {withRouter} from 'react-router-dom'
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions'
-import axios from 'axios';
+import { getProfile } from '../api/api';
 
 class Register extends Component {
 	constructor(props){
@@ -25,17 +24,8 @@ class Register extends Component {
     if(!this.props.auth.isAuthenticated) {
       return  this.props.history.push('/');
   }
-
-    axios.get('/api/users/profile')
-    .then(res => {
-      this.setState({  
-        currentUser: res.data,
-        isLoaded: true
-      }, () => { console.log ('test ', this.state.currentUser) });
-    })
-    .then(() => {
-      console.log("this", this.state.currentUser)
-    });
+    const get_user = getProfile.bind(this,"currentUser","isLoaded")
+    get_user();
   }
 
       
