@@ -18,7 +18,7 @@ export function getFoodOrSnack(menu, isLoaded, path) {
 
 export function getPackage(pack, isLoaded, path) {
   axios
-    .get("api/packages/" + path)
+    .get("/api/packages/" + path)
     .then(res => {
       console.log("api get package");
       this.setState({
@@ -59,4 +59,10 @@ export function addFoodOrSnack(data, status, path) {
       console.log("redirect");
       this.renderRedirect();
     });
+}
+
+export function addPackageToCart(data){
+  axios.post("/api/packages/addcart",data)
+  .then(alert("Add to cart success!"))
+  .then(res => {console.log("res ",res)});
 }

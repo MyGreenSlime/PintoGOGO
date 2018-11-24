@@ -3,6 +3,7 @@ import './package.css'
 import Nutrition from "./nutrition";
 import axios from "axios";
 import NoPackage from "./nopackage";
+import { getPackage, addPackageToCart } from "../api/api";
 
 export default class Package3DaysDetail extends Component {
   constructor(props) {
@@ -19,25 +20,20 @@ export default class Package3DaysDetail extends Component {
     console.log("arrive");
     var url = window.location.href;
     var res = url.split("/");
-    axios
-      .get("/api/packages/" + res[res.length - 1])
-      .then(res => {
-        this.setState({
-          isLoaded: true,
-          packages: res.data
-        });
-        console.log("from package detail", this.state.packages);
-      })
+    const get_package = getPackage.bind(this, "packages", "isLoaded", res[res.length - 1]);
+    get_package();
   }
 
   addToCart() {
     console.log("add pack");
-    axios
-      .post("/api/packages/addcart", this.state.packages[0])
-      .then(alert("Add to cart success!"))
-      .then(res => {
-        console.log("res", res);
-      });
+    const add_cart = addPackageToCart.bind(this,this.state.packages[0]);
+    add_cart();
+    // axios
+    //   .post("/api/packages/addcart", this.state.packages[0])
+    //   .then(alert("Add to cart success!"))
+    //   .then(res => {
+    //     console.log("res", res);
+    //   });
   }
 
   componentDidUpdate() {
