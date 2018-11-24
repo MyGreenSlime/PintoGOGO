@@ -62,8 +62,8 @@ export default class Package3DaysDetail extends Component {
 
     if(isLoaded){
       let day = 0
-      for(let i = 0; i<3; i+=2){
-        if(3%2 == 1 && i == 2 ){
+      for(let i = 0; i<this.props.num_day; i+=2){
+        if(this.props.num_day%2 == 1 && i == this.props.num_day-1 ){
           list_day[i] = 
             <div className="row">
               <div className="col-3-sm col-set" />
@@ -115,45 +115,14 @@ export default class Package3DaysDetail extends Component {
           <div className="set-frame-each-pks">
             <div className="backtopks row">
               <img src="/img/other/left-arrow.png" height="25px" />
-              <a href={this.props.location.state.prevLocation}>BACK</a>
+              <a href={this.props.location.prevLocation}>BACK</a>
             </div>
 
             <div className="row">
               <div className="col-md-8">
                 <div className="package-box ">
                   <div className="name-pks">{packages[0].name_package}</div>
-                  {/* ------------------------------------------------------ */}
                   {list_day}
-                  {/* ------------------------------------------------------ */}
-
-                  {/* <div className="row">
-                    <div className="col-3-sm col-set" />
-                    <div className="col-sm card-last-package ">
-                      DAY 3
-                      <div className="row">
-                        <div className="col card-pack-img hovereffect">
-                          <img
-                            className="card-img img-responsive"
-                            src={"\\" + packages[0].day_meal[2].meal_1.img_url}
-                          />
-                          <div className="overlay">
-                            <h2>{packages[0].day_meal[2].meal_1.menu_name}</h2>
-                          </div>
-                        </div>
-                        <div className="col card-pack-img hovereffect">
-                          <img
-                            className="card-img img-responsive"
-                            src={"\\" + packages[0].day_meal[2].meal_2.img_url}
-                          />
-                          <div className="overlay">
-                            <h2>{packages[0].day_meal[2].meal_2.menu_name}</h2>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-3-sm col-set" />
-                  </div> */}
-                  {/* <a href="/cart"> */}
                   <button
                     className="btn btn-set"
                     onClick={this.addToCart}
