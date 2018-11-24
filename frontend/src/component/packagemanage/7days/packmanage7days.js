@@ -3,10 +3,10 @@ import "../packagemanage.css";
 import { setMenuDrop } from "../helper";
 import axios from "axios";
 import { DropTarget } from "react-drag-drop-container";
-import NutritionManage from "../nutritionmanage"
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getProfile } from '../../api/api';
+import NutritionManage from "../nutritionmanage";
+import propTypes from "prop-types";
+import { connect } from "react-redux";
+import { getProfile } from "../../api/api";
 
 class Packagemanage7days extends Component {
   constructor(props) {
@@ -74,10 +74,10 @@ class Packagemanage7days extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-	componentDidMount() {
+  componentDidMount() {
     const get_user = getProfile.bind(this, "user", "");
     get_user();
-	}
+  }
 
   handleChange(e) {
     this.setState({
@@ -128,13 +128,16 @@ class Packagemanage7days extends Component {
       .post("/api/packages/" + path, newPackage)
       .then(response => {
         console.log("res", response);
-        if (path == "add") {
+        this.setState({
+          package_id: response.data.data.package_id
+        });
+        if (path == "add" && !this.state.save) {
           console.log("save");
-          alert("Save Package Success!");
-        } else if (path == "anonymous/addcart") {
           this.setState({
-            package_id: response.data.data.package_id
+            save: true
           });
+          alert("Save Package Success!");
+        } else if (path == "addcart") {
           alert("Add to cart success!");
         }
       })
@@ -521,7 +524,7 @@ class Packagemanage7days extends Component {
                   {/* <a href='/cart'> */}
                   <button
                     className="btn btn-shownutrition"
-                    onClick={() => this.send7DaysPackage("anonymous/addcart")}
+                    onClick={() => this.send7DaysPackage("addcart")}
                   >
                     ADD TO CART
                   </button>

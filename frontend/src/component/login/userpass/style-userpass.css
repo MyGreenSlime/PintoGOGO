@@ -22,7 +22,8 @@ input[type=text], input[type=password] {
   min-width: 100px;
   font-family: "Quicksand", sans-serif;
   height: auto;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
+  margin-top: 3%;
 }
 
 .submit__login--button:hover {

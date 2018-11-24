@@ -11,7 +11,7 @@ export default class Package5DaysDetail extends Component {
       packages: [],
       isLoaded: false
     };
-    this.addPack5DaysAToCart = this.addPack5DaysAToCart.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -27,14 +27,10 @@ export default class Package5DaysDetail extends Component {
     });
   }
 
-  addPack5DaysAToCart() {
+  addToCart() {
     console.log("add pack");
-    const pack3A = {
-      package_id: this.state.packages[0]._id,
-      name_package: "Package 5 days A",
-      price: this.state.packages[0].price
-    };
-    axios.put("/api/orders/add/package", pack3A);
+    axios.post("/api/packages/addcart", this.state.packages[0]);
+    alert("Add to cart success!")
   }
 
   render() {
@@ -190,7 +186,7 @@ export default class Package5DaysDetail extends Component {
                   <a href="/cart">
                     <button
                       className="btn btn-set"
-                      onClick={this.addPack3DaysAToCart}
+                      onClick={this.addToCart}
                       data-toggle="tooltip"
                       data-placement="top"
                       title="HAVE A GOOD MEAL :)"

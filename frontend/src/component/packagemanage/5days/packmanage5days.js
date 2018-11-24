@@ -160,22 +160,25 @@ class Packagemanage5days extends Component {
       price: this.state.sum_price
     };
     axios
-      .post("/api/packages/" + path, newPackage)
-      .then(response => {
-        console.log("res", response);
-        if (path == "add") {
-          console.log("save");
-          alert("Save Package success!");
-        } else if (path == "anonymous/addcart") {
-          this.setState({
-            package_id: response.data.data.package_id
-          });
-          alert("Add to cart success!");
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
+    .post("/api/packages/" + path, newPackage)
+    .then(response => {
+      console.log("res", response);
+      this.setState({
+        package_id: response.data.data.package_id
       });
+      if (path == "add" && !this.state.save) {
+        console.log("save");
+        this.setState({
+          save: true
+        });
+        alert("Save Package Success!");
+      } else if (path == "addcart") {
+        alert("Add to cart success!");
+      }
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   }
 
   render() {
@@ -420,7 +423,7 @@ class Packagemanage5days extends Component {
                 <div>
                   <button
                     className="btn btn-shownutrition"
-                    onClick={() => this.send5DaysPackage("anonymous/addcart")}
+                    onClick={() => this.send5DaysPackage("addcart")}
                   >
                     ADD TO CART
                   </button>

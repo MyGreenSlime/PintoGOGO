@@ -25,22 +25,17 @@ class Profile extends Component {
       return this.props.history.push("/");
     }
 
-    axios
-      .get("/api/users/profile")
-      .then(res => {
-        this.setState(
-          {
-            currentUser: res.data,
-            isLoaded: true
-          },
-          () => {
-            console.log("test ", this.state.currentUser);
-          }
-        );
-      })
-      .then(() => {
-        console.log("this", this.state.currentUser);
-      });
+    axios.get("/api/users/profile").then(res => {
+      this.setState(
+        {
+          currentUser: res.data,
+          isLoaded: true
+        },
+        () => {
+          console.log("test ", this.state.currentUser);
+        }
+      );
+    });
   }
 
   render() {
@@ -148,10 +143,10 @@ class Profile extends Component {
           </div>
           <br />
           <a href="/editprofile">
-          <button width="auto" type="submit" className="btn button-confirm">
-            {" "}
-            EDIT PROFILE{" "}
-          </button>
+            <button width="auto" type="submit" className="btn button-confirm">
+              {" "}
+              EDIT PROFILE{" "}
+            </button>
           </a>
         </div>
       </div>
