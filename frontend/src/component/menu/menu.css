@@ -30,4 +30,8 @@
     .menuzone__image--fix{
         display: table;
     }
+
+    .cardcartbox--delete{
+        cursor: pointer;
+    }
 }

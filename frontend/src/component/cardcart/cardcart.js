@@ -48,7 +48,6 @@ class CardCart extends Component {
             inputField: this.state.inputField + 1
           });
         }
-        
       );
   }
 
@@ -61,12 +60,22 @@ class CardCart extends Component {
           this.props.id
       )
       .then(() => {
-        if (this.state.inputField > 0) {
-          this.setState({
-            inputField: this.state.inputField - 1
-          });
+        if (this.state.inputField > 1) {
+          this.state.inputField -= 1
         }
       });
+  }
+
+  deletemenu() {
+    axios
+      .delete(
+        "/api/orders/del/food/" +
+          this.props.id
+      )
+      // .then(() => {
+      //   this.state.inputField = 0
+      //   }
+      // )
   }
 
   render() {
@@ -85,7 +94,7 @@ class CardCart extends Component {
             <div className="col-md-3 col-7 menuname__block">
               <p>{this.props.name}</p>
             </div>
-            <div className="col-md-1 col-5">
+            <div className="col-md-1 col-5 cardcartbox--delete" onClick={this.deletemenu.bind(this)}>
               DELETE
             </div>
             <div className="col-md-3 col-8 editamount">

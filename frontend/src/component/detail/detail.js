@@ -12,7 +12,7 @@ class SnackDetail extends Component {
             isLoaded: false
         };
 
-    }
+    } 
     findIdFromUrl() {
         var url = window.location.href;
         var res = url.split("/");
