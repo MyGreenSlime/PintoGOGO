@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./style-addmenu.css";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
