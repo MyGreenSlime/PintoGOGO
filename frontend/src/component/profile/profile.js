@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-import axios from "axios";
+import { getProfile } from "../api/api";
 
 class Profile extends Component {
   constructor(props) {
@@ -25,17 +25,8 @@ class Profile extends Component {
       return this.props.history.push("/");
     }
 
-    axios.get("/api/users/profile").then(res => {
-      this.setState(
-        {
-          currentUser: res.data,
-          isLoaded: true
-        },
-        () => {
-          console.log("test ", this.state.currentUser);
-        }
-      );
-    });
+    const get_user = getProfile.bind(this, "currentUser", "isLoaded");
+    get_user();
   }
 
   render() {
