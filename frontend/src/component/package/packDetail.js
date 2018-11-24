@@ -28,12 +28,6 @@ export default class Package3DaysDetail extends Component {
     console.log("add pack");
     const add_cart = addPackageToCart.bind(this,this.state.packages[0]);
     add_cart();
-    // axios
-    //   .post("/api/packages/addcart", this.state.packages[0])
-    //   .then(alert("Add to cart success!"))
-    //   .then(res => {
-    //     console.log("res", res);
-    //   });
   }
 
   componentDidUpdate() {
