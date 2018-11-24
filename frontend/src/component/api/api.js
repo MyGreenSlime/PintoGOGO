@@ -22,7 +22,7 @@ export function getPackage(pack, isLoaded, path) {
     .then(res => {
       console.log("api get package");
       this.setState({
-        [pack]: res,
+        [pack]: res.data,
         [isLoaded]: true
       });
       console.log("set ",this.state[pack])
