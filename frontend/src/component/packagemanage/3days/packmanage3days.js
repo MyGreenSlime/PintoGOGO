@@ -91,7 +91,6 @@ class Packagemanage3days extends Component {
           package_id: response.data.data.package_id
         });
         if (path == "add" && !this.state.save) {
-          console.log("save");
           this.setState({
             save: true
           });

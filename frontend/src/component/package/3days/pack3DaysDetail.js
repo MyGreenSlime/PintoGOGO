@@ -39,7 +39,7 @@ export default class Package3DaysDetail extends Component {
   }
 
   addToCart() {
-    console.log("add pack");
+    console.log("add pack", this.state.packages[0]);
     axios
       .post("/api/packages/addcart", this.state.packages[0])
       .then(alert("Add to cart success!"))

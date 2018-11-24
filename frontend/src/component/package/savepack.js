@@ -23,7 +23,9 @@ export default class Savepack extends Component {
               isLoaded: true,
           });
       })
-      .then(() => { console.log("package", this.state.packages.data) })
+      .then(() => { console.log("package", this.state.packages.data) 
+    console.log(this.props)})
+
   }
 
   createDivPackage(curPack) {
