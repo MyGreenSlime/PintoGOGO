@@ -53,67 +53,40 @@ class Profile extends Component {
         <div className="profile-box">
           <h2> PROFILE </h2>
           <img className="userpic" src={currentUser.img_url} />
-          <br />
+          {/* <br /> */}
           <div className=" addmargin row">
             <div className="col-sm-6">
-              <label
-                className="control-label text-form-left"
-                htmlFor="Firstname"
-              >
-                Firstname:
-              </label>
+              <label htmlFor="Firstname">Firstname:</label>
             </div>
             <div className="col-sm">{currentUser.first_name}</div>
           </div>
           <div className=" addmargin row">
             <div className="col-sm-6">
-              <label
-                className="control-label text-form-left"
-                htmlFor="Lastname"
-              >
-                Lastname:
-              </label>
+              <label htmlFor="Lastname">Lastname:</label>
             </div>
             <div className="col-sm">{currentUser.last_name}</div>
           </div>
           <div className=" addmargin row">
             <div className="col-sm-6">
-              <label
-                className="control-label text-form-left"
-                htmlFor="Username"
-              >
-                Username:
-              </label>
+              <label htmlFor="Username">Username:</label>
             </div>
             <div className="col-sm">{currentUser.user_name}</div>
           </div>
-          <div className=" addmargin row">
+          <div className="addmargin row">
             <div className="col-sm-6">
-              <label className="control-label text-form-left" htmlFor="Email">
-                E-mail:
-              </label>
+              <label htmlFor="Email">E-mail:</label>
             </div>
             <div className="col">{currentUser.email}</div>
           </div>
           <div className=" addmargin row">
             <div className="col-sm-6">
-              <label
-                className="control-label text-form-left"
-                htmlFor="PhoneNumber"
-              >
-                Phone Number: &nbsp;&nbsp;
-              </label>
+              <label htmlFor="PhoneNumber">Phone Number: </label>
             </div>
             <div className="col">{currentUser.phonenumber}</div>
           </div>
           <div className=" row">
             <div className="col-sm-6">
-              <label
-                className="control-label text-form-left"
-                htmlFor="PhoneNumber"
-              >
-                Address: &nbsp;&nbsp;
-              </label>
+              <label htmlFor="PhoneNumber">Address: </label>
             </div>
             <div className="col">
               <div class="dropdown">
