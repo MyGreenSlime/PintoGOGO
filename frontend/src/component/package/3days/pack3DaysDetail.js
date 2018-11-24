@@ -39,9 +39,13 @@ export default class Package3DaysDetail extends Component {
   }
 
   addToCart() {
-    console.log("add pack", this.state.packages[0]);
+    const pack = {
+      package_id: this.state.packages[0]._id,
+      package_name: this.state.packages[0].name_package,
+      price: this.state.packages[0].price
+    };
     axios
-      .post("/api/packages/addcart", this.state.packages[0])
+      .put("/api/orders/add/package", pack)
       .then(alert("Add to cart success!"))
       .then(res => {
         console.log("res", res);

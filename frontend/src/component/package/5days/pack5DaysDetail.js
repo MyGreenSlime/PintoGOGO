@@ -28,9 +28,17 @@ export default class Package5DaysDetail extends Component {
   }
 
   addToCart() {
-    console.log("add pack");
-    axios.post("/api/packages/addcart", this.state.packages[0]);
-    alert("Add to cart success!")
+    const pack = {
+      package_id: this.state.packages[0]._id,
+      package_name: this.state.packages[0].name_package,
+      price: this.state.packages[0].price
+    };
+    axios
+      .put("/api/orders/add/package", pack)
+      .then(alert("Add to cart success!"))
+      .then(res => {
+        console.log("res", res);
+      });
   }
 
   render() {
