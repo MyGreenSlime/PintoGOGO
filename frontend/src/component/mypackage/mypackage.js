@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./mypackage.css";
-import axios from "axios";
 import NoPackage from "../package/nopackage";
 import LinkWithPrev from "../LinkWithPrev/linkwithprev.js";
+import { deleteFromDB, getPackage } from "../api/api" 
 
 export default class MyPackage extends Component {
   constructor(props) {
@@ -16,24 +16,13 @@ export default class MyPackage extends Component {
   }
 
   deleteFromDb(curPack) {
-    axios
-      .delete("api/packages/del/" + curPack._id)
-      .then(res => console.log(res))
-      .then(() => {});
+    const deletePackage = deleteFromDB.bind(this, "package", curPack._id)
+    deletePackage();
   }
 
   componentDidMount() {
-    axios
-      .get("api/packages/user/all")
-      .then(res => {
-        this.setState({
-          packages: res,
-          isLoaded: true
-        });
-      })
-      .then(() => {
-        console.log("package", this.state.packages.data);
-      });
+      const getAllPackages = getPackage.bind(this, "packages", "isLoaded", "user/all")
+      getAllPackages();
   }
 
   createDivPackage(curPack) {
@@ -78,7 +67,7 @@ export default class MyPackage extends Component {
     if (!this.state.isLoaded) {
       return <div className="loader" />;
     }
-    if (!this.state.packages.data[0]) {
+    if (!this.state.packages[0]) {
       return (
         <div className="set-screen-mypack">
           <div className="set-frame-mypks">
@@ -89,7 +78,7 @@ export default class MyPackage extends Component {
       );
     }
 
-    const listPackages = this.state.packages.data.map((pk, index) => (
+    const listPackages = this.state.packages.map((pk, index) => (
       <div key={index}>{this.createDivPackage(pk)}</div>
     ));
     console.log(typeof this.state.packages.data);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./nutrition.css";
-import axios from "axios";
+import { getPackage } from "../api/api"
 
 export default class Nutrition extends Component {
   constructor() {
@@ -17,14 +17,8 @@ export default class Nutrition extends Component {
     console.log("arrive nutrition");
     var url = window.location.href;
     var res = url.split("/");
-    axios.get("/api/packages/" + res[res.length - 1]).then(res => {
-      this.setState({
-        isLoaded: true,
-        packages: res.data,
-        daymeal: res.data[0].day_meal
-      });
-      console.log("from package nutrition", this.state.packages);
-    });
+    const getCurrentPackage = getPackage.bind(this, "packages", "isLoaded", res[res.length - 1])
+    getCurrentPackage();
   }
 
   compute(x) {

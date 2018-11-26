@@ -60,6 +60,20 @@ export function getAddress(address, isLoaded) {
   })
 }
 
+export function getCurrentOrder(order, isLoaded) {
+  axios
+      .get("/api/orders/current")
+      .then(res => {
+        this.setState({
+          [order]: res.data,
+          [isLoaded]: true
+        });
+      })
+      .then(() => {
+        console.log("order ", this.state.order);
+      });
+}
+
 /** POST **/
 export function addFoodOrSnack(data, status, path) {
   axios.post("/api/menus/" + path + "/add", data)
@@ -118,9 +132,14 @@ export function decreaseAmount(path, id) {
     })
 }
 
+export function addToBill(data) {
+  axios.put("/api/orders/tobill", data)
+    .then(res => console.log("add to bill", res));
+}
+
 /** DELETE **/
 export function deleteFromDB(path, id) {
-  axios.delete("api/"+ path +"/del/"+id)
+  axios.delete("/api/"+ path +"/del/"+id)
   .then(res => console.log("delete", res))
   .then(() => {
     this.props.onMenuCardDeleted(id);
@@ -128,10 +147,8 @@ export function deleteFromDB(path, id) {
 }
 
 export function deleteOrder(path, id) {
-  axios.delete("api/order/del/"+ path +"/"+id)
+  axios.delete("/api/orders/del/"+ path +"/"+id)
   .then(res => console.log("delete order", res))
-  .then(() => {
-    this.props.onMenuCardDeleted(id);
-  });
 }
+
 
