@@ -3,9 +3,9 @@ import "./editprofile.css";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
-import axios from "axios";
+import { editProfile } from "../../actions/authActions";
 import classnames from "classnames";
+import { getProfile } from "../api/api";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -15,18 +15,44 @@ class EditProfile extends Component {
       last_name: "",
       email: "",
       phonenumber: "",
-      profilepic: "",
-      status: {},
+      profilepic: null,
+      imagePreviewUrl: null,
+      checkimg: null,
       errors: {},
       lat: [],
       lng: [],
       dest: [],
       dist: [],
       isLoaded: false,
+      setLoaded: false,
+      alreadyLoaded: true,
       currentUser: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.setUser = this.setUser.bind(this)
+  }
+
+  componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      return this.props.history.push("/");
+    }
+    const get_user = getProfile.bind(this, "currentUser", "isLoaded");
+    get_user();
+  }
+
+  setUser() {
+    this.setState({
+      first_name: this.state.currentUser.first_name,
+      last_name: this.state.currentUser.last_name,
+      email: this.state.currentUser.email,
+      phonenumber: this.state.currentUser.phonenumber,
+      imagePreviewUrl: this.state.currentUser.img_url,
+      checkimg: this.state.currentUser.img_url,
+      setLoaded: true,
+      alreadyLoaded: false
+    })
   }
 
   handleChange(e) {
@@ -38,73 +64,49 @@ class EditProfile extends Component {
   handleChangeImage(e) {
     let reader = new FileReader();
     let file = e.target.files[0];
-
-    this.setState(
-      {
-        img: e.target.files[0]
-      },
-      () => {
-        console.log(this.state.img);
-      }
-    );
-
     reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
+      this.setState(
+        {
+          profilepic: file,
+          imagePreviewUrl: reader.result
+        },
+        () => {
+          console.log("pic", this.state.profilepic);
+        }
+      );
     };
-
     reader.readAsDataURL(file);
   }
 
-  handleSubmit(e) {
-    const editUser = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      email: this.state.email,
-      phonenumber: this.state.phonenumber,
-    };
-    axios.put("api/users/edit/profile", editUser).then(response => {
-      console.log("res", response);
-    });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+      console.log("will recieve", nextProps)
+    }
   }
 
-  componentDidMount() {
-    if (!this.props.auth.isAuthenticated) {
-      return this.props.history.push("/");
+  handleSubmit(e) {
+    const formData = new FormData();
+    if (this.state.imagePreviewUrl != this.state.checkimg) {
+      formData.append("img", this.state.profilepic, this.state.profilepic.name);
+    } else {
+      formData.append("img_url", this.state.imagePreviewUrl);
     }
-
-    axios
-      .get("/api/users/profile")
-      .then(res => {
-        this.setState(
-          {
-            currentUser: res.data
-          },
-          () => {
-            console.log("curUser ", this.state.currentUser);
-          }
-        );
-      })
-      .then(() =>
-        this.setState({
-          first_name: this.state.currentUser.first_name,
-          last_name: this.state.currentUser.last_name,
-          email: this.state.currentUser.email,
-          phonenumber: this.state.currentUser.phonenumber,
-          profilepic: this.state.currentUser.img_url,
-          isLoaded: true
-        })
-      );
+    formData.append("first_name", this.state.first_name);
+    formData.append("last_name", this.state.last_name);
+    formData.append("email", this.state.email);
+    formData.append("phonenumber", this.state.phonenumber);
+    console.log(formData);
+    this.props.editProfile(formData, this.props.history);
+    e.preventDefault();
   }
 
   render() {
-    if (!!!this.state.isLoaded) {
-      return <div className="loader" />;
+    if (this.state.isLoaded && this.state.alreadyLoaded){
+      this.setUser()
     }
-    {
-      console.log("....", this.state.currentUser);
+    if (!!!this.state.setLoaded) {
+      return <div className="loader" />;
     }
     const { errors } = this.state;
     const { currentUser } = this.state;
@@ -116,25 +118,20 @@ class EditProfile extends Component {
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>
             <div className="profilepic-edit center">
-              <img className="userpic" src={this.state.profilepic} />
-              <input
-                // className="form-control-file"
-                type="file"
-                name="img"
-                accept="image/jpg"
-                onChange={this.handleChangeImage}
-                required
-              />
+              <img className="userpic-edit" src={this.state.imagePreviewUrl} />
+              <br />
+              <div className="upload-btn-wrapper">
+                <button className="btn-upload">Change Picture</button>
+                <input
+                  type="file"
+                  name="profilepic"
+                  onChange={this.handleChangeImage}
+                />
+              </div>
             </div>
-            <br />
             <div className=" addmargin row">
               <div className="col-sm-6">
-                <label
-                  className="control-label text-form-left"
-                  htmlFor="Firstname"
-                >
-                  Firstname:
-                </label>
+                <label htmlFor="Firstname">Firstname:</label>
               </div>
               <div className="col-sm">
                 <input
@@ -155,12 +152,7 @@ class EditProfile extends Component {
             </div>
             <div className=" addmargin row">
               <div className="col-sm-6">
-                <label
-                  className="control-label text-form-left"
-                  htmlFor="Lastname"
-                >
-                  Lastname:
-                </label>
+                <label htmlFor="Lastname">Lastname:</label>
               </div>
               <div className="col-sm">
                 <input
@@ -181,20 +173,13 @@ class EditProfile extends Component {
             </div>
             <div className=" addmargin row">
               <div className="col-sm-6">
-                <label
-                  className="control-label text-form-left"
-                  htmlFor="Username"
-                >
-                  Username:
-                </label>
+                <label htmlFor="Username">Username:</label>
               </div>
               <div className="col-sm">{currentUser.user_name}</div>
             </div>
             <div className=" addmargin row">
               <div className="col-sm-6">
-                <label className="control-label text-form-left" htmlFor="Email">
-                  E-mail:
-                </label>
+                <label htmlFor="Email">E-mail:</label>
               </div>
               <div className="col">
                 <input
@@ -215,12 +200,7 @@ class EditProfile extends Component {
             </div>
             <div className=" addmargin row">
               <div className="col-sm-6">
-                <label
-                  className="control-label text-form-left"
-                  htmlFor="PhoneNumber"
-                >
-                  Phone Number: &nbsp;&nbsp;
-                </label>
+                <label htmlFor="PhoneNumber">Phone Number:</label>
               </div>
               <div className="col">
                 <input
@@ -241,12 +221,7 @@ class EditProfile extends Component {
             </div>
             <div className=" row">
               <div className="col-sm-6">
-                <label
-                  className="control-label text-form-left"
-                  htmlFor="PhoneNumber"
-                >
-                  Address: &nbsp;&nbsp;
-                </label>
+                <label htmlFor="PhoneNumber">Address:</label>
               </div>
               <div className="col">
                 <div class="dropdown">
@@ -290,7 +265,7 @@ class EditProfile extends Component {
 }
 
 EditProfile.propTypes = {
-  registerUser: propTypes.func.isRequired,
+  editProfile: propTypes.func.isRequired,
   auth: propTypes.object.isRequired,
   errors: propTypes.object.isRequired
 };
@@ -302,5 +277,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { editProfile }
 )(withRouter(EditProfile));

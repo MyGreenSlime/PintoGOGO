@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./style-addmenu.css";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
@@ -30,7 +29,7 @@ class Add extends Component {
   }
   // cannot redirect I don't know why
   renderRedirect() {
-    return (window.location.href = "/add/"+this.props.path);
+    return (window.location.href = "/add/"+this.props.redirect);
   }
 
   componentDidMount() {

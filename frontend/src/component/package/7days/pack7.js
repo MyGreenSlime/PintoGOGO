@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import SavedPack from '../savepack';
 
-class Pack3 extends Component {
+class Pack7 extends Component {
 	render() {
 		return (
 			<React.Fragment>
@@ -13,4 +13,4 @@ class Pack3 extends Component {
 	}
 }
 
-export default Pack3;
+export default Pack7;

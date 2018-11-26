@@ -7,7 +7,8 @@ class Addmenu extends Component {
       <React.Fragment>
         <Add
           name = "menu_name"
-          path = "food"/> 
+          path = "food"
+          redirect = "menu"/> 
       </React.Fragment>
     );
   }

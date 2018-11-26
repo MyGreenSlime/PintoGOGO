@@ -15,8 +15,12 @@
 }
 
 .userpic {
-  width: 120px; 
-  margin: 2%
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 2%;
+  object-fit: cover;
 }
 
 .choice-group {
@@ -29,7 +33,7 @@
 }
 
 .profile-box {
-  width: 50%;
+  width: 40%;
   /* margin: 0 auto 0 auto;  */
   background-color: #f3ece7;
   border-radius: 12px;

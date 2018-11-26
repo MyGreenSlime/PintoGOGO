@@ -23,7 +23,7 @@ body {
   font: #7b7b7b;
   width: 220px;
   top: 20px;
-  left: 3%;
+  left: 0;
   position: relative;
   padding-bottom: 8px;
 }
@@ -46,7 +46,7 @@ body {
 
 .bottomright {
   position: absolute;
-  bottom: 0px;
+  bottom: 7%;
   right: 3%;
   font-size: 12px;
 }

@@ -41,6 +41,7 @@ class Register extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+      console.log("will recieve", nextProps)
     }
   }
 
@@ -77,7 +78,7 @@ class Register extends Component {
         }
       },
       () => {
-        console.log("reg destination: ", this.state.address.address[0]);
+        console.log("reg destination: ", this.state.address.address);
         console.log("reg lat: ", this.state.address.lat);
         console.log("reg lng: ", this.state.address.lng);
         console.log("reg distance: ", this.state.address.distance);

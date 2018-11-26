@@ -60,6 +60,8 @@ export default class Map extends Component {
     });
     window.getPlaceId();
 
+    window.handleDataFromGmap();
+
     // WHEN PLACE CHANGED
     window.autocomplete.addListener("place_changed", function() {
       window.onChangeAutoComp = true;

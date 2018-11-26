@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './package.css';
-import axios from "axios";
 import NoPackage from './nopackage';
 import LinkWithPrev from '../LinkWithPrev/linkwithprev.js'
 import { getPackage } from '../api/api';
@@ -16,14 +15,8 @@ export default class Savepack extends Component {
   }
 
   componentDidMount() {
-    axios.get('api/packages/system/'+this.props.path)
-      .then(res => {
-          this.setState({
-              packages: res,
-              isLoaded: true,
-          });
-      })
-      .then(() => { console.log("package", this.state.packages.data) })
+    const get_package = getPackage.bind(this, "packages", "isLoaded", "system/"+this.props.path);
+    get_package()
   }
 
   createDivPackage(curPack) {
@@ -52,11 +45,11 @@ export default class Savepack extends Component {
         if (!this.state.isLoaded) {
             return <div className="loader" />;
         }
-        if (!this.state.packages.data[0]) {
+        if (!this.state.packages[0]) {
             return <NoPackage />
         }
 
-        const listPackages = this.state.packages.data.map((pk, index) =>
+        const listPackages = this.state.packages.map((pk, index) =>
             <div key={index}>
                 {this.createDivPackage(pk)}
             </div>
