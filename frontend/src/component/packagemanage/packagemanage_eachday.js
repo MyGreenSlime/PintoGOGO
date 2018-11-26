@@ -21,19 +21,14 @@ class PackagemanageEachdays extends Component {
       save: false
     };
     const init_day = this.initDayImg.bind(this, this.props.num_day, "day_img");
-    const init_ready = this.initReady.bind(
-      this,
-      this.props.num_day,
-      "is_ready_to_show"
-    );
-    const init_detail = this.initDetail.bind(
-      this,
-      this.props.num_day,
-      "day_detail"
-    );
+    const init_ready = this.initReady.bind(this,this.props.num_day,"is_ready_to_show");
+    const init_detail = this.initDetail.bind(this,this.props.num_day,"day_detail");
     init_day();
     init_ready();
     init_detail();
+    console.log("img_day",this.state.day_img)
+    console.log("img_detail",this.state.day_detail)
+    console.log("ready",this.state.ready)
     this.send3DaysPackage = this.sendPackage.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -56,7 +51,7 @@ class PackagemanageEachdays extends Component {
   }
 
   initDetail(num_day, day_detail) {
-    const start_detail = ["", ""];
+    const start_detail = [null, null];
     for (let i = 0; i < num_day; i++) {
       this.state[day_detail].push(start_detail);
     }
@@ -99,13 +94,7 @@ class PackagemanageEachdays extends Component {
       day_meal: day_meal,
       price: price
     };
-    const send_pack = addOrSavePackageToCart.bind(
-      this,
-      newPackage,
-      path,
-      "save",
-      "package_id"
-    );
+    const send_pack = addOrSavePackageToCart.bind(this,newPackage,path,"save","package_id");
     send_pack();
   }
 
@@ -140,8 +129,8 @@ class PackagemanageEachdays extends Component {
     let newReady = []
     for (let i = 0; i < this.props.num_day; i++) {
       newDayMealState.push([this.state[dayimg][i][0],this.state[dayimg][i][1]]);
-      newDayDetailState.push([this.state[daydetail][i][0],this.state[daydetail][1]])
-      newReady.push([this.state[ready][i][0],this.state[ready][1]])
+      newDayDetailState.push([this.state[daydetail][i][0],this.state[daydetail][i][1]])
+      newReady.push([this.state[ready][i][0],this.state[ready][i][1]])
     }
 
 
@@ -200,8 +189,6 @@ class PackagemanageEachdays extends Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log("dayimg", this.state.day_img);
     const { isAuthenticated, user } = this.props.auth;
     const users = <div />;
     const admin = (
