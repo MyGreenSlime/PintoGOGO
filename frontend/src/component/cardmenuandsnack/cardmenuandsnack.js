@@ -29,7 +29,7 @@ class cardMenuAndSnack extends Component {
   }
 
   deleteFromDb() {
-    const deleteFood = deleteFromDB.bind(this, this.props.path + "/food", this.props.id)
+    const deleteFood = deleteFromDB.bind(this, "menus/" + this.props.path, this.props.id)
     deleteFood();
   }
 
