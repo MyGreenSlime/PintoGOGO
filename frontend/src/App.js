@@ -108,13 +108,11 @@ class App extends Component {
                 <Route path="/payment2" component={Payment2} />
                 <Route path="/menudetail" component={MenuDetail} />
                 <Route path="/3days" component={Pack3days} />
-                {/* <Route path="/3days" render={props => (<Pack3days {...props} />)} /> */}
                 <Route path="/5days" component={Pack5days} />
                 <Route path="/7days" component={Pack7days} />
                 <Route path="/mypackage" component={MyPackage} />
                 <Route path="/snackdetail" component={SnackDetail} />
                 <Route path="/editmenudetail" component={EditMenuDetail} />
-                {/* <Route path="/editsnackdetail" component={EditSnackDetail} /> */}
                 <Route paht="/bill" component={Payment}/>
                 <Route path="*" component={UnderConstruct}/>
               </Switch>

@@ -10,7 +10,7 @@ class Footer extends Component {
 					<p className='p2'>Welcome to PintoGoGo. Here you can find a lot of quality foods. Have a good meal.</p>
 				</div>
 				<div className='topright'>
-					<a className='link' href="">MENU</a> <a className='link' href="">PACKAGE</a> <a className='link' href="">SNACK</a>
+					<a className='link' href="/menu">MENU</a> <a className='link' href="/package">PACKAGE</a> <a className='link' href="/snack">SNACK</a>
 				</div>
 				 {/* <br/>  */}
 				<hr></hr>

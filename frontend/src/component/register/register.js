@@ -41,6 +41,7 @@ class Register extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+      console.log("will recieve", nextProps)
     }
   }
 

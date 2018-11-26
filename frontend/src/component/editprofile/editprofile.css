@@ -22,12 +22,12 @@
   width: 40%;
 }
 
-.userpic {
+.userpic-edit {
   display: inline-block;
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin: 2%;
+  margin: 5%;
   object-fit: cover;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .editprofile-box {
-  width: 51%;
+  width: 40%;
   /* margin: 0 auto 0 auto;  */
   background-color: #f3ece7;
   border-radius: 12px;
@@ -101,17 +101,44 @@ a {
 }
 
 .button-confirm {
-  background-color: #e4dac2;
+  background-color: #FAE5D3;
   color: #7b7b7b;
-  border: solid 0px;
+  border: 1.5px solid #7b7b7b;
   width: 130px;
   font-weight: bold;
-  /* margin-bottom: 20px; */
+  border-radius: 8px;
 }
 
 .addr-dropdown {
   width: 60%;
   min-width: 100px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn-upload {
+  border: 1.5px solid gray;
+  color: gray;
+  background-color: #FDF2E9;
+  padding: 5px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 input[type="text"] {
@@ -129,3 +156,4 @@ input[type="email"] {
 input[type="textarea"] {
   border-radius: 8px;
 }
+
