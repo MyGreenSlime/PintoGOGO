@@ -10,4 +10,4 @@ router.get('/all',passport.authenticate('jwt',{ session : false }), addressContr
 //get address made by owner
 router.get('/current',passport.authenticate('jwt',{ session : false }), addressControl.getCurrentAddress);
 
-module.exports = router;
+module.exports = router

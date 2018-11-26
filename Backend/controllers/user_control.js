@@ -11,13 +11,13 @@ const Address = require('../models/address');
 const Order = require('../models/order');
 
 //register
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
     const {errors, isValid} = validationRegisterInput(req.body);
     if(!isValid) {
         return res.status(400).json(errors);
     }
-    User.findOne({user_name : req.body.user_name})
-        .then(user => {
+    await User.findOne({user_name : req.body.user_name})
+        .then(async (user) => {
             if(user){
                 errors.user_name = 'Username already exists'
                 return res.status(400).json(errors)
@@ -41,12 +41,12 @@ exports.register = (req, res) => {
                     //address : address_id,
                     type : req.body.type
                 })
-                newAddress.save()
+                await newAddress.save()
                     .then(address => newUser.address = address._id)
                     .catch(err => console.log(err));
                 
                 
-                bcrytpt.genSalt(10, (err, salt) => {
+                await bcrytpt.genSalt(10, (err, salt) => {
                     bcrytpt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
                         newUser.password = hash;
