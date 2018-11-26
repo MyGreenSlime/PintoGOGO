@@ -5,7 +5,25 @@ import axios from 'axios'
 class Payment2 extends Component{
     constructor(props){
         super(props);
+        this.state = {
+            profile: null
+        };
     }
+
+    componentDidMount() {
+        axios
+          .get("api/users/profile")
+          .then(res => {
+            this.setState({
+              profile: res.data,
+              isLoaded: true
+            });
+          })
+          .then(() => {
+            console.log("order ", this.state.order);
+          });
+    }
+
     render() {
         return (
         <React.Fragment>

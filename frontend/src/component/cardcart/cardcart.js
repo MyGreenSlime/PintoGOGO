@@ -6,7 +6,7 @@ import axios from "axios";
 class CardCart extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.interval = setInterval(() => this.submitHandler(), 1000);
@@ -40,7 +40,7 @@ class CardCart extends Component {
       )
       .then(res => {
         console.log(res.data);
-        console.log(this.props.type_order, this.props.id)
+        // console.log(this.props.type_order, this.props.id)
       })
       .then(
         () => {
