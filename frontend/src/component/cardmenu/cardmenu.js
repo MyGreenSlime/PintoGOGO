@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import MenuDetail from '../detail/menudetail'
-import {deleteFoodOrSnack} from '../api/api'
+import {deleteFoodOrSnack, addToCart} from '../api/api'
 
 class cardMenu extends Component {
   constructor(props){
@@ -16,15 +16,16 @@ class cardMenu extends Component {
     }
 
   addToCartClick(e){
-      console.log('Click!!!!');
       this.setState({
           clicked : this.state.clicked+1
       })
-      axios.put('/api/orders/add/food',{
+      const food = {
         food_id: this.props.id,
         food_name: this.props.name,
         price: this.props.price
-      })
+      };
+      const addFoodToCart = addToCart.bind(this, "food", food)
+      addFoodToCart();
       e.preventDefault();
   }  
   

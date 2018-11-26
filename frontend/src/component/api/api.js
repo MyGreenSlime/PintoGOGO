@@ -73,6 +73,14 @@ export function addFoodOrSnack(data, status, path) {
     });
 }
 
+/** PUT **/
+export function addToCart(path, data){
+  axios.put('/api/orders/add/'+path, data)
+    .then(res => {
+      console.log("add to cart", res)
+    })
+}
+
 /**  DELETE **/
 export function deleteFoodOrSnack(path, id) {
   axios.delete("api/menus/"+ path +"/del/"+id)
