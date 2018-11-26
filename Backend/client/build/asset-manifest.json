@@ -1,16 +1,28 @@
 {
   "main.css": "/static/css/main.dc218d20.chunk.css",
+<<<<<<< HEAD
   "main.js": "/static/js/main.3cf1dff8.chunk.js",
   "main.js.map": "/static/js/main.3cf1dff8.chunk.js.map",
+=======
+  "main.js": "/static/js/main.173d3d3f.chunk.js",
+  "main.js.map": "/static/js/main.173d3d3f.chunk.js.map",
+>>>>>>> backend
   "static/css/1.1a867bec.chunk.css": "/static/css/1.1a867bec.chunk.css",
   "static/js/1.a00ed692.chunk.js": "/static/js/1.a00ed692.chunk.js",
   "static/js/1.a00ed692.chunk.js.map": "/static/js/1.a00ed692.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
   "static/css/main.dc218d20.chunk.css.map": "/static/css/main.dc218d20.chunk.css.map",
+<<<<<<< HEAD
   "static/media/style-carousel.css": "/static/media/carousel_3.ca015cd4.jpg",
   "static/css/1.1a867bec.chunk.css.map": "/static/css/1.1a867bec.chunk.css.map",
   "index.html": "/index.html",
   "precache-manifest.999c371702fdd4320692e200373d4dd3.js": "/precache-manifest.999c371702fdd4320692e200373d4dd3.js",
+=======
+  "static/media/style-carousel.css": "/static/media/carousel_2.15dcbe98.jpg",
+  "static/css/1.1a867bec.chunk.css.map": "/static/css/1.1a867bec.chunk.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.82a07a4ed9630404a17b6e0d7ca7d2e9.js": "/precache-manifest.82a07a4ed9630404a17b6e0d7ca7d2e9.js",
+>>>>>>> backend
   "service-worker.js": "/service-worker.js"
 }
