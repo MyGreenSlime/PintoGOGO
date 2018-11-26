@@ -67,7 +67,7 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
       this.setState({
         [pack_id]: res.data.data.package_id
       })
-      if(path == "add" && !this.statr[save]){
+      if(path == "add" && !this.state[save]){
         console.log("save")
         this.setState({
           [save]: true
