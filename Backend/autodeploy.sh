@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "Please Wait for build react" 
 npm run buildfrontend
+git add -A
+git commit -m ""$(date +"%D %T buildfront")""
 git checkout deploy
 git merge backend
 git add -A
