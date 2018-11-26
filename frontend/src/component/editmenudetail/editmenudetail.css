@@ -1,9 +1,7 @@
 .editmenudetail__imgpreview{
-    width: 80%;
-    border-radius: 6px;
-    padding-bottom: 8px;
-    padding-right: 10%;
-    border-radius: 8px;
+    width: 70%;
+    margin-bottom: 8px;
+    border-radius: 12px;
 }
 
 .menudetail__menuname--right{

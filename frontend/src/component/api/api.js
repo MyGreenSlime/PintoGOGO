@@ -137,6 +137,18 @@ export function addToBill(data) {
     .then(res => console.log("add to bill", res));
 }
 
+export function editFoodOrSnack(path, id, data) {
+  axios
+      .put("/api/menus/" + path + "/edit/" + id, data)
+      .then(res => {
+        console.log("edit "+path, res)
+      })
+      .then(() => {
+        console.log("redirect");
+        this.renderRedirect();
+      });
+}
+
 /** DELETE **/
 export function deleteFromDB(path, id) {
   axios.delete("/api/"+ path +"/del/"+id)

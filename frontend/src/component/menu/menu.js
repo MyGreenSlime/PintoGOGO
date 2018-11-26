@@ -106,19 +106,21 @@ class Menu extends Component {
           {this.checkFirstMenuSet()}</div>
         </div>
 
-        <div className="row">
-          <div className="row">
-            <div className="col-md-4 menuzone__image--fix">
-              {menus[firstImg] && (
-                <CardMenu
-                  name={menus[firstImg].menu_name}
-                  picture={menus[firstImg].img_url}
-                  calories={menus[firstImg].calories}
-                  id = {menus[firstImg]._id}
-                  price = {menus[firstImg].price}
-                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
-                />
-              )}
+        {/* <div className="row"> */}
+          <div className="row center">
+            {/* <div className="center"> */}
+              <div className="col-md-4 menuzone__image--fix">
+                {menus[firstImg] && (
+                  <CardMenu className="center"
+                    name={menus[firstImg].menu_name}
+                    picture={menus[firstImg].img_url}
+                    calories={menus[firstImg].calories}
+                    id = {menus[firstImg]._id}
+                    price = {menus[firstImg].price}
+                    onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
+                  />
+                )}
+              {/* </div> */}
             </div>
             
             <div className="col-md-4 menuzone__image--fix">
@@ -147,7 +149,7 @@ class Menu extends Component {
               )}
             </div>
           </div>
-          <div className="row">
+          <div className="row center">
             
               <div className="col-md-4 menuzone__image--fix">
                 {menus[forthImg] && (
@@ -189,7 +191,7 @@ class Menu extends Component {
                 
             
           </div>
-        </div>
+        
           
 
         <div className="mergerow--right">

@@ -69,6 +69,15 @@ class PackagemanageEachdays extends Component {
   }
 
   sendPackage(path) {
+    if (this.state.name_package === ""){
+      return ;
+      // (
+      //   <div className="invalid-feedback">
+      //      Please name your package
+      //   </div>
+      // )
+    }
+    else {
     /** cal price */
     let price = 0;
     for (let i = 0; i < this.props.num_day; i++) {
@@ -107,6 +116,7 @@ class PackagemanageEachdays extends Component {
       "package_id"
     );
     send_pack();
+    }
   }
 
   checkReady() {
@@ -261,8 +271,8 @@ class PackagemanageEachdays extends Component {
 
           {this.state.click_show && (
             <React.Fragment>
+              <form>
               <div>
-                <form>
                   <div className="row">
                     <label className="col-sm-4">Package name:</label>
                     <div className="col-sm-6">
@@ -274,6 +284,7 @@ class PackagemanageEachdays extends Component {
                         id="name_package"
                         onChange={this.handleChange}
                         value={this.state.name_package}
+                        required
                       />
                     </div>
                   </div>
@@ -282,7 +293,6 @@ class PackagemanageEachdays extends Component {
                     {isAuthenticated ? users : ""}
                     {user.type ? admin : ""}
                   </div>
-                </form>
               </div>
               <div>
                 <NutritionManage
@@ -299,11 +309,14 @@ class PackagemanageEachdays extends Component {
                 </button>
                 <button
                   className="btn btn-shownutrition" // onClick={this.testClick()}
+                  type="submit"
+                  value="Submit"
                   onClick={() => this.sendPackage("add")}
                 >
                   SAVE PACKAGE
                 </button>
               </div>
+              </form>
             </React.Fragment>
           )}
         </div>
