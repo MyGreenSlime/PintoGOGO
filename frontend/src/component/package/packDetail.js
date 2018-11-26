@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import './package.css'
 import Nutrition from "./nutrition";
-import axios from "axios";
 import NoPackage from "./nopackage";
-import { getPackage, addPackageToCart } from "../api/api";
+import { getPackage, addOrSavePackageToCart } from "../api/api";
 
 export default class Package3DaysDetail extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ export default class Package3DaysDetail extends Component {
 
   addToCart() {
     console.log("add pack");
-    const add_cart = addPackageToCart.bind(this,this.state.packages[0]);
+    const add_cart = addOrSavePackageToCart.bind(this,this.state.packages[0],"addcart","","");
     add_cart();
   }
 
