@@ -81,9 +81,9 @@ export function addToCart(path, data){
     })
 }
 
-/**  DELETE **/
-export function deleteFoodOrSnack(path, id) {
-  axios.delete("api/menus/"+ path +"/del/"+id)
+/** DELETE **/
+export function deleteFromDB(path, id) {
+  axios.delete("api/"+ path +"/del/"+id)
   .then(res => console.log("delete", res))
   .then(() => {
     this.props.onMenuCardDeleted(id);

@@ -2,10 +2,9 @@ import React, { Component} from 'react';
 import '../cardmenu/cardmenu.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios'
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { BrowserRouter as Route, Link} from 'react-router-dom'
 import MenuDetail from '../detail/menudetail'
-import {deleteFoodOrSnack, addToCart} from '../api/api'
+import {deleteFromDB, addToCart} from '../api/api'
 
 class cardMenu extends Component {
   constructor(props){
@@ -30,7 +29,7 @@ class cardMenu extends Component {
   }  
   
   deleteFromDb(){
-    const deleteFood = deleteFoodOrSnack.bind(this, "food", this.props.id)
+    const deleteFood = deleteFromDB.bind(this, "menus/food", this.props.id)
     deleteFood();
   }
 
