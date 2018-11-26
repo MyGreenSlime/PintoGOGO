@@ -18,13 +18,14 @@ class Register extends Component {
       password1: "",
       password2: "",
       phonenumber: "",
-      address: "",
+      address: {
+        address: "",
+        lat: "",
+        lng: "",
+        distance: null
+      },
       status: {},
-      errors: {},
-      lat: [],
-      lng: [],
-      dest: [],
-      dist: []
+      errors: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +41,7 @@ class Register extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+      console.log("will recieve", nextProps)
     }
   }
 
@@ -58,20 +60,30 @@ class Register extends Component {
       password1: this.state.password1,
       password2: this.state.password2,
       phonenumber: this.state.phonenumber,
-      address: this.state.dest
+      address: this.state.address
     };
+    console.log(this.state.address);
     this.props.registerUser(newUser, this.props.history);
     e.preventDefault();
   }
 
   handleData(lat, lng, dest, dist) {
-    this.setState({
-      lat: lat,
-      lng: lng,
-      dest: dest,
-      dist: dist
-    });
-    // console.log("reg dest: ", this.state.dest);
+    this.setState(
+      {
+        address: {
+          address: dest[0],
+          lat: lat,
+          lng: lng,
+          distance: dist
+        }
+      },
+      () => {
+        console.log("reg destination: ", this.state.address.address);
+        console.log("reg lat: ", this.state.address.lat);
+        console.log("reg lng: ", this.state.address.lng);
+        console.log("reg distance: ", this.state.address.distance);
+      }
+    );
   }
 
   render() {
@@ -159,7 +171,7 @@ class Register extends Component {
                         })}
                         name="password1"
                         id="Password"
-                        placeholder="password must least 6 character"
+                        placeholder="password must least 6 characters"
                         onChange={this.handleChange}
                         value={this.state.password1}
                       />
@@ -287,8 +299,7 @@ class Register extends Component {
             </div>
             <br />
             <button width="auto" type="submit" className="btn button-confirm">
-              {" "}
-              CONFIRM{" "}
+              {/* onClick={() => this.props.handleDataFromGmap */} CONFIRM{" "}
             </button>
           </form>
         </div>

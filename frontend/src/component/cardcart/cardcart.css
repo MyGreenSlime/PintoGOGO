@@ -1,5 +1,6 @@
 .cardcartbox{
     font-weight: bold;
+    font-size: 15px;
 }
 .img__block{
     display: inline-block;
@@ -17,11 +18,9 @@
 }
 .menuname__block{
     width: 20%;
-    text-align: center;
 }
 
 .menuprice{
-    /* padding-right: 100%; */
     text-align: center;
 }
 
@@ -30,7 +29,6 @@
 }
 
 .editamount{
-    /* text-align: center; */
     min-width: 160px;
 }
 .minusbutton{
@@ -42,7 +40,6 @@
 .addbutton{
     cursor: pointer;
     text-align: left;
-    /* padding-left: 5%; */
 }
 
 .form-group{
@@ -51,6 +48,7 @@
 }
 
 .cardcart__editamount__price{
+    text-align: left;
 }
 
 

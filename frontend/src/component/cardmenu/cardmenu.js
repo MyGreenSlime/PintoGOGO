@@ -2,9 +2,9 @@ import React, { Component} from 'react';
 import '../cardmenu/cardmenu.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios'
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import MenuDetail from '../menudetail/menudetail'
+import { BrowserRouter as Route, Link} from 'react-router-dom'
+import MenuDetail from '../detail/menudetail'
+import {deleteFromDB, addToCart} from '../api/api'
 
 class cardMenu extends Component {
   constructor(props){
@@ -15,25 +15,22 @@ class cardMenu extends Component {
     }
 
   addToCartClick(e){
-      console.log('Click!!!!');
       this.setState({
           clicked : this.state.clicked+1
       })
-      axios.put('/api/orders/add/food',{
+      const food = {
         food_id: this.props.id,
         food_name: this.props.name,
         price: this.props.price
-      })
+      };
+      const addFoodToCart = addToCart.bind(this, "food", food)
+      addFoodToCart();
       e.preventDefault();
   }  
   
   deleteFromDb(){
-    axios.delete('/api/menus/food/del/'+ this.props.id)
-    .then(res => console.log(res))
-    .then(() => {
-      this.props.onMenuCardDeleted(this.props.id);
-    });
-      
+    const deleteFood = deleteFromDB.bind(this, "menus/food", this.props.id)
+    deleteFood();
   }
 
   sendToMenuDetail(){
@@ -64,7 +61,7 @@ class cardMenu extends Component {
             </Link>
         </div>
 
-        <div className="row">
+        <div className="row cardmenu__undermenu--minwidth">
           <div className="col cardmenu__text">
             <p>
               {this.props.name}<br/>

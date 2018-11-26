@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react';
-import axios from "axios";
 import './style-packmenu.css'
 import { DragDropContainer } from "react-drag-drop-container"
+import { getFoodOrSnack } from '../api/api';
 
 class Packmenu extends Component {
 
@@ -13,14 +13,12 @@ class Packmenu extends Component {
       isLoaded: false,
     }
     this.createDivImage = this.createDivImage.bind(this);
+    
   }
 
   componentDidMount() {
-    axios.get('/api/menus/food')
-      .then(res => {
-        const allmenus = res.data
-        this.setState({ isLoaded: true, menus: allmenus })
-      }).then(() => {console.log(this.state.menus)})
+    const newGetFood = getFoodOrSnack.bind(this,"menus","isLoaded","food")
+    newGetFood()
   }
 
   createDivImage(url, name) {
@@ -45,13 +43,13 @@ class Packmenu extends Component {
   }
   
   render() {
-
+    // create customDragElement
     const img_drag = this.state.menus.map((menu,index) => 
       <React.Fragment key={index}>
-        <img src={menu.img_url} className="menu--image__drop" alt={menu.menu_name}/>
+        <img src={menu.img_url} className="menu--image__drag" alt={menu.menu_name}/>
       </React.Fragment>
     );
-
+    // create draggable element
     const listMenus = this.state.menus.map((menu, index) => 
       <React.Fragment key={index}>
         <DragDropContainer dragData={menu} targetKey="menu" dragClone="true" customDragElement={img_drag[index]}> 
@@ -60,7 +58,7 @@ class Packmenu extends Component {
       </React.Fragment>);
 
     const cols1 = [], cols2 = [];
-
+    //list column
     listMenus.forEach((items, i) => {
       if (i % 2 === 0) {
         cols1.push(items);

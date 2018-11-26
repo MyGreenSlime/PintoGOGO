@@ -6,7 +6,7 @@ import axios from "axios";
 class CardCart extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.interval = setInterval(() => this.submitHandler(), 1000);
@@ -40,7 +40,7 @@ class CardCart extends Component {
       )
       .then(res => {
         console.log(res.data);
-        console.log(this.props.type_order, this.props.id)
+        // console.log(this.props.type_order, this.props.id)
       })
       .then(
         () => {
@@ -48,7 +48,6 @@ class CardCart extends Component {
             inputField: this.state.inputField + 1
           });
         }
-        
       );
   }
 
@@ -61,13 +60,37 @@ class CardCart extends Component {
           this.props.id
       )
       .then(() => {
-        if (this.state.inputField > 0) {
-          this.setState({
-            inputField: this.state.inputField - 1
-          });
+        if (this.state.inputField > 1) {
+          this.state.inputField -= 1
         }
       });
   }
+
+  deletemenu() {
+    axios
+      .delete(
+        "/api/orders/del/food/" +
+          this.props.id
+      )
+      .then(() => {
+        this.state.inputField = 0
+        this.forceUpdate();
+        }
+      )
+      .then(() => {
+        this.forceUpdate();
+      });
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if(this.state.inputField == 0){
+  //     console.log("trueeeee")
+  //     return true;
+  //   }
+  //   else  {
+  //     return false;
+  //   }
+  // }
 
   render() {
     return (
@@ -75,7 +98,7 @@ class CardCart extends Component {
         <div className="cardcartbox">
           <hr />
           <div className="row rowcard">
-            <div className="col-md-3 col-5 img__block">
+            <div className="col-md-2 d-none d-sm-block img__block">
               <img
                 src={this.props.picture}
                 width="60%"
@@ -85,7 +108,10 @@ class CardCart extends Component {
             <div className="col-md-3 col-7 menuname__block">
               <p>{this.props.name}</p>
             </div>
-            <div className="col-md-3 col-9 editamount">
+            <div className="col-md-1 col-5 cardcartbox--delete" onClick={this.deletemenu.bind(this)}>
+              DELETE
+            </div>
+            <div className="col-md-3 col-8 editamount">
               <div className="row">
                 <div
                   className="minusbutton "
@@ -99,7 +125,7 @@ class CardCart extends Component {
                     placeholder={this.state.inputField}
                     value={this.state.inputField}
                     onChange={this.handleChange}
-                    style={{ width: "2rem", height: "30px" }}
+                    style={{ width: "3rem", height: "30px" }}
                   />
                 </div>
                 <div className="addbutton" onClick={this.increment.bind(this)}>

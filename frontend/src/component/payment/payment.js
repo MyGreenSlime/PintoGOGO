@@ -7,10 +7,16 @@ export default class Payment extends Component {
     super(props);
     this.state = {
       bill: null,
+      address: null,
+      distance: null,
+      deliveryFee: null,
+      distSelected: false,
+      totalCost: null,
       isLoaded: false
     };
 
     this.ddDOM = React.createRef();
+    this.calculateDeliveryFee = this.calculateDeliveryFee.bind(this);
   }
 
   componentDidMount() {
@@ -18,17 +24,25 @@ export default class Payment extends Component {
       .get("/api/bills/current")
       .then(res => {
         this.setState({
-          bill: res.data,
-          isLoaded: true
+          bill: res.data
         });
       })
       .then(() => {
         console.log("whole bill: ", this.state.bill);
         console.log("order: ", this.state.bill.order);
-        console.log(
-          "food name: ",
-          this.state.bill.order.food_order[0].food_name
-        );
+      })
+      .then(() => {
+        axios
+          .get("/api/address/current")
+          .then(res => {
+            this.setState({
+              address: res.data,
+              isLoaded: true
+            });
+          })
+          .then(() => {
+            console.log("address: ", this.state.address);
+          });
       });
   }
 
@@ -37,29 +51,48 @@ export default class Payment extends Component {
       const $ = window.$;
       this.ddDOM = $(this.ddDOM.current);
       this.ddDOM.dropdown();
+
+      $(".dd__addr-choice").click(function() {
+        var txt = $(this).text();
+        console.log("dd selected", txt);
+      });
       console.log(this.ddDOM);
     }
   }
 
-  showMenuList() {
-    let items;
-    if (!this.state.bill.order.food_order) {
-      items = <div />;
-    } else {
-      items = this.state.bill.order.food_order;
-      items.map(it => <p>{it.food_name}</p>);
+  calculateDeliveryFee(index) {
+    var dist = this.state.address[index].distance;
+    var fee = dist * 2;
+    var packageOrder = this.state.bill.order.package_order;
+
+    if (packageOrder != null) {
+      var i,
+        maxDay = 3;
+      for (i = 0; i < packageOrder.length; i++) {
+        if (packageOrder[i].package_id.type > maxDay) {
+          maxDay = packageOrder[i].package_id.type;
+        }
+      }
     }
-    return items;
+    fee = fee * maxDay;
+    var total = this.state.bill.order_cost + fee;
+
+    this.setState({
+      distance: dist,
+      deliveryFee: fee,
+      distSelected: true,
+      totalCost: total
+    });
   }
 
   render() {
-    const { bill, isLoaded } = this.state;
+    const { bill, address, isLoaded } = this.state;
 
     if (!!!isLoaded) {
       return <React.Fragment />;
     }
-
-    console.log("here", this.state.bill);
+    console.log("here addr: ", address);
+    console.log("here bill: ", bill);
     return (
       <React.Fragment>
         <div className="container set-screen-payment">
@@ -92,6 +125,32 @@ export default class Payment extends Component {
                       </div>
                     </div>
                   ))}
+                  {bill.order.snack_order.map(it => (
+                    <div className="row" style={{ width: "100%" }}>
+                      <div className="col">
+                        <p>{it.snack_name}</p>
+                      </div>
+                      <div className="col col--middle">
+                        <p>{it.amount}</p>
+                      </div>
+                      <div className="col col--right">
+                        <p>{it.price}</p>
+                      </div>
+                    </div>
+                  ))}
+                  {bill.order.package_order.map(it => (
+                    <div className="row" style={{ width: "100%" }}>
+                      <div className="col">
+                        <p>{it.package_name}</p>
+                      </div>
+                      <div className="col col--middle">
+                        <p>{it.amount}</p>
+                      </div>
+                      <div className="col col--right">
+                        <p>{it.price}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
                 <br />
                 <p>Choose Address</p>
@@ -105,15 +164,15 @@ export default class Payment extends Component {
                     Selected
                   </button>
                   <div className="dropdown-menu btn-block">
-                    <a className="dropdown-item" href="#">
-                      Link One
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Link Two
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Link Three
-                    </a>
+                    {address.map((it, index) => (
+                      <a
+                        key={index}
+                        className="dropdown-item dd__addr-choice"
+                        onClick={this.calculateDeliveryFee.bind(this, index)}
+                      >
+                        {it.address}
+                      </a>
+                    ))}
                   </div>
                 </div>
                 <div className="row">
@@ -131,6 +190,9 @@ export default class Payment extends Component {
                   <div className="col">
                     <p>Distance</p>
                   </div>
+                  <div className="col col--middle">
+                    <p>{this.state.distance}</p>
+                  </div>
                   <div className="col col--right">
                     <p>Kilometer</p>
                   </div>
@@ -139,6 +201,9 @@ export default class Payment extends Component {
                   <div className="col">
                     <p>Delivery Fee</p>
                   </div>
+                  <div className="col col--middle">
+                    <p>{this.state.deliveryFee}</p>
+                  </div>
                   <div className="col col--right">
                     <p>Baht</p>
                   </div>
@@ -146,6 +211,9 @@ export default class Payment extends Component {
                 <div className="row txt__total">
                   <div className="col">
                     <p>Order Total</p>
+                  </div>
+                  <div className="col col--middle">
+                    <p>{this.state.totalCost}</p>
                   </div>
                   <div className="col col--right">
                     <p>Baht</p>

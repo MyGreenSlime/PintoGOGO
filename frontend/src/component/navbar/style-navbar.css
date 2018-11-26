@@ -8,6 +8,14 @@
   padding-bottom: 4px;
 }
 
+.navbar__userpic {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 2%;
+  object-fit: cover;
+}
+
 .navbar__link {
   color: black;
   font-weight: bold;
@@ -26,3 +34,4 @@
 .navbar__icon {
   width: 1.4rem;
 }
+

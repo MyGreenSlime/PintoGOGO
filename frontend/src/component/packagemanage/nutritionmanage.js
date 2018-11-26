@@ -6,17 +6,18 @@ export default class NutritionManage extends Component {
 	super(props);
 
     this.state = {
-      		packages: {},
-			daymeal: this.props.menu_detail.slice()
+			  packages: {},
+			  daymeal: Object.assign({},this.props.menu_detail),
+			  length: this.props.day
 		}
 		this.compute = this.compute.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
 	this.setState({
-		daymeal: nextProps.menu_detail.slice()
+		daymeal: Object.assign({},nextProps.menu_detail)
+		// daymeal: nextProps.menu_detail.slice()
 	  }, () => {
-		console.log("this from nutrition22", this.state.daymeal)
 	  })
   }
   
@@ -24,17 +25,17 @@ export default class NutritionManage extends Component {
 	compute(x) {
 		const daymeal = this.state.daymeal
 		let sum = 0;
-		for (let i = 0; i < daymeal.length; i++) {
+		for (let i = 0; i < this.state.length; i++) {
 			 sum = sum + daymeal[i][0][x] + daymeal[i][1][x]
 		}
-		sum = sum/daymeal.length
+		sum = sum/this.state.length
 		return sum;
 	}
 
 	sumprice(x) {
 		const daymeal = this.state.daymeal
 		let sum = 0;
-		for (let i = 0; i < daymeal.length; i++) {
+		for (let i = 0; i < this.state.length; i++) {
 			 sum = sum + daymeal[i][0][x] + daymeal[i][1][x]
 		}
 		return sum;
@@ -43,7 +44,6 @@ export default class NutritionManage extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{console.log("this is from render", this.compute("calories"))}
 			<div className='nutritionmanage-box'>
 			price: {Math.round(this.sumprice("price")*0.95)} BAHT ( ลดจาก {this.sumprice("price")})
 			<br/>
@@ -99,7 +99,6 @@ export default class NutritionManage extends Component {
 					</div>
 				</div>
 		</div>
-		{console.log("this is from render2222")}
 			</React.Fragment>
 		);
 	}

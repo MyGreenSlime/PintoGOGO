@@ -6,9 +6,9 @@
   position: absolute;
   right: 0px;
   top: -10px;
-  margin-top: 95px;
+  margin-top: 170px;
   margin-right: 10px;
-  /* z-index: 0; */
+  /* z-index: -1; */
   /* margin-bottom: 50px; */
   /* margin-left: 5%; */
   width: 30%;
@@ -26,18 +26,20 @@
 }
 
 .menu--image{
-  width: 95%;
-  height: 95%;
+  width: 80%;
+  height: 80%;
   margin: 5%;
   border-radius: 10px;
 }
 
-.menu--image__drop{
+.menu--image__drag{
   width: 150px;
   height: 150px;
-  margin: 5%;
+  /* margin: 5%; */
   border-radius: 10px;
   position: relative;
+  display: inline-block;
+  /* z-index: 1; */
 }
 
 .hovereffect {

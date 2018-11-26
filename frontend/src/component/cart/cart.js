@@ -95,8 +95,8 @@ class Cart extends Component {
         <CardCart
           handlerFromParant={this.handleData}
           picture={""}
-          name={ord.package_id.type + "days package"}
-          price={ord.package_id.price}
+          name={ord.package_name}
+          price={ord.price}
           amount={ord.amount}
           id={ord.package_id._id}
           type_order="package"
@@ -120,36 +120,57 @@ class Cart extends Component {
     if (!this.state.isLoaded) {
       return <div className="loader" />;
     }
-    return <React.Fragment>
-      <div className="set-screen-cart">
-        <div className="linkbutton">
-          <div className="imgcart">
-            <a href="/">
-              <img src="/img/cart/plan.png" alt="plan icon" height="40px" />
-            </a>
-            <p>PLAN</p>
+    return (
+      <React.Fragment>
+        <div className="set-screen-cart">
+          <div className="linkbutton">
+            <div className="row cart__menubar">
+              <div className="col-1" />
+              <div className="col-1">
+                <a href="/">
+                  <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
+                </a>
+                <p>PLAN</p>
+              </div>
+              <div className="col-1">
+                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+              </div>
+
+              <div className="col-1">
+                <img src="/img/cart/cart.png" alt="cart icon" width="50%" />
+                <p>CART</p>
+              </div>
+              <div className="col-1">
+                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+              </div>
+              <div className="col-1">
+                <img
+                  src="/img/cart/payment.png"
+                  alt="payment icon"
+                  width="50%"
+                />
+                <p>PAYMENT</p>
+              </div>
+              <div className="col-1">
+                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+              </div>
+              <div className="col-1">
+                <img
+                  src="/img/cart/delivery.png"
+                  alt="delivery icon"
+                  width="50%"
+                />
+                <p>DELIVERY</p>
+              </div>
+              <div className="col-1">
+                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+              </div>
+              <div className="col-1">
+                <img src="/img/cart/enjoy.png" alt="enjoy icon" width="50%" />
+                <p>ENJOY</p>
+              </div>
+            </div>
           </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/cart.png" alt="cart icon" height="40px" />
-            <p>CART</p>
-          </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/payment.png"  alt="payment icon" height="40px" />
-            <p>PAYMENT</p>
-          </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/delivery.png" alt="delivery icon" height="40px" />
-            <p>DELIVERY</p>
-          </div>
-          <img src="/img/cart/arrow.png" alt="arrow icon" height="30px" />
-          <div className="imgcart">
-            <img src="/img/cart/enjoy.png" alt="enjoy icon" height="40px" />
-            <p>ENJOY</p>
-          </div>
-        </div>
 
           <div className="cartbox">
             <div className="header">
@@ -157,9 +178,9 @@ class Cart extends Component {
             </div>
             <div className="subhead">
               <div className="row">
-                <div className="col-6" />
-                <div className="col-3 amountzone">AMOUNT</div>
-                <div className="col-3">PRICE</div>
+                <div className="col-md-6" />
+                <div className="col-md-3 col-6 amountzone">AMOUNT</div>
+                <div className="col-md-3 col-6">PRICE</div>
               </div>
             </div>
             <div>
@@ -172,22 +193,18 @@ class Cart extends Component {
               <div className="total">
                 <p>TOTAL: {this.state.fromChild}</p>
               </div>
-              <a href="/bill">
+              {/* <a href="/bill"> */}
                 <button
                   className="btn button--confirm"
-                  onClick={this.confirmButtonClicked}
-                >
+                  onClick={this.confirmButtonClicked}>
                   CONFIRM
                 </button>
-              </a>
+              {/* </a> */}
             </div>
-            <a href="/bill">
-              <button className="btn button--confirm">CONFIRM</button>
-            </a>
           </div>
         </div>
       </React.Fragment>
-    
+    );
   }
 }
 export default Cart;
