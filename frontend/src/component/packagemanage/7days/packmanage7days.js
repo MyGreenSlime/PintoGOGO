@@ -131,7 +131,10 @@ class Packagemanage7days extends Component {
         if (path == "add") {
           console.log("save");
           alert("Save Package Success!");
-        } else if (path == "anonymous/addcart") {
+          this.setState({
+            package_id : response.data.data.package_id
+          })
+        } else if (path == "addcart") {
           this.setState({
             package_id: response.data.data.package_id
           });
@@ -521,7 +524,7 @@ class Packagemanage7days extends Component {
                   {/* <a href='/cart'> */}
                   <button
                     className="btn btn-shownutrition"
-                    onClick={() => this.send7DaysPackage("anonymous/addcart")}
+                    onClick={() => this.send7DaysPackage("addcart")}
                   >
                     ADD TO CART
                   </button>

@@ -38,16 +38,7 @@ export default class Package3DaysDetail extends Component {
       });
   }
 
-  addPack3DaysAToCart() {
-    console.log("add pack");
-    const pack3A = {
-      package_id: this.state.packages[0]._id,
-      name_package: "Package 3 days A",
-      price: this.state.packages[0].price
-    };
-    axios.put("/api/orders/add/package", pack3A);
-  }
-
+ 
   componentDidUpdate() {
     const $ = window.$;
     $('[data-toggle="tooltip"]').tooltip();

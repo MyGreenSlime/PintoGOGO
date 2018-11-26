@@ -165,8 +165,11 @@ class Packagemanage5days extends Component {
         console.log("res", response);
         if (path == "add") {
           console.log("save");
+          this.setState({
+            package_id : response.data.data.package_id
+          })
           alert("Save Package success!");
-        } else if (path == "anonymous/addcart") {
+        } else if (path == "addcart") {
           this.setState({
             package_id: response.data.data.package_id
           });
@@ -420,7 +423,7 @@ class Packagemanage5days extends Component {
                 <div>
                   <button
                     className="btn btn-shownutrition"
-                    onClick={() => this.send5DaysPackage("anonymous/addcart")}
+                    onClick={() => this.send5DaysPackage("addcart")}
                   >
                     ADD TO CART
                   </button>

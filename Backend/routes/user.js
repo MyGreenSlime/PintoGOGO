@@ -4,10 +4,10 @@ const passport = require('passport');
 
 const multer = require("multer");
 const storageProfile = multer.diskStorage({
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     cb(null, "./public/uploads/upload_profile/");
   },
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
   }
 });
@@ -15,7 +15,7 @@ const storageProfile = multer.diskStorage({
 const fileFilter = (req, file, cb) => {
   // reject a file
   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-    cb(null, true);
+    cb(nulls, true);
   } else {
     cb(null, false);
   }
@@ -37,25 +37,41 @@ router.post('/register', userControl.register)
 router.post('/login', userControl.login)
 
 //profile user data
-router.get('/profile', passport.authenticate('jwt',{ session : false }), userControl.getProfile)
+router.get('/profile', passport.authenticate('jwt', {
+  session: false
+}), userControl.getProfile)
 
 //update profile
-router.put('/edit/profile', passport.authenticate('jwt',{ session : false }),uploadProfile.single('img'), userControl.editProfile)
+router.put('/edit/profile', passport.authenticate('jwt', {
+  session: false
+}), uploadProfile.single('img'), userControl.editProfile)
 //add new address
-router.put('/add/address', passport.authenticate('jwt',{ session : false }), userControl.addAddres)
+router.put('/add/address', passport.authenticate('jwt', {
+  session: false
+}), userControl.addAddres)
 // del some address
-router.delete('/del/address/:id', passport.authenticate('jwt',{ session : false }), userControl.delAddress)
+router.delete('/del/address/:id', passport.authenticate('jwt', {
+  session: false
+}), userControl.delAddress)
 
 //add favorite food
-router.put('/add/favorite/food/:id', passport.authenticate('jwt',{ session : false }), userControl.addFavoriteFood)
+router.put('/add/favorite/food/:id', passport.authenticate('jwt', {
+  session: false
+}), userControl.addFavoriteFood)
 
 //delete some  favorite food
-router.delete('/del/favorite/food/:id', passport.authenticate('jwt',{ session : false }),userControl.delFavoriteFood)
+router.delete('/del/favorite/food/:id', passport.authenticate('jwt', {
+  session: false
+}), userControl.delFavoriteFood)
 
 //add favorite snack
-router.put('/add/favorite/snack/:id', passport.authenticate('jwt',{ session : false }), userControl.addFavoriteSnack)
+router.put('/add/favorite/snack/:id', passport.authenticate('jwt', {
+  session: false
+}), userControl.addFavoriteSnack)
 
 //delete some  favorite snack
-router.delete('/del/favorite/snack/:id', passport.authenticate('jwt',{ session : false }), userControl.delFavoriteSnack)
+router.delete('/del/favorite/snack/:id', passport.authenticate('jwt', {
+  session: false
+}), userControl.delFavoriteSnack)
 
 module.exports = router;

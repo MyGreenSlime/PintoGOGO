@@ -36,7 +36,7 @@ exports.getAllUserPackage = (req, res) =>{
 
 exports.getSystemAllPackage =  (req, res) => {
     const errors = {}
-    Package.find({by_admin : true})
+    Package.find({by_admin : true, saved : true})
         .populate({path : "day_meal.meal_1", model : "Menu"})
         .populate({path : "day_meal.meal_2", model : "Menu"})
         .populate({path : "day_meal.snack", model : "Snack"})
@@ -52,7 +52,7 @@ exports.getSystemAllPackage =  (req, res) => {
 
 exports.getSystem3DayPackage = (req, res) => {
     const errors = {}
-    Package.find({type : 3, by_admin : true})
+    Package.find({type : 3, by_admin : true, saved : true})
         .populate({path : "day_meal.meal_1", model : "Menu"})
         .populate({path : "day_meal.meal_2", model : "Menu"})
         .populate({path : "day_meal.snack", model : "Snack"})
@@ -68,7 +68,7 @@ exports.getSystem3DayPackage = (req, res) => {
 
 exports.getSystem5DayPackage = (req, res) => {
     const errors = {}
-    Package.find({type : 5, by_admin : true})
+    Package.find({type : 5, by_admin : true, saved : true})
         .populate({path : "day_meal.meal_1", model : "Menu"})
         .populate({path : "day_meal.meal_2", model : "Menu"})
         .populate({path : "day_meal.snack", model : "Snack"})
@@ -84,7 +84,7 @@ exports.getSystem5DayPackage = (req, res) => {
 
 exports.getSystem7DayPackage = (req, res) => {
     const errors = {}
-    Package.find({type : 7, by_admin : true})
+    Package.find({type : 7, by_admin : true, saved : true})
         .populate({path : "day_meal.meal_1", model : "Menu"})
         .populate({path : "day_meal.meal_2", model : "Menu"})
         .populate({path : "day_meal.snack", model : "Snack"})
@@ -190,6 +190,7 @@ exports.addCart = (req, res) => {
         owner : req.user.user_name,
         saved : false
     })
+    console.log(package_id)
     Package.findOne({_id : package_id}, function(err, package){
       if(package) {
         var isInc = true
@@ -206,6 +207,7 @@ exports.addCart = (req, res) => {
             }
         }
         if(isInc){
+            console.log("in1")
             Order.updateOne({user_id : req.user.id, isfinish : false, "package_order.package_id" : package_id},{
                 $inc : {"package_order.$.amount" : 1}
             }, (err, order) => {
@@ -213,14 +215,40 @@ exports.addCart = (req, res) => {
                     error.package = err
                     res.sendStatus(500).json(error)
                 } else {
-                    status.message = "increase amount finish"
-                    status.data = {
+                    if (order.nModified == 0) {
+                        console.log("in2")
+                        const newPackageOrder = {
+                            package_id : package_id,
+                            package_name : newPackage.name_package,
+                            price : newPackage.price,
+                            amount : 1
+                        }
+                        Order.updateOne(
+                            {user_id: req.user.id, isfinish: false },
+                            {
+                                $push: { package_order: newPackageOrder }
+                            },
+                            (err, order) => {
+                                if (err) {
+                                    error.orders = err;
+                                    res.sendStatus(400).json(error);
+                                } else {
+                                    res.json(status);
+                                }
+                            } 
+                        );
+                    } else {
+                        console.log("in3")
+                        status.message = "increase amount finish"
+                        status.data = {
                         package_id : package_id
+                        }
+                        res.json(status)
                     }
-                    res.json(status)
                 }
             })
         } else {
+            console.log("in4")
             newPackage.save()
                 .then(package => {
                     Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
@@ -252,6 +280,7 @@ exports.addCart = (req, res) => {
         }
         
       } else {
+            console.log("in5")
             newPackage.save()
                 .then(package => {
                     Order.findOne({user_id : req.user.id, isfinish : false}, function(err, order){
