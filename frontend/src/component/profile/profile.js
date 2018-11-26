@@ -13,7 +13,10 @@ class Profile extends Component {
       isLoaded: false,
       currentUser: null
     };
+
+    // this.dropdownDOM = React.createRef();
   }
+
   componentWillReceiveProps(nextProps) {
     if (!nextProps.auth.isAuthenticated) {
       return this.props.history.push("/");
@@ -37,6 +40,20 @@ class Profile extends Component {
       );
     });
   }
+
+  // componentDidUpdate() {
+  //   if (this.state.isLoaded) {
+  //     const $ = window.$;
+  //     this.dropdownDOM = $(this.dropdownDOM.current);
+  //     this.dropdownDOM.dropdown();
+
+  //     $(".dd__profile-addr").click(function() {
+  //       var txt = $(this).text();
+  //       console.log("dd selected", txt);
+  //     });
+  //     console.log(this.dropdownDOM);
+  //   }
+  // }
 
   render() {
     if (!!!this.state.isLoaded) {
@@ -128,15 +145,11 @@ class Profile extends Component {
                   Address
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item dd__profile-addr">
                     {currentUser.address[0].address}
                   </a>
-                  <a class="dropdown-item" href="#">
-                    Address 2
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    Add Address
-                  </a>
+                  <a class="dropdown-item">Address 2</a>
+                  <a class="dropdown-item">Add Address</a>
                 </div>
               </div>
             </div>
