@@ -95,7 +95,7 @@ class PackagemanageEachdays extends Component {
       day_meal.push(meal1_2);
     }
     console.log(path + " package");
-    if (this.state.save && path == "add") {
+    if (this.state.save && path === "add") {
       alert("your package is already save!");
     }
 
@@ -234,7 +234,7 @@ class PackagemanageEachdays extends Component {
     let list_day = [];
 
     for (let i = 0; i < this.props.num_day; i += 2) {
-      if (this.props.num_day % 2 == 1 && i == this.props.num_day - 1) {
+      if (this.props.num_day % 2 === 1 && i === this.props.num_day - 1) {
         list_day[i] = (
           <div className="row">
             <div className="col-3-sm col-set" />

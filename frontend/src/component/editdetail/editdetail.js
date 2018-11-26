@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./editmenudetail/editmenudetail.css";
+import "./editdetail.css";
 import { getFoodOrSnack, editFoodOrSnack } from "../api/api";
 
 class EditMenuDetail extends Component {
