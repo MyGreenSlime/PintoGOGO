@@ -30,7 +30,18 @@ class CheckoutForm extends Component {
 
     if (this.state.complete) return <h1>Purchase Complete</h1>;
     return (
-        <div className="row">
+        <div className=" card payment__box__container">
+            <strong>PAYMENT DETAIL  </strong>
+                <br/>
+                <div class="row icons">
+                    <div className="col-md-4 col-2" />
+                    <i className="fa fa-cc-visa fa-2x col-md-1 col-2" aria-hidden="true"></i>
+                    <i className="fa fa-cc-mastercard fa-2x col-md-1 col-2" aria-hidden="true"></i>
+                    <i className="fa fa-cc-discover fa-2x col-md-1 col-2" aria-hidden="true"></i>
+                    <i className="fa fa-cc-amex fa-2x col-md-1 col-2" aria-hidden="true"></i>
+                </div>
+                <hr />
+                {/* <div className="row ">
             <div className="col-4">
             </div>
             <div className="col-4">
@@ -41,7 +52,9 @@ class CheckoutForm extends Component {
                 </div>
             </div>
             
+        </div> */}
         </div>
+        
       
     );
   }

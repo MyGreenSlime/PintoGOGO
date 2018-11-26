@@ -114,6 +114,7 @@ class App extends Component {
                 <Route path="/snackdetail" component={SnackDetail} />
                 <Route path="/editmenudetail" component={EditMenuDetail} />
                 <Route paht="/bill" component={Payment}/>
+                <Route path="/checkoutform" component={CheckoutForm} />
                 <Route path="*" component={UnderConstruct}/>
               </Switch>
             <Footer />
