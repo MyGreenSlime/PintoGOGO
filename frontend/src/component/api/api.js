@@ -46,6 +46,19 @@ export function getProfile(profile, isLoaded) {
     });
 }
 
+export function getAddress(address, isLoaded) {
+  axios.get("/api/address/current")
+  .then(res => {
+    this.setState({
+      [address]: res.data,
+      [isLoaded]: true
+    });
+  })
+  .then(() => {
+    console.log("address", this.state[address])
+  })
+}
+
 /** POST **/
 export function addFoodOrSnack(data, status, path) {
   axios.post("/api/menus/" + path + "/add", data)
@@ -58,4 +71,13 @@ export function addFoodOrSnack(data, status, path) {
       console.log("redirect");
       this.renderRedirect();
     });
+}
+
+/**  DELETE **/
+export function deleteFoodOrSnack(path, id) {
+  axios.delete("api/menus/"+ path +"/del/"+id)
+  .then(res => console.log("delete", res))
+  .then(() => {
+    this.props.onMenuCardDeleted(id);
+  });
 }

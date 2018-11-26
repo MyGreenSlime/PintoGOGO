@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import MenuDetail from '../detail/menudetail'
+import {deleteFoodOrSnack} from '../api/api'
 
 class cardMenu extends Component {
   constructor(props){
@@ -28,12 +29,8 @@ class cardMenu extends Component {
   }  
   
   deleteFromDb(){
-    axios.delete('/api/menus/food/del/'+ this.props.id)
-    .then(res => console.log(res))
-    .then(() => {
-      this.props.onMenuCardDeleted(this.props.id);
-    });
-      
+    const deleteFood = deleteFoodOrSnack.bind(this, "food", this.props.id)
+    deleteFood();
   }
 
   sendToMenuDetail(){
