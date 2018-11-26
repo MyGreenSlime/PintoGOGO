@@ -1,6 +1,7 @@
 @media only screen{
     .menuzone{
         display: grid;
+        width: 100%;
         justify-content: center;  
         align-content: center; 
         
@@ -24,5 +25,13 @@
 
     .menuzone--padding{
         padding: 0;
+    }
+
+    .menuzone__image--fix{
+        display: table;
+    }
+
+    .cardcartbox--delete{
+        cursor: pointer;
     }
 }
