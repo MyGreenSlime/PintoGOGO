@@ -18,7 +18,7 @@ exports.getAllAddress = (req, res) => {
 
 exports.getCurrentAddress = (req, res) => {
     const error = {}
-    Address.findOne({owner : req.user.user_name}, function(err, address){
+    Address.find({owner : req.user.user_name}, function(err, address){
         if(err) {
             error.address = err
             res.status(500).send(error);

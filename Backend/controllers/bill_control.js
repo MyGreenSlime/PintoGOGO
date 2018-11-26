@@ -30,7 +30,14 @@ exports.getCurrentBill = (req, res) => {
         })
         .populate({
             path: "order",
-            model: "Order"
+            model : "Order"
+        })
+        .populate({
+            path : "order",
+            populate : {
+                path: "package_order.package_id",
+                model: "Package"
+            }
         })
         .exec((err, bill) => {
             if (err) {

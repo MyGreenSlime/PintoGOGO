@@ -448,7 +448,7 @@ exports.decreaseAmountSnack = (req, res) => {
         });
 }
 
-exports.decreaseAmoutPackage = (req, res) {
+exports.decreaseAmoutPackage = (req, res) => {
     const error = {};
     const package_id = req.params.id;
     var status = {

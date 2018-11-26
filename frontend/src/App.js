@@ -6,11 +6,14 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./util/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import store from "./store";
+//payment
+import {Elements, StripeProvider} from 'react-stripe-elements';
 
 //---------------don--------------------------------
 import Addmenu from "./component/add/addmenu";
 import Addsnack from "./component/add/addsnack";
 import Snack from "./component/snack/snack.js";
+import CheckoutForm from './component/checkout/CheckoutForm.js';
 import UnderConstruct from "./component/underconstruct/";
 //---------------name-------------------------------
 import Navbar from "./component/navbar/navbar";
@@ -41,6 +44,19 @@ import Login from "./component/login/mainlogin/login";
 const Home = () => {
   return [<Carousel />, <Recommend />, <Choice />];
 };
+
+const PaymentMethod = () => {
+  return (
+    <StripeProvider apiKey="pk_test_os3uf16y5tFa5WVqnqNPNaJk">
+      <div className="example">
+        <h1>React Stripe Elements Example</h1>
+        <Elements>
+          <CheckoutForm />
+        </Elements>
+      </div>
+    </StripeProvider>
+  )
+}
 
 //Check for token
 if (localStorage.jwtToken) {
@@ -76,6 +92,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 {/* <Route path="/demomenu" component={DemoMenu} /> */}
+                <Route path ="/payment" component ={PaymentMethod}/>
                 <Route path="/add/menu" component={Addmenu} />
                 <Route path="/add/snack" component={Addsnack} />
                 <Route path="/show/menu" component={Menu} />
