@@ -4,8 +4,8 @@ import { DropTarget } from "react-drag-drop-container";
 import { setMenuDrop } from "../helper";
 import axios from "axios";
 import NutritionManage from "../nutritionmanage";
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
+import propTypes from "prop-types";
+import { connect } from "react-redux";
 import { getProfile } from "../../api/api";
 
 class Packagemanage3days extends Component {
@@ -42,8 +42,8 @@ class Packagemanage3days extends Component {
   }
 
   componentDidMount() {
-      const get_user = getProfile.bind(this,"user","");
-      get_user();
+    const get_user = getProfile.bind(this, "user", "");
+    get_user();
   }
 
   handleChange(e) {
@@ -82,7 +82,7 @@ class Packagemanage3days extends Component {
         if (path == "add") {
           console.log("save");
           alert("Save Package Success!");
-        } else if (path == "anonymous/addcart") {
+        } else if (path == "addcart") {
           this.setState({
             package_id: response.data.data.package_id
           });
@@ -306,7 +306,7 @@ class Packagemanage3days extends Component {
                 {/* <a href="/cart"> */}
                 <button
                   className="btn btn-shownutrition"
-                  onClick={() => this.send3DaysPackage("anonymous/addcart")}
+                  onClick={() => this.send3DaysPackage("addcart")}
                 >
                   ADD TO CART
                 </button>
