@@ -96,13 +96,25 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
     });
 }
 
-
-
 /** PUT **/
-export function addToCart(path, data){
+export function addToCart(path, data) {
   axios.put('/api/orders/add/'+path, data)
     .then(res => {
       console.log("add to cart", res)
+    })
+}
+
+export function increaseAmount(path, id) {
+  axios.put("/api/orders/increase/amount/" + path + "/" + id)
+    .then(res => {
+      console.log("increase", res.data);
+    })
+}
+
+export function decreaseAmount(path, id) {
+  axios.put("/api/orders/decrease/amount/" + path + "/" + id)
+    .then(res => {
+      console.log("decrease", res.data);
     })
 }
 
@@ -114,3 +126,12 @@ export function deleteFromDB(path, id) {
     this.props.onMenuCardDeleted(id);
   });
 }
+
+export function deleteOrder(path, id) {
+  axios.delete("api/order/del/"+ path +"/"+id)
+  .then(res => console.log("delete order", res))
+  .then(() => {
+    this.props.onMenuCardDeleted(id);
+  });
+}
+
