@@ -133,9 +133,6 @@ class PackagemanageEachdays extends Component {
       newReady.push([this.state[ready][i][0],this.state[ready][i][1]])
     }
 
-
-    console.log("day meal", day, meal);
-
     newDayMealState[day][meal] = (
       <div className="hovereffect">
         <img
@@ -285,7 +282,7 @@ class PackagemanageEachdays extends Component {
                   ADD TO CART
                 </button>
                 <button
-                  className="btn btn-shownutrition" // onClick={this.testClick()}
+                  className="btn btn-shownutrition"
                   onClick={() => this.sendPackage("add")}
                 >
                   SAVE PACKAGE

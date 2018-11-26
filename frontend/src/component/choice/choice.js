@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Menu from "../menu/menu";
-import Snack from "../snack/snack";
+import Menu from "../menuandsnack/menu";
+import Snack from "../menuandsnack/snack";
 import Package from "../package-home/package-home";
 import "../choice/style-choice.css";
 
