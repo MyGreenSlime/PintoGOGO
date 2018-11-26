@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CardMenu from "../cardmenu/cardmenu";
+import CardMenu from "../cardmenuandsnack/cardmenuandsnack";
 import "./menuandsnack.css";
 import { getFoodOrSnack } from '../api/api';
 
@@ -120,6 +120,8 @@ class MenuAndSnack extends Component {
                   id={menus[firstImg]._id}
                   price={menus[firstImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
+                  path = {this.props.path}
+                  path_detail = {this.props.path_detail}
                 />
               )}
             </div>
@@ -133,6 +135,8 @@ class MenuAndSnack extends Component {
                   id={menus[secondImg]._id}
                   price={menus[secondImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, secondImg)}
+                  path={this.props.path}
+                  path_detail={this.props.path_detail}
                 />
               )}
             </div>
@@ -146,6 +150,8 @@ class MenuAndSnack extends Component {
                   id={menus[thirdImg]._id}
                   price={menus[thirdImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, thirdImg)}
+                  path={this.props.path}
+                  path_detail={this.props.path_detail}
                 />
               )}
             </div>
@@ -161,6 +167,8 @@ class MenuAndSnack extends Component {
                   id={menus[forthImg]._id}
                   price={menus[forthImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
+                  path={this.props.path}
+                  path_detail={this.props.path_detail}
                 />
               )}
             </div>
@@ -173,6 +181,8 @@ class MenuAndSnack extends Component {
                   id={menus[fifthImg]._id}
                   price={menus[fifthImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
+                  path={this.props.path}
+                  path_detail={this.props.path_detail}
                 />
               )}
             </div>
@@ -186,6 +196,8 @@ class MenuAndSnack extends Component {
                   id={menus[sixthImg]._id}
                   price={menus[sixthImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
+                  path={this.props.path}
+                  path_detail={this.props.path_detail}
                 />
               )}
             </div>
