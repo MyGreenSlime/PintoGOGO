@@ -64,17 +64,9 @@ class MenuAndSnack extends Component {
 
   checkLastMenuSet() {
     let img = "";
-    if(this.state.firstImg + 5 <= this.state.menus.length && this.sixthImg + 1 != this.state.menus.length){
+    if(this.state.firstImg + 5 < this.state.menus.length && this.state.sixthImg + 1 != this.state.menus.length && this.state.menus.length > 0){
       img = <img className="imgbutton" src="/img/other/right-arrow.png" alt="right arrow icon" height="20" />
     }
-    // if (this.state.firstImg < this.state.menus.length &&
-    //   this.state.secondImg < this.state.menus.length &&
-    //   this.state.thirdImg < this.state.menus.length &&
-    //   this.state.forthImg < this.state.menus.length &&
-    //   this.state.fifthImg < this.state.menus.length &&
-    //   this.state.sixthImg < this.state.menus.length && this.state.menus.length != 0) {
-    //     img = <img className="imgbutton" src="/img/other/right-arrow.png" alt="right arrow icon" height="20" />
-    // }
     console.log("right ", img)
     return img;
   }
