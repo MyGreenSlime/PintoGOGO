@@ -61,8 +61,46 @@ export function addFoodOrSnack(data, status, path) {
     });
 }
 
-export function addPackageToCart(data){
-  axios.post("/api/packages/addcart",data)
-  .then(alert("Add to cart success!"))
-  .then(res => {console.log("res ",res)});
+export function addOrSavePackageToCart(data,path,save,pack_id){
+  axios.post("/api/packages/"+path,data)
+    .then( res => {
+      this.setState({
+        [pack_id]: res.data.data.package_id
+      })
+      if(path == "add" && !this.statr[save]){
+        console.log("save")
+        this.setState({
+          [save]: true
+        })
+        alert("Save Package Success!");
+      }
+      else if(path == "addcart"){
+        alert("Add to cart success!");
+      }
+    })
+    .catch(function(err){
+      console.log(err)
+    });
 }
+
+
+// axios
+//   .post("/api/packages/" + path, newPackage)
+//   .then(response => {
+//     console.log("res", response);
+//     this.setState({
+//       package_id: response.data.data.package_id
+//     });
+//     if (path == "add" && !this.state.save) {
+//       console.log("save");
+//       this.setState({
+//         save: true
+//       });
+//       alert("Save Package Success!");
+//     } else if (path == "addcart") {
+//       alert("Add to cart success!");
+//     }
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
