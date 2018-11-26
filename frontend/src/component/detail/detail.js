@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './detail.css'
 import { getFoodOrSnack } from '../api/api';
+import axios from 'axios'
 
 class SnackDetail extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class SnackDetail extends Component {
             isLoaded: false
         };
 
-    }
+    } 
     findIdFromUrl() {
         var url = window.location.href;
         var res = url.split("/");
@@ -24,10 +25,20 @@ class SnackDetail extends Component {
         this.findIdFromUrl();
     }
 
+    addToCartClick(e){
+        console.log('Click!!!!');
+        axios.put('/api/orders/add/food',{
+          food_id: this.state.menu._id,
+          food_name: this.state.menu[this.props.name],
+          price: this.state.menu.price
+        })
+        e.preventDefault();
+    }  
+
     render() {
         const { isAuthenticated, user } = this.props.auth;
         const users = (
-            <div className="row justify-content-center">
+            <div className="row justify-content-center" onClick={this.addToCartClick.bind(this)}>
                 <button type="button" className="menudetail__detail--addtocartbutton">ADD TO CART</button>
             </div>
         )
