@@ -5,6 +5,7 @@ const keys = require("../config/keys");
 //load input validation
 const validationRegisterInput = require("../validator/register");
 const validationLoginInput = require("../validator/login");
+const validationEditProfile = require('../validator/editprofile')
 
 const User = require("../models/user");
 const Address = require("../models/address");
@@ -138,10 +139,16 @@ exports.getProfile = (req, res) => {
 };
 
 exports.editProfile = (req, res) => {
+  const { errors, isValid } = validationEditProfile(req.body);
+  //check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
   const error = {};
   const newUpdate = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
+    email : req.body.email,
     phonenumber: req.body.phonenumber,
     img_url: req.body.img_url
   };
@@ -155,6 +162,7 @@ exports.editProfile = (req, res) => {
         first_name: newUpdate.first_name,
         last_name: newUpdate.last_name,
         phonenumber: newUpdate.phonenumber,
+        email : newUpdate.email,
         img_url: newUpdate.img_url
       }
     },

@@ -577,7 +577,7 @@ exports.deletePackage = (req, res) => {
         })
 }
 
-exports.passToBill = (req, res) => {
+exports.passToBill = async (req, res) => {
     const error = {}
     const newBill = new Bill({
         order: req.body.order_id,
@@ -588,7 +588,7 @@ exports.passToBill = (req, res) => {
         ok: 1,
         status: "create bill"
     }
-    Order.updateOne({
+    await Order.updateOne({
         user_id: req.user.id,
         isfinish: false
     }, {
@@ -597,12 +597,12 @@ exports.passToBill = (req, res) => {
             update_time: Date.now
         }
     })
-    Bill.findOne({
+    await Bill.findOne({
         user: req.user.id,
         isfinish: false
-    }, function (err, bill) {
+    }, async (err, bill) => {
         if (bill) {
-            Bill.updateOne({
+            await Bill.updateOne({
                 user: req.user.id,
                 isfinish: false
             }, {

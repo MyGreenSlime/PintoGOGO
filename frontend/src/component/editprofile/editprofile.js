@@ -215,7 +215,7 @@ class EditProfile extends Component {
                   value={this.state.phonenumber}
                 />
                 {errors.phonenumber && (
-                  <div className="invalid-feedback">{errors.phone}</div>
+                  <div className="invalid-feedback">{errors.phonenumber}</div>
                 )}
               </div>
             </div>
