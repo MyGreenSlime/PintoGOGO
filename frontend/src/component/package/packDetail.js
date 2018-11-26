@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import './package.css'
+import "./package.css";
 import Nutrition from "./nutrition";
 import NoPackage from "./nopackage";
-import { getPackage, addOrSavePackageToCart } from "../api/api";
+import { getPackage, addToCart } from "../api/api";
 
 export default class Package3DaysDetail extends Component {
   constructor(props) {
@@ -12,20 +12,30 @@ export default class Package3DaysDetail extends Component {
       isLoaded: false
     };
     this.addToCart = this.addToCart.bind(this);
-    console.log("props" ,this.props)
+    console.log("props", this.props);
   }
 
   componentDidMount() {
     console.log("arrive");
     var url = window.location.href;
     var res = url.split("/");
-    const get_package = getPackage.bind(this, "packages", "isLoaded", res[res.length - 1]);
+    const get_package = getPackage.bind(
+      this,
+      "packages",
+      "isLoaded",
+      res[res.length - 1]
+    );
     get_package();
   }
 
   addToCart() {
     console.log("add pack");
-    const add_cart = addOrSavePackageToCart.bind(this,this.state.packages[0],"addcart","","");
+    var newPack = {
+      package_id: this.state.packages[0]._id,
+      package_name: this.state.packages[0].name_package,
+      price: this.state.packages[0].price
+    };
+    const add_cart = addToCart.bind(this, "package", newPack);
     add_cart();
   }
 
@@ -34,14 +44,18 @@ export default class Package3DaysDetail extends Component {
     $('[data-toggle="tooltip"]').tooltip();
   }
 
-  createDivHover(pack,day,meal){
+  createDivHover(pack, day, meal) {
     return (
       <div className="col card-pack-img hovereffect">
-        <img className="card-img img-responsive" src={"\\" + pack[0].day_meal[day]["meal_" + meal].img_url} />
+        <img
+          className="card-img img-responsive"
+          src={"\\" + pack[0].day_meal[day]["meal_" + meal].img_url}
+        />
         <div className="overlay">
           <h2>{pack[0].day_meal[day]["meal_" + meal].menu_name}</h2>
         </div>
-    </div>);  
+      </div>
+    );
   }
 
   render() {
@@ -49,43 +63,44 @@ export default class Package3DaysDetail extends Component {
 
     let list_day = [];
 
-    if(isLoaded){
-      let day = 0
-      for(let i = 0; i<this.props.num_day; i+=2){
-        if(this.props.num_day%2 == 1 && i == this.props.num_day-1 ){
-          list_day[i] = 
+    if (isLoaded) {
+      let day = 0;
+      for (let i = 0; i < this.props.num_day; i += 2) {
+        if (this.props.num_day % 2 == 1 && i == this.props.num_day - 1) {
+          list_day[i] = (
             <div className="row">
               <div className="col-3-sm col-set" />
               <div className="col-sm card-last-package ">
-                {"DAY" + (i+1)}
+                {"DAY" + (i + 1)}
                 <div className="row">
-                {this.createDivHover(packages, day + 1, 1)}
-                {this.createDivHover(packages, day + 1, 2)}
+                  {this.createDivHover(packages, day + 1, 1)}
+                  {this.createDivHover(packages, day + 1, 2)}
                 </div>
               </div>
               <div className="col-3-sm col-set" />
             </div>
-        }
-        else{
-        list_day[i] = 
-        (  <div className="row">
-            <div className="col-sm card-package">
-              {"DAY " + (i+1)}
-              <div className="row">
-                {this.createDivHover(packages,day,1)}
-                {this.createDivHover(packages,day,2)}
+          );
+        } else {
+          list_day[i] = (
+            <div className="row">
+              <div className="col-sm card-package">
+                {"DAY " + (i + 1)}
+                <div className="row">
+                  {this.createDivHover(packages, day, 1)}
+                  {this.createDivHover(packages, day, 2)}
+                </div>
+              </div>
+              <div className="col-sm card-package">
+                {"DAY " + (i + 2)}
+                <div className="row">
+                  {this.createDivHover(packages, day + 1, 1)}
+                  {this.createDivHover(packages, day + 1, 2)}
+                </div>
               </div>
             </div>
-            <div className="col-sm card-package">
-              {"DAY " + (i+2)}
-              <div className="row">
-                {this.createDivHover(packages,day+1,1)}
-                {this.createDivHover(packages,day+1,2)}
-              </div>
-            </div>
-          </div>)
+          );
         }
-        day+=1
+        day += 1;
       }
     }
 
