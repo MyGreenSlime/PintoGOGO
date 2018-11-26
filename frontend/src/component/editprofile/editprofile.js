@@ -117,7 +117,7 @@ class EditProfile extends Component {
         <div className="editprofile-box">
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>
-            <div className="profilepic-edit center">
+            <div className="center">
               <img className="userpic-edit" src={this.state.imagePreviewUrl} />
               <br />
               <div className="upload-btn-wrapper">
@@ -224,9 +224,9 @@ class EditProfile extends Component {
                 <label htmlFor="PhoneNumber">Address:</label>
               </div>
               <div className="col">
-                <div class="dropdown">
+                <div className="dropdown">
                   <button
-                    class="btn btn-secondary dropdown-toggle addr-dropdown"
+                    className="btn btn-secondary dropdown-toggle addr-dropdown"
                     type="button"
                     id="dropdownMenuButton"
                     data-toggle="dropdown"
@@ -236,16 +236,16 @@ class EditProfile extends Component {
                     Address
                   </button>
                   <div
-                    class="dropdown-menu"
+                    className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       {currentUser.address[0].address}
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Address 2
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Add Address
                     </a>
                   </div>

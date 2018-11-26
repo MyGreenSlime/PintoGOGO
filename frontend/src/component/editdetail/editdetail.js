@@ -115,13 +115,6 @@ class EditMenuDetail extends Component {
     if (this.state.isLoaded && !this.state.alreadyLoaded) {
       this.setMenu();
     }
-    let { imagePreviewUrl } = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = (
-        <img src={imagePreviewUrl} className="editmenudetail__imgpreview" />
-      );
-    }
     return (
       <React.Fragment>
         <div className="all">
@@ -155,7 +148,7 @@ class EditMenuDetail extends Component {
             <div className="row menudetail__detail">
               <div className="col-5">
                 <img
-                  src={imagePreviewUrl}
+                  src={this.state.imagePreviewUrl}
                   className="editmenudetail__imgpreview"
                 />
                 <br />

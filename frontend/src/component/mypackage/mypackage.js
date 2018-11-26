@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./mypackage.css";
 import NoPackage from "../package/nopackage";
 import LinkWithPrev from "../LinkWithPrev/linkwithprev.js";
-import { deleteFromDB, getPackage } from "../api/api" 
+import { deleteFromDB, getPackage } from "../api/api";
 
 export default class MyPackage extends Component {
   constructor(props) {
@@ -16,13 +16,18 @@ export default class MyPackage extends Component {
   }
 
   deleteFromDb(curPack) {
-    const deletePackage = deleteFromDB.bind(this, "package", curPack._id)
+    const deletePackage = deleteFromDB.bind(this, "package", curPack._id);
     deletePackage();
   }
 
   componentDidMount() {
-      const getAllPackages = getPackage.bind(this, "packages", "isLoaded", "user/all")
-      getAllPackages();
+    const getAllPackages = getPackage.bind(
+      this,
+      "packages",
+      "isLoaded",
+      "user/all"
+    );
+    getAllPackages();
   }
 
   createDivPackage(curPack) {
@@ -72,7 +77,24 @@ export default class MyPackage extends Component {
         <div className="set-screen-mypack">
           <div className="set-frame-mypks">
             <h3>My Package</h3>
-            <NoPackage />
+            <div className="set-each-mypackage">
+              You have no package.
+              <br />
+              <a href="/packagemanage">
+                <img
+                  src="img/package/add-pack.png"
+                  className="addpack"
+                  alt="add package"
+                  width="100px"
+                />
+              </a>
+              <br />
+              <a href="/packagemanage">
+                <button className="btn view-mypks">
+                  Try create your own package
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       );
