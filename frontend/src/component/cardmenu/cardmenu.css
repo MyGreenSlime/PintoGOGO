@@ -20,7 +20,7 @@
         cursor: pointer;
         width: 17em;
         text-align: center;
-        /* min-width: 279px; */
+        min-width: 33%;
     }
     
     .cardmenu__image--border{

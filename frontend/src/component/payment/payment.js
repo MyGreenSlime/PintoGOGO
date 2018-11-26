@@ -19,6 +19,19 @@ export default class Payment extends Component {
     this.calculateDeliveryFee = this.calculateDeliveryFee.bind(this);
   }
 
+  updateBill() {
+    axios
+      .put("api/bills/update/current")
+      .then(res => {
+        this.setState({bill : res.data})
+        console.log("i'm in!!!!!!!");
+    })
+    
+    .then(() => {
+      console.log("i'm in!!!!!!!");
+    })
+}
+
   componentDidMount() {
     axios
       .get("/api/bills/current")
@@ -43,7 +56,7 @@ export default class Payment extends Component {
           .then(() => {
             console.log("address: ", this.state.address);
           });
-      });
+      })
   }
 
   componentDidUpdate() {
@@ -219,10 +232,12 @@ export default class Payment extends Component {
                     <p>Baht</p>
                   </div>
                 </div>
-                <div className="row box__confirm">
-                  <button className="btn btn-lg button__confirm" type="button">
-                    Confirm Order
-                  </button>
+                <div className="row box__confirm" onClick={this.handleSubmit}>
+                  <a href="/payment">
+                    <button type="ฺ๊button" className="btn btn-lg button__confirm" >
+                        Confirm Order
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

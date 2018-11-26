@@ -108,7 +108,7 @@ class Menu extends Component {
 
         <div className="row">
           <div className="row">
-            <div className="col-md-4 menuzone__image--fix">
+            <div className="col-4 menuzone__image--fix">
               {menus[firstImg] && (
                 <CardMenu
                   name={menus[firstImg].menu_name}
@@ -121,7 +121,7 @@ class Menu extends Component {
               )}
             </div>
             
-            <div className="col-md-4 menuzone__image--fix">
+            <div className="col-4 menuzone__image--fix">
               {menus[secondImg] && (
                 <CardMenu
                   name={menus[secondImg].menu_name}
@@ -134,7 +134,7 @@ class Menu extends Component {
               )}
             </div>
             
-            <div className="col-md-4 menuzone__image--fix">
+            <div className="col-4 menuzone__image--fix">
               {menus[thirdImg] && (
                 <CardMenu
                   name={menus[thirdImg].menu_name}
@@ -149,7 +149,7 @@ class Menu extends Component {
           </div>
           <div className="row">
             
-              <div className="col-md-4 menuzone__image--fix">
+              <div className="col-4 menuzone__image--fix">
                 {menus[forthImg] && (
                   <CardMenu
                     name={menus[forthImg].menu_name}
@@ -161,7 +161,7 @@ class Menu extends Component {
                   />
                 )}
               </div>
-              <div className="col-md-4 menuzone__image--fix">
+              <div className="col-4 menuzone__image--fix">
                 {menus[fifthImg] && (
                     <CardMenu
                       name={menus[fifthImg].menu_name}
@@ -174,7 +174,7 @@ class Menu extends Component {
                   )}
               </div>
                 
-              <div className="col-md-4 menuzone__image--fix">
+              <div className="col-4 menuzone__image--fix">
                 {menus[sixthImg] && (
                   <CardMenu
                     name={menus[sixthImg].menu_name}

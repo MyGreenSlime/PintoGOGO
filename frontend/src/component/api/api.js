@@ -96,7 +96,12 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
     });
 }
 
-
+export function updateBill(path,id) {
+  // axios.put('/api/bills/update/current/'+path, data)
+  //   .then(res => {
+  //     console.log("add to cart", res)
+  //   })
+}
 
 /** PUT **/
 export function addToCart(path, data){
