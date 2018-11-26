@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import axios from "axios";
-import "../editmenudetail/editmenudetail.css";
+import "./editmenudetail/editmenudetail.css";
 import { getFoodOrSnack, editFoodOrSnack } from "../api/api";
 
 class EditMenuDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        id: "",
-      food: {},
+      id: "",
+      menu: {},
       menu_name: "",
       price: "",
       calories: "",
@@ -30,39 +29,40 @@ class EditMenuDetail extends Component {
   }
 
   componentDidMount() {
+    console.log("props", this.props) 
     var url = window.location.href;
     var res = url.split("/");
-    const getFood = getFoodOrSnack.bind(
+    const getMenu = getFoodOrSnack.bind(
       this,
-      "food",
+      "menu",
       "isLoaded",
-      "food/" + res[res.length - 1]
+      this.props.type + "/" + res[res.length - 1]
     );
-    getFood();
+    getMenu();
     this.setState({
       id: res[res.length - 1]
     });
   }
 
-  setFood() {
+  setMenu() {
     this.setState({
-      menu_name: this.state.food.menu_name,
-      price: this.state.food.price,
-      calories: this.state.food.calories,
-      protein: this.state.food.protein,
-      carbohydrate: this.state.food.carbohydrate,
-      fat: this.state.food.fat,
+      name: this.state.menu[this.props.name],
+      price: this.state.menu.price,
+      calories: this.state.menu.calories,
+      protein: this.state.menu.protein,
+      carbohydrate: this.state.menu.carbohydrate,
+      fat: this.state.menu.fat,
       img_url: "",
-      description: this.state.food.description,
-      sodium: this.state.food.sodium,
-      cholesterol: this.state.food.cholesterol,
-      imagePreviewUrl: "\\" + this.state.food.img_url,
+      description: this.state.menu.description,
+      sodium: this.state.menu.sodium,
+      cholesterol: this.state.menu.cholesterol,
+      imagePreviewUrl: "\\" + this.state.menu.img_url,
       alreadyLoaded: true
     });
   }
 
   renderRedirect() {
-    return (window.location.href = "/menudetail/" + this.state.id);
+    return (window.location.href = this.props.redirect + this.state.id);
   }
 
   handleChange(e) {
@@ -91,8 +91,8 @@ class EditMenuDetail extends Component {
   handleSubmit(e) {
     const formData = new FormData();
     formData.append("img", this.state.img_url, this.state.img_url.name);
-    formData.append("img_url", this.state.food.img_url);
-    formData.append("menu_name", this.state.menu_name);
+    formData.append("img_url", this.state.menu.img_url);
+    formData.append(this.props.name, this.state.name);
     formData.append("calories", this.state.calories);
     formData.append("price", this.state.price);
     formData.append("protein", this.state.protein);
@@ -101,14 +101,19 @@ class EditMenuDetail extends Component {
     formData.append("cholesterol", this.state.cholesterol);
     formData.append("sodium", this.state.sodium);
     formData.append("description", this.state.description);
-    const editSubmit = editFoodOrSnack.bind(this, "food", this.state.id, formData)
+    const editSubmit = editFoodOrSnack.bind(
+      this,
+      this.props.type,
+      this.state.id,
+      formData
+    );
     editSubmit();
     e.preventDefault();
   }
 
   render() {
     if (this.state.isLoaded && !this.state.alreadyLoaded) {
-      this.setFood();
+      this.setMenu();
     }
     let { imagePreviewUrl } = this.state;
     let $imagePreview = null;
@@ -135,12 +140,12 @@ class EditMenuDetail extends Component {
               <div className="col menudetail__menuname">
                 <input
                   type="text"
-                  name="menu_name"
+                  name="name"
                   className="form-control menudetail__menuname--right"
-                  placeholder={this.state.food.menu_name}
-                  value={this.state.menu_name}
+                  placeholder="Name"
+                  value={this.state.name}
                   onChange={this.handleChange}
-                  style={{ width: "40%" }}
+                  style={{ width: "30%" }}
                   required
                 />
               </div>
@@ -178,7 +183,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="description"
                     className="form-control"
-                    placeholder={this.state.food.description}
+                    placeholder="description"
                     value={this.state.description}
                     onChange={this.handleChange}
                   />
@@ -191,7 +196,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="calories"
                     className="form-control"
-                    placeholder={this.state.food.calories + " Kcal"}
+                    placeholder="calories g"
                     value={this.state.calories}
                     onChange={this.handleChange}
                     style={{ width: "20%" }}
@@ -206,7 +211,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="fat"
                     className="form-control"
-                    placeholder={this.state.food.fat + " mg"}
+                    placeholder="fat g"
                     value={this.state.fat}
                     onChange={this.handleChange}
                     style={{ width: "20%" }}
@@ -220,7 +225,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="cholesterol"
                     className="form-control"
-                    placeholder={this.state.food.cholesterol + " g"}
+                    placeholder="cholesterol mg"
                     value={this.state.cholesterol}
                     onChange={this.handleChange}
                     style={{ width: "20%" }}
@@ -234,7 +239,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="sodium"
                     className="form-control"
-                    placeholder={this.state.food.sodium + " mg"}
+                    placeholder="sodium mg"
                     value={this.state.sodium}
                     onChange={this.handleChange}
                     style={{ width: "20%" }}
@@ -248,7 +253,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="carbohydrate"
                     className="form-control"
-                    placeholder={this.state.food.carbohydrate + " g"}
+                    placeholder="carbohydrate g"
                     value={this.state.carbohydrate}
                     onChange={this.handleChange}
                     style={{ width: "20%" }}
@@ -262,7 +267,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="protein"
                     className="form-control"
-                    placeholder={this.state.food.protein + " g"}
+                    placeholder="protei gn"
                     value={this.state.protein}
                     onChange={this.handleChange}
                     style={{ width: "20%" }}
@@ -276,7 +281,7 @@ class EditMenuDetail extends Component {
                     type="text"
                     name="price"
                     className="form-control"
-                    placeholder={this.state.food.price + " ฿"}
+                    placeholder="price THB"
                     value={this.state.price}
                     onChange={this.handleChange}
                     style={{ width: "20%" }}

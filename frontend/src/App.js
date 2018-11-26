@@ -26,7 +26,8 @@ import Menu from "./component/menu/menu.js";
 import Cart from "./component/cart/cart.js";
 import MenuDetail from "./component/detail/menudetail.js";
 import SnackDetail from "./component/detail/snackdetail.js";
-import EditMenuDetail from "./component/editmenudetail/editmenudetail.js";
+import EditMenuDetail from "./component/editdetail/editmenudetail/editmenudetail.js";
+import EditSnackDetail from "./component/editdetail/editsnackdetail/editsnackdetail.js";
 import Payment2 from "./component/payment2/payment2.js"
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
@@ -113,6 +114,7 @@ class App extends Component {
                 <Route path="/mypackage" component={MyPackage} />
                 <Route path="/snackdetail" component={SnackDetail} />
                 <Route path="/editmenudetail" component={EditMenuDetail} />
+                <Route path="/editsnackdetail" component={EditSnackDetail} />
                 <Route paht="/bill" component={Payment}/>
                 <Route path="*" component={UnderConstruct}/>
               </Switch>
