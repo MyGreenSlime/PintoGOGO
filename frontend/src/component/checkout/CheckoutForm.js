@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
-import {CardElement, injectStripe} from 'react-stripe-elements';
+import {CardElement,
+    StripeProvider,
+    Elements,
+    injectStripe,} from 'react-stripe-elements';
 import axios from 'axios'
+import "../checkout/checkout.css"
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +37,7 @@ class CheckoutForm extends Component {
                 <div className="checkout">
                     <p>Would you like to complete the purchase?</p>
                     <CardElement />
-                    <button onClick={this.submit}>Send</button>
+                    <button onClick={this.submit}>Pay</button>
                 </div>
             </div>
             
