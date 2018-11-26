@@ -188,8 +188,7 @@ class Cart extends Component {
               <a href="/bill">
                 <button
                   className="btn button--confirm"
-                  onClick={this.confirmButtonClicked}
-                >
+                  onClick={this.confirmButtonClicked}>
                   CONFIRM
                 </button>
               </a>

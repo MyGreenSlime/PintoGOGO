@@ -72,11 +72,25 @@ class CardCart extends Component {
         "/api/orders/del/food/" +
           this.props.id
       )
-      // .then(() => {
-      //   this.state.inputField = 0
-      //   }
-      // )
+      .then(() => {
+        this.state.inputField = 0
+        this.forceUpdate();
+        }
+      )
+      .then(() => {
+        this.forceUpdate();
+      });
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if(this.state.inputField == 0){
+  //     console.log("trueeeee")
+  //     return true;
+  //   }
+  //   else  {
+  //     return false;
+  //   }
+  // }
 
   render() {
     return (
