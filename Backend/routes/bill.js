@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const Order =  require('../models/order');
-const Bill = require('../models/bill');
-
 const billControl = require('../controllers/bill_control');
 //get all bill
 router.get('/all', passport.authenticate('jwt',{ session : false }), billControl.getAllBill);

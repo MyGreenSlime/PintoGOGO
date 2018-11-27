@@ -1,12 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-
-const Order = require('../models/order');
-const Menu = require('../models/menu');
-const Snack = require('../models/snack');
-const Bill = require('../models/bill');
-
 const orderControl = require('../controllers/order_control');
 
 //get all order
