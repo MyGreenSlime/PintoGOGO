@@ -81,7 +81,7 @@ class MenuAndSnack extends Component {
       return <div className="loader" />;
     }
 
-    let col1 = [], col2 = []
+    const col1 = [], col2 = []
     if(isLoaded){
       console.log("len",menus.length)
       
@@ -89,34 +89,30 @@ class MenuAndSnack extends Component {
         if(i < menus.length){
           const card_col1 = 
             <div className="col-4 menuzone__image--fix">
-              {menus[i] && 
-                <CardMenu
-                  name={menus[i][this.props.name]}
-                  picture={menus[i].img_url}
-                  calories={menus[i].calories}
-                  id={menus[i]._id}
-                  price={menus[i].price}
-                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
-                  path={this.props.path}
-                  path_detail={this.props.path_detail}
-              />}
+              <CardMenu
+                name={menus[i][this.props.name]}
+                picture={menus[i].img_url}
+                calories={menus[i].calories}
+                id={menus[i]._id}
+                price={menus[i].price}
+                onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
+                path={this.props.path}
+                path_detail={this.props.path_detail}/>
             </div>
           col1.push(card_col1)
         }
         if(i+3 < menus.length){
           const card_col2 = 
             <div className="col-4 menuzone__image--fix">
-              {menus[i] && 
-                <CardMenu
-                  name={menus[i+3][this.props.name]}
-                  picture={menus[i+3].img_url}
-                  calories={menus[i+3].calories}
-                  id={menus[i+3]._id}
-                  price={menus[i+3].price}
-                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
-                  path={this.props.path}
-                  path_detail={this.props.path_detail}
-              />}
+              <CardMenu
+                name={menus[i+3][this.props.name]}
+                picture={menus[i+3].img_url}
+                calories={menus[i+3].calories}
+                id={menus[i+3]._id}
+                price={menus[i+3].price}
+                onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
+                path={this.props.path}
+                path_detail={this.props.path_detail}/>
             </div>
           col2.push(card_col2)
         }
