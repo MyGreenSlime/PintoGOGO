@@ -75,7 +75,7 @@
   .payment__box__container{
     font-family: 'Quicksand', sans-serif;
     font-size: 12px;
-    width: 60%;
+    width: 65%;
     padding: 0;
     margin-left: auto;
     margin-right: auto;
@@ -87,9 +87,10 @@
   }
 
   .payment__purchase--pad{
+    border-right: 0.5px solid #999999;
     padding-left: 4%;
   }
 
   .payment__customer__detail--left{
-    text-align: left;
+    text-align: center;
   }

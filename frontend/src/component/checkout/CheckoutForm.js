@@ -65,6 +65,7 @@ class CheckoutForm extends Component {
     return (
         
         <div className=" card payment__box__container">
+            <br/>
             <strong>PAYMENT DETAIL  </strong>
             
             <br/>
@@ -77,45 +78,48 @@ class CheckoutForm extends Component {
             </div>
             <hr />
             <div className="row ">
-                <div className="col-6 payment__purchase--pad">
+                <div className="col-md-6 col-12 payment__purchase--pad">
                     <div className="checkout">
                         {/* <p>Would you like to complete the purchase?</p> */}
                         <CardElement />
-                        <button onClick={this.submit}>Pay</button>
+                        <div className="btn button--confirm">
+                            <div onClick={this.submit}>Pay</div>
+                        </div>
                     </div>
                 </div>
                 
-                <div className="col-6 payment__customer__detail">
+                <div className="col-md-6 col-12 payment__customer__detail">
                     <div className="row">
-                        <div className="col-6 payment__customer__detail--left">
-                            CUSTOMER NAME
+                        <div className="col-md-4 col-12 payment__customer__detail--left">
+                            Customer name
                         </div>
-                        <div className="col-6">
-                            {currentUser.first_name}
+                        <div className="col-md-8 col-12">
+                            <p>{currentUser.first_name} {currentUser.last_name}</p>
                         </div>
                     </div>
                     <br/>
                     <div className="row">
-                        <div className="col-6 payment__customer__detail--left">
+                        <div className="col-md-4 col-12 payment__customer__detail--left">
                             TOTAL PRICE
                         </div>
-                        <div className="col-6">
+                        <div className="col-md-8 col-12">
                             {this.state.bill.total_cost}
                         </div>
                     </div>
                     <br/>
                     <div className="row">
-                        <div className="col-6 payment__customer__detail--left">
+                        <div className="col-md-4 col-12 payment__customer__detail--left">
                             ADDRESS
                         </div>
-                        <div className="col-6">
+                        <div className="col-md-8 col-12">
                             {this.state.bill.destination}
                         </div>
                     </div>
                 </div>
                 
             </div>
-            <a href="/">
+            <br/>
+            <a href="/enjoy">
                 <button
                 className="btn button--confirm"
                 onClick={this.confirmButtonClicked}>
