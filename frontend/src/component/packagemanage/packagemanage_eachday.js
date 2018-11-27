@@ -56,7 +56,7 @@ class PackagemanageEachdays extends Component {
   }
 
   initDetail(num_day, day_detail) {
-    const start_detail = ["", ""];
+    const start_detail = [null, null];
     for (let i = 0; i < num_day; i++) {
       this.state[day_detail].push(start_detail);
     }
@@ -140,8 +140,8 @@ class PackagemanageEachdays extends Component {
     let newReady = []
     for (let i = 0; i < this.props.num_day; i++) {
       newDayMealState.push([this.state[dayimg][i][0],this.state[dayimg][i][1]]);
-      newDayDetailState.push([this.state[daydetail][i][0],this.state[daydetail][1]])
-      newReady.push([this.state[ready][i][0],this.state[ready][1]])
+      newDayDetailState.push([this.state[daydetail][i][0],this.state[daydetail][i][1]])
+      newReady.push([this.state[ready][i][0],this.state[ready][i][1]])
     }
 
 

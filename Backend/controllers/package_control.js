@@ -233,6 +233,9 @@ exports.addCart = (req, res) => {
                                     error.orders = err;
                                     res.sendStatus(400).json(error);
                                 } else {
+                                    status.data = {
+                                        package_id : package_id
+                                    } 
                                     res.json(status);
                                 }
                             } 
