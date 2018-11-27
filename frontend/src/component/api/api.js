@@ -95,14 +95,14 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
       this.setState({
         [pack_id]: res.data.data.package_id
       })
-      if(path == "add" && !this.state[save]){
+      if(path === "add" && !this.state[save]){
         console.log("save")
         this.setState({
           [save]: true
         })
         alert("Save Package Success!");
       }
-      else if(path == "addcart"){
+      else if(path === "addcart"){
         alert("Add to cart success!");
       }
     })
