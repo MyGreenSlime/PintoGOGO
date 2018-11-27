@@ -1,5 +1,7 @@
 #!/bin/bash
 echo "Please Wait for build react" 
+rm package-lock.json
+npm install
 npm run buildfrontend
 git add -A
 git commit -m ""$(date +"%D %T buildfront")""
