@@ -91,6 +91,7 @@ export function addFoodOrSnack(data, status, path) {
 export function addOrSavePackageToCart(data,path,save,pack_id){
   axios.post("/api/packages/"+path,data)
     .then( res => {
+      console.log("id",res.data.data.package_id)
       this.setState({
         [pack_id]: res.data.data.package_id
       })
