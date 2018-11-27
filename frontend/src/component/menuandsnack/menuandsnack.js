@@ -103,7 +103,7 @@ class MenuAndSnack extends Component {
 
         <div className="row">
           <div className="row">
-            <div className="col-md-4 menuzone__image--fix">
+            <div className="col-4 menuzone__image--fix">
               {menus[firstImg] && (
                 <CardMenu
                   name={menus[firstImg][this.props.name]}
@@ -117,8 +117,8 @@ class MenuAndSnack extends Component {
                 />
               )}
             </div>
-
-            <div className="col-md-4 menuzone__image--fix">
+            
+            <div className="col-4 menuzone__image--fix">
               {menus[secondImg] && (
                 <CardMenu
                   name={menus[secondImg][this.props.name]}
@@ -132,8 +132,8 @@ class MenuAndSnack extends Component {
                 />
               )}
             </div>
-
-            <div className="col-md-4 menuzone__image--fix">
+            
+            <div className="col-4 menuzone__image--fix">
               {menus[thirdImg] && (
                 <CardMenu
                   name={menus[thirdImg][this.props.name]}
@@ -149,52 +149,46 @@ class MenuAndSnack extends Component {
             </div>
           </div>
           <div className="row">
-
-            <div className="col-md-4 menuzone__image--fix">
-              {menus[forthImg] && (
-                <CardMenu
-                  name={menus[forthImg][this.props.name]}
-                  picture={menus[forthImg].img_url}
-                  calories={menus[forthImg].calories}
-                  id={menus[forthImg]._id}
-                  price={menus[forthImg].price}
-                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
-                  path={this.props.path}
-                  path_detail={this.props.path_detail}
-                />
-              )}
-            </div>
-            <div className="col-md-4 menuzone__image--fix">
-              {menus[fifthImg] && (
-                <CardMenu
-                  name={menus[fifthImg][this.props.name]}
-                  picture={menus[fifthImg].img_url}
-                  calories={menus[fifthImg].calories}
-                  id={menus[fifthImg]._id}
-                  price={menus[fifthImg].price}
-                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
-                  path={this.props.path}
-                  path_detail={this.props.path_detail}
-                />
-              )}
-            </div>
-
-            <div className="col-md-4 menuzone__image--fix">
-              {menus[sixthImg] && (
-                <CardMenu
-                  name={menus[sixthImg][this.props.name]}
-                  picture={menus[sixthImg].img_url}
-                  calories={menus[sixthImg].calories}
-                  id={menus[sixthImg]._id}
-                  price={menus[sixthImg].price}
-                  onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
-                  path={this.props.path}
-                  path_detail={this.props.path_detail}
-                />
-              )}
-            </div>
-
-
+            
+              <div className="col-4 menuzone__image--fix">
+                {menus[forthImg] && (
+                  <CardMenu
+                    name={menus[forthImg].menu_name}
+                    picture={menus[forthImg].img_url}
+                    calories={menus[forthImg].calories}
+                    id = {menus[forthImg]._id}
+                    price = {menus[forthImg].price}
+                    onMenuCardDeleted={this.onMenuCardDeleted.bind(this, forthImg)}
+                  />
+                )}
+              </div>
+              <div className="col-4 menuzone__image--fix">
+                {menus[fifthImg] && (
+                    <CardMenu
+                      name={menus[fifthImg].menu_name}
+                      picture={menus[fifthImg].img_url}
+                      calories={menus[fifthImg].calories}
+                      id = {menus[fifthImg]._id}
+                      price = {menus[fifthImg].price}
+                      onMenuCardDeleted={this.onMenuCardDeleted.bind(this, fifthImg)}
+                    />
+                  )}
+              </div>
+                
+              <div className="col-4 menuzone__image--fix">
+                {menus[sixthImg] && (
+                  <CardMenu
+                    name={menus[sixthImg].menu_name}
+                    picture={menus[sixthImg].img_url}
+                    calories={menus[sixthImg].calories}
+                    id = {menus[sixthImg]._id}
+                    price = {menus[sixthImg].price}
+                    onMenuCardDeleted={this.onMenuCardDeleted.bind(this, sixthImg)}
+                  />
+                )}
+              </div>
+                
+            
           </div>
         </div>
 

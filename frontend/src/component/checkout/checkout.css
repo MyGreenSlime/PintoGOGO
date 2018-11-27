@@ -71,3 +71,26 @@
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
   } */
+  /* } */
+
+  .payment__box__container{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    width: 60%;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 2%;
+    color: black;
+    background-color: #f3ece7;
+    border-radius: 8px;
+  }
+
+  .payment__purchase--pad{
+    padding-left: 4%;
+  }
+
+  .payment__customer__detail--left{
+    text-align: left;
+  }
