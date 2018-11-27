@@ -21,7 +21,7 @@ class CheckoutForm extends Component {
   async submit(ev) {
     // User clicked submit
     ev.preventDefault();
-    let {token} = await this.props.stripe.createToken({name: "Name"});
+    let { token } = await this.props.stripe.createToken({ name: "Name" });
     var data = {
         token_id : token.id
     }

@@ -184,12 +184,12 @@ class Cart extends Component {
                 <p>TOTAL: {this.state.fromChild}</p>
               </div>
               <a href="/bill">
-              <button
-                className="btn button--confirm"
-                onClick={this.confirmButtonClicked}
-              >
-                CONFIRM
-              </button>
+                <button
+                  className="btn button--confirm"
+                  onClick={this.confirmButtonClicked}
+                >
+                  CONFIRM
+                </button>
               </a>
             </div>
           </div>
