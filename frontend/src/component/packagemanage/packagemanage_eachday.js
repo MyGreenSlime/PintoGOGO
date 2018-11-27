@@ -18,7 +18,8 @@ class PackagemanageEachdays extends Component {
       name_package: "",
       description: "",
       package_id: "",
-      save: false
+      save: false,
+      path: ""
     };
     const init_day = this.initDayImg.bind(this, this.props.num_day, "day_img");
     const init_ready = this.initReady.bind(this, this.props.num_day, "is_ready_to_show");
@@ -31,6 +32,7 @@ class PackagemanageEachdays extends Component {
     console.log("ready", this.state.ready)
     this.send3DaysPackage = this.sendPackage.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.setPath = this.setPath.bind(this);
   }
 
   initDayImg(num_day, day_img) {
@@ -64,38 +66,44 @@ class PackagemanageEachdays extends Component {
   }
 
   sendPackage(path) {
-    /** cal price */
-    let price = 0;
-    for (let i = 0; i < this.props.num_day; i++) {
-      price +=
-        this.state.day_detail[i][0]["price"] +
-        this.state.day_detail[i][1]["price"];
-    }
-    /** create daymeal */
-    let day_meal = [];
-    for (let i = 0; i < this.props.num_day; i++) {
-      const meal1_2 = {
-        meal_1: this.state.day_detail[i][0],
-        meal_2: this.state.day_detail[i][1]
-      };
-      day_meal.push(meal1_2);
-    }
-    console.log(path + " package");
-    if (this.state.save && path == "add") {
-      alert("your package is already save!");
-    }
+      /** cal price */
+      let price = 0;
+      for (let i = 0; i < this.props.num_day; i++) {
+        price +=
+          this.state.day_detail[i][0]["price"] +
+          this.state.day_detail[i][1]["price"];
+      }
+      /** create daymeal */
+      let day_meal = [];
+      for (let i = 0; i < this.props.num_day; i++) {
+        const meal1_2 = {
+          meal_1: this.state.day_detail[i][0],
+          meal_2: this.state.day_detail[i][1]
+        };
+        day_meal.push(meal1_2);
+      }
+      console.log(path + " package");
+      if (this.state.save && path === "add") {
+        alert("your package is already save!");
+      }
 
-    /** json */
-    const newPackage = {
-      package_id: this.state.package_id,
-      name_package: this.state.name_package,
-      description: this.state.description,
-      type: 3,
-      day_meal: day_meal,
-      price: price
-    };
-    const send_pack = addOrSavePackageToCart.bind(this, newPackage, path, "save", "package_id");
-    send_pack();
+      /** json */
+      const newPackage = {
+        package_id: this.state.package_id,
+        name_package: this.state.name_package,
+        description: this.state.description,
+        type: 3,
+        day_meal: day_meal,
+        price: price
+      };
+      const send_pack = addOrSavePackageToCart.bind(
+        this,
+        newPackage,
+        path,
+        "save",
+        "package_id"
+      );
+      send_pack();
   }
 
   checkReady() {
@@ -122,11 +130,10 @@ class PackagemanageEachdays extends Component {
   }
 
   setMenuDrop(dayimg, daydetail, ready, day, meal, e) {
-
     /* Copy Multi dimension array by Check */
     let newDayMealState = [];
     let newDayDetailState = [];
-    let newReady = []
+    let newReady = [];
     for (let i = 0; i < this.props.num_day; i++) {
       newDayMealState.push([this.state[dayimg][i][0], this.state[dayimg][i][1]]);
       newDayDetailState.push([this.state[daydetail][i][0], this.state[daydetail][i][1]])
@@ -155,7 +162,7 @@ class PackagemanageEachdays extends Component {
     });
     console.log("img ", this.state.day_img);
     console.log("detail", this.state.day_detail);
-    console.log("ready ", this.state.is_ready_to_show)
+    console.log("ready ", this.state.is_ready_to_show);
   }
 
   createDropTarget(day, meal) {
@@ -183,6 +190,29 @@ class PackagemanageEachdays extends Component {
         <div className="col card-pack-img">{this.createDropTarget(day, 1)}</div>
       </div>
     );
+  }
+
+  setPath(path) {
+    this.setState({
+      path: path
+    })
+
+  }
+
+  handleSubmit(e) {
+    const form = e.target;
+    // console.log(form.checkValidity());
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    else {
+      e.preventDefault();
+      this.sendPackage(this.state.path)
+    }
+    form.classList.add('was-validated');
+    console.log('test: ', form);
+    
   }
 
   render() {
@@ -245,8 +275,8 @@ class PackagemanageEachdays extends Component {
 
           {this.state.click_show && (
             <React.Fragment>
-              <div>
-                <form>
+              <form className="needs-validation" noValidate onSubmit={this.handleSubmit.bind(this)}>
+                <div>
                   <div className="row">
                     <label className="col-sm-4">Package name:</label>
                     <div className="col-sm-6">
@@ -258,7 +288,11 @@ class PackagemanageEachdays extends Component {
                         id="name_package"
                         onChange={this.handleChange}
                         value={this.state.name_package}
+                        required
                       />
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
                     </div>
                   </div>
                   <br />
@@ -266,28 +300,28 @@ class PackagemanageEachdays extends Component {
                     {isAuthenticated ? users : ""}
                     {user.type ? admin : ""}
                   </div>
-                </form>
-              </div>
-              <div>
-                <NutritionManage
-                  menu_detail={this.state.day_detail}
-                  day={this.props.num_day}
-                />
-              </div>
-              <div>
-                <button
-                  className="btn btn-shownutrition"
-                  onClick={() => this.sendPackage("addcart")}
-                >
-                  ADD TO CART
-                </button>
-                <button
-                  className="btn btn-shownutrition"
-                  onClick={() => this.sendPackage("add")}
-                >
-                  SAVE PACKAGE
-                </button>
-              </div>
+                </div>
+                <div>
+                  <NutritionManage
+                    menu_detail={this.state.day_detail}
+                    day={this.props.num_day}
+                  />
+                </div>
+                <div>
+                  <button
+                    className="btn btn-shownutrition"
+                    onClick={() => this.setPath("addcart")}
+                  >
+                    ADD TO CART
+                  </button>
+                  <button
+                    className="btn btn-shownutrition" // onClick={this.testClick()}
+                    onClick={() => this.setPath("add")}
+                  >
+                    SAVE PACKAGE
+                  </button>
+                </div>
+              </form>
             </React.Fragment>
           )}
         </div>
