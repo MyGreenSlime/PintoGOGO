@@ -100,13 +100,16 @@ class CheckoutForm extends Component {
                             TOTAL PRICE
                         </div>
                         <div className="col-6">
-                            {this.state.bill.order_cost}
+                            {this.state.bill.total_cost}
                         </div>
                     </div>
                     <br/>
                     <div className="row">
                         <div className="col-6 payment__customer__detail--left">
                             ADDRESS
+                        </div>
+                        <div className="col-6">
+                            {this.state.bill.destination}
                         </div>
                     </div>
                 </div>
