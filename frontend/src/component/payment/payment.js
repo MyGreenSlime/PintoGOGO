@@ -62,6 +62,7 @@ export default class Payment extends Component {
 
   calculateDeliveryFee(index) {
     var dist = this.state.address[index].distance;
+    dist = dist / 1000;
     var fee = dist * 2;
     var packageOrder = this.state.bill.order.package_order;
 
@@ -74,8 +75,8 @@ export default class Payment extends Component {
         }
       }
     }
-    fee = fee * maxDay;
-    var total = this.state.bill.order_cost + fee;
+    fee = Math.floor(fee * maxDay);
+    var total = Math.round(this.state.bill.order_cost + fee);
 
     this.setState({
       distance: dist,
