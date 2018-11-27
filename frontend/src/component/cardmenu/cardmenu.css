@@ -4,46 +4,49 @@
         box-sizing: border-box;
     }
 
+    .grid-cardmenu {
+        display: grid;
+        grid-template-rows: 80% 20%;
+        /* grid-gap: 3%; */
+        margin: 3%;
+    }
+
+    .grid-description {
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+
     .cardmenu__text{
         font-family: 'Quicksand', sans-serif;
         font-size: 13px;
-        margin-left: 25%;
-        /* padding-left: 40%; */
         text-align: center;
     }
     
-    .menu {
-        display: grid;
-      }
-    
     .cardmenu__image{    
         cursor: pointer;
-        width: 17em;
         text-align: center;
-        /* min-width: 279px; */
     }
     
     .cardmenu__image--border{
         border-radius: 8px;
+         width: 70%
     }
     
     .cartmenu__cart{
         cursor: pointer;
-        margin-right: 50%;
-        /* padding-right: 60%; */
+        /* margin-right: 50%; */
     }
     
     .cartmenu__button__delete{
         cursor: pointer;
-        margin-right: 50%;
-        /* padding-right: 60%; */
+        /* margin-right: 50%; */
     }
     
     div.inline{
         float: left;
     }
     
-    .cardmenu__undermenu--minwidth{
+    /* .cardmenu__undermenu--minwidth{
         width: 280px;
-    }
+    } */
 }

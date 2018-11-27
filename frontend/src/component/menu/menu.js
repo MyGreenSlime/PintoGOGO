@@ -107,7 +107,7 @@ class Menu extends Component {
         </div>
 
         {/* <div className="row"> */}
-          <div className="row center">
+          <div className="row">
             {/* <div className="center"> */}
               <div className="col-md-4 menuzone__image--fix">
                 {menus[firstImg] && (
@@ -125,7 +125,7 @@ class Menu extends Component {
             
             <div className="col-md-4 menuzone__image--fix">
               {menus[secondImg] && (
-                <CardMenu
+                <CardMenu className="center"
                   name={menus[secondImg].menu_name}
                   picture={menus[secondImg].img_url}
                   calories={menus[secondImg].calories}
@@ -138,7 +138,7 @@ class Menu extends Component {
             
             <div className="col-md-4 menuzone__image--fix">
               {menus[thirdImg] && (
-                <CardMenu
+                <CardMenu className="center"
                   name={menus[thirdImg].menu_name}
                   picture={menus[thirdImg].img_url}
                   calories={menus[thirdImg].calories}
@@ -149,11 +149,11 @@ class Menu extends Component {
               )}
             </div>
           </div>
-          <div className="row center">
+          <div className="row">
             
               <div className="col-md-4 menuzone__image--fix">
                 {menus[forthImg] && (
-                  <CardMenu
+                  <CardMenu className="center"
                     name={menus[forthImg].menu_name}
                     picture={menus[forthImg].img_url}
                     calories={menus[forthImg].calories}
@@ -165,7 +165,7 @@ class Menu extends Component {
               </div>
               <div className="col-md-4 menuzone__image--fix">
                 {menus[fifthImg] && (
-                    <CardMenu
+                    <CardMenu className="center"
                       name={menus[fifthImg].menu_name}
                       picture={menus[fifthImg].img_url}
                       calories={menus[fifthImg].calories}
@@ -178,7 +178,7 @@ class Menu extends Component {
                 
               <div className="col-md-4 menuzone__image--fix">
                 {menus[sixthImg] && (
-                  <CardMenu
+                  <CardMenu className="center"
                     name={menus[sixthImg].menu_name}
                     picture={menus[sixthImg].img_url}
                     calories={menus[sixthImg].calories}
