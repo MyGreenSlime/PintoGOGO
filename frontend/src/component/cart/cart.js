@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CardCart from "../cardcart/cardcart";
 import "../cart/cart.css";
-import axios from "axios";
+import { getCurrentOrder, addToBill } from "../api/api";
 
 class Cart extends Component {
   constructor() {
@@ -33,17 +33,8 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("/api/orders/current")
-      .then(res => {
-        this.setState({
-          order: res.data,
-          isLoaded: true
-        });
-      })
-      .then(() => {
-        console.log("order ", this.state.order);
-      });
+    const getOrder = getCurrentOrder.bind(this, "order", "isLoaded")
+    getOrder();
   }
 
   createCardCartFood() {
@@ -111,9 +102,8 @@ class Cart extends Component {
       order_id: this.state.order._id,
       totalprice: this.state.fromChild
     };
-    axios
-      .put("/api/orders/tobill", newBill)
-      .then(res => console.log("add to bill: ", res));
+    const addOrderToBill = addToBill.bind(this, newBill);
+    addOrderToBill();
   }
 
   render() {

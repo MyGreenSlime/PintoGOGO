@@ -27,11 +27,15 @@
         padding: 0;
     }
 
-    .menuzone__image--fix{
+    /* .menuzone__image--fix{
         display: table;
-    }
+    } */
 
     .cardcartbox--delete{
         cursor: pointer;
+    }
+
+    .center{
+        margin: 0 auto 0 auto;
     }
 }

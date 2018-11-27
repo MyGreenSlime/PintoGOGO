@@ -14,7 +14,7 @@ class Profile extends Component {
       currentUser: null
     };
 
-    // this.dropdownDOM = React.createRef();
+    this.dropdownDOM = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,19 +32,19 @@ class Profile extends Component {
     get_user();
   }
 
-  // componentDidUpdate() {
-  //   if (this.state.isLoaded) {
-  //     const $ = window.$;
-  //     this.dropdownDOM = $(this.dropdownDOM.current);
-  //     this.dropdownDOM.dropdown();
+  componentDidUpdate() {
+    if (this.state.isLoaded) {
+      const $ = window.$;
+      this.dropdownDOM = $(this.dropdownDOM.current);
+      this.dropdownDOM.dropdown();
 
-  //     $(".dd__profile-addr").click(function() {
-  //       var txt = $(this).text();
-  //       console.log("dd selected", txt);
-  //     });
-  //     console.log(this.dropdownDOM);
-  //   }
-  // }
+      $(".dd__profile-addr").click(function() {
+        var txt = $(this).text();
+        console.log("dd selected", txt);
+      });
+      console.log(this.dropdownDOM);
+    }
+  }
 
   render() {
     if (!!!this.state.isLoaded) {
@@ -60,7 +60,7 @@ class Profile extends Component {
         {/*bg*/}
         <div className="profile-box">
           <h2> PROFILE </h2>
-          <img className="userpic" src={currentUser.img_url} />
+          <img className="userpic" src={currentUser.img_url} alt="profile picture" />
           {/* <br /> */}
           <div className=" addmargin row">
             <div className="col-sm-6">
@@ -99,6 +99,7 @@ class Profile extends Component {
             <div className="col">
               <div class="dropdown">
                 <button
+                  ref={this.dropdownDOM}
                   class="btn btn-secondary dropdown-toggle addr-dropdown"
                   type="button"
                   id="dropdownMenuButton"

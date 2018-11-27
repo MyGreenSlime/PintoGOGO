@@ -21,14 +21,14 @@ class PackagemanageEachdays extends Component {
       save: false
     };
     const init_day = this.initDayImg.bind(this, this.props.num_day, "day_img");
-    const init_ready = this.initReady.bind(this,this.props.num_day,"is_ready_to_show");
-    const init_detail = this.initDetail.bind(this,this.props.num_day,"day_detail");
+    const init_ready = this.initReady.bind(this, this.props.num_day, "is_ready_to_show");
+    const init_detail = this.initDetail.bind(this, this.props.num_day, "day_detail");
     init_day();
     init_ready();
     init_detail();
-    console.log("img_day",this.state.day_img)
-    console.log("img_detail",this.state.day_detail)
-    console.log("ready",this.state.ready)
+    console.log("img_day", this.state.day_img)
+    console.log("img_detail", this.state.day_detail)
+    console.log("ready", this.state.ready)
     this.send3DaysPackage = this.sendPackage.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -94,7 +94,7 @@ class PackagemanageEachdays extends Component {
       day_meal: day_meal,
       price: price
     };
-    const send_pack = addOrSavePackageToCart.bind(this,newPackage,path,"save","package_id");
+    const send_pack = addOrSavePackageToCart.bind(this, newPackage, path, "save", "package_id");
     send_pack();
   }
 
@@ -128,9 +128,9 @@ class PackagemanageEachdays extends Component {
     let newDayDetailState = [];
     let newReady = []
     for (let i = 0; i < this.props.num_day; i++) {
-      newDayMealState.push([this.state[dayimg][i][0],this.state[dayimg][i][1]]);
-      newDayDetailState.push([this.state[daydetail][i][0],this.state[daydetail][i][1]])
-      newReady.push([this.state[ready][i][0],this.state[ready][i][1]])
+      newDayMealState.push([this.state[dayimg][i][0], this.state[dayimg][i][1]]);
+      newDayDetailState.push([this.state[daydetail][i][0], this.state[daydetail][i][1]])
+      newReady.push([this.state[ready][i][0], this.state[ready][i][1]])
     }
 
     newDayMealState[day][meal] = (
@@ -152,10 +152,10 @@ class PackagemanageEachdays extends Component {
       [dayimg]: newDayMealState,
       [daydetail]: newDayDetailState,
       [ready]: newReady
-    });   
-    console.log("img ",this.state.day_img);
+    });
+    console.log("img ", this.state.day_img);
     console.log("detail", this.state.day_detail);
-    console.log("ready ",this.state.is_ready_to_show)
+    console.log("ready ", this.state.is_ready_to_show)
   }
 
   createDropTarget(day, meal) {
