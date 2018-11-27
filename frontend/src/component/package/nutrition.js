@@ -22,7 +22,7 @@ export default class Nutrition extends Component {
   }
 
   compute(x) {
-    const daymeal = this.state.daymeal;
+    const daymeal = this.state.packages[0].day_meal;
     let sum = 0;
     for (let i = 0; i < daymeal.length; i++) {
       sum = sum + daymeal[i].meal_1[x] + daymeal[i].meal_2[x];
@@ -35,6 +35,10 @@ export default class Nutrition extends Component {
     const { packages, daymeal, isLoaded } = this.state;
     if (!!!isLoaded) {
       return <React.Fragment />;
+    }
+
+    if(isLoaded){
+      console.log("nutrition",this.state.packages)
     }
 
     return (
