@@ -44,7 +44,7 @@ export default class MyPackage extends Component {
           <div className="col-sm-4">
             <img
               className="img-mypack"
-              src={curPack.day_meal[0].meal_1.img_url}
+              // src={curPack.day_meal[0].meal_1.img_url}
             />
           </div>
           <div className="col-sm">
