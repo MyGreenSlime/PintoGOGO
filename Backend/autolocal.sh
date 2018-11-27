@@ -6,7 +6,7 @@ npm run buildfrontend
 echo "git add" 
 git add -A
 echo "git commit" 
-git commit -am "deploy $date '+%Y-%m-%d %H:%M:%S'"
+git commit -am "deploy `date +'%Y-%m-%d %H:%M:%S'`"
 echo "git push" 
 git push origin backend
 bash deploy.sh
