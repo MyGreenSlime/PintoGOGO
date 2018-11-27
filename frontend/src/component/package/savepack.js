@@ -24,7 +24,7 @@ export default class Savepack extends Component {
       <React.Fragment>
         <div className="set-each-package row">
           <div className="col-sm-4">
-            <img className="img-pack" src={curPack.day_meal[0].meal_1.img_url} />
+            {/* <img className="img-pack" src={curPack.day_meal[0].meal_1.img_url} /> */}
           </div>
           <div className="col-sm dis-grid">
             <div>

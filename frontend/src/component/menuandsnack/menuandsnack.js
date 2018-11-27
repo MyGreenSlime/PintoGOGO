@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import CardMenu from "../cardmenu/cardmenu";
-import "../menu/menu.css";
+import CardMenu from "../cardmenuandsnack/cardmenuandsnack";
+import "./menuandsnack.css";
 import { getFoodOrSnack } from '../api/api';
 
-class Menu extends Component {
+class MenuAndSnack extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,15 +15,15 @@ class Menu extends Component {
       forthImg: 3,
       fifthImg: 4,
       sixthImg: 5,
-      length_menu: 0
     };
+    console.log("props",this.props.path)
     this.checkFirstMenuSet = this.checkFirstMenuSet.bind(this);
     this.checkLastMenuSet = this.checkLastMenuSet.bind(this);
     this.leftClick = this.leftClick.bind(this);
   }
 
   componentDidMount() {
-    const GetFood = getFoodOrSnack.bind(this,"menus","isLoaded","food");
+    const GetFood = getFoodOrSnack.bind(this, "menus", "isLoaded", this.props.path);
     GetFood();
   }
 
@@ -54,25 +54,20 @@ class Menu extends Component {
   }
 
   checkFirstMenuSet() {
-    let img=""
+    let img = ""
     if (this.state.firstImg - 6 >= 0) {
       img = <img src="/img/other/left-arrow.png" alt="left arrow icon" height="20" />;
     }
-    console.log("left ",img)
+    console.log("left ", img)
     return img;
   }
 
   checkLastMenuSet() {
     let img = "";
-    if (this.state.firstImg <= this.state.menus.length && 
-      this.state.secondImg <= this.state.menus.length && 
-      this.state.thirdImg <= this.state.menus.length && 
-      this.state.forthImg <= this.state.menus.length && 
-      this.state.fifthImg <= this.state.menus.length && 
-      this.state.sixthImg <= this.state.menus.length && this.state.menus.length != 0) {
+    if(this.state.firstImg + 5 < this.state.menus.length && this.state.sixthImg + 1 != this.state.menus.length && this.state.menus.length > 0){
       img = <img className="imgbutton" src="/img/other/right-arrow.png" alt="right arrow icon" height="20" />
     }
-    console.log("right ",img)
+    console.log("right ", img)
     return img;
   }
 
@@ -90,7 +85,7 @@ class Menu extends Component {
       menus,
       firstImg,
       secondImg,
-      thirdImg, 
+      thirdImg,
       forthImg,
       fifthImg,
       sixthImg
@@ -103,53 +98,59 @@ class Menu extends Component {
 
         <div className="mergerow--left">
           <div onClick={this.leftClick.bind(this)}>
-          {this.checkFirstMenuSet()}</div>
+            {this.checkFirstMenuSet()}</div>
         </div>
 
         <div className="row">
           <div className="row">
-            <div className="col-md-4 menuzone__image--fix">
+            <div className="col-4 menuzone__image--fix">
               {menus[firstImg] && (
                 <CardMenu
-                  name={menus[firstImg].menu_name}
+                  name={menus[firstImg][this.props.name]}
                   picture={menus[firstImg].img_url}
                   calories={menus[firstImg].calories}
-                  id = {menus[firstImg]._id}
-                  price = {menus[firstImg].price}
+                  id={menus[firstImg]._id}
+                  price={menus[firstImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, firstImg)}
+                  path = {this.props.path}
+                  path_detail = {this.props.path_detail}
                 />
               )}
             </div>
             
-            <div className="col-md-4 menuzone__image--fix">
+            <div className="col-4 menuzone__image--fix">
               {menus[secondImg] && (
                 <CardMenu
-                  name={menus[secondImg].menu_name}
+                  name={menus[secondImg][this.props.name]}
                   picture={menus[secondImg].img_url}
                   calories={menus[secondImg].calories}
-                  id = {menus[secondImg]._id}
-                  price={menus[secondImg].price}              
+                  id={menus[secondImg]._id}
+                  price={menus[secondImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, secondImg)}
+                  path={this.props.path}
+                  path_detail={this.props.path_detail}
                 />
               )}
             </div>
             
-            <div className="col-md-4 menuzone__image--fix">
+            <div className="col-4 menuzone__image--fix">
               {menus[thirdImg] && (
                 <CardMenu
-                  name={menus[thirdImg].menu_name}
+                  name={menus[thirdImg][this.props.name]}
                   picture={menus[thirdImg].img_url}
                   calories={menus[thirdImg].calories}
-                  id = {menus[thirdImg]._id}
-                  price = {menus[thirdImg].price}
+                  id={menus[thirdImg]._id}
+                  price={menus[thirdImg].price}
                   onMenuCardDeleted={this.onMenuCardDeleted.bind(this, thirdImg)}
+                  path={this.props.path}
+                  path_detail={this.props.path_detail}
                 />
               )}
             </div>
           </div>
           <div className="row">
             
-              <div className="col-md-4 menuzone__image--fix">
+              <div className="col-4 menuzone__image--fix">
                 {menus[forthImg] && (
                   <CardMenu
                     name={menus[forthImg].menu_name}
@@ -161,7 +162,7 @@ class Menu extends Component {
                   />
                 )}
               </div>
-              <div className="col-md-4 menuzone__image--fix">
+              <div className="col-4 menuzone__image--fix">
                 {menus[fifthImg] && (
                     <CardMenu
                       name={menus[fifthImg].menu_name}
@@ -174,7 +175,7 @@ class Menu extends Component {
                   )}
               </div>
                 
-              <div className="col-md-4 menuzone__image--fix">
+              <div className="col-4 menuzone__image--fix">
                 {menus[sixthImg] && (
                   <CardMenu
                     name={menus[sixthImg].menu_name}
@@ -190,7 +191,7 @@ class Menu extends Component {
             
           </div>
         </div>
-          
+
 
         <div className="mergerow--right">
           <div onClick={this.rightClick.bind(this)}>
@@ -198,14 +199,14 @@ class Menu extends Component {
           </div>
         </div>
         {/* <div /> */}
-        
-  
-        
-          
+
+
+
+
         <div />
       </div>
     );
   }
 }
 
-export default Menu;
+export default MenuAndSnack;

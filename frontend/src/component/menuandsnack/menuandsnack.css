@@ -5,7 +5,7 @@
         justify-content: center;  
         align-content: center; 
         
-        grid-template-columns: 16.5% 75% 8.5%;
+        grid-template-columns: 12.5% 75% 12.5%;
         grid-template-rows: 50% 50%;
         margin-top: 3%;
     }
@@ -27,11 +27,15 @@
         padding: 0;
     }
 
-    .menuzone__image--fix{
+    /* .menuzone__image--fix{
         display: table;
-    }
+    } */
 
     .cardcartbox--delete{
         cursor: pointer;
+    }
+
+    .center{
+        margin: 0 auto 0 auto;
     }
 }

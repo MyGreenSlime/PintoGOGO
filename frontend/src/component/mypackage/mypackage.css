@@ -9,12 +9,9 @@
   background-position :  top left; 
 }
 
-.nomypack{
-    margin: 30px auto 30px auto;
-  background-color: #f3ece7;
-  color: #7b7b7b;
-  padding: 3%;
-  border-radius: 12px;
+.addpack{
+  width: 15%;
+  margin-top: 5%;
 }
 
 .set-frame-mypks

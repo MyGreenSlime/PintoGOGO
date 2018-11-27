@@ -12,12 +12,28 @@ export default class Payment extends Component {
       deliveryFee: null,
       distSelected: false,
       totalCost: null,
-      isLoaded: false
+      isLoaded: false,
+      status: 0
     };
 
     this.ddDOM = React.createRef();
     this.calculateDeliveryFee = this.calculateDeliveryFee.bind(this);
+    this.updateBill = this.updateBill.bind(this);
   }
+
+  updateBill() {
+    const formData = new FormData()
+    formData.append('distance',this.state.distance)
+    formData.append('deliveryFee',this.state.deliveryFee)
+    formData.append('distSelected',this.state.distSelected)
+    formData.append('totalCost',this.state.totalCost)
+    axios
+      .put("api/bills/update/current", formData)
+      .then(res => {
+        this.setState({status : res.data})
+        console.log("i'm in!!!!!!!");
+    })
+}
 
   componentDidMount() {
     axios
@@ -43,7 +59,7 @@ export default class Payment extends Component {
           .then(() => {
             console.log("address: ", this.state.address);
           });
-      });
+      })
   }
 
   componentDidUpdate() {
@@ -62,6 +78,7 @@ export default class Payment extends Component {
 
   calculateDeliveryFee(index) {
     var dist = this.state.address[index].distance;
+    dist = dist / 1000;
     var fee = dist * 2;
     var packageOrder = this.state.bill.order.package_order;
 
@@ -74,8 +91,8 @@ export default class Payment extends Component {
         }
       }
     }
-    fee = fee * maxDay;
-    var total = this.state.bill.order_cost + fee;
+    fee = Math.floor(fee * maxDay);
+    var total = Math.round(this.state.bill.order_cost + fee);
 
     this.setState({
       distance: dist,
@@ -219,10 +236,12 @@ export default class Payment extends Component {
                     <p>Baht</p>
                   </div>
                 </div>
-                <div className="row box__confirm">
-                  <button className="btn btn-lg button__confirm" type="button">
-                    Confirm Order
-                  </button>
+                <div className="row box__confirm" onClick={this.updateBill}>
+                  <a href="/payment">
+                    <button type="ฺ๊button" className="btn btn-lg button__confirm" >
+                        Confirm Order
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

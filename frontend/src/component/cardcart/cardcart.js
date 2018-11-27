@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import "../cardcart/cardcart.css";
-import axios from "axios";
+import { increaseAmount, decreaseAmount, deleteOrder } from "../api/api"
 
 class CardCart extends Component {
   constructor(props) {
@@ -31,66 +31,25 @@ class CardCart extends Component {
   }
 
   increment() {
-    axios
-      .put(
-        "/api/orders/increase/amount/" +
-          this.props.type_order +
-          "/" +
-          this.props.id
-      )
-      .then(res => {
-        console.log(res.data);
-        // console.log(this.props.type_order, this.props.id)
-      })
-      .then(
-        () => {
-          this.setState({
-            inputField: this.state.inputField + 1
-          });
-        }
-      );
+    const increase = increaseAmount.bind(this, this.props.type_order, this.props.id);
+    increase();
+    this.state.inputField += 1
   }
 
   decrement() {
-    axios
-      .put(
-        "/api/orders/decrease/amount/" +
-          this.props.type_order +
-          "/" +
-          this.props.id
-      )
-      .then(() => {
-        if (this.state.inputField > 1) {
-          this.state.inputField -= 1
-        }
-      });
+    const decrease = decreaseAmount.bind(this, this.props.type_order, this.props.id);
+    decrease();
+    if (this.state.inputField > 1) {
+      this.state.inputField -= 1
+    }
   }
 
-  deletemenu() {
-    axios
-      .delete(
-        "/api/orders/del/food/" +
-          this.props.id
-      )
-      .then(() => {
-        this.state.inputField = 0
-        this.forceUpdate();
-        }
-      )
-      .then(() => {
-        this.forceUpdate();
-      });
+  deleteOrder(){
+    const deleteFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
+    deleteFromCart();
+    this.state.inputField = 0;
+    this.forceUpdate();
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if(this.state.inputField == 0){
-  //     console.log("trueeeee")
-  //     return true;
-  //   }
-  //   else  {
-  //     return false;
-  //   }
-  // }
 
   render() {
     return (
@@ -108,7 +67,7 @@ class CardCart extends Component {
             <div className="col-md-3 col-7 menuname__block">
               <p>{this.props.name}</p>
             </div>
-            <div className="col-md-1 col-5 cardcartbox--delete" onClick={this.deletemenu.bind(this)}>
+            <div className="col-md-1 col-5 cardcartbox--delete" onClick={this.deleteOrder.bind(this)}>
               DELETE
             </div>
             <div className="col-md-3 col-8 editamount">
