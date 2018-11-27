@@ -33,12 +33,6 @@ class cardMenuAndSnack extends Component {
     deleteFood();
   }
 
-  sendToMenuDetail() {
-    return <div>
-      <Route path= {this.props.path_detail + ":menuId"} component={MenuDetail} />
-    </div>
-  }
-
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const users = (
@@ -57,7 +51,7 @@ class cardMenuAndSnack extends Component {
       {/* block__element--modify */}
       <div className="cardmenu__image">
         <Link to={this.props.path_detail + this.props.id}>
-          <img src={this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border" onClick={this.sendToMenuDetail.bind(this)} />
+          <img src={this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border"  />
         </Link>
       </div>
 
