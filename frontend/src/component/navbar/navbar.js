@@ -87,7 +87,7 @@ class Navigationbar extends Component {
         </NavItem>
         <NavItem className="navbar__item">
           <NavLink href="/cart" className="navbar__link">
-            <img src="../img/navbar/icon-cart2.png" className="navbar__icon" />
+            <img src="/img/navbar/icon-cart2.png" className="navbar__icon" />
           </NavLink>
         </NavItem>
       </React.Fragment>

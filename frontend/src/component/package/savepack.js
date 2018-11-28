@@ -32,7 +32,7 @@ export default class Savepack extends Component {
               <p>{curPack.description}</p>
             </div>
             {/* <LinkWithPrev to={"/" + this.props.path + "/" + curPack._id}> */}
-            <LinkWithPrev to={"/packagedetail/" + curPack._id}>
+            <LinkWithPrev to={"/detail/package/" + curPack._id}>
               <button className="btn view-pks">View Package</button>
             </LinkWithPrev>
           </div>

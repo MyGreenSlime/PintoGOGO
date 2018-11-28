@@ -46,7 +46,7 @@ export default class MyPackage extends Component {
             </div>
             <div className="row">
               <div className="col-sm">
-              <LinkWithPrev to={"/packagedetail/" + curPack._id}>
+                <LinkWithPrev to={"/detail/package/" + curPack._id}>
                   <button className="btn view-mypks">View Package</button>
                 </LinkWithPrev>
               </div>

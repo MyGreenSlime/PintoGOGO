@@ -28,6 +28,7 @@ import MenuDetail from "./component/detail/menudetail.js";
 import SnackDetail from "./component/detail/snackdetail.js";
 import EditMenuDetail from "./component/editdetail/editmenudetail/editmenudetail.js";
 import EditSnackDetail from "./component/editdetail/editsnackdetail/editsnackdetail.js";
+import Enjoy from "./component/enjoy/enjoy.js"
 import Payment2 from "./component/payment2/payment2.js"
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
@@ -112,12 +113,14 @@ class App extends Component {
                 {/* <Route path="/3days" component={Pack3days} />
                 <Route path="/5days" component={Pack5days} />
                 <Route path="/7days" component={Pack7days} /> */}
-                <Route path="/packagedetail" component={PackDetail} />
+                <Route path="/detail/package" component={PackDetail} />
                 <Route path="/mypackage" component={MyPackage} />
                 <Route path="/detail/snack" component={SnackDetail} />
                 <Route path="/edit/detail/menu" component={EditMenuDetail} />
                 <Route path="/edit/detail/snack" component={EditSnackDetail} />
+                <Route path = "/enjoy" component={Enjoy}/>
                 <Route paht="/bill" component={Payment}/>
+                
                 <Route path="*" component={UnderConstruct}/>
               </Switch>
             <Footer />
