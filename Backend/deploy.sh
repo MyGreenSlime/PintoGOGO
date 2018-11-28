@@ -16,4 +16,4 @@ echo '${USERNAME} : pm2 start 0';
 pm2 start 0;
 "
 echo "you are about to deploy app to ${USERNAME}@${HOSTS}"
-ssh -l ${USERNAME} ${HOST} "${SCRIPT}"
+ssh -i "newkey" ${USERNAME}@${HOST} "${SCRIPT}"
