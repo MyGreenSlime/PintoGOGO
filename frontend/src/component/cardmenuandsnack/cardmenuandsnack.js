@@ -52,7 +52,7 @@ class cardMenuAndSnack extends Component {
       {/* block__element--modify */}
       <div className="cardmenu__image">
         <Link to={this.props.path_detail + this.props.id}>
-          <img src={this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border"  />
+          <img src={"\\"+this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border"  />
         </Link>
       </div>
 

@@ -12,7 +12,7 @@ import { Elements, StripeProvider } from "react-stripe-elements";
 //---------------don--------------------------------
 import Addmenu from "./component/add/addmenu";
 import Addsnack from "./component/add/addsnack";
-import Snack from "./component/menuandsnack/snack.js";
+import Snack from "./component/show/showsnack.js";
 import CheckoutForm from "./component/checkout/CheckoutForm.js";
 import UnderConstruct from "./component/underconstruct/index.js";
 //---------------name-------------------------------
@@ -22,7 +22,7 @@ import Choice from "./component/choice/choice";
 import Recommend from "./component/recommend/recommend";
 import Payment from "./component/payment/payment";
 //---------------boo---------------------------------
-import Menu from "./component/menuandsnack/menu.js";
+import Menu from "./component/show/showmenu.js";
 import Cart from "./component/cart/cart.js";
 import MenuDetail from "./component/detail/menudetail.js";
 import SnackDetail from "./component/detail/snackdetail.js";

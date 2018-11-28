@@ -10,11 +10,6 @@ class MenuAndSnack extends Component {
       menus: {},
       isLoaded: false,
       firstImg: 0,
-      secondImg: 1,
-      thirdImg: 2,
-      forthImg: 3,
-      fifthImg: 4,
-      sixthImg: 5,
     };
     console.log("props",this.props.path)
     this.checkFirstMenuSet = this.checkFirstMenuSet.bind(this);
