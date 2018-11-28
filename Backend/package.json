@@ -29,7 +29,7 @@
   "scripts": {
     "test": "jest",
     "server": "nodemon server.js",
-    "buildfrontend": "cd .. && cd frontend && npm install && npm run build && cp -Rf ./build ../Backend/client/"
+    "buildfrontend": "cd .. && cd frontend && rm package-lock.json &&npm install && npm run build && cp -Rf ./build ../Backend/client/"
   },
   "author": "",
   "license": "ISC"
