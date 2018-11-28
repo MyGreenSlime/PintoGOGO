@@ -35,9 +35,10 @@ import Package from "./component/package/package.js";
 import PackageManage from "./component/packagemanage/packagemanage.js";
 import Profile from "./component/profile/profile";
 import Footer from "./component/footer/footer.js";
-import Pack3days from "./component/package/3days/pack3DaysDetail.js";
-import Pack5days from "./component/package/5days/pack5DaysDetail.js";
-import Pack7days from "./component/package/7days/pack7DaysDetail.js";
+// import Pack3days from "./component/package/3days/pack3DaysDetail.js";
+// import Pack5days from "./component/package/5days/pack5DaysDetail.js";
+// import Pack7days from "./component/package/7days/pack7DaysDetail.js";
+import PackDetail from "./component/package/packDetail"
 import MyPackage from "./component/mypackage/mypackage.js";
 import EditProfile from "./component/editprofile/editprofile.js";
 //---------------pat------------------------------------
@@ -108,9 +109,10 @@ class App extends Component {
                 <Route path="/cart" component={Cart}/>
                 <Route path="/payment2" component={Payment2} />
                 <Route path="/menudetail" component={MenuDetail} />
-                <Route path="/3days" component={Pack3days} />
+                {/* <Route path="/3days" component={Pack3days} />
                 <Route path="/5days" component={Pack5days} />
-                <Route path="/7days" component={Pack7days} />
+                <Route path="/7days" component={Pack7days} /> */}
+                <Route path="/packagedetail" component={PackDetail} />
                 <Route path="/mypackage" component={MyPackage} />
                 <Route path="/snackdetail" component={SnackDetail} />
                 <Route path="/editmenudetail" component={EditMenuDetail} />
