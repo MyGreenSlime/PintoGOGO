@@ -84,6 +84,7 @@
     color: black;
     background-color: #f3ece7;
     border-radius: 8px;
+    
   }
 
   .payment__purchase--pad{
@@ -94,3 +95,14 @@
   .payment__customer__detail--left{
     text-align: center;
   }
+
+  .checkout__set__bg{
+    background: url("/img/cart/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 1% 0 10% 0 ;
+    /* min-height: 40vw; */
+    background-attachment: fixed;
+    background-position :  top left; 
+  }
+  
