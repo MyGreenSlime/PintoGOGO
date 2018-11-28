@@ -44,18 +44,22 @@ router.post(
                 }
               },
               (err, order) => {
-                Bill.updateOne(
-                  {
-                    user: req.user.id,
-                    isfinish: false
-                  },
-                  {
-                    $set: {
-                      isfinish: true,
-                      update_time: Date.now()
-                    }
-                  }
-                );
+                console.log("manage order finish")
+              }
+            );
+
+            await Bill.updateOne(
+              {
+                user: req.user.id,
+                isfinish: false
+              },
+              {
+                $set: {
+                  isfinish: true,
+                  update_time: Date.now()
+                }
+              },(err, bill) => {
+                console.log("manage bill finish")
               }
             );
             var newOrder = new Order({

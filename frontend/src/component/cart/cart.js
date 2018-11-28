@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import CardCart from "../cardcart/cardcart";
 import "../cart/cart.css";
 import { getCurrentOrder, addToBill } from "../api/api";
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import { connect } from "react-redux";
 
 class Cart extends Component {
   constructor() {
@@ -33,10 +37,12 @@ class Cart extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
     const getOrder = getCurrentOrder.bind(this, "order", "isLoaded");
     getOrder();
   }
-
   createCardCartFood() {
     let card_food;
     if (!this.state.order.food_order) {
@@ -198,4 +204,16 @@ class Cart extends Component {
     );
   }
 }
-export default Cart;
+Cart.propTypes = {
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+)(withRouter(Cart));
