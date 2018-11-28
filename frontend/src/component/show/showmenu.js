@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import CardMenu from '../cardmenuandsnack/cardmenuandsnack.js'
+import Menu from '../menuandsnack/menu.js'
+import './show.css'
 
 class Showmenu extends Component {
-
-  
 
   render() { 
     return (
     <React.Fragment>
-        <div>MENU</div>
-        <div />
-      </React.Fragment>);
+      <div className="topic">MENU</div>
+      <Menu/>
+    </React.Fragment>);
   }
 }
  
