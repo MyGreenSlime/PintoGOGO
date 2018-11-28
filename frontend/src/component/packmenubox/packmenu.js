@@ -30,7 +30,7 @@ class Packmenu extends Component {
     img = 
     <figure>
       <div className="hovereffect">
-        <img src={url} className="menu--image" alt={name} />
+        <img src={"\\"+url} className="menu--image" alt={name} />
         <div className="overlay">
           <h2>{name}</h2>
           {/* <a class="btn info" href="#">Detail</a> */}
@@ -46,7 +46,7 @@ class Packmenu extends Component {
     // create customDragElement
     const img_drag = this.state.menus.map((menu,index) => 
       <React.Fragment key={index}>
-        <img src={menu.img_url} className="menu--image__drag" alt={menu.menu_name}/>
+        <img src={"\\"+menu.img_url} className="menu--image__drag" alt={menu.menu_name}/>
       </React.Fragment>
     );
     // create draggable element

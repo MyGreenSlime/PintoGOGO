@@ -139,12 +139,13 @@ class PackagemanageEachdays extends Component {
       newDayDetailState.push([this.state[daydetail][i][0], this.state[daydetail][i][1]])
       newReady.push([this.state[ready][i][0], this.state[ready][i][1]])
     }
+    console.log("img",e.dragData.img_url)
 
     newDayMealState[day][meal] = (
       <div className="hovereffect">
         <img
           className="card-img"
-          src={e.dragData.img_url}
+          src={"\\"+e.dragData.img_url}
           alt={e.dragData.menu_name}
         />
         <div className="overlay">

@@ -15,7 +15,7 @@ export default class MyPackage extends Component {
   }
 
   deleteFromDb(curPack) {
-    const deletePackage = deleteFromDB.bind(this, "package", curPack._id);
+    const deletePackage = deleteFromDB.bind(this, "packages", curPack._id);
     deletePackage();
   }
 

@@ -13,7 +13,7 @@ class PackageHome extends Component {
             <div className="desc--text">
               Choose our pre-select 3/5/7 days packages. 
             </div>
-            <a href="package" style={{ color: "black" }} className="btn button--pack">
+            <a href="/package" style={{ color: "black" }} className="btn button--pack">
               choose your package
             </a>
           </div>
@@ -21,7 +21,7 @@ class PackageHome extends Component {
             <div className="desc--text">
               Create your own custom package with your satisfaction.
             </div>
-            <a href="package/manage" style={{ color: "black" }} className="btn button--pack">
+          <a href="/package/manage" style={{ color: "black" }} className="btn button--pack">
               create your own package
             </a>
           </div>

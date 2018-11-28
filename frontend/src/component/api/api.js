@@ -154,9 +154,7 @@ export function editFoodOrSnack(path, id, data) {
 export function deleteFromDB(path, id) {
   axios.delete("/api/"+ path +"/del/"+id)
   .then(res => console.log("delete", res))
-  .then(() => {
-    this.props.onMenuCardDeleted(id);
-  });
+  
 }
 
 export function deleteOrder(path, id) {
