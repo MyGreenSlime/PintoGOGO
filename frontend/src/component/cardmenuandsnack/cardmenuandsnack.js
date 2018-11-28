@@ -57,14 +57,14 @@ class cardMenuAndSnack extends Component {
       </div>
 
       <div className="row cardmenu__undermenu--minwidth">
-        <div className="col cardmenu__text">
+        <div className="col-9 cardmenu__text">
           <p>
             {this.props.name}<br />
             {this.props.calories} Kcal
             </p>
         </div>
 
-        <div className="col">
+        <div className="col-3">
           {isAuthenticated ? users : ""}
           {user.type ? admin : ""}
         </div>

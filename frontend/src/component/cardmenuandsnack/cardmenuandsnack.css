@@ -18,7 +18,7 @@
 
     .cardmenu__text{
         font-family: 'Quicksand', sans-serif;
-        font-size: 13px;
+        font-size: 15px;
         text-align: center;
     }
     
@@ -29,7 +29,7 @@
     
     .cardmenu__image--border{
         border-radius: 8px;
-         width: 70%
+         width: 75%
     }
     
     .cartmenu__cart{
@@ -46,7 +46,7 @@
         float: left;
     }
     
-    /* .cardmenu__undermenu--minwidth{
-        width: 280px;
-    } */
+    .cardmenu__undermenu--minwidth{
+        padding: 0 15%;
+    }
 }
