@@ -1,9 +1,8 @@
 language: node_js
 node_js:
   - "node"
-before _install:
-  - cd PintoGOGO/Backend
-install:
-  - npm install
 script: 
- - npm run test
+  - cd PintoGOGO
+  - cd Backend
+  - npm install
+  - npm run test
