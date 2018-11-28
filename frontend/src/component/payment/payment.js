@@ -6,14 +6,13 @@ export default class Payment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bill: null,
-      address: null,
-      distance: null,
-      deliveryFee: null,
+      bill: {},
+      address: "",
+      distance: "",
+      deliveryFee: "",
       distSelected: false,
-      totalCost: null,
-      isLoaded: false,
-      status: 0
+      totalCost: "",
+      isLoaded: false
     };
 
     this.ddDOM = React.createRef();
@@ -22,16 +21,17 @@ export default class Payment extends Component {
   }
 
   updateBill() {
-    const formData = new FormData()
-    formData.append('distance',this.state.distance)
-    formData.append('deliveryFee',this.state.deliveryFee)
-    formData.append('distSelected',this.state.distSelected)
-    formData.append('totalCost',this.state.totalCost)
+    var finalOrder = {
+      destination: window.txt,
+      delivery_fee: this.state.deliveryFee,
+      distance: this.state.distance,
+      total_cost: this.state.totalCost
+    }
     axios
-      .put("api/bills/update/current", formData)
+      .put("api/bills/update/current", finalOrder)
       .then(res => {
-        this.setState({status : res.data})
-        console.log("i'm in!!!!!!!");
+        console.log("final!! ", this.state.bill);
+        
     })
 }
 
@@ -69,8 +69,8 @@ export default class Payment extends Component {
       this.ddDOM.dropdown();
 
       $(".dd__addr-choice").click(function() {
-        var txt = $(this).text();
-        console.log("dd selected", txt);
+        window.txt = $(this).text();
+        console.log("dd selected", window.txt);
       });
       console.log(this.ddDOM);
     }
@@ -112,7 +112,7 @@ export default class Payment extends Component {
     console.log("here bill: ", bill);
     return (
       <React.Fragment>
-        <div className="container set-screen-payment">
+        <div className="set-screen-payment">
           <div className="box__content">
             <div className="card card-form card__payment">
               <div className="card-body">

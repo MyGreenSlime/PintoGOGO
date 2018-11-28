@@ -9,7 +9,7 @@ class Menudetail extends Component {
              name = "menu_name"
              type = "MENU"
              path_get_data = "food/"
-             path_to_edit = "editmenudetail"/>
+             path_to_edit = "edit/detail/menu"/>
         </React.Fragment>
       );
   }

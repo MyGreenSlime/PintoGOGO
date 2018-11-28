@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./mypackage.css";
-import NoPackage from "../package/nopackage";
 import LinkWithPrev from "../LinkWithPrev/linkwithprev.js";
 import { deleteFromDB, getPackage } from "../api/api";
 
@@ -31,7 +30,6 @@ export default class MyPackage extends Component {
   }
 
   createDivPackage(curPack) {
-    var path = "/" + curPack.type + "days/";
     let divpk = (
       <React.Fragment>
         <div className="set-each-mypackage row">
@@ -48,7 +46,7 @@ export default class MyPackage extends Component {
             </div>
             <div className="row">
               <div className="col-sm">
-                <LinkWithPrev to={path + curPack._id}>
+                <LinkWithPrev to={"/detail/package/" + curPack._id}>
                   <button className="btn view-mypks">View Package</button>
                 </LinkWithPrev>
               </div>
@@ -80,7 +78,7 @@ export default class MyPackage extends Component {
             <div className="set-each-mypackage">
               You have no package.
               <br />
-              <a href="/packagemanage">
+              <a href="/package/manage">
                 <img
                   src="img/package/add-pack.png"
                   className="addpack"
@@ -89,7 +87,7 @@ export default class MyPackage extends Component {
                 />
               </a>
               <br />
-              <a href="/packagemanage">
+              <a href="/package/manage">
                 <button className="btn view-mypks">
                   Try create your own package
                 </button>

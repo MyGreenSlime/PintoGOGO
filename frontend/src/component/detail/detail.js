@@ -4,7 +4,7 @@ import './detail.css'
 import { getFoodOrSnack } from '../api/api';
 import axios from 'axios'
 
-class SnackDetail extends Component {
+class Detail extends Component {
     constructor(props) {
         super(props);
         this.findIdFromUrl = this.findIdFromUrl.bind(this)
@@ -57,7 +57,7 @@ class SnackDetail extends Component {
             <div className="menudetail">
                 <div className="row menudetail__outside">
                     <div className="col-3 homebutton">
-                        <img src="/img/other/left-arrow.png" height="20px" />
+                        <img src="/img/other/left-arrow.png" height="20px" alt="back"/>
                         <a href="/">
                             BACK TO HOMEPAGE
                         </a>
@@ -71,7 +71,7 @@ class SnackDetail extends Component {
                 <div className="menudetail__detail--line" />
                 <div className="row menudetail__detail">
                     <div className="col-5">
-                        <img src={"\\" + this.state.menu.img_url} width="80%" className="menudetail__detail--foodimg" />
+                        <img src={"\\" + this.state.menu.img_url} width="80%" className="menudetail__detail--foodimg" alt={this.state.menu[this.props.name]}/>
                         {isAuthenticated ? users : ""}
                         {user.type ? admin : ""}
                     </div>
@@ -148,4 +148,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps)(SnackDetail);
+export default connect(mapStateToProps)(Detail);

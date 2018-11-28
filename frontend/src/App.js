@@ -28,6 +28,7 @@ import MenuDetail from "./component/detail/menudetail.js";
 import SnackDetail from "./component/detail/snackdetail.js";
 import EditMenuDetail from "./component/editdetail/editmenudetail/editmenudetail.js";
 import EditSnackDetail from "./component/editdetail/editsnackdetail/editsnackdetail.js";
+import Enjoy from "./component/enjoy/enjoy.js"
 import Payment2 from "./component/payment2/payment2.js"
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
@@ -35,9 +36,10 @@ import Package from "./component/package/package.js";
 import PackageManage from "./component/packagemanage/packagemanage.js";
 import Profile from "./component/profile/profile";
 import Footer from "./component/footer/footer.js";
-import Pack3days from "./component/package/3days/pack3DaysDetail.js";
-import Pack5days from "./component/package/5days/pack5DaysDetail.js";
-import Pack7days from "./component/package/7days/pack7DaysDetail.js";
+// import Pack3days from "./component/package/3days/pack3DaysDetail.js";
+// import Pack5days from "./component/package/5days/pack5DaysDetail.js";
+// import Pack7days from "./component/package/7days/pack7DaysDetail.js";
+import PackDetail from "./component/package/packDetail"
 import MyPackage from "./component/mypackage/mypackage.js";
 import EditProfile from "./component/editprofile/editprofile.js";
 //---------------pat------------------------------------
@@ -102,20 +104,23 @@ class App extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/package" component={Package} />
-                <Route path="/packagemanage" component={PackageManage} />
+                <Route path="/package/manage" component={PackageManage} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/editprofile" component={EditProfile} />
+                <Route path="/edit/profile" component={EditProfile} />
                 <Route path="/cart" component={Cart}/>
                 <Route path="/payment2" component={Payment2} />
-                <Route path="/menudetail" component={MenuDetail} />
-                <Route path="/3days" component={Pack3days} />
+                <Route path="/detail/menu" component={MenuDetail} />
+                {/* <Route path="/3days" component={Pack3days} />
                 <Route path="/5days" component={Pack5days} />
-                <Route path="/7days" component={Pack7days} />
+                <Route path="/7days" component={Pack7days} /> */}
+                <Route path="/detail/package" component={PackDetail} />
                 <Route path="/mypackage" component={MyPackage} />
-                <Route path="/snackdetail" component={SnackDetail} />
-                <Route path="/editmenudetail" component={EditMenuDetail} />
-                <Route path="/editsnackdetail" component={EditSnackDetail} />
+                <Route path="/detail/snack" component={SnackDetail} />
+                <Route path="/edit/detail/menu" component={EditMenuDetail} />
+                <Route path="/edit/detail/snack" component={EditSnackDetail} />
+                <Route path = "/enjoy" component={Enjoy}/>
                 <Route paht="/bill" component={Payment}/>
+                
                 <Route path="*" component={UnderConstruct}/>
               </Switch>
             <Footer />

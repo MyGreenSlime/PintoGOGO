@@ -24,14 +24,15 @@ export default class Savepack extends Component {
       <React.Fragment>
         <div className="set-each-package row">
           <div className="col-sm-4">
-            {/* <img className="img-pack" src={curPack.day_meal[0].meal_1.img_url} /> */}
+            <img className="img-pack" src={curPack.day_meal[0].meal_1.img_url} />
           </div>
           <div className="col-sm dis-grid">
             <div>
               <p className="name-each-pks">{curPack.name_package}</p>
               <p>{curPack.description}</p>
             </div>
-            <LinkWithPrev to={"/" + this.props.path + "/" + curPack._id}>
+            {/* <LinkWithPrev to={"/" + this.props.path + "/" + curPack._id}> */}
+            <LinkWithPrev to={"/detail/package/" + curPack._id}>
               <button className="btn view-pks">View Package</button>
             </LinkWithPrev>
           </div>

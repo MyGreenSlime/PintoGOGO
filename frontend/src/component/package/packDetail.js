@@ -16,9 +16,9 @@ export default class Package3DaysDetail extends Component {
   }
 
   componentDidMount() {
-    console.log("arrive");
     var url = window.location.href;
     var res = url.split("/");
+    console.log(res[res.length - 1])
     const get_package = getPackage.bind(
       this,
       "packages",
@@ -63,10 +63,12 @@ export default class Package3DaysDetail extends Component {
 
     let list_day = [];
 
-    if (isLoaded) {
+    if (!!!isLoaded) {
+      return <div className="loader" />;
+    } else {
       let day = 0;
-      for (let i = 0; i < this.props.num_day; i += 2) {
-        if (this.props.num_day % 2 == 1 && i == this.props.num_day - 1) {
+      for (let i = 0; i < packages[0].type; i += 2) {
+        if (packages[0].type % 2 == 1 && i == packages[0].type - 1) {
           list_day[i] = (
             <div className="row">
               <div className="col-3-sm col-set" />
@@ -104,10 +106,6 @@ export default class Package3DaysDetail extends Component {
       }
     }
 
-    if (!!!isLoaded) {
-      return <div className="loader" />;
-    }
-
     if (!packages[0]) {
       console.log("in no pack");
       return <NoPackage />;
@@ -119,7 +117,7 @@ export default class Package3DaysDetail extends Component {
           <div className="set-frame-each-pks">
             <div className="backtopks row">
               <img src="/img/other/left-arrow.png" height="25px" />
-              <a href={this.props.location.prevLocation}>BACK</a>
+              <a href={this.props.location.state.prevLocation}>BACK</a>
             </div>
 
             <div className="row">

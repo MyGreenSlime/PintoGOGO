@@ -8,7 +8,7 @@ class Snack extends Component {
         <MenuAndSnack
           path="snack"
           name = "snack_name"
-          path_detail = "/snackdetail/" />
+          path_detail= "/detail/snack/" />
       </React.Fragment>
     );
   }
