@@ -103,20 +103,20 @@ class App extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/package" component={Package} />
-                <Route path="/packagemanage" component={PackageManage} />
+                <Route path="/package/manage" component={PackageManage} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/editprofile" component={EditProfile} />
+                <Route path="/edit/profile" component={EditProfile} />
                 <Route path="/cart" component={Cart}/>
                 <Route path="/payment2" component={Payment2} />
-                <Route path="/menudetail" component={MenuDetail} />
+                <Route path="/detail/menu" component={MenuDetail} />
                 {/* <Route path="/3days" component={Pack3days} />
                 <Route path="/5days" component={Pack5days} />
                 <Route path="/7days" component={Pack7days} /> */}
                 <Route path="/packagedetail" component={PackDetail} />
                 <Route path="/mypackage" component={MyPackage} />
-                <Route path="/snackdetail" component={SnackDetail} />
-                <Route path="/editmenudetail" component={EditMenuDetail} />
-                <Route path="/editsnackdetail" component={EditSnackDetail} />
+                <Route path="/detail/snack" component={SnackDetail} />
+                <Route path="/edit/detail/menu" component={EditMenuDetail} />
+                <Route path="/edit/detail/snack" component={EditSnackDetail} />
                 <Route paht="/bill" component={Payment}/>
                 <Route path="*" component={UnderConstruct}/>
               </Switch>

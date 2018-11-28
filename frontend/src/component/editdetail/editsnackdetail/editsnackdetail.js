@@ -8,7 +8,7 @@ class Addmenu extends Component {
         <EditDetail
           name="snack_name"
           type="snack"
-          redirect="/snackdetail/"/> 
+          redirect="/detail/snack/"/> 
       </React.Fragment>
     );
   }

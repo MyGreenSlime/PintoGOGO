@@ -78,7 +78,7 @@ export default class MyPackage extends Component {
             <div className="set-each-mypackage">
               You have no package.
               <br />
-              <a href="/packagemanage">
+              <a href="/package/manage">
                 <img
                   src="img/package/add-pack.png"
                   className="addpack"
@@ -87,7 +87,7 @@ export default class MyPackage extends Component {
                 />
               </a>
               <br />
-              <a href="/packagemanage">
+              <a href="/package/manage">
                 <button className="btn view-mypks">
                   Try create your own package
                 </button>
