@@ -5,4 +5,5 @@ before _install:
   - cd PintoGOGO/Backend
 install:
   - npm install
-  
+script: 
+ - npm run test
