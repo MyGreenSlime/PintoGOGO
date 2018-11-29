@@ -37,6 +37,7 @@ export default class MyPackage extends Component {
             <img
               className="img-mypack"
               src={curPack.day_meal[0].meal_1.img_url}
+              alt={curPack.day_meal[0].meal_1.menu_name}
             />
           </div>
           <div className="col-sm">
