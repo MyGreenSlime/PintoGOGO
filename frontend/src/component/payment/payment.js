@@ -106,7 +106,7 @@ export default class Payment extends Component {
     const { bill, address, isLoaded } = this.state;
 
     if (!!!isLoaded) {
-      return <React.Fragment />;
+      return <div className="loader" />;
     }
     console.log("here addr: ", address);
     console.log("here bill: ", bill);
