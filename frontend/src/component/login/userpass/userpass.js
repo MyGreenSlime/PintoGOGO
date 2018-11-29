@@ -91,8 +91,10 @@ class Userpass extends Component {
             </div>
             {/*BUTTON*/}
             <div>
-              <button type="submit" className="submit__login--button">
+              <button type="submit" className="button-login">
+              <span>
                 LOGIN
+                </span>
               </button>
             </div>
         </form>
