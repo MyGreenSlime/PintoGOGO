@@ -116,46 +116,46 @@ class Cart extends Component {
           <div className="linkbutton">
             <div className="row cart__menubar">
               <div className="col-1" />
-              <div className="col-1">
+              <div className="col-md-1 col-2">
                 <a href="/">
                   <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
                 </a>
                 <p>PLAN</p>
               </div>
-              <div className="col-1">
+              <div className="col-md-1 d-none d-sm-block">
                 <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
               </div>
 
-              <div className="col-1">
+              <div className="col-md-1 col-2">
                 <img src="/img/cart/cart.png" alt="cart icon" width="50%" />
                 <p>CART</p>
               </div>
-              <div className="col-1">
+              <div className="col-md-1 d-none d-sm-block">
                 <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
               </div>
-              <div className="col-1">
+              <div className="col-md-1 col-2">
                 <img
                   src="/img/cart/payment.png"
                   alt="payment icon"
                   width="50%"
                 />
-                <p>PAYMENT</p>
+                <p>BILL</p>
               </div>
-              <div className="col-1">
+              <div className="col-md-1 d-none d-sm-block">
                 <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
               </div>
-              <div className="col-1">
+              <div className="col-md-1 col-2">
                 <img
                   src="/img/cart/delivery.png"
                   alt="delivery icon"
                   width="50%"
                 />
-                <p>DELIVERY</p>
+                <p>PAY</p>
               </div>
-              <div className="col-1">
+              <div className="col-md-1 d-none d-sm-block">
                 <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
               </div>
-              <div className="col-1">
+              <div className="col-md-1 col-2">
                 <img src="/img/cart/enjoy.png" alt="enjoy icon" width="50%" />
                 <p>ENJOY</p>
               </div>
@@ -169,7 +169,7 @@ class Cart extends Component {
             <div className="subhead">
               <div className="row">
                 <div className="col-md-6" />
-                <div className="col-md-3 col-6 amountzone">AMOUNT</div>
+                <div className="col-md-3 col-6">AMOUNT</div>
                 <div className="col-md-3 col-6">PRICE</div>
               </div>
             </div>

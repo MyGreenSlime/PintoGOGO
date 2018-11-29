@@ -16,7 +16,7 @@
 }
 
 .cart__menubar{
-    padding-top: 2%;
+    padding-top: 8%;
     margin-right: 0;
 }
 
@@ -51,18 +51,6 @@
 
 .subhead{
     padding-top: 3%;
-}
-
-.amountzone{
-    /* min-width: 160px; */
-    /* margin-left: 20px; */
-    /* text-align: right; */
-}
-
-.pricezone{
-    /* text-align: right; */
-    /* margin-left: 10%;  */
-    /* margin-right: 5%; */
 }
 
 .total{
