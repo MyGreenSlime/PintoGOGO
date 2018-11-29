@@ -13,9 +13,7 @@ class Cart extends Component {
       order: null,
       isLoaded: false
     };
-    this.createCardCartFood = this.createCardCartFood.bind(this);
-    this.createCardCartSnack = this.createCardCartSnack.bind(this);
-    this.createCardPackage = this.createCardPackage.bind(this);
+    this.createCardCart = this.createCardCart.bind(this)
     this.confirmButtonClicked = this.confirmButtonClicked.bind(this);
   }
 
@@ -37,65 +35,24 @@ class Cart extends Component {
     getOrder();
   }
 
-  createCardCartFood() {
-    let card_food;
-    if (!this.state.order.food_order) {
-      console.log("noorder")
-      card_food = <div />;
-    } else {
-      card_food = this.state.order.food_order.map((ord, index) => (
+  createCardCart(type){
+    let card_cart;
+    if(!this.state.order[type+"_order"]){
+      card_cart = <div/>
+    }else{
+      card_cart = this.state.order[type + "_order"].map((ord, index) => (
         <CardCart
           handlerFromParant={this.handleData}
-          picture={ord.food_id.img_url}
-          name={ord.food_name}
+          picture={ () => (type === 'package')? "":ord[type+"_id"].img_url}
+          name={ord[type+"_name"]}
           price={ord.price}
           amount={ord.amount}
-          id={ord.food_id._id}
-          type_order="food"
+          id={ord[type+"_id"]._id}
+          type_order={type}
         />
       ));
     }
-    return card_food;
-  }
-
-  createCardCartSnack() {
-    let card_snack;
-    if (!this.state.order.snack_order) {
-      card_snack = <div />;
-    } else {
-      card_snack = this.state.order.snack_order.map((ord, index) => (
-        <CardCart
-          handlerFromParant={this.handleData}
-          picture={ord.snack_id.img_url}
-          name={ord.snack_name}
-          price={ord.price}
-          amount={ord.amount}
-          id={ord.snack_id._id}
-          type_order="snack"
-        />
-      ));
-    }
-    return card_snack;
-  }
-
-  createCardPackage() {
-    let card_package;
-    if (!this.state.order.package_order) {
-      card_package = <div />;
-    } else {
-      card_package = this.state.order.package_order.map((ord, index) => (
-        <CardCart
-          handlerFromParant={this.handleData}
-          picture={""}
-          name={ord.package_name}
-          price={ord.price}
-          amount={ord.amount}
-          id={ord.package_id._id}
-          type_order="package"
-        />
-      ));
-    }
-    return card_package;
+    return card_cart;
   }
 
   checkOrder(){
@@ -190,10 +147,9 @@ class Cart extends Component {
               </div>
             </div>
             <div>
-
-              {this.createCardCartFood()}
-              {this.createCardCartSnack()}
-              {this.createCardPackage()}
+              {this.createCardCart("food")}
+              {this.createCardCart("snack")}
+              {this.createCardCart("package")}
             </div>
             <hr />
             <div>
