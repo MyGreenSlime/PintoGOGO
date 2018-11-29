@@ -38,10 +38,12 @@ class CardCart extends Component {
 
   decrement() {
     const decrease = decreaseAmount.bind(this, this.props.type_order, this.props.id);
-    decrease();
+    
     if (this.state.inputField > 1) {
       this.state.inputField -= 1
+      decrease();
     }
+    
   }
 
   deleteOrder(){
