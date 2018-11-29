@@ -32,7 +32,7 @@ export default class Nutrition extends Component {
   }
 
   render() {
-    const { packages, daymeal, isLoaded } = this.state;
+    const { packages, isLoaded } = this.state;
     if (!!!isLoaded) {
       return <React.Fragment />;
     }

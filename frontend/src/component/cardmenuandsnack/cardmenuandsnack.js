@@ -52,19 +52,19 @@ class cardMenuAndSnack extends Component {
       {/* block__element--modify */}
       <div className="cardmenu__image">
         <Link to={this.props.path_detail + this.props.id}>
-          <img src={this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border"  />
+          <img src={"\\"+this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border"  />
         </Link>
       </div>
 
       <div className="row cardmenu__undermenu--minwidth">
-        <div className="col cardmenu__text">
+        <div className="col-9 cardmenu__text">
           <p>
             {this.props.name}<br />
             {this.props.calories} Kcal
             </p>
         </div>
 
-        <div className="col">
+        <div className="col-3">
           {isAuthenticated ? users : ""}
           {user.type ? admin : ""}
         </div>

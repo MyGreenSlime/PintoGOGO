@@ -48,7 +48,7 @@ class Profile extends Component {
 
   render() {
     if (!!!this.state.isLoaded) {
-      return <React.Fragment />;
+      return <div className="loader" />;
     }
     {
       console.log("....", this.state.currentUser);

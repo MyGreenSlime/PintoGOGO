@@ -31,25 +31,25 @@ export default class Recommend extends Component {
         <div className="row">
           <div className="col-lg-3 col-md-6 col-6 nopadding">
             <Link to={"/detail/menu/" + menus[1]._id}>
-              <img className="img-rec" src={menus[1].img_url} />
+              <img className="img-rec" src={menus[1].img_url} alt={menus[1].menu_name}/>
             </Link>
             <p>{menus[1].menu_name}</p>
           </div>
           <div className="col-lg-3 col-md-6 col-6 nopadding">
-            <Link to={"/detail/menu/" + menus[1]._id}>
-              <img className="img-rec" src={menus[3].img_url} />
+            <Link to={"/detail/menu/" + menus[3]._id}>
+              <img className="img-rec" src={menus[3].img_url} alt={menus[3].menu_name}/>
             </Link>
             <p>{menus[3].menu_name}</p>
           </div>
           <div className="col-lg-3 col-md-6 col-6 nopadding">
-            <Link to={"/detail/menu/" + menus[1]._id}>
-              <img className="img-rec" src={menus[2].img_url} />
+            <Link to={"/detail/menu/" + menus[2]._id}>
+            <img className="img-rec" src={menus[2].img_url} alt={menus[2].menu_name}/>
             </Link>
             <p>{menus[2].menu_name}</p>
           </div>
           <div className="col-lg-3 col-md-6 col-6 nopadding">
-            <Link to={"/detail/menu/" + menus[1]._id}>
-              <img className="img-rec" src={menus[0].img_url} />
+            <Link to={"/detail/menu/" + menus[0]._id}>
+              <img className="img-rec" src={menus[0].img_url} alt={menus[0].menu_name}/>
             </Link>
             <p>{menus[0].menu_name}</p>
           </div>
