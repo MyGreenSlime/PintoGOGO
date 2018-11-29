@@ -153,7 +153,7 @@ exports.editProfile = (req, res) => {
     img_url: req.body.img_url
   };
   if (req.file) {
-    newUpdate.img_url = req.file.path;
+    newUpdate.img_url = "\\"+req.file.path;
   }
   User.updateOne(
     { _id: req.user.id },

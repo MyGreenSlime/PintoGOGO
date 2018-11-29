@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./editdetail.css";
 import { getFoodOrSnack, editFoodOrSnack } from "../api/api";
-
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 class EditMenuDetail extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +31,9 @@ class EditMenuDetail extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated && !this.props.auth.user.type) {
+      return this.props.history.push("/");
+    }
     console.log("props", this.props) 
     var url = window.location.href;
     var res = url.split("/");
@@ -289,4 +294,17 @@ class EditMenuDetail extends Component {
   }
 }
 
-export default EditMenuDetail;
+EditMenuDetail.propTypes = {
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+)(withRouter(EditMenuDetail));
+

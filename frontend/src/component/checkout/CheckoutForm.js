@@ -6,15 +6,20 @@ import {CardElement,
     injectStripe,} from 'react-stripe-elements';
 import axios from 'axios'
 import "../checkout/checkout.css"
+import "../checkout/enjoy.css"
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
         isLoaded: false,
         currentUser: null,
-        bill: null
+        bill: null,
+        status : false,
+        waiting : false
     }
-    this.state = {complete: false};
     this.submit = this.submit.bind(this);
   }
 
@@ -25,18 +30,25 @@ class CheckoutForm extends Component {
     var data = {
         token_id : token.id
     }
+    this.setState({
+        waiting : true
+    })
     axios.post("/api/payment/charge", data)
         .then((res) => {
             console.log(res)
             if (res.data.ok == 1) {
                 this.setState({
-                    status: true
+                    status: true,
+                    waiting : false
                 });
             }
         })
     }
 
     componentDidMount() {
+        if (!this.props.auth.isAuthenticated) {
+            this.props.history.push("/");
+          }
         axios.get("api/bills/current")
         .then(res => {
             this.setState({
@@ -44,12 +56,18 @@ class CheckoutForm extends Component {
             });
         })
         .then(() => {
+            if(this.state.bill === null) {
+                this.props.history.push("/cart");
+            }
+            else if(this.state.bill.destination === null){
+                this.props.history.push("/bill")
+            }
             const get_user = getProfile.bind(this, "currentUser", "isLoaded");
             get_user();
         })
         .then(() => {
-            console.log("whole bill: ", this.state.bill);
-            console.log("order: ", this.state.bill.order);
+            //console.log("whole bill: ", this.state.bill);
+            //console.log("order: ", this.state.bill.order);
         })
     }
 
@@ -60,7 +78,34 @@ class CheckoutForm extends Component {
       {
         console.log("....", this.state.currentUser);
       }
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
+    if (this.state.status) return (
+        <React.Fragment>
+            <div className="enjoy__container">
+                <img src="img/login/icon.png" width="20%"/>
+                <div>Enjoy your food...</div>
+            </div>
+            <div>
+                Your order id: {this.state.bill._id}
+            </div>
+            <br/>
+            <a href="/">
+                <button
+                className="btn button--confirm"
+                onClick={this.confirmButtonClicked}>
+                Back To Home
+                </button>
+            </a>
+        </React.Fragment>
+
+    );
+    else if (this.state.waiting) {
+        return (
+            <div className="enjoy__container">
+                <img src="img/login/icon.png" width="20%"/>
+                <div>Please waiting..</div>
+            </div>
+        );
+      }
     const { currentUser } = this.state;
     return (
         
@@ -82,9 +127,6 @@ class CheckoutForm extends Component {
                     <div className="checkout">
                         {/* <p>Would you like to complete the purchase?</p> */}
                         <CardElement />
-                        <div className="btn button--confirm">
-                            <div onClick={this.submit}>Pay</div>
-                        </div>
                     </div>
                 </div>
                 
@@ -119,17 +161,25 @@ class CheckoutForm extends Component {
                 
             </div>
             <br/>
-            <a href="/enjoy">
-                <button
-                className="btn button--confirm"
-                onClick={this.confirmButtonClicked}>
-                CONFIRM PAYMENT
-                </button>
-            </a>
+            <div className="btn button--confirm">
+                 <div onClick={this.submit}>Pay</div>
+            </div>
         </div>
         
       
     );
   }
 }
-export default injectStripe(CheckoutForm);
+CheckoutForm.propTypes = {
+    auth: propTypes.object.isRequired,
+    errors: propTypes.object.isRequired
+  };
+  
+  const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+  });
+  
+  export default connect(
+    mapStateToProps
+  )(withRouter(injectStripe(CheckoutForm)));

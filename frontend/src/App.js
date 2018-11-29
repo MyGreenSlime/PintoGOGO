@@ -53,7 +53,6 @@ const PaymentMethod = () => {
   return (
     <StripeProvider apiKey="pk_test_os3uf16y5tFa5WVqnqNPNaJk">
       <div className="example">
-        <h1>React Stripe Elements Example</h1>
         <Elements>
           <CheckoutForm />
         </Elements>

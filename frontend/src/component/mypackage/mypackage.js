@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "./mypackage.css";
 import LinkWithPrev from "../LinkWithPrev/linkwithprev.js";
 import { deleteFromDB, getPackage } from "../api/api";
-
-export default class MyPackage extends Component {
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import { connect } from "react-redux";
+class MyPackage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +23,10 @@ export default class MyPackage extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+
     const getAllPackages = getPackage.bind(
       this,
       "packages",
@@ -115,3 +122,16 @@ export default class MyPackage extends Component {
     );
   }
 }
+MyPackage.propTypes = {
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps
+)(withRouter(MyPackage));

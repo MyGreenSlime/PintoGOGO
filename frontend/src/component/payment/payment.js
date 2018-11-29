@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import "../payment/style-payment.css";
 import axios from "axios";
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import { connect } from "react-redux";
 
-export default class Payment extends Component {
+class Payment extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,6 +40,9 @@ export default class Payment extends Component {
 }
 
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
     axios
       .get("/api/bills/current")
       .then(res => {
@@ -44,8 +51,11 @@ export default class Payment extends Component {
         });
       })
       .then(() => {
-        console.log("whole bill: ", this.state.bill);
-        console.log("order: ", this.state.bill.order);
+        if(this.state.bill === null || this.state.bill.order === null){
+          this.props.history.push("/cart");
+        }
+        //console.log("whole bill: ", this.state.bill);
+        //console.log("order: ", this.state.bill.order);
       })
       .then(() => {
         axios
@@ -251,3 +261,17 @@ export default class Payment extends Component {
     );
   }
 }
+
+Payment.propTypes = {
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps
+)(withRouter(Payment));
