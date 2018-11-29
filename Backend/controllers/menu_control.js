@@ -44,7 +44,7 @@ exports.addFood = (req, res) => {
   menu.description = req.body.description;
   menu.cholesterol = req.body.cholesterol;
   menu.sodium = req.body.sodium;
-  menu.img_url = req.file.path;
+  menu.img_url = "\\"+req.file.path;
 
   menu.save(function(err, savedMenu) {
     if (err) {
@@ -75,7 +75,7 @@ exports.editFood = (req, res) => {
     img_url: req.body.img_url
   };
   if (req.file) {
-    menuEdit.img_url = req.file.path;
+    menuEdit.img_url = "\\"+req.file.path;
   }
   Menu.updateOne(
     { _id: req.params.id },
@@ -232,7 +232,7 @@ exports.addSnack = (req, res) => {
     (snack.description = req.body.description),
     (snack.cholesterol = req.body.cholesterol),
     (snack.sodium = req.body.sodium),
-    (snack.img_url = req.file.path);
+    (snack.img_url = "\\"+req.file.path);
 
   snack.save(function(err, savedSnack) {
     if (err) {
@@ -263,7 +263,7 @@ exports.editSnack = (req, res) => {
     img_url: req.body.img_url
   };
   if (req.file) {
-    snackEdit.img_url = req.file.path;
+    snackEdit.img_url = "\\"+req.file.path;
   }
   Snack.updateOne(
     { _id: req.params.id },
