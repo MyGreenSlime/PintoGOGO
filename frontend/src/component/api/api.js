@@ -53,6 +53,7 @@ export function getCurrentOrder(order, isLoaded) {
           [isLoaded]: true
         });
       })
+      .then(() => console.log("order", this.state[order]))
 }
 
 /** POST **/
@@ -114,7 +115,6 @@ export function editFoodOrSnack(path, id, data) {
 /** DELETE **/
 export function deleteFromDB(path, id) {
   axios.delete("/api/"+ path +"/del/"+id)
-  
 }
 
 export function deleteOrder(path, id) {

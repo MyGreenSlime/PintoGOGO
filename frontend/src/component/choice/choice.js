@@ -44,7 +44,7 @@ export default class Choice extends Component {
   }
 
   setActiveButton(isButton) {
-    let color = "btn button-choice";
+    let color = "btn button-choice on-click-choice";
     color += isButton ? " btn--active" : "";
     return color;
   }
@@ -77,13 +77,15 @@ export default class Choice extends Component {
         <div className="choice-box">
           <div className="row">
             <div className="col-md-4 col-6">
-              <img className="img-choice" src="../img/choice/choice_1.png" />
-              <button
-                className={this.setActiveButton(this.state.isMenu)}
-                onClick={this.changeRenderToMenu}
-              >
-                MENU
-              </button>
+              <img className="img-choice"  src="../img/choice/choice_1.png" />
+              <div >
+                <button
+                  className={this.setActiveButton(this.state.isMenu)}
+                  onClick={this.changeRenderToMenu}
+                >
+                  MENU
+                </button>
+              </div>
             </div>
             <div className="col-md-4 col-6">
               <img className="img-choice" src="../img/choice/choice_2.png" />

@@ -4,13 +4,14 @@
   background-size: cover;
   background-repeat: no-repeat;
   padding: 1% 0 5% 0 ;
-  min-height: 40vw;
+  min-height: 70vh;
   background-attachment: fixed;
   background-position :  top left; 
 }
 
 .addpack{
   width: 15%;
+  min-width: 80px;
   margin-top: 5%;
 }
 
@@ -56,6 +57,7 @@
   /* background-color: #FAE5D3; */
   /* width: 80%; */
   padding: 8px;
+  
 }
 
 .img-mypack
@@ -71,7 +73,15 @@
   font-size: 16px;
   font-weight: bold;
   background-color: #e4dac2;
-  width: auto;
+  /* width: auto; */
   margin: 5px;
-  
+}
+
+.create-mypks
+{
+  color: #7b7b7b;
+  font-size: 1.35vw;
+  font-weight: bold;
+  background-color: #e4dac2;
+  margin: 5px;
 }
