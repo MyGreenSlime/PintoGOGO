@@ -101,7 +101,7 @@ class Add extends Component {
       <React.Fragment>
         <div className="setbg__addmenu">
           <div className="form-group" className="addmenu__box">
-            <h3>Status : {status}</h3>
+            <h3>{"ADD " + this.props.path.toUpperCase()}</h3>
             <form onSubmit={this.handleSubmit.bind(this)}>
               <div className="form-group">
                 <input
