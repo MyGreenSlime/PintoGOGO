@@ -149,6 +149,7 @@ class EditMenuDetail extends Component {
               <div className="col-5">
                 <img
                   src={this.state.imagePreviewUrl}
+                  alt={this.state.name}
                   className="editmenudetail__imgpreview"
                 />
                 <br />
