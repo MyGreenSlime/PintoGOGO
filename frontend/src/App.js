@@ -29,7 +29,6 @@ import SnackDetail from "./component/detail/snackdetail.js";
 import EditMenuDetail from "./component/editdetail/editmenudetail/editmenudetail.js";
 import EditSnackDetail from "./component/editdetail/editsnackdetail/editsnackdetail.js";
 import Enjoy from "./component/enjoy/enjoy.js";
-import Payment2 from "./component/payment2/payment2.js";
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
 import Package from "./component/package/package.js";
@@ -53,7 +52,6 @@ const PaymentMethod = () => {
   return (
     <StripeProvider apiKey="pk_test_os3uf16y5tFa5WVqnqNPNaJk">
       <div className="example">
-        <h1>React Stripe Elements Example</h1>
         <Elements>
           <CheckoutForm />
         </Elements>
@@ -108,7 +106,6 @@ class App extends Component {
               <Route path="/profile" component={Profile} />
               <Route path="/edit/profile" component={EditProfile} />
               <Route path="/cart" component={Cart} />
-              <Route path="/payment2" component={Payment2} />
               <Route path="/detail/menu" component={MenuDetail} />
               {/* <Route path="/3days" component={Pack3days} />
                 <Route path="/5days" component={Pack5days} />
