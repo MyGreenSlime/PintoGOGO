@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../payment/style-payment.css";
+import "../cart/cart.css";
 import axios from "axios";
 
 export default class Payment extends Component {
@@ -113,61 +114,112 @@ export default class Payment extends Component {
     return (
       <React.Fragment>
         <div className="set-screen-payment">
+          <div className="row cart__menubar">
+            <div className="col-1" />
+            <div className="col-md-1 col-2">
+              <a href="/">
+                <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
+              </a>
+              <p>PLAN</p>
+            </div>
+            <div className="col-md-1 d-none d-sm-block">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+
+            <div className="col-md-1 col-2">
+              <a href="/cart">
+                <img src="/img/cart/cart.png" alt="cart icon" width="50%" />
+              </a>
+              <p>CART</p>
+            </div>
+            <div className="col-md-1 d-none d-sm-block">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+            <div className="col-md-1 col-2">
+              <img
+                src="/img/cart/payment.png"
+                alt="payment icon"
+                width="50%"
+              />
+              <p>BILL</p>
+            </div>
+            <div className="col-md-1 d-none d-sm-block">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+            <div className="col-md-1 col-2">
+              <img
+                src="/img/cart/delivery.png"
+                alt="delivery icon"
+                width="50%"
+              />
+              <p>PAY</p>
+            </div>
+            <div className="col-md-1 d-none d-sm-block">
+              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            </div>
+            <div className="col-md-1 col-2">
+              <img src="/img/cart/enjoy.png" alt="enjoy icon" width="50%" />
+              <p>ENJOY</p>
+            </div>
+          </div>
+          
           <div className="box__content">
             <div className="card card-form card__payment">
               <div className="card-body">
-                <h2 className="txt__title">Order Summary</h2>
+                <h5 className="txt__title">Order Summary</h5>
+                <hr/>
                 <div className="row">
-                  <div className="col">
-                    <p />
-                  </div>
-                  <div className="col col--middle">
+                  <div className="col-md-6" />
+                  <div className="col-md-3 col-6 box__content__head--center">
                     <p>Amount</p>
                   </div>
-                  <div className="col col--right">
+                  <div className="col-md-3 col-6 box__content__head--center">
                     <p>Price (Baht)</p>
                   </div>
                 </div>
-                <div className="row">
+                <hr/>
+                {/* <div className="row"> */}
                   {bill.order.food_order.map(it => (
+
                     <div className="row" style={{ width: "100%" }}>
-                      <div className="col">
+                      <div className="col-md-6 col-12">
                         <p>{it.food_name}</p>
                       </div>
-                      <div className="col col--middle">
+                      <div className="col-md-3 col-6 box__content--center">
                         <p>{it.amount}</p>
                       </div>
-                      <div className="col col--right">
+                      <div className="col-md-3 col-6 box__content--center">
                         <p>{it.price}</p>
                       </div>
                     </div>
                   ))}
                   {bill.order.snack_order.map(it => (
                     <div className="row" style={{ width: "100%" }}>
-                      <div className="col">
+                      <div className="col-md-6 col-12">
                         <p>{it.snack_name}</p>
                       </div>
-                      <div className="col col--middle">
+                      <div className="col-md-3 col-6 box__content--center">
                         <p>{it.amount}</p>
                       </div>
-                      <div className="col col--right">
+                      <div className="col-md-3 col-6 box__content--center">
                         <p>{it.price}</p>
                       </div>
                     </div>
                   ))}
                   {bill.order.package_order.map(it => (
                     <div className="row" style={{ width: "100%" }}>
-                      <div className="col">
+                      <div className="col-md-6 col-12">
                         <p>{it.package_name}</p>
                       </div>
-                      <div className="col col--middle">
+                      <div className="col-md-3 col-6 box__content--center">
                         <p>{it.amount}</p>
                       </div>
-                      <div className="col col--right">
+                      <div className="col-md-3 col-6 box__content--center">
                         <p>{it.price}</p>
                       </div>
                     </div>
                   ))}
+                  <hr/>
                 </div>
                 <br />
                 <p>Choose Address</p>
@@ -193,48 +245,49 @@ export default class Payment extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col">
+                  <div className="col-md-6 col-6">
                     <p>Food cost</p>
                   </div>
-                  <div className="col col--middle">
+                  <div className="col-md-6 col-6 box__content--center">
                     <p>{bill.order_cost}</p>
                   </div>
-                  <div className="col col--right">
+                  {/* <div className="col-md-3 col-4 box__content--center">
                     <p>Baht</p>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row">
-                  <div className="col">
-                    <p>Distance</p>
+                  <div className="col-md-6 col-6">
+                    <p>Distance (kilometer)</p>
                   </div>
-                  <div className="col col--middle">
+                  <div className="col-md-6 col-6 box__content--center">
                     <p>{this.state.distance}</p>
                   </div>
-                  <div className="col col--right">
-                    <p>Kilometer</p>
-                  </div>
+                  {/* <div className="col-md-3 col-4 box__content--center">
+                    <p>Km.</p>
+                  </div> */}
                 </div>
                 <div className="row">
-                  <div className="col">
+                  <div className="col-md-6 col-6">
                     <p>Delivery Fee</p>
                   </div>
-                  <div className="col col--middle">
+                  <div className="col-md-6 col-6 box__content--center">
                     <p>{this.state.deliveryFee}</p>
                   </div>
-                  <div className="col col--right">
+                  {/* <div className="col-md-3 col-4 box__content--center">
                     <p>Baht</p>
-                  </div>
+                  </div> */}
                 </div>
+                <hr/>
                 <div className="row txt__total">
-                  <div className="col">
+                  <div className="col-md-6 col-6">
                     <p>Order Total</p>
                   </div>
-                  <div className="col col--middle">
+                  <div className="col-md-6 col-6 box__content--center">
                     <p>{this.state.totalCost}</p>
                   </div>
-                  <div className="col col--right">
+                  {/* <div className="col-md-3 col-4 box__content--center">
                     <p>Baht</p>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row box__confirm" onClick={this.updateBill}>
                   <a href="/payment">
@@ -243,7 +296,7 @@ export default class Payment extends Component {
                     </button>
                   </a>
                 </div>
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </div>

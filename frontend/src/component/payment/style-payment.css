@@ -8,24 +8,25 @@
   /* min-height: 40vw; */
   background-attachment: fixed;
   background-position :  top left; 
+  margin-top: 5%;
 }
 
 .box__content {
-  width: 80%;
+  width: 75%;
   margin: auto;
+  font-family: "Quicksand", sans-serif;
 }
 
 .card__payment {
   text-align: left;
   padding-top: 1rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  margin: auto;
-  font-size: 18px;
-  font-family: "Quicksand", sans-serif;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #7b7b7b;
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-top: 5%;
+  border-radius: 12px;
+  font-size: 15px;
+  /* text-transform: uppercase; */
+  color: black;
   background-color: #f3ece7;
 }
 
@@ -35,7 +36,7 @@
 
 .box__addr {
   margin-bottom: 30px;
-  color: #7b7b7b;
+  color:black;
   background-color: #e4dac2;
 }
 
@@ -45,22 +46,33 @@
   background-color: #e4dac2;
   font-family: "Quicksand", sans-serif;
   font-weight: bold;
+  margin-bottom: 2%;
 }
 
-.col--middle {
+/* .col--middle {
   text-align: center;
   padding-left: 200px;
 }
 
 .col--right {
   text-align: right;
-}
+} */
 
 .txt__total {
   margin-top: 20px;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .box__confirm {
   justify-content: center;
+}
+
+.box__content__head--center{
+  text-align: center;
+  font-weight: bold;
+}
+
+.box__content--center{
+  text-align: center;
+  padding-left: 5%;
 }
