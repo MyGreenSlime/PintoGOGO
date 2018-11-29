@@ -118,15 +118,10 @@ class PackagemanageEachdays extends Component {
     console.log("ready", all_ready);
     if (all_ready) {
       return (
-        <button
-          className="btn btn-shownutrition"
-          onClick={() => this.setState({ click_show: true })}
-        >
-          CLICK TO SHOW NUTRITION
-        </button>
+        <button className="btn btn-shownutrition" onClick={() => this.setState({ click_show: true })}> CLICK TO SHOW NUTRITION </button>
       );
     }
-    return <div />;
+    return <button className="btn btn-shownutrition" disabled> CLICK TO SHOW NUTRITION </button>;
   }
 
   setMenuDrop(dayimg, daydetail, ready, day, meal, e) {

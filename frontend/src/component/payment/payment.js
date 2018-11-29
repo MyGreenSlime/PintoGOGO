@@ -102,6 +102,16 @@ export default class Payment extends Component {
     });
   }
 
+  checkSelectAddr(){
+    console.log("select?",this.state.distSelected)
+    if(this.state.distSelected){
+      return <button type="ฺ๊button" className="btn btn-lg button__confirm" > Confirm Order </button>;
+    }
+    else{
+      return <button type="ฺ๊button" className="btn btn-lg button__confirm" disabled> Confirm Order </button>;
+    }
+  }
+
   render() {
     const { bill, address, isLoaded } = this.state;
 
@@ -238,9 +248,10 @@ export default class Payment extends Component {
                 </div>
                 <div className="row box__confirm" onClick={this.updateBill}>
                   <a href="/payment">
-                    <button type="ฺ๊button" className="btn btn-lg button__confirm" >
+                      {this.checkSelectAddr()}
+                    {/* <button type="ฺ๊button" className="btn btn-lg button__confirm" >
                         Confirm Order
-                    </button>
+                    </button> */}
                   </a>
                 </div>
               </div>

@@ -40,6 +40,7 @@ class Cart extends Component {
   createCardCartFood() {
     let card_food;
     if (!this.state.order.food_order) {
+      console.log("noorder")
       card_food = <div />;
     } else {
       card_food = this.state.order.food_order.map((ord, index) => (
@@ -95,6 +96,21 @@ class Cart extends Component {
       ));
     }
     return card_package;
+  }
+
+  checkOrder(){
+    let is_no_order = true;
+    for(let data in this.state.order){
+      if(this.state.order.hasOwnProperty(data) && typeof this.state.order[data] === 'object'){
+        if(this.state.order[data].length !== 0){
+          is_no_order = false
+        }
+      }
+    }
+    if(is_no_order){
+      return <button className="btn button--confirm" disabled> CONFIRM </button>;
+    }
+    return <button className="btn button--confirm" onClick={this.confirmButtonClicked}> CONFIRM </button>;
   }
 
   confirmButtonClicked() {
@@ -174,6 +190,7 @@ class Cart extends Component {
               </div>
             </div>
             <div>
+
               {this.createCardCartFood()}
               {this.createCardCartSnack()}
               {this.createCardPackage()}
@@ -184,12 +201,7 @@ class Cart extends Component {
                 <p>TOTAL: {this.state.fromChild}</p>
               </div>
               <a href="/bill">
-                <button
-                  className="btn button--confirm"
-                  onClick={this.confirmButtonClicked}
-                >
-                  CONFIRM
-                </button>
+                {this.checkOrder()}
               </a>
             </div>
           </div>
