@@ -44,7 +44,7 @@ export default class Choice extends Component {
   }
 
   setActiveButton(isButton) {
-    let color = "btn button";
+    let color = "btn button-choice";
     color += isButton ? " btn--active" : "";
     return color;
   }

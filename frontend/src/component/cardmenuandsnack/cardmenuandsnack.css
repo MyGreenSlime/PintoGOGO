@@ -45,8 +45,41 @@
     div.inline{
         float: left;
     }
+
+    .menu-name {
+        font-weight: bold;
+    }
     
-    .cardmenu__undermenu--minwidth{
+    .cardmenu__undermenu{
         padding: 0 15%;
+        margin-top: 7px;
+    }
+
+    .on-click {
+        width: 25px;
+        height: 25px;
+        /* margin: 0; */
+        /* background: red; */
+        /* -webkit-transition: width 500ms, height 500ms; For Safari 3.1 to 6.0 */
+        transition: width 200ms, height 200ms;
+    }
+    
+    .on-click:hover {
+        width: 32px;
+        height: 32px;
+    }
+
+    .on-click-img {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        -webkit-transition: width 200ms, height 200ms, margin 200ms;
+        transition: width 200ms, height 200ms, margin 200ms;
+    }
+    
+    .on-click-img:hover {
+        width: 108%;
+        height: 108%;
+        margin: -4% -4% 0 -4%;
     }
 }

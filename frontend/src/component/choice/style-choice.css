@@ -5,13 +5,14 @@
   padding: 20px 14% 20px 14%;
 }
 
-.button {
+.button-choice {
   width: 60%;
-  height: 2em;
+  /* height: 2em; */
+  min-width: 80px;
   border: none;
   color: #7b7b7b;
   margin-bottom: 20px;
-  font-size: 1em;
+  font-size: 1.5vw;
   font-weight: bold;
   background-color: #e4dac2;
   cursor: pointer;
