@@ -287,6 +287,7 @@ class EditProfile extends Component {
                   <ul>
                     {this.createRenderAddr("address")}
                     {this.createRenderAddr("newAddr")}
+
                     {/* {currentUser.address.map((item, index) => (
                       <li className="edit-list__addr">
                         {item.address}
