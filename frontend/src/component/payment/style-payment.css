@@ -47,6 +47,10 @@
   font-weight: bold;
 }
 
+.break__word{
+  white-space: normal !important;
+}
+
 .button__confirm:disabled {
   background-color: #c0c0c0;
 }

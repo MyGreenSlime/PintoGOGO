@@ -194,7 +194,7 @@ export default class Payment extends Component {
                     {address.map((it, index) => (
                       <a
                         key={index}
-                        className="dropdown-item dd__addr-choice"
+                        className="dropdown-item dd__addr-choice break__word"
                         onClick={this.calculateDeliveryFee.bind(this, index)}
                       >
                         {it.address}
