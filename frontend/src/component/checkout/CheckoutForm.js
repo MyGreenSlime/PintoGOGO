@@ -90,28 +90,28 @@ class CheckoutForm extends Component {
                 
                 <div className="col-md-6 col-12 payment__customer__detail">
                     <div className="row">
-                        <div className="col-md-4 col-12 payment__customer__detail--left">
+                        <div className="col-md-4 col-6 payment__customer__detail--left">
                             Customer name
                         </div>
-                        <div className="col-md-8 col-12">
+                        <div className="col-md-8 col-6">
                             <p>{currentUser.first_name} {currentUser.last_name}</p>
                         </div>
                     </div>
                     <br/>
                     <div className="row">
-                        <div className="col-md-4 col-12 payment__customer__detail--left">
+                        <div className="col-md-4 col-6 payment__customer__detail--left">
                             TOTAL PRICE
                         </div>
-                        <div className="col-md-8 col-12">
+                        <div className="col-md-8 col-6">
                             {this.state.bill.total_cost}
                         </div>
                     </div>
                     <br/>
                     <div className="row">
-                        <div className="col-md-4 col-12 payment__customer__detail--left">
+                        <div className="col-md-4 col-6 payment__customer__detail--left">
                             ADDRESS
                         </div>
-                        <div className="col-md-8 col-12">
+                        <div className="col-md-8 col-6">
                             {this.state.bill.destination}
                         </div>
                     </div>
