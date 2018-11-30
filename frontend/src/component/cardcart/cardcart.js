@@ -33,21 +33,27 @@ class CardCart extends Component {
   increment() {
     const increase = increaseAmount.bind(this, this.props.type_order, this.props.id);
     increase();
-    this.state.inputField += 1
+    this.setState({
+      inputField: this.state.inputField+1
+    })
   }
 
   decrement() {
     const decrease = decreaseAmount.bind(this, this.props.type_order, this.props.id);
     decrease();
     if (this.state.inputField > 1) {
-      this.state.inputField -= 1
+      this.setState({
+        inputField: this.state.inputField-1
+      })
     }
   }
 
   deleteOrder(){
     const deleteFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
     deleteFromCart();
-    this.state.inputField = 0;
+    this.setState({
+      inputField: 0
+    })
     this.forceUpdate();
   }
 

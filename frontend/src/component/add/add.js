@@ -19,7 +19,6 @@ class Add extends Component {
       description: "",
       sodium: "",
       cholesterol: "",
-      status: 0,
       file: "",
       imagePreviewUrl: ""
     };
