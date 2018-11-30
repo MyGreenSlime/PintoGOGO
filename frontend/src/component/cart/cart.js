@@ -37,13 +37,21 @@ class Cart extends Component {
 
   createCardCart(type){
     let card_cart;
+    let img_url
+    if(type === "package"){
+      img_url = ""
+    }
+    else{
+      img_url = "img_url"
+    }
     if(!this.state.order[type+"_order"]){
       card_cart = <div/>
     }else{
       card_cart = this.state.order[type + "_order"].map((ord, index) => (
         <CardCart
           handlerFromParant={this.handleData}
-          picture={ () => (type === 'package')? "":ord[type+"_id"].img_url}
+          // ord.food_id.img_url
+          picture={ord[type +"_id"][img_url]}
           name={ord[type+"_name"]}
           price={ord.price}
           amount={ord.amount}
@@ -156,9 +164,7 @@ class Cart extends Component {
               <div className="total">
                 <p>TOTAL: {this.state.fromChild}</p>
               </div>
-              <a href="/bill">
-                {this.checkOrder()}
-              </a>
+              {this.checkOrder()}
             </div>
           </div>
         </div>
