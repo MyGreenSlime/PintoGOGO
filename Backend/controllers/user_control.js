@@ -329,3 +329,51 @@ exports.delFavoriteSnack = (req, res) => {
     }
   );
 };
+
+exports.getAllUser = (req, res) => {
+  const error = {}
+  if(!req.user.type) {
+    error.admin = "need admin account"
+    res.status(500).send(error)
+  }
+  User.find({})
+    .populate({ path: "favorite_food", model: "Menu" })
+    .populate({ path: "favorite_snack", model: "Snack" })
+    .exec((err, user) => {
+      if (err) {
+        error.user = err;
+        res.status(400).json(error);
+      } else {
+        res.json(user);
+      }
+    });
+}
+
+exports.promoteUser = (req, res) => {
+  const status = {
+    ok : 1,
+    message : "promote id finish"
+  }
+  const error = {}
+  const user_id  = req.params.id
+  const type = req.body.type
+  if(!req.user.type) {
+    error.admin = "need admin account"
+    res.status(500).send(error)
+  }
+  User.updateOne({
+    _id : user_id
+  },{
+    $set : {
+      type : type
+    }
+  }, (err, user) => {
+    if(err){
+      error.user = err
+      res.status(500).json(error)
+    }
+    else {
+      res.json(status)
+    }
+  })
+}

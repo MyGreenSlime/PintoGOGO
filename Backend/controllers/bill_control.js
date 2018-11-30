@@ -116,8 +116,9 @@ exports.toDoList = (req,res) => {
         error.admin = "need admin account"
         res.status(500).send(error)
     }
-    var today = new Date(new Date().setUTCHours(0,0,0,0))
+    var today = new Date(new Date().setUTCHours(23,0,0,0))
     var tomorrow = new Date(new Date().setUTCHours(0,0,0,0))
+    today.setDate(new Date().getDate()-1)
     tomorrow.setDate(new Date().getDate()+1)
     console.log("today",today)
     console.log("tomorrow",tomorrow)
