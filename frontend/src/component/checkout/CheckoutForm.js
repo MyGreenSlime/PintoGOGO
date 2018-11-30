@@ -10,6 +10,7 @@ import "../checkout/enjoy.css"
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { currentOrder} from "../../actions/authActions"
 import Progress from '../progressbar/progressbar'
 class CheckoutForm extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class CheckoutForm extends Component {
             status: true,
             waiting: false
           });
+          this.props.currentOrder()
         }
       });
   }
@@ -189,14 +191,16 @@ class CheckoutForm extends Component {
 }
 CheckoutForm.propTypes = {
     auth: propTypes.object.isRequired,
-    errors: propTypes.object.isRequired
+    errors: propTypes.object.isRequired,
+    currentOrder : propTypes.func.isRequired
   };
   
   const mapStateToProps = state => ({
     auth: state.auth,
-    errors: state.errors
+    errors: state.errors,
+    order : state.order
   });
   
   export default connect(
-    mapStateToProps
+    mapStateToProps, {currentOrder}
   )(withRouter(injectStripe(CheckoutForm)));

@@ -17,6 +17,7 @@ import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { getCurrentOrder } from "../api/api";
+import { currentOrder} from '../../actions/authActions'
 class Navigationbar extends Component {
   constructor(props) {
     super(props);
@@ -26,8 +27,21 @@ class Navigationbar extends Component {
       isOpen: false,
       dropdownOpen: false,
       currentUser: [],
-      order: []
+      order: [],
+      amountorder : 0
     };
+    this.countOrder = this.countOrder.bind(this)
+  }
+  componentDidMount() {
+    this.props.currentOrder()
+    this.setState({
+      amountorder : this.props.order.order.amount
+    })
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      amountorder : nextProps.order.order.amount
+    })
   }
 
   onLogoutClick(e) {
@@ -44,22 +58,10 @@ class Navigationbar extends Component {
   }
 
   countOrder() {
-    const getOrder = getCurrentOrder.bind(this, "order", "");
-    getOrder();
-    let sum_amt = 0;
-    for (let data in this.state.order) {
-      if (
-        this.state.order.hasOwnProperty(data) &&
-        typeof this.state.order[data] === "object"
-      ) {
-        for (let i = 0; i < this.state.order[data].length; i++) {
-          sum_amt += this.state.order[data][i].amount;
-        }
-      }
-    }
-
-    if (sum_amt !== 0) {
-      return <div className="circle__counter">{sum_amt}</div>;
+    
+    console.log(this.props.order.order.amount)
+    if (this.state.amountorder !== 0) {
+      return <div className="circle__counter">{this.state.amountorder}</div>;
     }
     return;
   }
@@ -67,6 +69,9 @@ class Navigationbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     // {console.log("nav",user)}
+    const showorder = (
+      <div className="circle__counter">{this.state.amountorder}</div>
+    )
     const forAdmin = (
       <React.Fragment>
         <NavItem className="navbar__item">
@@ -111,7 +116,7 @@ class Navigationbar extends Component {
         </NavItem>
         <NavItem className="navbar__item">
           <NavLink href="/cart" className="navbar__link">
-            {/* {this.countOrder()} */}
+            {(this.state.amountorder!=0) ? showorder : "" }
             <img src="/img/navbar/icon-cart2.png" className="navbar__icon" />
             {/* <div className="circle__counter">52</div> */}
           </NavLink>
@@ -177,14 +182,17 @@ class Navigationbar extends Component {
 }
 Navigationbar.propTypes = {
   logoutUser: propTypes.func.isRequired,
-  auth: propTypes.object.isRequired
+  auth: propTypes.object.isRequired,
+  order : propTypes.object.isRequired,
+  currentOrder : propTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  order : state.order
 });
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, currentOrder }
 )(Navigationbar);

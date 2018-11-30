@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 import "../cardcart/cardcart.css";
 import { increaseAmount, decreaseAmount, deleteOrder} from "../api/api"
-
+import {currentOrder } from "../../actions/authActions"
+import { connect } from "react-redux";
 class CardCart extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +37,7 @@ class CardCart extends Component {
     this.setState({
       inputField: this.state.inputField+1
     })
+    this.props.currentOrder();
   }
 
   decrement() {
@@ -46,6 +48,7 @@ class CardCart extends Component {
         inputField: this.state.inputField-1
       })
     }
+    this.props.currentOrder();
     
   }
 
@@ -67,6 +70,7 @@ class CardCart extends Component {
     })
     this.forceUpdate();
     this.props.onOrderDeleted(this.props.id,this.props.type_order);
+    this.props.currentOrder();
   }
 
   render() {
@@ -125,7 +129,15 @@ class CardCart extends Component {
 
 CardCart.propTypes = {
   name: propTypes.string,
-  amount: propTypes.number
+  amount: propTypes.number,
+  auth: propTypes.object.isRequired,
+  order : propTypes.object.isRequired,
+  currentOrder : propTypes.func.isRequired
 };
 
-export default CardCart;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  order : state.order
+});
+
+export default connect(mapStateToProps, {currentOrder})(CardCart);
