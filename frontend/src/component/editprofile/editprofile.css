@@ -101,9 +101,9 @@ a {
 }
 
 .button-confirm {
-  background-color: #fae5d3;
+  background-color: #f7eec3;
   color: #7b7b7b;
-  border: 1.5px solid #7b7b7b;
+  border: 1.5px solid #e0d5a2;
   width: 130px;
   font-weight: bold;
   border-radius: 8px;
@@ -169,9 +169,9 @@ label {
 }
 
 .edit-list__addr {
-  list-style-type: none;
+  margin: 3% auto;
 }
 
-.btn-delete {
-  margin-left: 18px;
+.addr-list {
+  text-align: center;
 }

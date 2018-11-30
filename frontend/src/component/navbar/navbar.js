@@ -43,7 +43,9 @@ class Navigationbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    {console.log("nav",user)}
+    {
+      console.log("nav", user);
+    }
     const forAdmin = (
       <React.Fragment>
         <NavItem className="navbar__item">
@@ -67,12 +69,12 @@ class Navigationbar extends Component {
               {user.user_name}
             </DropdownToggle>
             <DropdownMenu>
-                <NavLink href="/profile" className="navbar__link">
-                  <DropdownItem>Profile</DropdownItem>
-                </NavLink>
-                <NavLink href="/mypackage" className="navbar__link">
-                  <DropdownItem>My Package</DropdownItem>
-                </NavLink>
+              <NavLink href="/profile" className="navbar__link">
+                <DropdownItem>Profile</DropdownItem>
+              </NavLink>
+              <NavLink href="/mypackage" className="navbar__link">
+                <DropdownItem>My Package</DropdownItem>
+              </NavLink>
             </DropdownMenu>
           </NavItem>
         </UncontrolledDropdown>

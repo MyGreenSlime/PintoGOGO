@@ -30,7 +30,7 @@ export default class ModalMap extends Component {
         }
       },
       () => {
-        console.log("address from modal", this.state.address)
+        console.log("address from modal", this.state.address);
         // console.log("modal destination: ", this.state.address.address);
         // console.log("modal lat: ", this.state.address.lat);
         // console.log("modal lng: ", this.state.address.lng);
@@ -42,7 +42,6 @@ export default class ModalMap extends Component {
   handleSaveAddr() {
     // console.log("address from modal". this.state.address)
     this.props.handleFromEditProfile(
-      
       this.state.address.address,
       this.state.address.lat,
       this.state.address.lng,
@@ -50,18 +49,45 @@ export default class ModalMap extends Component {
     );
   }
 
+  checkAmountAddr() {
+    if (this.props.amountAddress >= 3) {
+      return (
+        <button
+          type="button"
+          class="btn button--save"
+          data-toggle="modal"
+          data-target="#modalMap"
+          disabled
+        >
+          Add Address
+        </button>
+      );
+    }
+    return (
+      <button
+        type="button"
+        class="btn button--save"
+        data-toggle="modal"
+        data-target="#modalMap"
+      >
+        Add Address
+      </button>
+    );
+  }
+
   render() {
     return (
       <React.Fragment>
         <div className="container">
-          <button
+          {this.checkAmountAddr()}
+          {/* <button
             type="button"
-            class="btn btn-warning"
+            class="btn button--save"
             data-toggle="modal"
             data-target="#modalMap"
           >
             Add Address
-          </button>
+          </button> */}
 
           <div
             class="modal fade"
@@ -79,13 +105,13 @@ export default class ModalMap extends Component {
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-warning"
+                    class="btn btn-warning button--save"
                     data-dismiss="modal"
                     onClick={this.handleSaveAddr}
                   >
                     Save changes
                   </button>
-                  <p>{this.props.addrAmount}</p>
+                  <p>{this.props.amountAddress}</p>
                 </div>
               </div>
             </div>

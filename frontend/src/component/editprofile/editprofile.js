@@ -21,7 +21,7 @@ class EditProfile extends Component {
       imagePreviewUrl: null,
       checkimg: null,
       errors: {},
-      address: [],
+      oldAddr: [],
       newAddr: [],
       isLoaded: false,
       setLoaded: false,
@@ -29,6 +29,7 @@ class EditProfile extends Component {
       currentUser: null,
       amountAddr: null
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
@@ -48,8 +49,6 @@ class EditProfile extends Component {
   }
 
   setUser() {
-    console.log("set user");
-    console.log(this.state.currentUser.address.length);
     this.setState({
       first_name: this.state.currentUser.first_name,
       last_name: this.state.currentUser.last_name,
@@ -60,7 +59,7 @@ class EditProfile extends Component {
       setLoaded: true,
       alreadyLoaded: false,
       amountAddr: this.state.currentUser.address.length,
-      address: this.state.currentUser.address
+      oldAddr: this.state.currentUser.address
     });
   }
 
@@ -98,6 +97,7 @@ class EditProfile extends Component {
 
   handleSubmit(e) {
     const formData = new FormData();
+
     if (this.state.imagePreviewUrl != this.state.checkimg) {
       formData.append("img", this.state.profilepic, this.state.profilepic.name);
     } else {
@@ -107,6 +107,7 @@ class EditProfile extends Component {
     formData.append("last_name", this.state.last_name);
     formData.append("email", this.state.email);
     formData.append("phonenumber", this.state.phonenumber);
+
     console.log("formData", formData);
     this.props.editProfile(formData, this.props.history);
     e.preventDefault();
@@ -119,20 +120,20 @@ class EditProfile extends Component {
       },
       () => {
         console.log("length addr: ", this.state.amountAddr);
-        const new_addr = {
+        const newaddr = {
           address: addr,
           lat: lat,
           lng: lng,
           distance: dist
         };
-        this.state.newAddr.push(new_addr);
+        this.state.newAddr.push(newaddr);
         this.forceUpdate();
       }
     );
-    console.log("address from handle: ", addr);
-    console.log("lat from handle: ", lat);
-    console.log("lng from handle: ", lng);
-    console.log("dist from handle: ", dist);
+    console.log("address from editProfile: ", addr);
+    console.log("lat from editProfile: ", lat);
+    console.log("lng from editProfile: ", lng);
+    console.log("dist from editProfile: ", dist);
   }
 
   createRenderAddr(addr) {
@@ -140,43 +141,22 @@ class EditProfile extends Component {
       return;
     } else {
       console.log("from create render", this.state[addr]);
-      const list_addr = this.state[addr].map((item, index) => (
-        <li className="edit-list__addr">
-          {item.address}
-          <button
-            type="button"
-            className="btn btn-delete"
-            onClick={this.deleteAddr.bind(this, index, addr)}
-          >
-            <i class="fa fa-close" />
-          </button>
-        </li>
+      const listAddr = this.state[addr].map((item, index) => (
+        <div className="row edit-list__addr">
+          <div className="col-10 addr-list">{item.address}</div>
+          <div className="col">
+            <button
+              type="button"
+              className="btn"
+              onClick={this.deleteAddr.bind(this, index, addr)}
+            >
+              <i className="fa fa-close" />
+            </button>
+          </div>
+        </div>
       ));
 
-      return list_addr;
-    }
-  }
-
-  deleteAddr(index, type) {
-    let typeOfListAdddr = "address";
-    if (typeOfListAdddr == type) {
-      console.log("this is old address no.: ", index);
-      for (let i = 0; i < this.state.address.length; i++) {
-        if (i == index) {
-          let id = this.state.address[i]._id;
-          axios.delete("/api/users/del/address/" + id).then(res => {});
-          this.state.address.splice(i, 1);
-        }
-      }
-      this.forceUpdate();
-    } else {
-      console.log("this is new address no.: ", index);
-      for (var i = 0; i < this.state.newAddr.length; i++) {
-        if (i == index) {
-          this.state.newAddr.splice(i, 1);
-        }
-      }
-      this.forceUpdate();
+      return listAddr;
     }
   }
 
@@ -192,8 +172,37 @@ class EditProfile extends Component {
         }
       };
       await axios.put("/api/users/add/address", newAddress).then(res => {
-        console.log(res.data);
+        console.log("put new address to DB: ", res.data);
       });
+    }
+  }
+
+  deleteAddr(index, type) {
+    let typeOfListAdddr = "oldAddr";
+    if (typeOfListAdddr == type) {
+      console.log("this is old address no.: ", index);
+      for (let i = 0; i < this.state.oldAddr.length; i++) {
+        if (i == index) {
+          let id = this.state.oldAddr[i]._id;
+          axios.delete("/api/users/del/address/" + id).then(res => {});
+          this.state.oldAddr.splice(i, 1);
+          this.setState({
+            amountAddr: this.state.amountAddr - 1
+          });
+        }
+      }
+      this.forceUpdate();
+    } else {
+      console.log("this is new address no.: ", index);
+      for (let i = 0; i < this.state.newAddr.length; i++) {
+        if (i == index) {
+          this.state.newAddr.splice(i, 1);
+          this.setState({
+            amountAddr: this.state.amountAddr - 1
+          });
+        }
+      }
+      this.forceUpdate();
     }
   }
 
@@ -317,22 +326,22 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className=" row">
-              <div className="col-sm-6">
-                <label htmlFor="PhoneNumber">Address:</label>
+              <div className="col-lg">
+                <label htmlFor="PhoneNumber">Address</label>
               </div>
-              <div className="col">
-                <div className="edit-address-area">
-                  <ul>
-                    {this.createRenderAddr("address")}
-                    {this.createRenderAddr("newAddr")}
-                  </ul>
-                </div>
-                <ModalMap
-                  handleFromEditProfile={this.handleDataAddr}
-                  addrAmount={this.state.amountAddr}
-                />
+              {/* <div className="col-lg"> */}
+              <div className="edit-address-area">
+                {/* <ul> */}
+                {this.createRenderAddr("oldAddr")}
+                {this.createRenderAddr("newAddr")}
+                {/* </ul> */}
               </div>
+              <ModalMap
+                handleFromEditProfile={this.handleDataAddr}
+                amountAddress={this.state.amountAddr}
+              />
             </div>
+            {/* </div> */}
             <br />
             <button
               width="auto"
