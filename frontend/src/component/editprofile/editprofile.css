@@ -11,7 +11,7 @@
 }
 
 .addmargin {
-    margin: 15px 0 15px 0;
+  margin: 15px 0 15px 0;
 }
 
 .center {
@@ -101,7 +101,7 @@ a {
 }
 
 .button-confirm {
-  background-color: #FAE5D3;
+  background-color: #fae5d3;
   color: #7b7b7b;
   border: 1.5px solid #7b7b7b;
   width: 130px;
@@ -124,7 +124,7 @@ a {
 .btn-upload {
   border: 1.5px solid gray;
   color: gray;
-  background-color: #FDF2E9;
+  background-color: #fdf2e9;
   padding: 5px 8px;
   border-radius: 8px;
   font-size: 10px;
@@ -132,7 +132,7 @@ a {
   cursor: pointer;
 }
 
-.upload-btn-wrapper input[type=file] {
+.upload-btn-wrapper input[type="file"] {
   font-size: 100px;
   position: absolute;
   left: 0;
@@ -159,4 +159,19 @@ input[type="textarea"] {
 
 label {
   font-weight: bold;
+}
+
+.modal {
+  z-index: 20;
+}
+.modal-backdrop {
+  z-index: 10;
+}
+
+.edit-list__addr {
+  list-style-type: none;
+}
+
+.btn-delete {
+  margin-left: 18px;
 }

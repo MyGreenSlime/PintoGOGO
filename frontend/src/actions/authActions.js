@@ -17,7 +17,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 export const editProfile = (formData, history) => dispatch => {
   axios
-    .put("api/users/edit/profile", formData)
+    .put("/api/users/edit/profile", formData)
     .then(res => history.push("/profile"))
     .catch(err =>
       dispatch({

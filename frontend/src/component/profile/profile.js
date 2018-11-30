@@ -54,13 +54,18 @@ class Profile extends Component {
       console.log("....", this.state.currentUser);
     }
     const { currentUser } = this.state;
+    console.log("curr", currentUser);
     return (
       <div className="set-screen">
         {" "}
         {/*bg*/}
         <div className="profile-box">
           <h2> PROFILE </h2>
-          <img className="userpic" src={currentUser.img_url} alt="profile picture" />
+          <img
+            className="userpic"
+            src={currentUser.img_url}
+            alt="profile picture"
+          />
           {/* <br /> */}
           <div className=" addmargin row">
             <div className="col-sm-6">
@@ -97,10 +102,10 @@ class Profile extends Component {
               <label htmlFor="PhoneNumber">Address: </label>
             </div>
             <div className="col">
-              <div class="dropdown">
-                <button
+              <div className="dropdown">
+                {/* <button
                   ref={this.dropdownDOM}
-                  class="btn btn-secondary dropdown-toggle addr-dropdown"
+                  className="btn btn-secondary dropdown-toggle addr-dropdown"
                   type="button"
                   id="dropdownMenuButton"
                   data-toggle="dropdown"
@@ -108,14 +113,19 @@ class Profile extends Component {
                   aria-expanded="false"
                 >
                   Address
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                </button> */}
+                <div className="address-area">
+                  {currentUser.address.map((item, index) => (
+                    <ol className="list__addr">{item.address}</ol>
+                  ))}
+                </div>
+                {/* <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item dd__profile-addr">
                     {currentUser.address[0].address}
                   </a>
                   <a class="dropdown-item">Address 2</a>
                   <a class="dropdown-item">Add Address</a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

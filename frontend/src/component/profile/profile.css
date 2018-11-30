@@ -11,7 +11,7 @@
 }
 
 .addmargin {
-    margin: 15px 0 15px 0;
+  margin: 15px 0 15px 0;
 }
 
 .userpic {
@@ -120,4 +120,8 @@ input[type="email"] {
 
 input[type="textarea"] {
   border-radius: 8px;
+}
+
+.list__addr {
+  padding: 0;
 }

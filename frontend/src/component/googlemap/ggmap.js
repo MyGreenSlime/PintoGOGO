@@ -212,7 +212,13 @@ export default class Map extends Component {
         <div className="input-button ">
           <div className="center row">
             <input
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                }
+              }}
               className="form-control input-addr"
+              placeholder="Enter your address here"
               ref={this.divSearchBox}
             />
           </div>
