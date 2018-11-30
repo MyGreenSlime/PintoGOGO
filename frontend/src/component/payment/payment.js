@@ -178,11 +178,10 @@ export default class Payment extends Component {
                   </div>
                 </div>
                 <hr/>
-                {/* <div className="row"> */}
                   {bill.order.food_order.map(it => (
 
                     <div className="row" style={{ width: "100%" }}>
-                      <div className="col-md-6 col-12">
+                      <div className="col-md-6 col-12 ">
                         <p>{it.food_name}</p>
                       </div>
                       <div className="col-md-3 col-6 box__content--center">
@@ -251,9 +250,6 @@ export default class Payment extends Component {
                   <div className="col-md-6 col-6 box__content--center">
                     <p>{bill.order_cost}</p>
                   </div>
-                  {/* <div className="col-md-3 col-4 box__content--center">
-                    <p>Baht</p>
-                  </div> */}
                 </div>
                 <div className="row">
                   <div className="col-md-6 col-6">
@@ -262,9 +258,6 @@ export default class Payment extends Component {
                   <div className="col-md-6 col-6 box__content--center">
                     <p>{this.state.distance}</p>
                   </div>
-                  {/* <div className="col-md-3 col-4 box__content--center">
-                    <p>Km.</p>
-                  </div> */}
                 </div>
                 <div className="row">
                   <div className="col-md-6 col-6">
@@ -273,9 +266,6 @@ export default class Payment extends Component {
                   <div className="col-md-6 col-6 box__content--center">
                     <p>{this.state.deliveryFee}</p>
                   </div>
-                  {/* <div className="col-md-3 col-4 box__content--center">
-                    <p>Baht</p>
-                  </div> */}
                 </div>
                 <hr/>
                 <div className="row txt__total">
@@ -285,9 +275,6 @@ export default class Payment extends Component {
                   <div className="col-md-6 col-6 box__content--center">
                     <p>{this.state.totalCost}</p>
                   </div>
-                  {/* <div className="col-md-3 col-4 box__content--center">
-                    <p>Baht</p>
-                  </div> */}
                 </div>
                 <div className="row box__confirm" onClick={this.updateBill}>
                   <a href="/payment">
@@ -296,7 +283,6 @@ export default class Payment extends Component {
                     </button>
                   </a>
                 </div>
-              {/* </div> */}
             </div>
           </div>
         </div>

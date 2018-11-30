@@ -1,4 +1,3 @@
-
 .box{
   background-color: #f3ece7;
   margin-top: 10%;
@@ -23,4 +22,9 @@
 
 .desc--text{
   margin: 5%;
+}
+
+.package__img__box{
+  margin-top: 5%;
+  width: 70%;
 }

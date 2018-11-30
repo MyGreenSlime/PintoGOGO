@@ -25,6 +25,7 @@ class CheckoutForm extends Component {
     var data = {
         token_id : token.id
     }
+
     axios.post("/api/payment/charge", data)
         .then((res) => {
             console.log(res)
@@ -63,7 +64,7 @@ class CheckoutForm extends Component {
     if (this.state.complete) return <h1>Purchase Complete</h1>;
     const { currentUser } = this.state;
     return (
-        
+    <div className="outer__container">
         <div className=" card payment__box__container">
             <br/>
             <strong>PAYMENT DETAIL  </strong>
@@ -80,7 +81,6 @@ class CheckoutForm extends Component {
             <div className="row ">
                 <div className="col-md-6 col-12 payment__purchase--pad">
                     <div className="checkout">
-                        {/* <p>Would you like to complete the purchase?</p> */}
                         <CardElement />
                         <div className="btn button--confirm">
                             <div onClick={this.submit}>Pay</div>
@@ -127,7 +127,7 @@ class CheckoutForm extends Component {
                 </button>
             </a>
         </div>
-        
+    </div>
       
     );
   }
