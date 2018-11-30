@@ -26,9 +26,9 @@ class Add extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
   }
-  // cannot redirect I don't know why
+
   renderRedirect() {
-    return (window.location.href = "/add/"+this.props.redirect);
+    return (window.location.href = "/add/" + this.props.redirect);
   }
 
   componentDidMount() {
@@ -84,7 +84,12 @@ class Add extends Component {
     formData.append("sodium", this.state.sodium);
     formData.append("description", this.state.description);
 
-    const add_menu = addFoodOrSnack.bind(this, formData, "status", this.props.path)
+    const add_menu = addFoodOrSnack.bind(
+      this,
+      formData,
+      "status",
+      this.props.path
+    );
     add_menu();
     e.preventDefault();
   }
@@ -92,14 +97,17 @@ class Add extends Component {
   render() {
     let { imagePreviewUrl } = this.state;
     let $imagePreview = null;
+
     if (imagePreviewUrl) {
-        $imagePreview = <img src={imagePreviewUrl} className="imgpreview" alt="preview"/>;
+      $imagePreview = (
+        <img src={imagePreviewUrl} className="imgpreview" alt="preview" />
+      );
     }
-    const { status } = this.state;
+
     return (
       <React.Fragment>
         <div className="setbg__addmenu">
-          <div className="form-group" className="addmenu__box">
+          <div className="form-group addmenu__box">
             <h3>{"ADD " + this.props.path.toUpperCase()}</h3>
             <form onSubmit={this.handleSubmit.bind(this)}>
               <div className="form-group">
@@ -213,13 +221,13 @@ class Add extends Component {
               </div>
               {$imagePreview}
               <button
-                  type="submit"
-                  value="submit"
-                  className="submit__addmenu--button"
+                type="submit"
+                value="submit"
+                className="submit__addmenu--button"
               >
-                  SUBMIT
+                SUBMIT
               </button>
-          </form>
+            </form>
           </div>
         </div>
       </React.Fragment>
@@ -227,13 +235,13 @@ class Add extends Component {
   }
 }
 Add.propTypes = {
-    auth: propTypes.object.isRequired,
-    errors: propTypes.object.isRequired
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(mapStateToProps)(withRouter(Add));

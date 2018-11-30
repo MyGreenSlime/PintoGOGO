@@ -50,9 +50,9 @@ const Home = () => {
 const PaymentMethod = () => {
   return (
     <StripeProvider apiKey="pk_test_os3uf16y5tFa5WVqnqNPNaJk">
-        <Elements>
-          <CheckoutForm />
-        </Elements>
+      <Elements>
+        <CheckoutForm />
+      </Elements>
     </StripeProvider>
   );
 };
@@ -70,7 +70,6 @@ if (localStorage.jwtToken) {
   if (decode.exp < currentTime) {
     //logout user
     store.dispatch(logoutUser());
-    //TODO: Clear current profile
     // Clear current profile
 
     //redirect
@@ -78,9 +77,6 @@ if (localStorage.jwtToken) {
   }
 }
 
-{
-  /*-------------Add path of page---------------*/
-}
 class App extends Component {
   render() {
     return (

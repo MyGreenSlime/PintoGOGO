@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./cardmenuandsnack.css";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
-import { BrowserRouter as Route, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import { deleteFromDB, addToCart } from "../api/api";
 
 class cardMenuAndSnack extends Component {
@@ -41,7 +41,12 @@ class cardMenuAndSnack extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const users = (
       <div className="cartmenu__cart" onClick={this.addToCartClick.bind(this)}>
-        <img className="on-click" src={"/img/other/cart.png"} alt="cart icon" height="20" />
+        <img
+          className="on-click"
+          src={"/img/other/cart.png"}
+          alt="cart icon"
+          height="20"
+        />
       </div>
     );
     const admin = (
@@ -53,30 +58,35 @@ class cardMenuAndSnack extends Component {
           <img src={"/img/other/delete.png"} alt="delete icon" height="20" />
         </div>
       </React.Fragment>
-    )
-    return( <section className="menu">
-      {/* block__element--modify */}
-      <div className="on-click-img cardmenu__image">
-        <Link to={this.props.path_detail + this.props.id}>
-          <img src={this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border"  />
-        </Link>
-      </div>
+    );
+    return (
+      <section className="menu">
+        {/* block__element--modify */}
+        <div className="on-click-img cardmenu__image">
+          <Link to={this.props.path_detail + this.props.id}>
+            <img
+              src={this.props.picture}
+              alt={this.props.name}
+              width="70%"
+              className="cardmenu__image--border"
+            />
+          </Link>
+        </div>
 
-      <div className="row cardmenu__undermenu">
-        <div className="col-9 cardmenu__text">
-          <div className="menu-name">
-            {this.props.name}<br />
+        <div className="row cardmenu__undermenu">
+          <div className="col-9 cardmenu__text">
+            <div className="menu-name">
+              {this.props.name}
+              <br />
             </div>
-            
             {this.props.calories} Kcal
-            
-        </div>
+          </div>
 
-        <div className="col-3">
-          {isAuthenticated ? users : ""}
-          {user.type ? admin : ""}
+          <div className="col-3">
+            {isAuthenticated ? users : ""}
+            {user.type ? admin : ""}
+          </div>
         </div>
-      </div>
       </section>
     );
   }

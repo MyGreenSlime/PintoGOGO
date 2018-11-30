@@ -3,7 +3,6 @@ import "./profile.css";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
 import { getProfile } from "../api/api";
 
 class Profile extends Component {
@@ -50,18 +49,18 @@ class Profile extends Component {
     if (!!!this.state.isLoaded) {
       return <div className="loader" />;
     }
-    {
-      console.log("....", this.state.currentUser);
-    }
     const { currentUser } = this.state;
-    console.log("curr", currentUser);
-    return <div className="set-screen">
+
+    return (
+      <div className="set-screen">
         {" "}
-        {/*bg*/}
         <div className="profile-box">
           <h2> PROFILE </h2>
-          <img className="userpic" src={currentUser.img_url} alt="profile picture" />
-          {/* <br /> */}
+          <img
+            className="userpic"
+            src={currentUser.img_url}
+            alt="user profile"
+          />
           <div className=" addmargin row">
             <div className="col-sm-6">
               <label htmlFor="Firstname">Firstname:</label>
@@ -93,16 +92,13 @@ class Profile extends Component {
             <div className="col">{currentUser.phonenumber}</div>
           </div>
           <div className="addr-area col">
-            {/* <div className="col-lg"> */}
-              <label htmlFor="PhoneNumber">Address</label>
-            {/* </div> */}
-            {/* <div className=""> */}
-              {currentUser.address.map((item, index) => (
-                <div className=" edit-list__addr addr-list">
-                  <li>{item.address}</li>
-                </div>
-              ))}
-            {/* </div> */}
+            <label htmlFor="PhoneNumber">Address</label>
+
+            {currentUser.address.map((item, index) => (
+              <div className=" edit-list__addr addr-list">
+                <li>{item.address}</li>
+              </div>
+            ))}
           </div>
 
           <br />
@@ -113,7 +109,8 @@ class Profile extends Component {
             </button>
           </a>
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 
@@ -128,6 +125,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-)(withRouter(Profile));
+export default connect(mapStateToProps)(withRouter(Profile));

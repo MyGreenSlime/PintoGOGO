@@ -4,9 +4,8 @@ import "../cart/cart.css";
 import axios from "axios";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 import { connect } from "react-redux";
-import Progress from '../progressbar/progressbar'
+import Progress from "../progressbar/progressbar";
 
 class Payment extends Component {
   constructor(props) {
@@ -27,19 +26,16 @@ class Payment extends Component {
   }
 
   updateBill() {
-    var finalOrder = {
+    const finalOrder = {
       destination: window.txt,
       delivery_fee: this.state.deliveryFee,
       distance: this.state.distance,
       total_cost: this.state.totalCost
-    }
-    axios
-      .put("api/bills/update/current", finalOrder)
-      .then(res => {
-        // console.log("final!! ", this.state.bill);
-        
-    }).then( () => {window.location.href = '/payment'})
-}
+    };
+    axios.put("api/bills/update/current", finalOrder).then(() => {
+      window.location.href = "/payment";
+    });
+  }
 
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
@@ -53,25 +49,18 @@ class Payment extends Component {
         });
       })
       .then(() => {
-        if(this.state.bill === null || this.state.bill.order === null){
+        if (this.state.bill === null || this.state.bill.order === null) {
           this.props.history.push("/cart");
         }
-        //console.log("whole bill: ", this.state.bill);
-        //console.log("order: ", this.state.bill.order);
       })
       .then(() => {
-        axios
-          .get("/api/address/current")
-          .then(res => {
-            this.setState({
-              address: res.data,
-              isLoaded: true
-            });
-          })
-          .then(() => {
-            // console.log("address: ", this.state.address);
+        axios.get("/api/address/current").then(res => {
+          this.setState({
+            address: res.data,
+            isLoaded: true
           });
-      })
+        });
+      });
   }
 
   componentDidUpdate() {
@@ -82,17 +71,15 @@ class Payment extends Component {
 
       $(".dd__addr-choice").click(function() {
         window.txt = $(this).text();
-        // console.log("dd selected", window.txt);
       });
-      // console.log(this.ddDOM);
     }
   }
 
   calculateDeliveryFee(index) {
-    var dist = this.state.address[index].distance;
+    let dist = this.state.address[index].distance;
     dist = dist / 1000;
-    var fee = dist * 2;
-    var packageOrder = this.state.bill.order.package_order;
+    let fee = dist * 2;
+    let packageOrder = this.state.bill.order.package_order;
 
     if (packageOrder != null) {
       var i,
@@ -104,7 +91,7 @@ class Payment extends Component {
       }
     }
     fee = Math.floor(fee * maxDay);
-    var total = Math.round(this.state.bill.order_cost + fee);
+    let total = Math.round(this.state.bill.order_cost + fee);
 
     this.setState({
       distance: dist,
@@ -114,13 +101,25 @@ class Payment extends Component {
     });
   }
 
-  checkSelectAddr(){
-    console.log("select?",this.state.distSelected)
-    if(this.state.distSelected){
-      return <button type="ฺ๊button" className="btn btn-lg button__confirm" onClick={this.updateBill.bind(this)}> Confirm Order </button>;
-    }
-    else{
-      return <button type="ฺ๊button" className="btn btn-lg button__confirm" disabled> Confirm Order </button>;
+  checkSelectAddr() {
+    if (this.state.distSelected) {
+      return (
+        <button
+          type="ฺ๊button"
+          className="btn btn-lg button__confirm"
+          onClick={this.updateBill.bind(this)}
+        >
+          {" "}
+          Confirm Order{" "}
+        </button>
+      );
+    } else {
+      return (
+        <button type="ฺ๊button" className="btn btn-lg button__confirm" disabled>
+          {" "}
+          Confirm Order{" "}
+        </button>
+      );
     }
   }
 
@@ -130,11 +129,11 @@ class Payment extends Component {
     if (!!!isLoaded) {
       return <div className="loader" />;
     }
-    console.log("here addr: ", address);
-    console.log("here bill: ", bill);
-    return <React.Fragment>
+
+    return (
+      <React.Fragment>
         <div className="set-screen-payment">
-        <Progress/>
+          <Progress />
 
           <div className="box__content">
             <div className="card card-form card__payment">
@@ -195,18 +194,23 @@ class Payment extends Component {
               <br />
               <p>Choose Address</p>
               <div className="dropdown box__addr">
-                <button ref={this.ddDOM} className="btn btn-block dropdown-toggle dd__addr" type="button" data-toggle="dropdown">
+                <button
+                  ref={this.ddDOM}
+                  className="btn btn-block dropdown-toggle dd__addr"
+                  type="button"
+                  data-toggle="dropdown"
+                >
                   Selected
                 </button>
                 <div className="dropdown-menu btn-block">
                   {address.map((it, index) => (
-                    <a
+                    <li
                       key={index}
                       className="dropdown-item dd__addr-choice break__word"
                       onClick={this.calculateDeliveryFee.bind(this, index)}
                     >
                       {it.address}
-                    </a>
+                    </li>
                   ))}
                 </div>
               </div>
@@ -249,7 +253,8 @@ class Payment extends Component {
             </div>
           </div>
         </div>
-      </React.Fragment>;
+      </React.Fragment>
+    );
   }
 }
 
@@ -263,6 +268,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps
-)(withRouter(Payment));
+export default connect(mapStateToProps)(withRouter(Payment));

@@ -54,7 +54,7 @@ export default class ModalMap extends Component {
       return (
         <button
           type="button"
-          class="btn button--save"
+          className="btn button--save"
           data-toggle="modal"
           data-target="#modalMap"
           disabled
@@ -66,7 +66,7 @@ export default class ModalMap extends Component {
     return (
       <button
         type="button"
-        class="btn button--save"
+        className="btn button--save"
         data-toggle="modal"
         data-target="#modalMap"
       >
@@ -80,32 +80,23 @@ export default class ModalMap extends Component {
       <React.Fragment>
         <div className="container">
           {this.checkAmountAddr()}
-          {/* <button
-            type="button"
-            class="btn button--save"
-            data-toggle="modal"
-            data-target="#modalMap"
-          >
-            Add Address
-          </button> */}
-
           <div
-            class="modal fade"
+            className="modal fade"
             id="modalMap"
             tabindex="-1"
             role="dialog"
             aria-labelledby="modalMapTitle"
             aria-hidden="true"
           >
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body">
+            <div className="modal-dialog modal-dialog-centered" role="document">
+              <div className="modal-content">
+                <div className="modal-body">
                   <GoogleMap handleFromParent={this.handleData} />
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-warning button--save"
+                    className="btn btn-warning button--save"
                     data-dismiss="modal"
                     onClick={this.handleSaveAddr}
                   >

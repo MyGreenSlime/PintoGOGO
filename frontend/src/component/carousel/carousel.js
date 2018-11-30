@@ -3,10 +3,6 @@ import React, { Component } from "react";
 import "../carousel/style-carousel.css";
 
 export default class CarouselFood extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <section id="showcase">

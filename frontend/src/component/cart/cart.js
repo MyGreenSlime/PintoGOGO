@@ -4,9 +4,8 @@ import "../cart/cart.css";
 import { getCurrentOrder, addToBill } from "../api/api";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 import { connect } from "react-redux";
-import Progress from '../progressbar/progressbar'
+import Progress from "../progressbar/progressbar";
 
 class Cart extends Component {
   constructor() {
@@ -43,9 +42,9 @@ class Cart extends Component {
     getOrder();
   }
 
-  onOrderDeleted(index,type) {
-    console.log(this.state.order)
-    const getOrder = getCurrentOrder.bind(this,"order","isLoaded")
+  onOrderDeleted(index, type) {
+    console.log(this.state.order);
+    const getOrder = getCurrentOrder.bind(this, "order", "isLoaded");
     getOrder();
   }
 
@@ -123,7 +122,7 @@ class Cart extends Component {
     return (
       <React.Fragment>
         <div className="set-screen-cart">
-            <Progress/>
+          <Progress />
 
           <div className="cartbox">
             <div className="header">
@@ -164,6 +163,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-)(withRouter(Cart));
+export default connect(mapStateToProps)(withRouter(Cart));

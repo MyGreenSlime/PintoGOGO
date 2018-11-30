@@ -98,7 +98,7 @@ class EditProfile extends Component {
   handleSubmit(e) {
     const formData = new FormData();
 
-    if (this.state.imagePreviewUrl != this.state.checkimg) {
+    if (this.state.imagePreviewUrl !== this.state.checkimg) {
       formData.append("img", this.state.profilepic, this.state.profilepic.name);
     } else {
       formData.append("img_url", this.state.imagePreviewUrl);
@@ -179,10 +179,10 @@ class EditProfile extends Component {
 
   deleteAddr(index, type) {
     let typeOfListAdddr = "oldAddr";
-    if (typeOfListAdddr == type) {
+    if (typeOfListAdddr === type) {
       console.log("this is old address no.: ", index);
       for (let i = 0; i < this.state.oldAddr.length; i++) {
-        if (i == index) {
+        if (i === index) {
           let id = this.state.oldAddr[i]._id;
           axios.delete("/api/users/del/address/" + id).then(res => {});
           this.state.oldAddr.splice(i, 1);
@@ -195,7 +195,7 @@ class EditProfile extends Component {
     } else {
       console.log("this is new address no.: ", index);
       for (let i = 0; i < this.state.newAddr.length; i++) {
-        if (i == index) {
+        if (i === index) {
           this.state.newAddr.splice(i, 1);
           this.setState({
             amountAddr: this.state.amountAddr - 1
@@ -224,7 +224,11 @@ class EditProfile extends Component {
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>
             <div className="center">
-              <img className="userpic-edit" src={this.state.imagePreviewUrl} alt="profile picture"/>
+              <img
+                className="userpic-edit"
+                src={this.state.imagePreviewUrl}
+                alt="user profile"
+              />
               <br />
               <div className="upload-btn-wrapper">
                 <button className="btn-upload">Change Picture</button>
@@ -325,17 +329,17 @@ class EditProfile extends Component {
                 )}
               </div>
             </div>
-              <div className="col-lg">
-                <label htmlFor="PhoneNumber">Address</label>
-              </div>
-              <div className="edit-address-area">
-                {this.createRenderAddr("oldAddr")}
-                {this.createRenderAddr("newAddr")}
-              </div>
-              <ModalMap
-                handleFromEditProfile={this.handleDataAddr}
-                amountAddress={this.state.amountAddr}
-              />
+            <div className="col-lg">
+              <label htmlFor="PhoneNumber">Address</label>
+            </div>
+            <div className="edit-address-area">
+              {this.createRenderAddr("oldAddr")}
+              {this.createRenderAddr("newAddr")}
+            </div>
+            <ModalMap
+              handleFromEditProfile={this.handleDataAddr}
+              amountAddress={this.state.amountAddr}
+            />
             <br />
             <button
               width="auto"

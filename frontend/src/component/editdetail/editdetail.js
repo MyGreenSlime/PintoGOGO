@@ -35,7 +35,7 @@ class EditMenuDetail extends Component {
     if (!this.props.auth.isAuthenticated && !this.props.auth.user.type) {
       return this.props.history.push("/");
     }
-    console.log("props", this.props) 
+    console.log("props", this.props);
     var url = window.location.href;
     var res = url.split("/");
     const getMenu = getFoodOrSnack.bind(
@@ -157,7 +157,6 @@ class EditMenuDetail extends Component {
                   src={this.state.imagePreviewUrl}
                   alt={this.state.name}
                   className="editmenudetail__imgpreview"
-                  alt="preview"
                 />
                 <br />
                 <div className="upload-btn-wrapper">
@@ -168,7 +167,6 @@ class EditMenuDetail extends Component {
                     onChange={this.handleChangeImage}
                   />
                 </div>
-                
               </div>
               <div className="col-md-7">
                 <div className="row menudetail_detail_description">
@@ -308,7 +306,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-)(withRouter(EditMenuDetail));
-
+export default connect(mapStateToProps)(withRouter(EditMenuDetail));

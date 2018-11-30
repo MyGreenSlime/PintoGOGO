@@ -74,7 +74,6 @@ class MenuAndSnack extends Component {
         />
       );
     }
-    console.log("right ", img);
     return img;
   }
 
@@ -96,8 +95,6 @@ class MenuAndSnack extends Component {
     const col1 = [],
       col2 = [];
     if (isLoaded) {
-      console.log("len", menus.length);
-
       for (let i = firstImg; i < firstImg + 3; i++) {
         if (i < menus.length) {
           const card_col1 = (
@@ -143,37 +140,36 @@ class MenuAndSnack extends Component {
       </div>
     );
     return (
-      <div id="carouselExampleControls" data-interval={false} class="carousel slide" data-ride="carousel">
-      <div className="menuzone">
-        <div className="mergerow--left">
-        <a href="#carouselExampleControls" role="button" data-slide="prev">
-          <div onClick={this.leftClick.bind(this)}>
-            {this.checkFirstMenuSet()}
-          </div>
-          </a>
-        </div>
-
-          <div class="carousel-inner" >
-            <div class="carousel-item full-height active">
-              {menuShow}
-            </div>
-            <div class="carousel-item full-height">
-              {menuShow}
-            </div>
-            <div class="carousel-item full-height">
-              {menuShow}
-            </div>
+      <div
+        id="carouselExampleControls"
+        data-interval={false}
+        className="carousel slide"
+        data-ride="carousel"
+      >
+        <div className="menuzone">
+          <div className="mergerow--left">
+            <a href="#carouselExampleControls" role="button" data-slide="prev">
+              <div onClick={this.leftClick.bind(this)}>
+                {this.checkFirstMenuSet()}
+              </div>
+            </a>
           </div>
 
-        <div className="mergerow--right">
-        <a href="#carouselExampleControls" role="button" data-slide="next">
-          <div onClick={this.rightClick.bind(this)}>
-            {this.checkLastMenuSet()}
+          <div className="carousel-inner">
+            <div className="carousel-item full-height active">{menuShow}</div>
+            <div className="carousel-item full-height">{menuShow}</div>
+            <div className="carousel-item full-height">{menuShow}</div>
           </div>
-          </a>
+
+          <div className="mergerow--right">
+            <a href="#carouselExampleControls" role="button" data-slide="next">
+              <div onClick={this.rightClick.bind(this)}>
+                {this.checkLastMenuSet()}
+              </div>
+            </a>
+          </div>
+          <div />
         </div>
-        <div />
-      </div>
       </div>
     );
   }
