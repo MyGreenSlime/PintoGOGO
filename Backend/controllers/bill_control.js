@@ -122,7 +122,6 @@ exports.toDoList = (req,res) => {
     console.log("today",today)
     console.log("tomorrow",tomorrow)
     Bill.find({
-        user : req.user.id,
         isfinish : true,
         update_time : {
             $gte : today ,
