@@ -56,7 +56,7 @@ class Detail extends Component {
         return <React.Fragment>
             <div className="menudetail">
                 <div className="row menudetail__outside">
-                    <div className="col-3 homebutton">
+                    <div className="col-12 menudetail__homebutton">
                         <img src="/img/other/left-arrow.png" height="20px" alt="back"/>
                         <a href="/">
                             BACK TO HOMEPAGE
@@ -70,7 +70,7 @@ class Detail extends Component {
                 </div>
                 <div className="menudetail__detail--line" />
                 <div className="row menudetail__detail">
-                    <div className="col-5">
+                    <div className="col-md-5 col-12">
                         <img src={"\\" + this.state.menu.img_url} width="80%" className="menudetail__detail--foodimg" alt={this.state.menu[this.props.name]}/>
                         {isAuthenticated ? users : ""}
                         {user.type ? admin : ""}
@@ -85,6 +85,7 @@ class Detail extends Component {
                         </div>
                             {this.state.menu.calories} Kcal
                         </div>
+                        <br/>
                         <div className="row menudetail__detail--line" />
                         <div className='row'>
                             <div className='col-9'>
