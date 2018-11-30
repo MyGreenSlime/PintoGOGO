@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import "../cardcart/cardcart.css";
-import { increaseAmount, decreaseAmount, deleteOrder } from "../api/api"
+import { increaseAmount, decreaseAmount, deleteFoodOrder, deleteSnackOrder, deletePackageOrder} from "../api/api"
 
 class CardCart extends Component {
   constructor(props) {
@@ -47,8 +47,19 @@ class CardCart extends Component {
   }
 
   deleteOrder(){
-    const deleteFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
-    deleteFromCart();
+    const deleteFoodFromCart = deleteFoodOrder.bind(this, this.props.type_order, this.props.id)
+    const deleteSnackFromCart = deleteSnackOrder.bind(this, this.props.type_order, this.props.id)
+    const deletePackageFromCart = deletePackageOrder.bind(this, this.props.type_order, this.props.id)
+    if(this.props.type_order == "food"){
+      deleteFoodFromCart();
+    }
+    else if(this.props.type_order == "snack"){
+      deleteSnackFromCart();
+    }
+    else{
+      deletePackageFromCart();
+    }
+    
     this.state.inputField = 0;
     this.forceUpdate();
   }

@@ -157,8 +157,18 @@ export function deleteFromDB(path, id) {
   
 }
 
-export function deleteOrder(path, id) {
+export function deleteFoodOrder(path, id) {
   axios.delete("/api/orders/del/"+ path +"/"+id)
+  .then(res => console.log("delete food", res))
+}
+
+export function deleteSnackOrder(path, id) {
+  axios.delete("api/orders/del/"+ path +"/"+id)
+  .then(res => console.log("delete snack", res))
+} 
+
+export function deletePackageOrder(path, id) {
+  axios.delete("api/orders/del/"+ path +"/"+id)
   .then(res => console.log("delete order", res))
 }
 
