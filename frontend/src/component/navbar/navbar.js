@@ -27,7 +27,6 @@ class Navigationbar extends Component {
       dropdownOpen: false,
       currentUser: [],
       order: [],
-      sum_amount: 0
     };
   }
 
