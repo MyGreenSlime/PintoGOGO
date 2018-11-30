@@ -31,7 +31,7 @@ export default class Payment extends Component {
     axios
       .put("api/bills/update/current", finalOrder)
       .then(res => {
-        console.log("final!! ", this.state.bill);
+        // console.log("final!! ", this.state.bill);
         
     })
 }
@@ -45,8 +45,8 @@ export default class Payment extends Component {
         });
       })
       .then(() => {
-        console.log("whole bill: ", this.state.bill);
-        console.log("order: ", this.state.bill.order);
+        // console.log("whole bill: ", this.state.bill);
+        // console.log("order: ", this.state.bill.order);
       })
       .then(() => {
         axios
@@ -58,7 +58,7 @@ export default class Payment extends Component {
             });
           })
           .then(() => {
-            console.log("address: ", this.state.address);
+            // console.log("address: ", this.state.address);
           });
       })
   }
@@ -71,9 +71,9 @@ export default class Payment extends Component {
 
       $(".dd__addr-choice").click(function() {
         window.txt = $(this).text();
-        console.log("dd selected", window.txt);
+        // console.log("dd selected", window.txt);
       });
-      console.log(this.ddDOM);
+      // console.log(this.ddDOM);
     }
   }
 

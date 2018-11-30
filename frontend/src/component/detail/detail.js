@@ -26,7 +26,7 @@ class Detail extends Component {
     }
 
     addToCartClick(e){
-        console.log('Click!!!!');
+        // console.log('Click!!!!');
         axios.put('/api/orders/add/food',{
           food_id: this.state.menu._id,
           food_name: this.state.menu[this.props.name],
@@ -75,8 +75,8 @@ class Detail extends Component {
                         {isAuthenticated ? users : ""}
                         {user.type ? admin : ""}
                     </div>
-                    <div className="col">
-                        <div className="row menudetail_detail_description">
+                    <div className="col-md-7">
+                        <div className="row menudetail__detail__description break__word">
                             <p>{this.state.menu.description}</p>
                         </div>
                         <div className='row'>
@@ -106,7 +106,7 @@ class Detail extends Component {
                             <p>{this.state.menu.sodium} mg</p>
                         </div>
                         <div className='row'>
-                            <div className='col-9'>
+                            <div className='col-9 break__word'>
                                 <p>CARBOHYDRATE</p>
                             </div>
                             <p> {this.state.menu.carbohydrate} g</p>
@@ -126,17 +126,23 @@ class Detail extends Component {
                     </div>
                 </div>
                 <div className="row menudetaiil__summary--row">
-                    <div className="col-4 menudetaiil__summary--col">
-                        <p>{this.state.menu.protein} G</p>
-                        PROTEIN
+                    <div className="col-md-4 col-12 menudetaiil__summary--col">
+                        <div className="menudetail__summary--bg">
+                            <p>{this.state.menu.protein} G</p>
+                            PROTEIN
+                        </div>
                     </div>
-                    <div className="col-4 menudetaiil__summary--col">
-                        <p>{this.state.menu.calories} G</p>
-                        CALORIES
-                    </div>
-                    <div className="col-4 menudetaiil__summary--col">
-                        <p> {this.state.menu.carbohydrate} G</p>
-                        CARBOHYDRATE
+                    <div className="col-md-4 col-12 menudetaiil__summary--col">
+                        <div className="menudetail__summary--bg">
+                            <p>{this.state.menu.calories} G</p>
+                            CALORIES
+                            </div>
+                        </div>
+                    <div className="col-md-4 col-12 menudetaiil__summary--col break__word">
+                        <div className="menudetail__summary--bg">
+                            <p> {this.state.menu.carbohydrate} G</p>
+                            CARBOHYDRATE
+                        </div>
                     </div>
                 </div>
             </div>

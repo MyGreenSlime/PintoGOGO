@@ -24,7 +24,7 @@ class CardCart extends Component {
   }
 
   handleChange(event) {
-    console.log("event");
+    // console.log("event");
     this.setState({
       inputField: event.target.value
     });

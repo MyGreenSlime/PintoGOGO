@@ -25,9 +25,9 @@ class Enjoy extends Component {
             get_user();
         })
         .then(() => {
-            console.log("whole bill: ", this.state.bill);
-            console.log("order: ", this.state.bill.order);
-            console.log(this.state.isLoaded);
+            // console.log("whole bill: ", this.state.bill);
+            // console.log("order: ", this.state.bill.order);
+            // console.log(this.state.isLoaded);
         })
     }
 

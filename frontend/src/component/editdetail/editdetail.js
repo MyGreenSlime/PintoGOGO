@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./editdetail.css";
+import "../detail/detail.css";
 import { getFoodOrSnack, editFoodOrSnack } from "../api/api";
 
 class EditMenuDetail extends Component {
@@ -29,7 +30,7 @@ class EditMenuDetail extends Component {
   }
 
   componentDidMount() {
-    console.log("props", this.props) 
+    // console.log("props", this.props) 
     var url = window.location.href;
     var res = url.split("/");
     const getMenu = getFoodOrSnack.bind(
@@ -81,7 +82,7 @@ class EditMenuDetail extends Component {
           imagePreviewUrl: reader.result
         },
         () => {
-          console.log("pic", this.state.profilepic);
+          // console.log("pic", this.state.profilepic);
         }
       );
     };
@@ -119,7 +120,7 @@ class EditMenuDetail extends Component {
       <React.Fragment>
         <div className="all">
           <div className="row menudetail__outside">
-            <div className="col-3 menudetail__homebutton">
+            <div className="col-12 menudetail__homebutton">
               <img
                 src="/img/other/left-arrow.png"
                 alt="left arrow icon"
@@ -146,7 +147,7 @@ class EditMenuDetail extends Component {
             <div className="line" />
 
             <div className="row menudetail__detail">
-              <div className="col-5">
+              <div className="col-md-5 col-12">
                 <img
                   src={this.state.imagePreviewUrl}
                   alt={this.state.name}
@@ -161,17 +162,9 @@ class EditMenuDetail extends Component {
                     onChange={this.handleChangeImage}
                   />
                 </div>
-                <div className="row justify-content-center">
-                  <button
-                    type="submit"
-                    value="submit"
-                    className="menudetail__detail--addtocartbutton"
-                  >
-                    SAVE CHANGE
-                  </button>
-                </div>
+                
               </div>
-              <div className="col">
+              <div className="col-md-7">
                 <div className="row menudetail_detail_description">
                   <textarea
                     type="text"
@@ -280,6 +273,15 @@ class EditMenuDetail extends Component {
                     onChange={this.handleChange}
                     style={{ width: "20%" }}
                   />
+                </div>
+                <div className="row justify-content-center">
+                  <button
+                    type="submit"
+                    value="submit"
+                    className="menudetail__detail--addtocartbutton"
+                  >
+                    SAVE CHANGE
+                  </button>
                 </div>
               </div>
             </div>
