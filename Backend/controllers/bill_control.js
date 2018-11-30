@@ -81,3 +81,71 @@ exports.updateBill = (req, res) => {
         }
     })
 }
+
+exports.historyPurchase = (req, res) => {
+    const error = {}
+    Bill.find({
+        user : req.user.id,
+        isfinish : true
+    })
+    .sort({ "update_time": -1 })
+    .populate({
+        path: "order",
+        model : "Order"
+    })
+    .populate({
+        path : "order",
+        populate : {
+            path: "package_order.package_id",
+            model: "Package"
+        }
+    })
+    .exec((err, bill) => {
+        if (err) {
+            error.bills = err
+            res.status(500).json(error)
+        } else {
+            res.json(bill)
+        }
+    })
+}
+
+exports.toDoList = (req,res) => {
+    const error = {}
+    if(!req.user.type) {
+        error.admin = "need admin account"
+        res.status(500).send(error)
+    }
+    var today = new Date(new Date().setUTCHours(0,0,0,0))
+    var tomorrow = new Date(new Date().setUTCHours(0,0,0,0))
+    tomorrow.setDate(new Date().getDate()+1)
+    console.log("today",today)
+    console.log("tomorrow",tomorrow)
+    Bill.find({
+        user : req.user.id,
+        isfinish : true,
+        update_time : {
+            $gte : today ,
+            $lte : tomorrow
+        }
+    })
+    .populate({
+        path: "order",
+        model : "Order"
+    })
+    .populate({
+        path : "order",
+        populate : {
+            path: "package_order.package_id",
+            model: "Package"
+        }
+    })
+    .exec((err, bill) => {
+        if (err) {
+            error.bills = err
+            res.status(500).json(error)
+        } else {
+            res.json(bill)
+        }
+    })
+}
