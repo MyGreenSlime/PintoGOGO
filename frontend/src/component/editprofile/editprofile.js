@@ -5,9 +5,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { editProfile } from "../../actions/authActions";
 import classnames from "classnames";
-import { getProfile } from "../api/api";
+import { getProfile, deleteAddress, addAddress } from "../api/api";
 import ModalMap from "../modal-map/modalmap";
-import axios from "axios";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -171,9 +170,9 @@ class EditProfile extends Component {
           distance: this.state.newAddr[i].distance
         }
       };
-      await axios.put("/api/users/add/address", newAddress).then(res => {
-        console.log("put new address to DB: ", res.data);
-      });
+     
+      const addAddr = addAddress.bind(this, newAddress);
+      await addAddr();
     }
   }
 
@@ -184,7 +183,8 @@ class EditProfile extends Component {
       for (let i = 0; i < this.state.oldAddr.length; i++) {
         if (i == index) {
           let id = this.state.oldAddr[i]._id;
-          axios.delete("/api/users/del/address/" + id).then(res => {});
+          const deleteAddr = deleteAddress.bind(this, id);
+          deleteAddr();
           this.state.oldAddr.splice(i, 1);
           this.setState({
             amountAddr: this.state.amountAddr - 1

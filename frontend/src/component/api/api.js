@@ -114,6 +114,12 @@ export function editFoodOrSnack(path, id, data) {
       });
 }
 
+export function addAddress(data) {
+  axios.put("/api/users/add/address", data).then(res => {
+    console.log("add addr", res.data);
+  });
+}
+
 /** DELETE **/
 export function deleteFromDB(path, id) {
   axios.delete("/api/"+ path +"/del/"+id)
@@ -122,4 +128,10 @@ export function deleteFromDB(path, id) {
 export function deleteOrder(path, id) {
   axios.delete("/api/orders/del/" + path + "/" + id)
     .then(res => console.log("delete food", res))
+}
+
+
+export function deleteAddress(id) {
+  axios.delete("/api/users/del/address/" + id)
+    .then(res => console.log("delete", res));
 }

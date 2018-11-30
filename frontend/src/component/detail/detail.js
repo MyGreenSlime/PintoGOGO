@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './detail.css'
-import { getFoodOrSnack } from '../api/api';
-import axios from 'axios'
+import { getFoodOrSnack, addToCart } from '../api/api';
 
 class Detail extends Component {
     constructor(props) {
@@ -26,12 +25,13 @@ class Detail extends Component {
     }
 
     addToCartClick(e){
-        // console.log('Click!!!!');
-        axios.put('/api/orders/add/food',{
-          food_id: this.state.menu._id,
-          food_name: this.state.menu[this.props.name],
-          price: this.state.menu.price
-        })
+        const newOrder = {
+            food_id: this.state.menu._id,
+            food_name: this.state.menu[this.props.name],
+            price: this.state.menu.price
+          }
+        const addNewOrder = addToCart.bind(this, this.props.path_get_data, newOrder)
+        addNewOrder();
         e.preventDefault();
     }  
 

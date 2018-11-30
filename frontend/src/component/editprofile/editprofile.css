@@ -101,9 +101,9 @@ a {
 }
 
 .button-confirm {
-  background-color: #f7eec3;
+  background-color: #e4dac2;
   color: #7b7b7b;
-  border: 1.5px solid #e0d5a2;
+  border: none;
   width: 130px;
   font-weight: bold;
   border-radius: 8px;
@@ -122,12 +122,12 @@ a {
 }
 
 .btn-upload {
-  border: 1.5px solid gray;
+  border: none;
   color: gray;
-  background-color: #fdf2e9;
+  background-color:#ffe6cc;
   padding: 5px 8px;
   border-radius: 8px;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
 }

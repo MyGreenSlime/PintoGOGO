@@ -28,7 +28,7 @@
 }
 
 .submit__addmenu--button {
-  margin-bottom: 10%;
+  margin: 5% 0 10% 0;
   background-color: #ccc0a5;
   color: white;
   border: none;
@@ -47,3 +47,4 @@
   padding-bottom: 8px;
   padding-right: 10%;
 }
+
