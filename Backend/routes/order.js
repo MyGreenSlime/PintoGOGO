@@ -80,13 +80,13 @@ router.delete(
     "/del/snack/:id",
     passport.authenticate("jwt", {
         session: false
-    }), orderControl.decreaseAmountSnack);
+    }), orderControl.deleteSnack);
 //del package from order
 router.delete(
     "/del/package/:id",
     passport.authenticate("jwt", {
         session: false
-    }), orderControl.decreaseAmoutPackage)
+    }), orderControl.deletePackage)
 
 // pass value to bill
 router.put('/tobill', passport.authenticate('jwt', {
