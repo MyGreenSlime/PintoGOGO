@@ -16,6 +16,8 @@ export function getPackage(pack, isLoaded, path) {
   axios
     .get("/api/packages/" + path)
     .then(res => {
+      console.log("res pack",res.data)
+      console.log("path",path)
       this.setState({
         [pack]: res.data,
         [isLoaded]: true
@@ -53,7 +55,6 @@ export function getCurrentOrder(order, isLoaded) {
           [isLoaded]: true
         });
       })
-      .then(() => console.log("order", this.state[order]))
 }
 
 /** POST **/

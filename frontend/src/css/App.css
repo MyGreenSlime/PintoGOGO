@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  min-height: 70vh;
+  min-height: calc(100vh-155px);
 }
 
 .App-logo {

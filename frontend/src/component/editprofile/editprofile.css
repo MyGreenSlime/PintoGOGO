@@ -5,7 +5,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   padding: 7% 0 7% 0;
-  min-height: 40vw;
+  min-height: calc(100vh - 155px);
   background-attachment: fixed;
   background-position: top left;
 }

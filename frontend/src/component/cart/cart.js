@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import CardCart from "../cardcart/cardcart";
 import "../cart/cart.css";
 import { getCurrentOrder, addToBill } from "../api/api";
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import { connect } from "react-redux";
+import Progress from '../progressbar/progressbar'
 
 class Cart extends Component {
   constructor() {
@@ -31,6 +36,9 @@ class Cart extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
     const getOrder = getCurrentOrder.bind(this, "order", "isLoaded");
     getOrder();
   }
@@ -115,55 +123,7 @@ class Cart extends Component {
     return (
       <React.Fragment>
         <div className="set-screen-cart">
-          <div className="linkbutton">
-            <div className="row cart__menubar">
-              <div className="col" />
-              <div className="col-md-1 col-2">
-                <a href="/">
-                  <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
-                </a>
-                <p>PLAN</p>
-              </div>
-              <div className="col-md-1 d-none d-sm-block">
-                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
-              </div>
-
-              <div className="col-md-1 col-2">
-                <img src="/img/cart/cart.png" alt="cart icon" width="50%" />
-                <p>CART</p>
-              </div>
-              <div className="col-md-1 d-none d-sm-block">
-                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
-              </div>
-              <div className="col-md-1 col-2">
-                <img
-                  src="/img/cart/payment.png"
-                  alt="payment icon"
-                  width="50%"
-                />
-                <p>BILL</p>
-              </div>
-              <div className="col-md-1 d-none d-sm-block">
-                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
-              </div>
-              <div className="col-md-1 col-2">
-                <img
-                  src="/img/cart/delivery.png"
-                  alt="delivery icon"
-                  width="50%"
-                />
-                <p>PAY</p>
-              </div>
-              <div className="col-md-1 d-none d-sm-block">
-                <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
-              </div>
-              <div className="col-md-1 col-2">
-                <img src="/img/cart/enjoy.png" alt="enjoy icon" width="50%" />
-                <p>ENJOY</p>
-              </div>
-              <div className="col"/>
-            </div>
-          </div>
+            <Progress/>
 
           <div className="cartbox">
             <div className="header">
@@ -194,4 +154,16 @@ class Cart extends Component {
     );
   }
 }
-export default Cart;
+Cart.propTypes = {
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+)(withRouter(Cart));

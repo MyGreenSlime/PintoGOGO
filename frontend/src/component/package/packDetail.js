@@ -3,8 +3,12 @@ import "./package.css";
 import Nutrition from "./nutrition";
 import NoPackage from "./nopackage";
 import { getPackage, addToCart } from "../api/api";
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import { connect } from "react-redux";
 
-export default class Package3DaysDetail extends Component {
+class Package3DaysDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,9 +65,20 @@ export default class Package3DaysDetail extends Component {
 
   render() {
     const { packages, isLoaded } = this.state;
-
+    const { isAuthenticated, user } = this.props.auth;
     let list_day = [];
-
+    const addtoMyCart = (
+      <button
+        className="btn btn-set"
+        onClick={this.addToCart}
+        data-toggle="tooltip"
+        data-placement="top"
+        title="HAVE A GOOD MEAL :)"
+      >
+        {" "}
+        Add to cart{" "}
+      </button>
+    )
     if (!!!isLoaded) {
       return <div className="loader" />;
     } else {
@@ -126,16 +141,7 @@ export default class Package3DaysDetail extends Component {
                 <div className="package-box ">
                   <div className="name-pks">{packages[0].name_package}</div>
                   {list_day}
-                  <button
-                    className="btn btn-set"
-                    onClick={this.addToCart}
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="HAVE A GOOD MEAL :)"
-                  >
-                    {" "}
-                    Add to cart{" "}
-                  </button>
+                  {isAuthenticated ?   addtoMyCart: ""}
                   {/* </a> */}
                 </div>
               </div>
@@ -149,3 +155,17 @@ export default class Package3DaysDetail extends Component {
     );
   }
 }
+
+Package3DaysDetail.propTypes = {
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps
+)(withRouter(Package3DaysDetail));

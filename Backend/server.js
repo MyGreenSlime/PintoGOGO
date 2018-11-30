@@ -49,7 +49,7 @@ app.use('/api/packages', packages);
 app.use('/api/orders', orders);
 app.use('/api/bills', bills);
 app.use('/api/address', address);
-app.use('/api/payment', payment)
+app.use('/api/payment', payment);
 app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });

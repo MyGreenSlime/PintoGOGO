@@ -3,6 +3,11 @@ const router = express.Router();
 const passport = require('passport');
 
 const multer = require("multer");
+
+const User = require("../models/user");
+const Address = require("../models/address");
+const Order = require("../models/order");
+
 const storageProfile = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/uploads/upload_profile/");
@@ -40,6 +45,14 @@ router.post('/login', userControl.login)
 router.get('/profile', passport.authenticate('jwt', {
   session: false
 }), userControl.getProfile)
+
+router.get('/all', passport.authenticate('jwt', {
+  session: false
+}), userControl.promoteUser);
+
+router.put('/promote/:id', passport.authenticate('jwt', {
+  session: false
+}),userControl.promoteUser)
 
 //update profile
 router.put('/edit/profile', passport.authenticate('jwt', {

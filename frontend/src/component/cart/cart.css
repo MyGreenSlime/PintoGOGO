@@ -2,75 +2,61 @@
   background: url("/img/cart/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 1% 0 10% 0 ;
-  /* min-height: 40vw; */
+  padding: 1% 0 10% 0;
+  min-height: calc(100vh - 155px);
   background-attachment: fixed;
-  background-position :  top left; 
+  background-position: top left;
 }
 
-.linkbutton{
-    margin-top: 5%;
-    font-family: 'Quicksand', sans-serif;
-    color: #7b7b7b;
-    font-weight: bold;
+.imgcart {
+  cursor: pointer;
+}
+.imgcart:hover {
+  opacity: 0.5;
+}
+.cartbox {
+  font-family: "Quicksand", sans-serif;
+  font-size: 12px;
+  width: 80%;
+  padding: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+  color: black;
+  background-color: #f3ece7;
+  font-weight: bold;
+  border-radius: 8px;
 }
 
-.cart__menubar{
-    padding-top: 8%;
-    margin-right: 0;
+.header {
+  background-color: #ebcfc4;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 1%;
+  padding-right: 70%;
+  font-size: 15px;
 }
 
-.imgcart{
-    cursor: pointer;
-}
-.imgcart:hover{
-    opacity: 0.5;
-}
-.cartbox{
-    font-family: 'Quicksand', sans-serif;
-    font-size: 12px;
-    width: 80%;
-    padding: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2%;
-    color: black;
-    background-color: #f3ece7;
-    font-weight: bold;
-    border-radius: 8px;
+.subhead {
+  padding-top: 3%;
 }
 
-.header{
-    background-color: #ebcfc4;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    padding: 1%;
-    padding-right: 70%;
-    font-size: 15px;
+.total {
+  display: inline-block;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  padding: 1%;
+  padding-right: 70%;
+  width: 20;
 }
 
-.subhead{
-    padding-top: 3%;
+.button--confirm {
+  background-color: #e4dac2;
+  color: #7b7b7b;
+  font-weight: bold;
+  margin-bottom: 2%;
 }
 
-.total{
-    display: inline-block;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 15px;
-    padding: 1%;
-    padding-right: 70%; 
-    width: 20;
+.button--confirm:disabled {
+  background-color: #c0c0c0;
 }
-
-.button--confirm{
-    background-color: #e4dac2;
-    color: #7b7b7b;
-    font-weight: bold;
-    margin-bottom: 2%;
-}
-
-.button--confirm:disabled{
-    background-color: #c0c0c0;
-}
-
-

@@ -92,7 +92,7 @@ class PackagemanageEachdays extends Component {
         package_id: this.state.package_id,
         name_package: this.state.name_package,
         description: this.state.description,
-        type: 3,
+        type: this.props.num_day,
         day_meal: day_meal,
         price: price
       };
@@ -140,7 +140,7 @@ class PackagemanageEachdays extends Component {
       <div className="hovereffect">
         <img
           className="card-img"
-          src={"\\"+e.dragData.img_url}
+          src={e.dragData.img_url}
           alt={e.dragData.menu_name}
         />
         <div className="overlay">
@@ -261,6 +261,32 @@ class PackagemanageEachdays extends Component {
       }
     }
 
+    const login = (
+      <div >
+        <button
+          className="btn btn-shownutrition"
+          onClick ={() => window.location.href='/login'}
+        >
+          LOGIN
+        </button>
+      </div>
+    )
+    const addAndSave = (
+      <div>
+        <button
+          className="btn btn-shownutrition"
+          onClick={() => this.setPath("addcart")}
+        >
+          ADD TO CART
+        </button>
+        <button
+          className="btn btn-shownutrition" // onClick={this.testClick()}
+          onClick={() => this.setPath("add")}
+        >
+          SAVE PACKAGE
+        </button>
+      </div>
+    )
     return (
       <React.Fragment>
         <div className="packagemanage-box ">
@@ -303,20 +329,7 @@ class PackagemanageEachdays extends Component {
                     day={this.props.num_day}
                   />
                 </div>
-                <div>
-                  <button
-                    className="btn btn-shownutrition"
-                    onClick={() => this.setPath("addcart")}
-                  >
-                    ADD TO CART
-                  </button>
-                  <button
-                    className="btn btn-shownutrition" // onClick={this.testClick()}
-                    onClick={() => this.setPath("add")}
-                  >
-                    SAVE PACKAGE
-                  </button>
-                </div>
+                  {isAuthenticated ? addAndSave : login}
               </form>
             </React.Fragment>
           )}

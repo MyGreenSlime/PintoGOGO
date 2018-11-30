@@ -20,7 +20,7 @@ import Navbar from "./component/navbar/navbar";
 import Carousel from "./component/carousel/carousel";
 import Choice from "./component/choice/choice";
 import Recommend from "./component/recommend/recommend";
-import Payment from "./component/payment/payment";
+import Payment from "./component/bill/bill";
 //---------------boo---------------------------------
 import Menu from "./component/show/showmenu.js";
 import Cart from "./component/cart/cart.js";
@@ -28,7 +28,6 @@ import MenuDetail from "./component/detail/menudetail.js";
 import SnackDetail from "./component/detail/snackdetail.js";
 import EditMenuDetail from "./component/editdetail/editmenudetail/editmenudetail.js";
 import EditSnackDetail from "./component/editdetail/editsnackdetail/editsnackdetail.js";
-import Enjoy from "./component/enjoy/enjoy.js";
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
 import Package from "./component/package/package.js";
@@ -113,7 +112,6 @@ class App extends Component {
               <Route path="/detail/snack" component={SnackDetail} />
               <Route path="/edit/detail/menu" component={EditMenuDetail} />
               <Route path="/edit/detail/snack" component={EditSnackDetail} />
-              <Route path="/enjoy" component={Enjoy} />
               <Route paht="/bill" component={Payment} />
               <Route path="*" component={UnderConstruct} />
             </Switch>

@@ -49,7 +49,9 @@ export default class Savepack extends Component {
         if (!this.state.packages[0]) {
             return <NoPackage />
         }
-
+        if(this.state.isLoaded){
+          console.log("pack",this.state.packages)
+        }
         const listPackages = this.state.packages.map((pk, index) =>
             <div key={index}>
                 {this.createDivPackage(pk)}

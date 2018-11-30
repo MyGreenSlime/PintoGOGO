@@ -1,28 +1,20 @@
 .package-home {
-  display: inline;
+  padding: 0 5%;
+  overflow-x: hidden;
 }
 
-.box-left{
+.box{
   background-color: #f3ece7;
-  margin: 10% 2% 10% 18%;
+  margin: 10% auto;
   border-radius: 10px;
   width: 80%;
   height: 80%;
-  overflow-x: hidden;
+  padding: 2%;
+  overflow-y: hidden
   /* left: 50%;
   transform: translateX(-50%); */
 }
 
-.box-right{
-  background-color: #f3ece7;
-  margin: 10% 18% 10% 2%;
-  border-radius: 10px;
-  width: 80%;
-  height: 80%;
-  overflow-x: hidden;
-  /* left: 50%;
-  transform: translateX(-50%); */
-}
 
 .button--pack{
   font-size: large;
@@ -30,6 +22,9 @@
   margin: 5%;
   background-color: #e4dac2;
   text-transform: uppercase;
+  white-space: normal;
+  word-break: break-word;
+  
 }
 
 .desc--text{

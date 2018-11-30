@@ -71,7 +71,7 @@ class Detail extends Component {
                 <div className="menudetail__detail--line" />
                 <div className="row menudetail__detail">
                     <div className="col-md-5 col-12">
-                        <img src={"\\" + this.state.menu.img_url} width="80%" className="menudetail__detail--foodimg" alt={this.state.menu[this.props.name]}/>
+                        <img src={this.state.menu.img_url} width="80%" className="menudetail__detail--foodimg" alt={this.state.menu[this.props.name]}/>
                         {isAuthenticated ? users : ""}
                         {user.type ? admin : ""}
                     </div>

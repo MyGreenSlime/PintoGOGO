@@ -99,7 +99,7 @@ class Profile extends Component {
             {/* <div className=""> */}
               {currentUser.address.map((item, index) => (
                 <div className=" edit-list__addr addr-list">
-                  <li>{item.address}></li>
+                  <li>{item.address}</li>
                 </div>
               ))}
             {/* </div> */}
@@ -130,5 +130,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
 )(withRouter(Profile));

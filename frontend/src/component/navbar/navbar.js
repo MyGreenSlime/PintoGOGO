@@ -26,7 +26,7 @@ class Navigationbar extends Component {
       isOpen: false,
       dropdownOpen: false,
       currentUser: [],
-      order: [],
+      order: []
     };
   }
 
@@ -43,22 +43,25 @@ class Navigationbar extends Component {
     });
   }
 
-  countOrder(){
+  countOrder() {
     const getOrder = getCurrentOrder.bind(this, "order", "");
     getOrder();
-    let sum_amt = 0
+    let sum_amt = 0;
     for (let data in this.state.order) {
-      if (this.state.order.hasOwnProperty(data) && typeof this.state.order[data] === 'object') {
-        for(let i=0; i<this.state.order[data].length; i++){
-          sum_amt += this.state.order[data][i].amount
+      if (
+        this.state.order.hasOwnProperty(data) &&
+        typeof this.state.order[data] === "object"
+      ) {
+        for (let i = 0; i < this.state.order[data].length; i++) {
+          sum_amt += this.state.order[data][i].amount;
         }
       }
     }
 
-    if(sum_amt !== 0){
+    if (sum_amt !== 0) {
       return <div className="circle__counter">{sum_amt}</div>;
     }
-    return ;
+    return;
   }
 
   render() {
@@ -81,31 +84,7 @@ class Navigationbar extends Component {
     const authLinkes = (
       <React.Fragment>
         <NavItem className="navbar__item" onClick={this.userChoice} />
-        <NavItem className="navbar__item">
-          <NavLink href="/show/menu" className="navbar__link">
-            MENU
-          </NavLink>
-        </NavItem>
-        <NavItem className="navbar__item">
-          <NavLink href="/show/snack" className="navbar__link">
-            SNACK
-          </NavLink>
-        </NavItem>
-        <UncontrolledDropdown nav inNavbar>
-          <NavItem className="navbar__item">
-            <DropdownToggle className="navbar__link" nav caret>
-              PACKAGE
-            </DropdownToggle>
-            <DropdownMenu>
-                <NavLink href="/package" className="navbar__link">
-                  <DropdownItem>Choose package</DropdownItem>
-                </NavLink>
-                <NavLink href="/package/manage" className="navbar__link">
-                  <DropdownItem>Create package</DropdownItem>
-                </NavLink>
-            </DropdownMenu>
-          </NavItem>
-        </UncontrolledDropdown>
+
         <UncontrolledDropdown nav inNavbar>
           <NavItem className="navbar__item">
             <DropdownToggle className="navbar__link" nav caret>
@@ -156,11 +135,37 @@ class Navigationbar extends Component {
     );
     return (
       <div>
-        <Navbar light expand="md" className="navbar fixed-top">
+        <Navbar light expand="lg" className="navbar fixed-top">
           <NavbarBrand href="/">PintoGogo</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
+
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto">
+              <NavItem className="navbar__item">
+                <NavLink href="/show/menu" className="navbar__link">
+                  MENU
+                </NavLink>
+              </NavItem>
+              <NavItem className="navbar__item">
+                <NavLink href="/show/snack" className="navbar__link">
+                  SNACK
+                </NavLink>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <NavItem className="navbar__item">
+                  <DropdownToggle className="navbar__link" nav caret>
+                    PACKAGE
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <NavLink href="/package" className="navbar__link">
+                      <DropdownItem>Choose package</DropdownItem>
+                    </NavLink>
+                    <NavLink href="/package/manage" className="navbar__link">
+                      <DropdownItem>Create package</DropdownItem>
+                    </NavLink>
+                  </DropdownMenu>
+                </NavItem>
+              </UncontrolledDropdown>
               {user.type ? forAdmin : ""}
               {isAuthenticated ? authLinkes : guestLinkes}
             </Nav>
