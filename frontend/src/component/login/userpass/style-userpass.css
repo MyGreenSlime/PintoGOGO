@@ -9,7 +9,7 @@
 
 input[type=text], input[type=password] {
   left: 50%;
-  width: 105%;
+  width: 100%;
 }
 
 .submit__login--button:hover {

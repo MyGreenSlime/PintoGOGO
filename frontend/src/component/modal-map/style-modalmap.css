@@ -3,12 +3,12 @@
 }
 
 .button--save {
-  border: 1.5px solid gray;
+  /* border: 1.5px solid gray; */
   color: gray;
-  background-color: #fdf2e9;
+  background-color: #ffe6cc;
   padding: 5px 8px;
   border-radius: 8px;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
 }

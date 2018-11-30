@@ -201,9 +201,19 @@ class Add extends Component {
                   required
                 />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <input
                   className="form-control"
+                  type="file"
+                  name="img"
+                  accept="image/jpg"
+                  onChange={this.handleChangeImage}
+                  required
+                />
+              </div> */}
+              <div className="upload-btn-wrapper">
+                <button className="btn btn-upload">Add Picture</button>
+                <input
                   type="file"
                   name="img"
                   accept="image/jpg"

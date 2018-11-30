@@ -96,7 +96,7 @@ class CardCart extends Component {
                   onClick={this.decrement.bind(this)}>
                   <img src={"/img/cart/minus.png"} width="20px" />
                 </div>
-                <div className="form-group">
+                <div className="form-group-cardcart">
                   <input
                     type="text"
                     className="form-control"
