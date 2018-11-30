@@ -1,0 +1,14 @@
+.button--save:disabled {
+  background-color: #c0c0c0;
+}
+
+.button--save {
+  border: 1.5px solid gray;
+  color: gray;
+  background-color: #fdf2e9;
+  padding: 5px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}

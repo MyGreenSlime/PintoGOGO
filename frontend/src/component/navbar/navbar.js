@@ -112,12 +112,12 @@ class Navigationbar extends Component {
               {user.user_name}
             </DropdownToggle>
             <DropdownMenu>
-                <NavLink href="/profile" className="navbar__link">
-                  <DropdownItem>Profile</DropdownItem>
-                </NavLink>
-                <NavLink href="/mypackage" className="navbar__link">
-                  <DropdownItem>My Package</DropdownItem>
-                </NavLink>
+              <NavLink href="/profile" className="navbar__link">
+                <DropdownItem>Profile</DropdownItem>
+              </NavLink>
+              <NavLink href="/mypackage" className="navbar__link">
+                <DropdownItem>My Package</DropdownItem>
+              </NavLink>
             </DropdownMenu>
           </NavItem>
         </UncontrolledDropdown>

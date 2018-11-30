@@ -54,8 +54,8 @@ class Profile extends Component {
       console.log("....", this.state.currentUser);
     }
     const { currentUser } = this.state;
-    return (
-      <div className="set-screen">
+    console.log("curr", currentUser);
+    return <div className="set-screen">
         {" "}
         {/*bg*/}
         <div className="profile-box">
@@ -92,33 +92,19 @@ class Profile extends Component {
             </div>
             <div className="col">{currentUser.phonenumber}</div>
           </div>
-          <div className=" row">
-            <div className="col-sm-6">
-              <label htmlFor="PhoneNumber">Address: </label>
-            </div>
-            <div className="col">
-              <div class="dropdown">
-                <button
-                  ref={this.dropdownDOM}
-                  class="btn btn-secondary dropdown-toggle addr-dropdown"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Address
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item dd__profile-addr">
-                    {currentUser.address[0].address}
-                  </a>
-                  <a class="dropdown-item">Address 2</a>
-                  <a class="dropdown-item">Add Address</a>
+          <div className="addr-area col">
+            {/* <div className="col-lg"> */}
+              <label htmlFor="PhoneNumber">Address</label>
+            {/* </div> */}
+            {/* <div className=""> */}
+              {currentUser.address.map((item, index) => (
+                <div className=" edit-list__addr addr-list">
+                  <li>{item.address}></li>
                 </div>
-              </div>
-            </div>
+              ))}
+            {/* </div> */}
           </div>
+
           <br />
           <a href="/edit/profile">
             <button width="auto" type="submit" className="btn button-confirm">
@@ -127,8 +113,7 @@ class Profile extends Component {
             </button>
           </a>
         </div>
-      </div>
-    );
+      </div>;
   }
 }
 
