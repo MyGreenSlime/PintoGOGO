@@ -100,6 +100,7 @@ class Userpass extends Component {
 }
 
 Userpass.propTypes = {
+
   loginUser: propTypes.func.isRequired,
   auth: propTypes.object.isRequired,
   errors: propTypes.object.isRequired

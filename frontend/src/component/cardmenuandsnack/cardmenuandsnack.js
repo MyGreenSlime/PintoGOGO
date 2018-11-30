@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { BrowserRouter as Route,Link } from "react-router-dom";
 import { deleteFromDB, addToCart } from "../api/api";
+import {currentOrder } from "../../actions/authActions"
 
 class cardMenuAndSnack extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class cardMenuAndSnack extends Component {
     this.state = {
       clicked: 0
     };
+    this.addToCartClick = this.addToCartClick.bind(this)
   }
 
   addToCartClick(e) {
@@ -24,6 +26,7 @@ class cardMenuAndSnack extends Component {
     };
     const addFoodToCart = addToCart.bind(this, this.props.path, menu);
     addFoodToCart();
+    this.props.currentOrder();
     e.preventDefault();
   }
 
@@ -35,6 +38,7 @@ class cardMenuAndSnack extends Component {
     );
     deleteFood();
     this.props.onMenuCardDeleted(this.props.id);
+    this.props.currentOrder();
   }
 
   render() {
@@ -93,11 +97,14 @@ class cardMenuAndSnack extends Component {
 }
 
 cardMenuAndSnack.propTypes = {
-  auth: propTypes.object.isRequired
+  auth: propTypes.object.isRequired,
+  order : propTypes.object.isRequired,
+  currentOrder : propTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  order : state.order
 });
 
-export default connect(mapStateToProps)(cardMenuAndSnack);
+export default connect(mapStateToProps, {currentOrder})(cardMenuAndSnack);

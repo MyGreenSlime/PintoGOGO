@@ -7,8 +7,8 @@ import "../checkout/enjoy.css"
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Progress from "../progressbar/progressbar";
-
+import { currentOrder} from "../../actions/authActions"
+import Progress from '../progressbar/progressbar'
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
@@ -174,13 +174,17 @@ class CheckoutForm extends Component {
   }
 }
 CheckoutForm.propTypes = {
-  auth: propTypes.object.isRequired,
-  errors: propTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
-
-export default connect(mapStateToProps)(withRouter(injectStripe(CheckoutForm)));
+    auth: propTypes.object.isRequired,
+    errors: propTypes.object.isRequired,
+    currentOrder : propTypes.func.isRequired
+  };
+  
+  const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors,
+    order : state.order
+  });
+  
+  export default connect(
+    mapStateToProps, {currentOrder}
+  )(withRouter(injectStripe(CheckoutForm)));

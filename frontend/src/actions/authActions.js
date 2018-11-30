@@ -1,4 +1,4 @@
-import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, SET_CURRENT_ORDER } from "./types";
 import axios from "axios";
 import setAuthToken from "../util/setAuthToken";
 import jwt_decode from "jwt-decode";
@@ -47,6 +47,46 @@ export const loginUser = userData => dispatch => {
         payload: err.response.data
       });
     });
+};
+//Order
+export const currentOrder = () => dispatch => {
+  axios
+    .get("/api/orders/current")
+    .then(res => {
+      const order = res.data;
+      var sum_amt = 0;
+      var thisorder = {
+        amount : 0,
+        order : res.data
+      }
+      for (let data in order) {
+        if (
+          order.hasOwnProperty(data) &&
+          typeof order[data] === "object"
+        ) {
+          for (let i = 0; i < order[data].length; i++) {
+            sum_amt += order[data][i].amount;
+          }
+        }
+      }
+      thisorder.amount = sum_amt
+      //Set current user
+      dispatch(setCurrentAmountOrder(thisorder));
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      });
+    })
+};
+
+export const setCurrentAmountOrder = amount_order => {
+  return {
+    type: SET_CURRENT_ORDER,
+    payload: amount_order
+  };
 };
 
 export const setCurrentUser = decode => {

@@ -95,13 +95,14 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
     })
 }
 
-export function addPayment(data,status,waiting) {
+export function addPayment(data,status,waiting,current) {
   axios.post("/api/payment/charge", data).then(res => {
     if (res.data.ok === 1) {
       this.setState({
         [status]: true,
         [waiting]: false
       });
+      this.props.currentOrder();
     }
   });
   

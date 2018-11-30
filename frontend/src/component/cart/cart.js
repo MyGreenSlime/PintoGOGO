@@ -5,7 +5,8 @@ import { getCurrentOrder, addToBill } from "../api/api";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Progress from "../progressbar/progressbar";
+import Progress from '../progressbar/progressbar'
+import { currentOrder } from "../../actions/authActions"
 
 class Cart extends Component {
   constructor() {
@@ -155,12 +156,17 @@ class Cart extends Component {
 }
 Cart.propTypes = {
   auth: propTypes.object.isRequired,
-  errors: propTypes.object.isRequired
+  errors: propTypes.object.isRequired,
+  currentOrder : propTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  order : state.errors
 });
 
-export default connect(mapStateToProps)(withRouter(Cart));
+export default connect(
+  mapStateToProps,
+  { currentOrder }
+)(withRouter(Cart));
