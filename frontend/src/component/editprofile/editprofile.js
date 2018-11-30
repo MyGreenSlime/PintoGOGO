@@ -112,13 +112,6 @@ class EditProfile extends Component {
     e.preventDefault();
   }
 
-  deleteAddr(id) {
-    console.log("button delete click!");
-    axios.delete("/api/users/del/address/" + id).then(res => {
-      console.log("delete addr success");
-    });
-  }
-
   handleDataAddr(addr, lat, lng, dist) {
     this.setState(
       {
@@ -150,13 +143,13 @@ class EditProfile extends Component {
       const list_addr = this.state[addr].map((item, index) => (
         <li className="edit-list__addr">
           {item.address}
-          {/* <button
+          <button
             type="button"
             className="btn btn-delete"
-            onClick={this.deleteAddr.bind(this, this.state[addr][index]._id)}
+            onClick={this.deleteAddr.bind(this, index, addr)}
           >
             <i class="fa fa-close" />
-          </button> */}
+          </button>
         </li>
       ));
 
@@ -164,10 +157,32 @@ class EditProfile extends Component {
     }
   }
 
+  deleteAddr(index, type) {
+    let typeOfListAdddr = "address";
+    if (typeOfListAdddr == type) {
+      console.log("this is old address no.: ", index);
+      for (let i = 0; i < this.state.address.length; i++) {
+        if (i == index) {
+          let id = this.state.address[i]._id;
+          axios.delete("/api/users/del/address/" + id).then(res => {});
+          this.state.address.splice(i, 1);
+        }
+      }
+      this.forceUpdate();
+    } else {
+      console.log("this is new address no.: ", index);
+      for (var i = 0; i < this.state.newAddr.length; i++) {
+        if (i == index) {
+          this.state.newAddr.splice(i, 1);
+        }
+      }
+      this.forceUpdate();
+    }
+  }
+
   async updateAddress() {
-    var len = Object.keys(this.state.newAddr).length;
-    for (var i = 0; i < len; i++) {
-      console.log(this.state.newAddr[i]);
+    let len = Object.keys(this.state.newAddr).length;
+    for (let i = 0; i < len; i++) {
       const newAddress = {
         address: {
           address: this.state.newAddr[i].address,
@@ -321,7 +336,7 @@ class EditProfile extends Component {
             <br />
             <button
               width="auto"
-              type="button"
+              type="submit"
               className="btn button-confirm"
               onClick={this.updateAddress}
             >
