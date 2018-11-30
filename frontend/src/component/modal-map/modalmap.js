@@ -30,6 +30,7 @@ export default class ModalMap extends Component {
         }
       },
       () => {
+        console.log("address from modal", this.state.address)
         // console.log("modal destination: ", this.state.address.address);
         // console.log("modal lat: ", this.state.address.lat);
         // console.log("modal lng: ", this.state.address.lng);
@@ -39,7 +40,9 @@ export default class ModalMap extends Component {
   }
 
   handleSaveAddr() {
+    // console.log("address from modal". this.state.address)
     this.props.handleFromEditProfile(
+      
       this.state.address.address,
       this.state.address.lat,
       this.state.address.lng,

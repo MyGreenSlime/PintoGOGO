@@ -35,6 +35,7 @@ class EditProfile extends Component {
     this.setUser = this.setUser.bind(this);
     this.deleteAddr = this.deleteAddr.bind(this);
     this.handleDataAddr = this.handleDataAddr.bind(this);
+    this.createRenderAddr = this.createRenderAddr.bind(this)
   }
 
   componentDidMount() {
@@ -120,7 +121,7 @@ class EditProfile extends Component {
   handleDataAddr(addr, lat, lng, dist) {
     this.setState(
       {
-        amountAddr: this.state.amountAddr + 1
+        amountAddr: this.state.amountAddr + 1,
       },
       () => {
         console.log("length addr: ", this.state.amountAddr);
@@ -131,6 +132,7 @@ class EditProfile extends Component {
           distance: dist
         };
         this.state.newAddr.push(new_addr);
+        this.forceUpdate();
       }
     );
     console.log("address from handle: ", addr);
@@ -140,10 +142,15 @@ class EditProfile extends Component {
   }
 
   createRenderAddr(addr) {
+    if(this.state[addr] <= 0) {
+      return;
+    }
+    else {
+      console.log("from create render", this.state[addr])
     const list_addr = this.state[addr].map((item, index) => (
       <li className="edit-list__addr">
         {item.address}
-        {/* <button
+        <button
           type="button"
           className="btn btn-delete"
           onClick={this.deleteAddr.bind(
@@ -152,11 +159,12 @@ class EditProfile extends Component {
           )}
         >
           <i class="fa fa-close" />
-        </button> */}
+        </button>
       </li>
     ));
 
     return list_addr;
+      }
   }
 
   render() {
@@ -287,39 +295,7 @@ class EditProfile extends Component {
                   <ul>
                     {this.createRenderAddr("address")}
                     {this.createRenderAddr("newAddr")}
-                    {/* {currentUser.address.map((item, index) => (
-                      <li className="edit-list__addr">
-                        {item.address}
-                        <button
-                          type="button"
-                          className="btn btn-delete"
-                          onClick={this.deleteAddr.bind(
-                            this,
-                            currentUser.address[index]._id
-                          )}
-                        >
-                          <i class="fa fa-close" />
-                        </button>
-                      </li>
-                    ))} */}
                   </ul>
-                  {/* {currentUser.address.map((item, index) => (
-                    <ul>
-                      <li className="edit-list__addr">
-                        {item.address}
-                        <button
-                          type="button"
-                          className="btn btn-delete"
-                          onClick={this.deleteAddr.bind(
-                            this,
-                            currentUser.address[index]._id
-                          )}
-                        >
-                          <i class="fa fa-close" />
-                        </button>
-                      </li>
-                    </ul>
-                  ))} */}
                 </div>
                 <ModalMap
                   handleFromEditProfile={this.handleDataAddr}
