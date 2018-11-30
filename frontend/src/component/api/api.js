@@ -119,7 +119,6 @@ export function deleteFromDB(path, id) {
 }
 
 export function deleteOrder(path, id) {
-  axios.delete("/api/orders/del/"+ path +"/"+id)
+  axios.delete("/api/orders/del/" + path + "/" + id)
+    .then(res => console.log("delete food", res))
 }
-
-

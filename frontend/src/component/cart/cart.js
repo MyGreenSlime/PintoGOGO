@@ -13,7 +13,7 @@ class Cart extends Component {
       order: null,
       isLoaded: false
     };
-    this.createCardCart = this.createCardCart.bind(this)
+    this.createCardCart = this.createCardCart.bind(this);
     this.confirmButtonClicked = this.confirmButtonClicked.bind(this);
   }
 
@@ -35,47 +35,68 @@ class Cart extends Component {
     getOrder();
   }
 
-  createCardCart(type){
+  onOrderDeleted(index,type) {
+    console.log(this.state.order)
+    const getOrder = getCurrentOrder.bind(this,"order","isLoaded")
+    getOrder();
+  }
+
+  createCardCart(type) {
     let card_cart;
-    let img_url
-    if(type === "package"){
-      img_url = ""
+    let img_url;
+    if (type === "package") {
+      img_url = "";
+    } else {
+      img_url = "img_url";
     }
-    else{
-      img_url = "img_url"
-    }
-    if(!this.state.order[type+"_order"]){
-      card_cart = <div/>
-    }else{
+    if (!this.state.order[type + "_order"]) {
+      card_cart = <div />;
+    } else {
       card_cart = this.state.order[type + "_order"].map((ord, index) => (
         <CardCart
           handlerFromParant={this.handleData}
-          // ord.food_id.img_url
-          picture={ord[type +"_id"][img_url]}
-          name={ord[type+"_name"]}
+          picture={ord[type + "_id"][img_url]}
+          name={ord[type + "_name"]}
           price={ord.price}
           amount={ord.amount}
-          id={ord[type+"_id"]._id}
+          id={ord[type + "_id"]._id}
           type_order={type}
+          onOrderDeleted={this.onOrderDeleted.bind(this, index, type)}
         />
       ));
     }
     return card_cart;
   }
 
-  checkOrder(){
+  checkOrder() {
     let is_no_order = true;
-    for(let data in this.state.order){
-      if(this.state.order.hasOwnProperty(data) && typeof this.state.order[data] === 'object'){
-        if(this.state.order[data].length !== 0){
-          is_no_order = false
+    for (let data in this.state.order) {
+      if (
+        this.state.order.hasOwnProperty(data) &&
+        typeof this.state.order[data] === "object"
+      ) {
+        if (this.state.order[data].length !== 0) {
+          is_no_order = false;
         }
       }
     }
-    if(is_no_order){
-      return <button className="btn button--confirm" disabled> CONFIRM </button>;
+    if (is_no_order) {
+      return (
+        <button className="btn button--confirm" disabled>
+          {" "}
+          CONFIRM{" "}
+        </button>
+      );
     }
-    return <button className="btn button--confirm" onClick={this.confirmButtonClicked}> CONFIRM </button>;
+    return (
+      <button
+        className="btn button--confirm"
+        onClick={this.confirmButtonClicked}
+      >
+        {" "}
+        CONFIRM{" "}
+      </button>
+    );
   }
 
   confirmButtonClicked() {
