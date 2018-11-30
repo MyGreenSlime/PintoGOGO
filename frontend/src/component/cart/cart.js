@@ -117,7 +117,7 @@ class Cart extends Component {
         <div className="set-screen-cart">
           <div className="linkbutton">
             <div className="row cart__menubar">
-              <div className="col-1" />
+              <div className="col" />
               <div className="col-md-1 col-2">
                 <a href="/">
                   <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
@@ -161,6 +161,7 @@ class Cart extends Component {
                 <img src="/img/cart/enjoy.png" alt="enjoy icon" width="50%" />
                 <p>ENJOY</p>
               </div>
+              <div className="col"/>
             </div>
           </div>
 

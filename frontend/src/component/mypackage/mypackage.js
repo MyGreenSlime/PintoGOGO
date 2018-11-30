@@ -12,11 +12,21 @@ export default class MyPackage extends Component {
     };
     this.createDivPackage = this.createDivPackage.bind(this);
     this.deleteFromDb = this.deleteFromDb.bind(this);
+    this.onPackageDeleted = this.onPackageDeleted.bind(this);
   }
 
   deleteFromDb(curPack) {
     const deletePackage = deleteFromDB.bind(this, "packages", curPack._id);
     deletePackage();
+    this.onPackageDeleted(curPack._id)
+  }
+
+  onPackageDeleted(index) {
+    const newPackages = this.state.packages.slice();
+    newPackages.splice(index, 1);
+    this.setState({
+      packages: newPackages
+    });
   }
 
   componentDidMount() {
@@ -89,7 +99,7 @@ export default class MyPackage extends Component {
               </a>
               <br />
               <a href="/package/manage">
-                <button className="btn view-mypks">
+                <button className="btn create-mypks">
                   Try create your own package
                 </button>
               </a>

@@ -39,18 +39,15 @@ class Enjoy extends Component {
             console.log("....", this.state.currentUser);
           }
         
-        return (
-            <React.Fragment>
-                <div className="enjoy__container">
-                    <img src="img/login/icon.png" width="20%"/>
-                    <div>Enjoy your food...</div>
-                </div>
-                <div>
-                    Your order id: {this.state.bill._id}
-                </div>
-            </React.Fragment>
-
-        );
+        return <React.Fragment>
+            <div className="set-screen-enjoy">
+              <div className="enjoy__container">
+                <img src="img/login/icon.png" width="20%" />
+                <div>Enjoy your food...</div>
+              </div>
+              <div>Your order id: {this.state.bill._id}</div>
+            </div>
+          </React.Fragment>;
     }
 }
 export default Enjoy;

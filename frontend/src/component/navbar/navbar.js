@@ -81,6 +81,31 @@ class Navigationbar extends Component {
     const authLinkes = (
       <React.Fragment>
         <NavItem className="navbar__item" onClick={this.userChoice} />
+        <NavItem className="navbar__item">
+          <NavLink href="/show/menu" className="navbar__link">
+            MENU
+          </NavLink>
+        </NavItem>
+        <NavItem className="navbar__item">
+          <NavLink href="/show/snack" className="navbar__link">
+            SNACK
+          </NavLink>
+        </NavItem>
+        <UncontrolledDropdown nav inNavbar>
+          <NavItem className="navbar__item">
+            <DropdownToggle className="navbar__link" nav caret>
+              PACKAGE
+            </DropdownToggle>
+            <DropdownMenu>
+                <NavLink href="/package" className="navbar__link">
+                  <DropdownItem>Choose package</DropdownItem>
+                </NavLink>
+                <NavLink href="/package/manage" className="navbar__link">
+                  <DropdownItem>Create package</DropdownItem>
+                </NavLink>
+            </DropdownMenu>
+          </NavItem>
+        </UncontrolledDropdown>
         <UncontrolledDropdown nav inNavbar>
           <NavItem className="navbar__item">
             <DropdownToggle className="navbar__link" nav caret>

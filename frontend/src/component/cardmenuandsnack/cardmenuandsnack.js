@@ -38,7 +38,7 @@ class cardMenuAndSnack extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const users = (
       <div className="cartmenu__cart" onClick={this.addToCartClick.bind(this)}>
-        <img src={"/img/other/cart.png"} alt="cart icon" height="20" />
+        <img className="on-click" src={"/img/other/cart.png"} alt="cart icon" height="20" />
       </div>
     )
     const admin = (
@@ -50,18 +50,20 @@ class cardMenuAndSnack extends Component {
     )
     return <section className="menu">
       {/* block__element--modify */}
-      <div className="cardmenu__image">
+      <div className="on-click-img cardmenu__image">
         <Link to={this.props.path_detail + this.props.id}>
           <img src={"\\"+this.props.picture} alt={this.props.name} width="70%" className="cardmenu__image--border"  />
         </Link>
       </div>
 
-      <div className="row cardmenu__undermenu--minwidth">
+      <div className="row cardmenu__undermenu">
         <div className="col-9 cardmenu__text">
-          <p>
+          <div className="menu-name">
             {this.props.name}<br />
+            </div>
+            
             {this.props.calories} Kcal
-            </p>
+            
         </div>
 
         <div className="col-3">

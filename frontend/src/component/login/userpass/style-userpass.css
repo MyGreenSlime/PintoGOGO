@@ -12,20 +12,46 @@ input[type=text], input[type=password] {
   width: 105%;
 }
 
-.submit__login--button {
-  background-color: #ccc0a5;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  padding: 5px;
-  width: 50%;
-  min-width: 100px;
-  font-family: "Quicksand", sans-serif;
-  height: auto;
-  margin-bottom: 8%;
-  margin-top: 3%;
-}
-
 .submit__login--button:hover {
   background-color: #d3c4be;
+}
+
+.button-login {
+  /* width: 50%;
+  min-width: 100px; */
+  border-radius: 10px;
+  background-color: #ccc0a5;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px 10%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-bottom: 8%;
+  margin-top: 3%;
+  height: auto;
+}
+
+.button-login span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button-login span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button-login:hover span {
+  padding-right: 25px;
+}
+
+.button-login:hover span:after {
+  opacity: 1;
+  right: 0;
 }

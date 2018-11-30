@@ -70,6 +70,7 @@ class CardCart extends Component {
   }
 
   render() {
+    {console.log("props", this.props)}
     return (
       <React.Fragment>
         <div className="cardcartbox">
