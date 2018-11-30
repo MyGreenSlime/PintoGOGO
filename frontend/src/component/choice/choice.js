@@ -77,8 +77,12 @@ export default class Choice extends Component {
         <div className="choice-box">
           <div className="row">
             <div className="col-md-4 col-6">
-              <img className="img-choice"  src="../img/choice/choice_1.png" />
-              <div >
+              <img
+                className="img-choice"
+                src="../img/choice/choice_1.png"
+                alt="menu icon"
+              />
+              <div>
                 <button
                   className={this.setActiveButton(this.state.isMenu)}
                   onClick={this.changeRenderToMenu}
@@ -88,7 +92,11 @@ export default class Choice extends Component {
               </div>
             </div>
             <div className="col-md-4 col-6">
-              <img className="img-choice" src="../img/choice/choice_2.png" />
+              <img
+                className="img-choice"
+                src="../img/choice/choice_2.png"
+                alt="package icon"
+              />
               <button
                 className={this.setActiveButton(this.state.isPackage)}
                 onClick={this.changeRenderToPackage}
@@ -97,7 +105,11 @@ export default class Choice extends Component {
               </button>
             </div>
             <div className="col-md-4 col-6 center">
-              <img className="img-choice" src="../img/choice/choice_3.png" />
+              <img
+                className="img-choice"
+                src="../img/choice/choice_3.png"
+                alt="snack icon"
+              />
               <button
                 className={this.setActiveButton(this.state.isSnack)}
                 onClick={this.changeRenderToSnack}

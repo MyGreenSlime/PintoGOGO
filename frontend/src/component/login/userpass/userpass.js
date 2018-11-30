@@ -18,7 +18,6 @@ class Userpass extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.onResize, false);
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/');
       //window.location.href = "/";
@@ -37,9 +36,6 @@ class Userpass extends Component {
     }
   }
 
-  onResize(e) {
-    console.log(`${e.target.innerWidth} ${e.target.innerHeight}`);
-  }
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value

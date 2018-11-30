@@ -4,7 +4,6 @@ import LinkWithPrev from "../LinkWithPrev/linkwithprev.js";
 import { deleteFromDB, getPackage } from "../api/api";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 import { connect } from "react-redux";
 class MyPackage extends Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class MyPackage extends Component {
   deleteFromDb(curPack) {
     const deletePackage = deleteFromDB.bind(this, "packages", curPack._id);
     deletePackage();
-    this.onPackageDeleted(curPack._id)
+    this.onPackageDeleted(curPack._id);
   }
 
   onPackageDeleted(index) {
@@ -119,8 +118,6 @@ class MyPackage extends Component {
     const listPackages = this.state.packages.map((pk, index) => (
       <div key={index}>{this.createDivPackage(pk)}</div>
     ));
-    console.log(typeof this.state.packages.data);
-
     return (
       <React.Fragment>
         <div className="set-screen-mypack">
@@ -143,6 +140,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps
-)(withRouter(MyPackage));
+export default connect(mapStateToProps)(withRouter(MyPackage));

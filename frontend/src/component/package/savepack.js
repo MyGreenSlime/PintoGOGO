@@ -50,14 +50,12 @@ export default class Savepack extends Component {
             return <NoPackage />
         }
         if(this.state.isLoaded){
-          console.log("pack",this.state.packages)
         }
         const listPackages = this.state.packages.map((pk, index) =>
             <div key={index}>
                 {this.createDivPackage(pk)}
             </div>
         );
-        console.log(typeof this.state.packages.data)
 
         return (
             <React.Fragment>

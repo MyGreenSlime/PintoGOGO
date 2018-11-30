@@ -32,8 +32,6 @@ export default class Map extends Component {
   }
 
   initMap() {
-    // console.log(this.divMap.current);
-
     // CREATE MAP
     window.myGMap = new window.google.maps.Map(this.divMap.current, {
       center: { lat: 13.736717, lng: 100.523186 },
@@ -82,7 +80,6 @@ export default class Map extends Component {
 
       window.lat = window.autocomplete.getPlace().geometry.location.lat();
       window.lng = window.autocomplete.getPlace().geometry.location.lng();
-      // console.log("latlng from autocomp: ", window.lat, window.lng);
 
       var latlng = new window.google.maps.LatLng(window.lat, window.lng);
       window.marker.setPosition(latlng);
@@ -131,7 +128,6 @@ export default class Map extends Component {
           window.destAddr = response.destinationAddresses;
           window.distance = response.rows[0].elements[0].distance.value;
           window.duration = response.rows[0].elements[0].duration;
-          console.log("get distance (m): ", window.distance);
         }
       }
     );
@@ -152,7 +148,6 @@ export default class Map extends Component {
       if (status === window.google.maps.GeocoderStatus.OK) {
         if (results[1]) {
           window.placeid = results[1].place_id;
-          // console.log("place id: ", results[1].place_id);
         } else {
           window.alert("No results found");
         }
@@ -203,7 +198,6 @@ export default class Map extends Component {
     setTimeout(() => {
       window.handleSubmit();
     }, 1000);
-    console.log("func handleDataFromGmap worked");
   }
 
   render() {

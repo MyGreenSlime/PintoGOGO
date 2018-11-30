@@ -5,7 +5,6 @@ import NoPackage from "./nopackage";
 import { getPackage, addToCart } from "../api/api";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 import { connect } from "react-redux";
 
 class Package3DaysDetail extends Component {
@@ -16,13 +15,12 @@ class Package3DaysDetail extends Component {
       isLoaded: false
     };
     this.addToCart = this.addToCart.bind(this);
-    console.log("props", this.props);
   }
 
   componentDidMount() {
     var url = window.location.href;
     var res = url.split("/");
-    console.log(res[res.length - 1])
+
     const get_package = getPackage.bind(
       this,
       "packages",
@@ -33,7 +31,6 @@ class Package3DaysDetail extends Component {
   }
 
   addToCart() {
-    console.log("add pack");
     var newPack = {
       package_id: this.state.packages[0]._id,
       package_name: this.state.packages[0].name_package,
@@ -53,8 +50,8 @@ class Package3DaysDetail extends Component {
       <div className="col card-pack-img hovereffect">
         <img
           className="card-img img-responsive"
-          src={"\\" + pack[0].day_meal[day]["meal_" + meal].img_url}
-          alt={pack[0].day_meal[day]["meal_"+meal].menu_name}
+          src={pack[0].day_meal[day]["meal_" + meal].img_url}
+          alt={pack[0].day_meal[day]["meal_" + meal].menu_name}
         />
         <div className="overlay">
           <h2>{pack[0].day_meal[day]["meal_" + meal].menu_name}</h2>
@@ -65,7 +62,7 @@ class Package3DaysDetail extends Component {
 
   render() {
     const { packages, isLoaded } = this.state;
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
     let list_day = [];
     const addtoMyCart = (
       <button
@@ -78,13 +75,13 @@ class Package3DaysDetail extends Component {
         {" "}
         Add to cart{" "}
       </button>
-    )
+    );
     if (!!!isLoaded) {
       return <div className="loader" />;
     } else {
       let day = 0;
       for (let i = 0; i < packages[0].type; i += 2) {
-        if (packages[0].type % 2 == 1 && i == packages[0].type - 1) {
+        if (packages[0].type % 2 === 1 && i === packages[0].type - 1) {
           list_day[i] = (
             <div className="row">
               <div className="col-3-sm col-set" />
@@ -123,7 +120,6 @@ class Package3DaysDetail extends Component {
     }
 
     if (!packages[0]) {
-      console.log("in no pack");
       return <NoPackage />;
     }
 
@@ -132,7 +128,11 @@ class Package3DaysDetail extends Component {
         <div className="set-screen-pack">
           <div className="set-frame-each-pks">
             <div className="backtopks row">
-              <img src="/img/other/left-arrow.png" height="25px" />
+              <img
+                src="/img/other/left-arrow.png"
+                height="25px"
+                alt="left arrow"
+              />
               <a href={this.props.location.state.prevLocation}>BACK</a>
             </div>
 
@@ -141,8 +141,7 @@ class Package3DaysDetail extends Component {
                 <div className="package-box ">
                   <div className="name-pks">{packages[0].name_package}</div>
                   {list_day}
-                  {isAuthenticated ?   addtoMyCart: ""}
-                  {/* </a> */}
+                  {isAuthenticated ? addtoMyCart : ""}
                 </div>
               </div>
               <div className="col-md">
@@ -166,6 +165,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps
-)(withRouter(Package3DaysDetail));
+export default connect(mapStateToProps)(withRouter(Package3DaysDetail));

@@ -16,8 +16,6 @@ export function getPackage(pack, isLoaded, path) {
   axios
     .get("/api/packages/" + path)
     .then(res => {
-      console.log("res pack",res.data)
-      console.log("path",path)
       this.setState({
         [pack]: res.data,
         [isLoaded]: true
@@ -99,7 +97,6 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
 
 export function addPayment(data,status,waiting) {
   axios.post("/api/payment/charge", data).then(res => {
-    console.log(res);
     if (res.data.ok === 1) {
       this.setState({
         [status]: true,
@@ -141,9 +138,7 @@ export function updateBill(data){
     .then(() => { window.location.href = '/payment' })
 }
 export function addAddress(data) {
-  axios.put("/api/users/add/address", data).then(res => {
-    console.log("add addr", res.data);
-  });
+  axios.put("/api/users/add/address", data)
 }
 
 /** DELETE **/
@@ -153,11 +148,9 @@ export function deleteFromDB(path, id) {
 
 export function deleteOrder(path, id) {
   axios.delete("/api/orders/del/" + path + "/" + id)
-    .then(res => console.log("delete food", res))
 }
 
 
 export function deleteAddress(id) {
   axios.delete("/api/users/del/address/" + id)
-    .then(res => console.log("delete", res));
 }

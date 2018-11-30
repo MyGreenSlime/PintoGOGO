@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import "../cardcart/cardcart.css";
-import { increaseAmount, decreaseAmount, deleteOrder} from "../api/api"
+import { increaseAmount, decreaseAmount, deleteOrder } from "../api/api";
 
 class CardCart extends Component {
   constructor(props) {
     super(props);
-    // console.log(props);
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.interval = setInterval(() => this.submitHandler(), 1000);
@@ -24,77 +23,103 @@ class CardCart extends Component {
   }
 
   handleChange(event) {
-    // console.log("event");
     this.setState({
       inputField: event.target.value
     });
   }
 
   increment() {
-    const increase = increaseAmount.bind(this, this.props.type_order, this.props.id);
+    const increase = increaseAmount.bind(
+      this,
+      this.props.type_order,
+      this.props.id
+    );
     increase();
     this.setState({
-      inputField: this.state.inputField+1
-    })
+      inputField: this.state.inputField + 1
+    });
   }
 
   decrement() {
-    const decrease = decreaseAmount.bind(this, this.props.type_order, this.props.id);
+    const decrease = decreaseAmount.bind(
+      this,
+      this.props.type_order,
+      this.props.id
+    );
     if (this.state.inputField > 1) {
       decrease();
       this.setState({
-        inputField: this.state.inputField-1
-      })
+        inputField: this.state.inputField - 1
+      });
     }
-    
   }
 
-  deleteOrder(){
-    const deleteFoodFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
-    const deleteSnackFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
-    const deletePackageFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
+  deleteOrder() {
+    const deleteFoodFromCart = deleteOrder.bind(
+      this,
+      this.props.type_order,
+      this.props.id
+    );
+    const deleteSnackFromCart = deleteOrder.bind(
+      this,
+      this.props.type_order,
+      this.props.id
+    );
+    const deletePackageFromCart = deleteOrder.bind(
+      this,
+      this.props.type_order,
+      this.props.id
+    );
     if (this.props.type_order === "food") {
       deleteFoodFromCart();
-    }
-    else if (this.props.type_order === "snack") {
+    } else if (this.props.type_order === "snack") {
       deleteSnackFromCart();
-    }
-    else {
+    } else {
       deletePackageFromCart();
     }
     this.setState({
       inputField: 0
-    })
+    });
     this.forceUpdate();
-    this.props.onOrderDeleted(this.props.id,this.props.type_order);
+    this.props.onOrderDeleted(this.props.id, this.props.type_order);
   }
 
   render() {
-    {console.log("props", this.props)}
+    let img
+    if(this.props.type_order === "package"){
+      img = ""
+    }else{
+      img = <img
+        src={this.props.picture}
+        width="60%"
+        className="cardcart__image"
+        alt = {this.props.type_order}
+      />
+    }
     return (
       <React.Fragment>
         <div className="cardcartbox">
           <hr />
           <div className="row rowcard">
             <div className="col-md-2 d-none d-sm-block img__block">
-              <img
-                src={this.props.picture}
-                width="60%"
-                className="cardcart__image"
-              />
+              {img}
             </div>
             <div className="col-md-3 col-7 menuname__block">
               <p>{this.props.name}</p>
             </div>
-            <div className="col-md-1 col-5 cardcartbox--delete" onClick={this.deleteOrder.bind(this)}>
+            <div
+              className="col-md-1 col-5 cardcartbox--delete"
+              onClick={this.deleteOrder.bind(this)}
+            >
               DELETE
             </div>
             <div className="col-md-3 col-8 editamount">
               <div className="row">
                 <div
                   className="minusbutton "
-                  onClick={this.decrement.bind(this)}>
-                  <img src={"/img/cart/minus.png"} width="20px" />
+                  onClick={this.decrement.bind(this)}
+                >
+                  <img src={"/img/cart/minus.png"} width="20px" alt="minus" />
                 </div>
                 <div className="form-group-cardcart">
                   <input
@@ -107,7 +132,7 @@ class CardCart extends Component {
                   />
                 </div>
                 <div className="addbutton" onClick={this.increment.bind(this)}>
-                  <img src={"/img/cart/add.png"} width="20px" />
+                  <img src={"/img/cart/add.png"} width="20px" alt="plus" />
                 </div>
               </div>
             </div>

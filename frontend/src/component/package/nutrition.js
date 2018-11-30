@@ -14,7 +14,6 @@ export default class Nutrition extends Component {
   }
 
   componentDidMount() {
-    console.log("arrive nutrition");
     var url = window.location.href;
     var res = url.split("/");
     const getCurrentPackage = getPackage.bind(this, "packages", "isLoaded", res[res.length - 1])
@@ -38,7 +37,6 @@ export default class Nutrition extends Component {
     }
 
     if(isLoaded){
-      console.log("nutrition",this.state.packages)
     }
 
     return (

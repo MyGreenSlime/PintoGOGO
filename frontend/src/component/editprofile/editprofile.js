@@ -77,9 +77,6 @@ class EditProfile extends Component {
           profilepic: file,
           imagePreviewUrl: reader.result
         },
-        () => {
-          console.log("pic", this.state.profilepic);
-        }
       );
     };
     reader.readAsDataURL(file);
@@ -90,14 +87,13 @@ class EditProfile extends Component {
       this.setState({
         errors: nextProps.errors
       });
-      console.log("will recieve", nextProps);
     }
   }
 
   handleSubmit(e) {
     const formData = new FormData();
 
-    if (this.state.imagePreviewUrl != this.state.checkimg) {
+    if (this.state.imagePreviewUrl !== this.state.checkimg) {
       formData.append("img", this.state.profilepic, this.state.profilepic.name);
     } else {
       formData.append("img_url", this.state.imagePreviewUrl);
@@ -107,7 +103,6 @@ class EditProfile extends Component {
     formData.append("email", this.state.email);
     formData.append("phonenumber", this.state.phonenumber);
 
-    console.log("formData", formData);
     this.props.editProfile(formData, this.props.history);
     e.preventDefault();
   }
@@ -118,7 +113,6 @@ class EditProfile extends Component {
         amountAddr: this.state.amountAddr + 1
       },
       () => {
-        console.log("length addr: ", this.state.amountAddr);
         const newaddr = {
           address: addr,
           lat: lat,
@@ -129,19 +123,14 @@ class EditProfile extends Component {
         this.forceUpdate();
       }
     );
-    console.log("address from editProfile: ", addr);
-    console.log("lat from editProfile: ", lat);
-    console.log("lng from editProfile: ", lng);
-    console.log("dist from editProfile: ", dist);
   }
 
   createRenderAddr(addr) {
     if (this.state[addr] <= 0) {
       return;
     } else {
-      console.log("from create render", this.state[addr]);
       const listAddr = this.state[addr].map((item, index) => (
-        <div className="row edit-list__addr">
+        <div className="row edit-list__addr" key={index}>
           <div className="col-10 addr-list">{item.address}</div>
           <div className="col">
             <button
@@ -178,10 +167,9 @@ class EditProfile extends Component {
 
   deleteAddr(index, type) {
     let typeOfListAdddr = "oldAddr";
-    if (typeOfListAdddr == type) {
-      console.log("this is old address no.: ", index);
+    if (typeOfListAdddr === type) {
       for (let i = 0; i < this.state.oldAddr.length; i++) {
-        if (i == index) {
+        if (i === index) {
           let id = this.state.oldAddr[i]._id;
           const deleteAddr = deleteAddress.bind(this, id);
           deleteAddr();
@@ -193,9 +181,8 @@ class EditProfile extends Component {
       }
       this.forceUpdate();
     } else {
-      console.log("this is new address no.: ", index);
       for (let i = 0; i < this.state.newAddr.length; i++) {
-        if (i == index) {
+        if (i === index) {
           this.state.newAddr.splice(i, 1);
           this.setState({
             amountAddr: this.state.amountAddr - 1
@@ -215,7 +202,6 @@ class EditProfile extends Component {
     }
     const { errors } = this.state;
     const { currentUser } = this.state;
-    console.log("current user!!", currentUser);
     return (
       <div className="set-screen">
         {" "}
@@ -224,7 +210,11 @@ class EditProfile extends Component {
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>
             <div className="center">
-              <img className="userpic-edit" src={this.state.imagePreviewUrl} alt="profile picture"/>
+              <img
+                className="userpic-edit"
+                src={this.state.imagePreviewUrl}
+                alt="user profile"
+              />
               <br />
               <div className="upload-btn-wrapper">
                 <button className="btn-upload">Change Picture</button>
@@ -325,17 +315,17 @@ class EditProfile extends Component {
                 )}
               </div>
             </div>
-              <div className="col-lg">
-                <label htmlFor="PhoneNumber">Address</label>
-              </div>
-              <div className="edit-address-area">
-                {this.createRenderAddr("oldAddr")}
-                {this.createRenderAddr("newAddr")}
-              </div>
-              <ModalMap
-                handleFromEditProfile={this.handleDataAddr}
-                amountAddress={this.state.amountAddr}
-              />
+            <div className="col-lg">
+              <label htmlFor="PhoneNumber">Address</label>
+            </div>
+            <div className="edit-address-area">
+              {this.createRenderAddr("oldAddr")}
+              {this.createRenderAddr("newAddr")}
+            </div>
+            <ModalMap
+              handleFromEditProfile={this.handleDataAddr}
+              amountAddress={this.state.amountAddr}
+            />
             <br />
             <button
               width="auto"

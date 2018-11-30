@@ -66,7 +66,6 @@ class Navigationbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    // {console.log("nav",user)}
     const forAdmin = (
       <React.Fragment>
         <NavItem className="navbar__item">
@@ -112,7 +111,11 @@ class Navigationbar extends Component {
         <NavItem className="navbar__item">
           <NavLink href="/cart" className="navbar__link">
             {this.countOrder()}
-            <img src="/img/navbar/icon-cart2.png" className="navbar__icon" />
+            <img
+              src="/img/navbar/icon-cart2.png"
+              className="navbar__icon"
+              alt="cart icon"
+            />
             {/* <div className="circle__counter">52</div> */}
           </NavLink>
         </NavItem>

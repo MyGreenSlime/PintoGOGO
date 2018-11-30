@@ -22,14 +22,19 @@ class PackagemanageEachdays extends Component {
       path: ""
     };
     const init_day = this.initDayImg.bind(this, this.props.num_day, "day_img");
-    const init_ready = this.initReady.bind(this, this.props.num_day, "is_ready_to_show");
-    const init_detail = this.initDetail.bind(this, this.props.num_day, "day_detail");
+    const init_ready = this.initReady.bind(
+      this,
+      this.props.num_day,
+      "is_ready_to_show"
+    );
+    const init_detail = this.initDetail.bind(
+      this,
+      this.props.num_day,
+      "day_detail"
+    );
     init_day();
     init_ready();
     init_detail();
-    console.log("img_day", this.state.day_img)
-    console.log("img_detail", this.state.day_detail)
-    console.log("ready", this.state.ready)
     this.send3DaysPackage = this.sendPackage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setPath = this.setPath.bind(this);
@@ -66,44 +71,43 @@ class PackagemanageEachdays extends Component {
   }
 
   sendPackage(path) {
-      /** cal price */
-      let price = 0;
-      for (let i = 0; i < this.props.num_day; i++) {
-        price +=
-          this.state.day_detail[i][0]["price"] +
-          this.state.day_detail[i][1]["price"];
-      }
-      /** create daymeal */
-      let day_meal = [];
-      for (let i = 0; i < this.props.num_day; i++) {
-        const meal1_2 = {
-          meal_1: this.state.day_detail[i][0],
-          meal_2: this.state.day_detail[i][1]
-        };
-        day_meal.push(meal1_2);
-      }
-      console.log(path + " package");
-      if (this.state.save && path === "add") {
-        alert("your package is already save!");
-      }
-
-      /** json */
-      const newPackage = {
-        package_id: this.state.package_id,
-        name_package: this.state.name_package,
-        description: this.state.description,
-        type: this.props.num_day,
-        day_meal: day_meal,
-        price: price
+    /** cal price */
+    let price = 0;
+    for (let i = 0; i < this.props.num_day; i++) {
+      price +=
+        this.state.day_detail[i][0]["price"] +
+        this.state.day_detail[i][1]["price"];
+    }
+    /** create daymeal */
+    let day_meal = [];
+    for (let i = 0; i < this.props.num_day; i++) {
+      const meal1_2 = {
+        meal_1: this.state.day_detail[i][0],
+        meal_2: this.state.day_detail[i][1]
       };
-      const send_pack = addOrSavePackageToCart.bind(
-        this,
-        newPackage,
-        path,
-        "save",
-        "package_id"
-      );
-      send_pack();
+      day_meal.push(meal1_2);
+    }
+    if (this.state.save && path === "add") {
+      alert("your package is already save!");
+    }
+
+    /** json */
+    const newPackage = {
+      package_id: this.state.package_id,
+      name_package: this.state.name_package,
+      description: this.state.description,
+      type: this.props.num_day,
+      day_meal: day_meal,
+      price: price
+    };
+    const send_pack = addOrSavePackageToCart.bind(
+      this,
+      newPackage,
+      path,
+      "save",
+      "package_id"
+    );
+    send_pack();
   }
 
   checkReady() {
@@ -115,13 +119,23 @@ class PackagemanageEachdays extends Component {
         }
       }
     }
-    console.log("ready", all_ready);
     if (all_ready) {
       return (
-        <button className="btn btn-shownutrition" onClick={() => this.setState({ click_show: true })}> CLICK TO SHOW NUTRITION </button>
+        <button
+          className="btn btn-shownutrition"
+          onClick={() => this.setState({ click_show: true })}
+        >
+          {" "}
+          CLICK TO SHOW NUTRITION{" "}
+        </button>
       );
     }
-    return <button className="btn btn-shownutrition" disabled> CLICK TO SHOW NUTRITION </button>;
+    return (
+      <button className="btn btn-shownutrition" disabled>
+        {" "}
+        CLICK TO SHOW NUTRITION{" "}
+      </button>
+    );
   }
 
   setMenuDrop(dayimg, daydetail, ready, day, meal, e) {
@@ -130,11 +144,16 @@ class PackagemanageEachdays extends Component {
     let newDayDetailState = [];
     let newReady = [];
     for (let i = 0; i < this.props.num_day; i++) {
-      newDayMealState.push([this.state[dayimg][i][0], this.state[dayimg][i][1]]);
-      newDayDetailState.push([this.state[daydetail][i][0], this.state[daydetail][i][1]])
-      newReady.push([this.state[ready][i][0], this.state[ready][i][1]])
+      newDayMealState.push([
+        this.state[dayimg][i][0],
+        this.state[dayimg][i][1]
+      ]);
+      newDayDetailState.push([
+        this.state[daydetail][i][0],
+        this.state[daydetail][i][1]
+      ]);
+      newReady.push([this.state[ready][i][0], this.state[ready][i][1]]);
     }
-    console.log("img",e.dragData.img_url)
 
     newDayMealState[day][meal] = (
       <div className="hovereffect">
@@ -156,9 +175,6 @@ class PackagemanageEachdays extends Component {
       [daydetail]: newDayDetailState,
       [ready]: newReady
     });
-    console.log("img ", this.state.day_img);
-    console.log("detail", this.state.day_detail);
-    console.log("ready ", this.state.is_ready_to_show);
   }
 
   createDropTarget(day, meal) {
@@ -191,24 +207,19 @@ class PackagemanageEachdays extends Component {
   setPath(path) {
     this.setState({
       path: path
-    })
-
+    });
   }
 
   handleSubmit(e) {
     const form = e.target;
-    // console.log(form.checkValidity());
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
-    }
-    else {
+    } else {
       e.preventDefault();
-      this.sendPackage(this.state.path)
+      this.sendPackage(this.state.path);
     }
-    form.classList.add('was-validated');
-    console.log('test: ', form);
-    
+    form.classList.add("was-validated");
   }
 
   render() {
@@ -236,7 +247,7 @@ class PackagemanageEachdays extends Component {
     for (let i = 0; i < this.props.num_day; i += 2) {
       if (this.props.num_day % 2 === 1 && i === this.props.num_day - 1) {
         list_day[i] = (
-          <div className="row">
+          <div className="row" key={i}>
             <div className="col-3-sm col-set" />
             <div className="col-sm card-last-package ">
               {"DAY " + (i + 1)}
@@ -247,7 +258,7 @@ class PackagemanageEachdays extends Component {
         );
       } else {
         list_day[i] = (
-          <div className="row">
+          <div className="row" key={i+1}>
             <div className="col-sm card-package">
               {"DAY " + (i + 1)}
               {this.createRowDay(i)}
@@ -262,15 +273,15 @@ class PackagemanageEachdays extends Component {
     }
 
     const login = (
-      <div >
+      <div>
         <button
           className="btn btn-shownutrition"
-          onClick ={() => window.location.href='/login'}
+          onClick={() => (window.location.href = "/login")}
         >
           LOGIN
         </button>
       </div>
-    )
+    );
     const addAndSave = (
       <div>
         <button
@@ -286,7 +297,7 @@ class PackagemanageEachdays extends Component {
           SAVE PACKAGE
         </button>
       </div>
-    )
+    );
     return (
       <React.Fragment>
         <div className="packagemanage-box ">
@@ -297,7 +308,11 @@ class PackagemanageEachdays extends Component {
 
           {this.state.click_show && (
             <React.Fragment>
-              <form className="needs-validation" noValidate onSubmit={this.handleSubmit.bind(this)}>
+              <form
+                className="needs-validation"
+                noValidate
+                onSubmit={this.handleSubmit.bind(this)}
+              >
                 <div>
                   <div className="row">
                     <label className="col-sm-4">Package name:</label>
@@ -312,7 +327,7 @@ class PackagemanageEachdays extends Component {
                         value={this.state.name_package}
                         required
                       />
-                      <div class="invalid-feedback">
+                      <div className="invalid-feedback">
                         Please choose a username.
                       </div>
                     </div>
@@ -329,7 +344,7 @@ class PackagemanageEachdays extends Component {
                     day={this.props.num_day}
                   />
                 </div>
-                  {isAuthenticated ? addAndSave : login}
+                {isAuthenticated ? addAndSave : login}
               </form>
             </React.Fragment>
           )}
