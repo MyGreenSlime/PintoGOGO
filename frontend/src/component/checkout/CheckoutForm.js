@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import {getProfile} from "../api/api";
+import {getProfile, addPayment, getBills} from "../api/api";
 import {CardElement,
-    StripeProvider,
-    Elements,
     injectStripe,} from 'react-stripe-elements';
-import axios from 'axios'
 import "../checkout/checkout.css"
 import "../checkout/enjoy.css"
 import propTypes from "prop-types";
@@ -32,7 +29,7 @@ class CheckoutForm extends Component {
     if (token === undefined) {
       console.log("invalid")
       this.setState({
-        alert: <div class="alert alert-danger" role="alert"> Invalid Card Number! </div>
+        alert: <div className="alert alert-danger" role="alert"> Invalid Card Number! </div>
       })
     } else {
       var data = {
@@ -42,16 +39,8 @@ class CheckoutForm extends Component {
         this.setState({
             waiting: true
         })
-      // console.log("id",data.token_id)
-      axios.post("/api/payment/charge", data).then(res => {
-        console.log(res);
-        if (res.data.ok === 1) {
-          this.setState({
-            status: true,
-            waiting: false
-          });
-        }
-      });
+        const add_payment = addPayment.bind(this,data,"status","waiting")
+        add_payment();
   }
 }
 
@@ -59,26 +48,18 @@ class CheckoutForm extends Component {
         if (!this.props.auth.isAuthenticated) {
             this.props.history.push("/");
           }
-        axios.get("api/bills/current")
-        .then(res => {
-            this.setState({
-                bill: res.data
-            });
-        })
-        .then(() => {
-            if(this.state.bill === null) {
-                this.props.history.push("/cart");
-            }
-            else if(this.state.bill.destination === null){
-                this.props.history.push("/bill")
-            }
-            const get_user = getProfile.bind(this, "currentUser", "isLoaded");
-            get_user();
-        })
-        .then(() => {
-            //console.log("whole bill: ", this.state.bill);
-            //console.log("order: ", this.state.bill.order);
-        });
+        const get_bill = getBills.bind(this,"bill");
+        get_bill()
+            .then( () => {
+                if (this.state.bill === null) {
+                    this.props.history.push("/cart");
+                }
+                else if (this.state.bill.destination === null) {
+                    this.props.history.push("/bill")
+                }
+                const get_user = getProfile.bind(this, "currentUser", "isLoaded");
+                get_user();
+            })
     }
 
   render() {
@@ -132,7 +113,7 @@ class CheckoutForm extends Component {
           <strong>PAYMENT DETAIL </strong>
 
           <br />
-          <div class="row icons">
+          <div className="row icons">
             <div className="col-md-4 col-2" />
             <i className="fa fa-cc-visa fa-2x col-md-1 col-2" aria-hidden="true" />
             <i className="fa fa-cc-mastercard fa-2x col-md-1 col-2" aria-hidden="true" />

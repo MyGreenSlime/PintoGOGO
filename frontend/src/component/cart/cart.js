@@ -62,6 +62,7 @@ class Cart extends Component {
     } else {
       card_cart = this.state.order[type + "_order"].map((ord, index) => (
         <CardCart
+          key = {index}
           handlerFromParant={this.handleData}
           picture={ord[type + "_id"][img_url]}
           name={ord[type + "_name"]}

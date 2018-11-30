@@ -57,6 +57,15 @@ export function getCurrentOrder(order, isLoaded) {
       })
 }
 
+export function getBills(bill) {
+  return axios.get("/api/bills/current")
+    .then(res => {
+      this.setState({
+        [bill]: res.data
+      });
+    })
+}
+
 /** POST **/
 export function addFoodOrSnack(data, status, path) {
   axios.post("/api/menus/" + path + "/add", data)
@@ -88,6 +97,19 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
     })
 }
 
+export function addPayment(data,status,waiting) {
+  axios.post("/api/payment/charge", data).then(res => {
+    console.log(res);
+    if (res.data.ok === 1) {
+      this.setState({
+        [status]: true,
+        [waiting]: false
+      });
+    }
+  });
+  
+}
+
 /** PUT **/
 export function addToCart(path, data) {
   axios.put('/api/orders/add/'+path, data)
@@ -112,6 +134,11 @@ export function editFoodOrSnack(path, id, data) {
       .then(() => {
         this.renderRedirect();
       });
+}
+
+export function updateBill(data){
+  axios.put("api/bills/update/current", data)
+    .then(() => { window.location.href = '/payment' })
 }
 
 /** DELETE **/

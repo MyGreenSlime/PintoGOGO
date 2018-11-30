@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "../bill/style-bill.css";
 import "../cart/cart.css";
-import axios from "axios";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 import { connect } from "react-redux";
 import Progress from '../progressbar/progressbar'
+import { updateBill, getAddress, getBills } from "../api/api";
 
 class Payment extends Component {
   constructor(props) {
@@ -33,45 +32,24 @@ class Payment extends Component {
       distance: this.state.distance,
       total_cost: this.state.totalCost
     }
-    axios
-      .put("api/bills/update/current", finalOrder)
-      .then(res => {
-        // console.log("final!! ", this.state.bill);
-        
-    }).then( () => {window.location.href = '/payment'})
+    const update_bill = updateBill.bind(this,finalOrder)
+    update_bill();
 }
 
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
-    axios
-      .get("/api/bills/current")
-      .then(res => {
-        this.setState({
-          bill: res.data
-        });
-      })
-      .then(() => {
-        if(this.state.bill === null || this.state.bill.order === null){
-          this.props.history.push("/cart");
-        }
-        //console.log("whole bill: ", this.state.bill);
-        //console.log("order: ", this.state.bill.order);
-      })
-      .then(() => {
-        axios
-          .get("/api/address/current")
-          .then(res => {
-            this.setState({
-              address: res.data,
-              isLoaded: true
-            });
-          })
-          .then(() => {
-            // console.log("address: ", this.state.address);
-          });
-      })
+    const get_bill = getBills.bind(this,"bill","history")
+    get_bill()
+    .then(() => {
+      if (this.state.bill === null || this.state.bill.order === null) {
+        this.props.history.push("/cart");
+      }
+    })
+    .then(() => 
+      {const get_addr = getAddress.bind(this,"address","isLoaded")
+        get_addr()});
   }
 
   componentDidUpdate() {
@@ -151,16 +129,18 @@ class Payment extends Component {
                   </div>
                 </div>
                 <hr />
-                {bill.order.food_order.map(it => (
-                  <div className="row" style={{ width: "100%" }}>
-                    <div className="col-md-6 col-12 ">
-                      <p>{it.food_name}</p>
-                    </div>
-                    <div className="col-md-3 col-6 box__content--center">
-                      <p>{it.amount}</p>
-                    </div>
-                    <div className="col-md-3 col-6 box__content--center">
-                      <p>{it.price}</p>
+                {bill.order.food_order.map((it,index) => (
+                  <div key={index}>
+                    <div className="row" style={{ width: "100%" }}>
+                      <div className="col-md-6 col-12 ">
+                        <p>{it.food_name}</p>
+                      </div>
+                      <div className="col-md-3 col-6 box__content--center">
+                        <p>{it.amount}</p>
+                      </div>
+                      <div className="col-md-3 col-6 box__content--center">
+                        <p>{it.price}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
