@@ -111,7 +111,7 @@ class Navigationbar extends Component {
         </NavItem>
         <NavItem className="navbar__item">
           <NavLink href="/cart" className="navbar__link">
-            {this.countOrder()}
+            {/* {this.countOrder()} */}
             <img src="/img/navbar/icon-cart2.png" className="navbar__icon" />
             {/* <div className="circle__counter">52</div> */}
           </NavLink>
