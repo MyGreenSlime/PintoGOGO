@@ -101,6 +101,7 @@ export function decreaseAmount(path, id) {
 
 export function addToBill(data) {
   axios.put("/api/orders/tobill", data)
+    .then( () => {window.location.href = '/bill'})
 }
 
 export function editFoodOrSnack(path, id, data) {
