@@ -5,7 +5,8 @@ import NutritionManage from "./nutritionmanage";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { addOrSavePackageToCart } from "../api/api";
-
+import { currentOrder } from "../../actions/authActions";
+import { withRouter } from "react-router-dom";
 class PackagemanageEachdays extends Component {
   constructor(props) {
     super(props);
@@ -258,7 +259,7 @@ class PackagemanageEachdays extends Component {
         );
       } else {
         list_day[i] = (
-          <div className="row" key={i+1}>
+          <div className="row" key={i + 1}>
             <div className="col-sm card-package">
               {"DAY " + (i + 1)}
               {this.createRowDay(i)}
@@ -355,11 +356,18 @@ class PackagemanageEachdays extends Component {
 }
 
 PackagemanageEachdays.propTypes = {
-  auth: propTypes.object.isRequired
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired,
+  currentOrder: propTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors,
+  order: state.errors
 });
 
-export default connect(mapStateToProps)(PackagemanageEachdays);
+export default connect(
+  mapStateToProps,
+  { currentOrder }
+)(withRouter(PackagemanageEachdays));

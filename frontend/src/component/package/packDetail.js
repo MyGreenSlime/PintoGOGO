@@ -6,8 +6,9 @@ import { getPackage, addToCart } from "../api/api";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { currentOrder } from "../../actions/authActions";
 
-class Package3DaysDetail extends Component {
+class PackageDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -155,14 +156,19 @@ class Package3DaysDetail extends Component {
   }
 }
 
-Package3DaysDetail.propTypes = {
+PackageDetail.propTypes = {
   auth: propTypes.object.isRequired,
-  errors: propTypes.object.isRequired
+  errors: propTypes.object.isRequired,
+  currentOrder: propTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  order: state.errors
 });
 
-export default connect(mapStateToProps)(withRouter(Package3DaysDetail));
+export default connect(
+  mapStateToProps,
+  { currentOrder }
+)(withRouter(PackageDetail));

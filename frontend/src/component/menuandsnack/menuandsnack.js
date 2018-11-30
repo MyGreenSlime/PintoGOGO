@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import CardMenu from "../cardmenuandsnack/cardmenuandsnack";
 import "./menuandsnack.css";
 import { getFoodOrSnack } from "../api/api";
+import propTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { currentOrder } from "../../actions/authActions";
 
 class MenuAndSnack extends Component {
   constructor(props) {
@@ -25,6 +29,7 @@ class MenuAndSnack extends Component {
       this.props.path
     );
     GetFood();
+    this.props.currentOrder();
   }
 
   rightClick(e) {
@@ -111,7 +116,7 @@ class MenuAndSnack extends Component {
         }
         if (i + 3 < menus.length) {
           const card_col2 = (
-            <div className="col-sm-4 menuzone__image--fix" key={i+3}>
+            <div className="col-sm-4 menuzone__image--fix" key={i + 3}>
               <CardMenu
                 name={menus[i + 3][this.props.name]}
                 picture={menus[i + 3].img_url}
@@ -171,4 +176,19 @@ class MenuAndSnack extends Component {
   }
 }
 
-export default MenuAndSnack;
+MenuAndSnack.propTypes = {
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired,
+  currentOrder: propTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors,
+  order: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { currentOrder }
+)(withRouter(MenuAndSnack));

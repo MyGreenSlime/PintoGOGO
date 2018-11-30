@@ -92,6 +92,10 @@ export function addOrSavePackageToCart(data,path,save,pack_id){
       else if(path === "addcart"){
         alert("Add to cart success!");
       }
+      
+    })
+    .then(() => {
+      this.props.currentOrder();
     })
 }
 
@@ -110,15 +114,24 @@ export function addPayment(data,status,waiting,current) {
 
 /** PUT **/
 export function addToCart(path, data) {
-  axios.put('/api/orders/add/'+path, data)
+  axios.put('/api/orders/add/'+path, data).then( res => {
+    this.props.currentOrder();
+
+  })
 }
 
 export function increaseAmount(path, id) {
   axios.put("/api/orders/increase/amount/" + path + "/" + id)
+  .then(res => {
+    this.props.currentOrder();
+  })
 }
 
 export function decreaseAmount(path, id) {
   axios.put("/api/orders/decrease/amount/" + path + "/" + id)
+    .then(res => {
+      this.props.currentOrder();
+    })
 }
 
 export function addToBill(data) {
@@ -145,6 +158,9 @@ export function addAddress(data) {
 /** DELETE **/
 export function deleteFromDB(path, id) {
   axios.delete("/api/"+ path +"/del/"+id)
+    .then(res => {
+      this.props.currentOrder();
+    })
 }
 
 export function deleteOrder(path, id) {
