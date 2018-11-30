@@ -37,7 +37,7 @@ class CheckoutForm extends Component {
       // console.log("id",data.token_id)
       axios.post("/api/payment/charge", data).then(res => {
         console.log(res);
-        if (res.data.ok == 1) {
+        if (res.data.ok === 1) {
           this.setState({
             status: true
           });
@@ -68,90 +68,68 @@ class CheckoutForm extends Component {
     if (!!!this.state.isLoaded) {
       return <div className="loader" />;
     }
-    {
-      console.log("....", this.state.currentUser);
-    }
     if (this.state.complete) return <h1>Purchase Complete</h1>;
     const { currentUser } = this.state;
-    return (
-      <div className=" card payment__box__container">
-        <br />
-        {this.state.alert}
-        <strong>PAYMENT DETAIL </strong>
+    return <div className="checkout__set__bg">
+        <div className=" card payment__box__container">
+          <br />
+          {this.state.alert}
+          <strong>PAYMENT DETAIL </strong>
 
-        <br />
-        <div class="row icons">
-          <div className="col-md-4 col-2" />
-          <i
-            className="fa fa-cc-visa fa-2x col-md-1 col-2"
-            aria-hidden="true"
-          />
-          <i
-            className="fa fa-cc-mastercard fa-2x col-md-1 col-2"
-            aria-hidden="true"
-          />
-          <i
-            className="fa fa-cc-discover fa-2x col-md-1 col-2"
-            aria-hidden="true"
-          />
-          <i
-            className="fa fa-cc-amex fa-2x col-md-1 col-2"
-            aria-hidden="true"
-          />
-        </div>
-        <hr />
-        <div className="row ">
-          <div className="col-md-6 col-12 payment__purchase--pad">
-            <div className="checkout">
-              {/* <p>Would you like to complete the purchase?</p> */}
-              <CardElement />
-              <div className="btn button--confirm">
-                <div onClick={this.submit}>Pay</div>
+          <br />
+          <div class="row icons">
+            <div className="col-md-4 col-2" />
+            <i className="fa fa-cc-visa fa-2x col-md-1 col-2" aria-hidden="true" />
+            <i className="fa fa-cc-mastercard fa-2x col-md-1 col-2" aria-hidden="true" />
+            <i className="fa fa-cc-discover fa-2x col-md-1 col-2" aria-hidden="true" />
+            <i className="fa fa-cc-amex fa-2x col-md-1 col-2" aria-hidden="true" />
+          </div>
+          <hr />
+          <div className="row ">
+            <div className="col-md-6 col-12 payment__purchase--pad">
+              <div className="checkout">
+                {/* <p>Would you like to complete the purchase?</p> */}
+                <CardElement />
+                <div className="btn button--confirm">
+                  <div onClick={this.submit}>Pay</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-6 col-12 payment__customer__detail">
+              <div className="row">
+                <div className="col-md-4 col-12 payment__customer__detail--left">
+                  Customer name
+                </div>
+                <div className="col-md-8 col-12">
+                  <p>
+                    {currentUser.first_name} {currentUser.last_name}
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div className="row">
+                <div className="col-md-4 col-12 payment__customer__detail--left">
+                  TOTAL PRICE
+                </div>
+                <div className="col-md-8 col-12">
+                  {this.state.bill.total_cost}
+                </div>
+              </div>
+              <br />
+              <div className="row">
+                <div className="col-md-4 col-12 payment__customer__detail--left">
+                  ADDRESS
+                </div>
+                <div className="col-md-8 col-12">
+                  {this.state.bill.destination}
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="col-md-6 col-12 payment__customer__detail">
-            <div className="row">
-              <div className="col-md-4 col-12 payment__customer__detail--left">
-                Customer name
-              </div>
-              <div className="col-md-8 col-12">
-                <p>
-                  {currentUser.first_name} {currentUser.last_name}
-                </p>
-              </div>
-            </div>
-            <br />
-            <div className="row">
-              <div className="col-md-4 col-12 payment__customer__detail--left">
-                TOTAL PRICE
-              </div>
-              <div className="col-md-8 col-12">
-                {this.state.bill.total_cost}
-              </div>
-            </div>
-            <br />
-            <div className="row">
-              <div className="col-md-4 col-12 payment__customer__detail--left">
-                ADDRESS
-              </div>
-              <div className="col-md-8 col-12">
-                {this.state.bill.destination}
-              </div>
-            </div>
-          </div>
+          <br />
         </div>
-        <br />
-        {/* <a href="/enjoy">
-                <button
-                className="btn button--confirm"
-                onClick={this.confirmButtonClicked}>
-                CONFIRM PAYMENT
-                </button>
-            </a> */}
-      </div>
-    );
+      </div>;
   }
 }
 export default injectStripe(CheckoutForm);

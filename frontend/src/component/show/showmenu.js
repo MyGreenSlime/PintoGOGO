@@ -7,8 +7,10 @@ class Showmenu extends Component {
   render() { 
     return (
     <React.Fragment>
-      <div className="topic">MENU</div>
-      <Menu/>
+      <div className="set-screen-show">
+        <div className="topic">MENU</div>
+        <Menu/>
+      </div>
     </React.Fragment>);
   }
 }
