@@ -51,11 +51,9 @@ const Home = () => {
 const PaymentMethod = () => {
   return (
     <StripeProvider apiKey="pk_test_os3uf16y5tFa5WVqnqNPNaJk">
-      <div className="example">
         <Elements>
           <CheckoutForm />
         </Elements>
-      </div>
     </StripeProvider>
   );
 };
