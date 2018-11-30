@@ -58,7 +58,7 @@
     .on-click {
         width: 25px;
         height: 25px;
-        -webkit-transition: width 500ms, height 500ms;
+        -webkit-transition: width 200ms, height 200ms;
         transition: width 200ms, height 200ms;
     }
     
