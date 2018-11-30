@@ -123,46 +123,46 @@ export default class Payment extends Component {
     console.log("here bill: ", bill);
     return <React.Fragment>
         <div className="set-screen-payment">
-          <div className="row cart__menubar">
-            <div className="col" />
-            <div className="col-md-1 col-2">
+        <div className="grid-menubar cart__menubar center">
+            {/* <div className="col" /> */}
+            <div>
               <a href="/">
                 <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
               </a>
               <p>PLAN</p>
             </div>
-            <div className="col-md-1 d-none d-sm-block">
-              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            <div>
+              <img className="max-wid" src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
             </div>
 
-            <div className="col-md-1 col-2">
+            <div >
               <a href="/cart">
                 <img src="/img/cart/cart.png" alt="cart icon" width="50%" />
               </a>
               <p>CART</p>
             </div>
-            <div className="col-md-1 d-none d-sm-block">
-              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            <div>
+              <img className="max-wid" src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
             </div>
-            <div className="col-md-1 col-2">
+            <div>
               <img src="/img/cart/payment.png" alt="payment icon" width="50%" />
               <p>BILL</p>
             </div>
-            <div className="col-md-1 d-none d-sm-block">
-              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            <div>
+            <img className="max-wid" src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
             </div>
-            <div className="col-md-1 col-2">
+            <div>
               <img src="/img/cart/delivery.png" alt="delivery icon" width="50%" />
               <p>PAY</p>
             </div>
-            <div className="col-md-1 d-none d-sm-block">
-              <img src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
+            <div>
+            <img className="max-wid" src="/img/cart/arrow.png" alt="arrow icon" width="20%" />
             </div>
-            <div className="col-md-1 col-2">
+            <div>
               <img src="/img/cart/enjoy.png" alt="enjoy icon" width="50%" />
               <p>ENJOY</p>
             </div>
-            <div className="col" />
+            {/* <div className="col" /> */}
           </div>
 
           <div className="box__content">

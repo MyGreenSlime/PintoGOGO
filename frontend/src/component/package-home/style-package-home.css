@@ -1,12 +1,25 @@
-.box{
+.package-home {
+  display: inline;
+}
+
+.box-left{
   background-color: #f3ece7;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 10% 2% 10% 18%;
   border-radius: 10px;
   width: 80%;
   height: 80%;
+  overflow-x: hidden;
+  /* left: 50%;
+  transform: translateX(-50%); */
+}
+
+.box-right{
+  background-color: #f3ece7;
+  margin: 10% 18% 10% 2%;
+  border-radius: 10px;
+  width: 80%;
+  height: 80%;
+  overflow-x: hidden;
   /* left: 50%;
   transform: translateX(-50%); */
 }

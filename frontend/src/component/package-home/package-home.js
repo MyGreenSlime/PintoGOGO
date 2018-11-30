@@ -9,8 +9,8 @@ class PackageHome extends Component {
   render() { 
     return <React.Fragment>
         <div className="row">
-          <div className="col-6">
-            <div className="box">
+          <div className="col-sm">
+            <div className="box-left">
                 <img src="../img/package/pack.jpg" className="package__img__box" />
               
               <div className="desc--text">
@@ -22,8 +22,8 @@ class PackageHome extends Component {
             </div>
           </div>
 
-          <div className="col">
-            <div className="box">
+          <div className="col-sm">
+            <div className="box-right">
               <img src="../img/package/pack2.png" className="package__img__box" />
               <div className="desc--text">
                 Create your own custom package with your satisfaction.
