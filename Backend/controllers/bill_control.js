@@ -8,6 +8,7 @@ exports.getAllBill = (req, res) => {
         res.status(500).send(error)
     }
     Bill.find({})
+        .sort({ "update_time": -1 })
         .populate({
             path: "order",
             model: "Order"

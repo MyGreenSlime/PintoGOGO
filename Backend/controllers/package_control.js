@@ -424,7 +424,7 @@ exports.addCart = (req, res) => {
                         err,
                         order
                     ) {
-                        const newPackageOrder = {
+                        const newPackageOrder1 = {
                             package_id: package._id,
                             package_name: package.name_package,
                             price: package.price,
@@ -435,7 +435,7 @@ exports.addCart = (req, res) => {
                                 isfinish: false
                             }, {
                                 $push: {
-                                    package_order: newPackageOrder
+                                    package_order: newPackageOrder1
                                 }
                             },
                             (err, order) => {
@@ -445,7 +445,7 @@ exports.addCart = (req, res) => {
                                 } else {
                                     if (order.nModified == 0) {
                                         console.log("in2")
-                                        const newPackageOrder = {
+                                        const newPackageOrder2 = {
                                             package_id: package_id,
                                             package_name: newPackage.name_package,
                                             price: newPackage.price,
@@ -456,7 +456,7 @@ exports.addCart = (req, res) => {
                                                 isfinish: false
                                             }, {
                                                 $push: {
-                                                    package_order: newPackageOrder
+                                                    package_order: newPackageOrder2
                                                 }
                                             },
                                             (err, order) => {
@@ -465,7 +465,7 @@ exports.addCart = (req, res) => {
                                                     res.sendStatus(400).json(error);
                                                 } else {
                                                     status.data = {
-                                                        package_id: package_id
+                                                        package_id: newPackageOrder2.package_id
                                                     }
                                                     res.json(status);
                                                 }
@@ -475,7 +475,7 @@ exports.addCart = (req, res) => {
                                         console.log("in3")
                                         status.message = "increase amount finish"
                                         status.data = {
-                                            package_id: package_id
+                                            package_id: newPackageOrder1.package_id
                                         }
                                         res.json(status)
                                     }
