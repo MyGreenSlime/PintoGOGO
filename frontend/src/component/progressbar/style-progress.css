@@ -1,0 +1,11 @@
+
+.cart__menubar {
+  width: 72%;
+  min-width: 315px;
+  margin-top: 60px !important;
+}
+
+.grid-menubar {
+  display: grid;
+  grid-template-columns: 15% 6.25% 15% 6.25% 15% 6.25% 15% 6.25% 15%;
+}

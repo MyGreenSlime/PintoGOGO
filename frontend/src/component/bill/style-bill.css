@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+
+.set-screen-payment {
+  background: url("/img/cart/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 1% 0 10% 0;
+  min-height: calc(100vh - 155px);
+  background-attachment: fixed;
+  background-position :  top left; 
+}
+
+.bill-box {
+  width: 70%;
+}
+
+.box__content {
+  width: 65%;
+  min-width: 315px;
+  margin: auto;
+  font-family: "Quicksand", sans-serif;
+}
+
+.card__payment {
+  text-align: left;
+  padding-top: 1rem;
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-top: 5%;
+  border-radius: 12px;
+  font-size: 15px;
+  /* text-transform: uppercase; */
+  color: black;
+  background-color: #f3ece7;
+}
+
+.txt__title {
+  margin-bottom: 40px;
+}
+
+.max-wid {
+  /* max-width: 15px; */
+}
+
+.box__addr {
+  margin-bottom: 30px;
+  color:black;
+  background-color: #e4dac2;
+}
+
+.dd__addr{
+  color: #7b7b7b;
+  background-color: #e4dac2;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+}
+
+.button__confirm {
+  color: #7b7b7b;
+  background-color: #e4dac2;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  margin-bottom: 4%;
+}
+
+.break__word{
+  white-space: normal !important;
+}
+
+.button__confirm:disabled {
+  background-color: #c0c0c0;
+}
+
+.txt__total {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.box__confirm {
+  justify-content: center;
+}
+
+.box__content__head--center{
+  text-align: center;
+  font-weight: bold;
+}
+
+.box__content--center{
+  text-align: center;
+  padding-left: 5%;
+}
