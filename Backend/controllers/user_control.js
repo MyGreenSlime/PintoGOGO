@@ -5,7 +5,7 @@ const keys = require("../config/keys");
 //load input validation
 const validationRegisterInput = require("../validator/register");
 const validationLoginInput = require("../validator/login");
-const validationEditProfile = require('../validator/editprofile')
+const validationEditProfile = require("../validator/editprofile");
 
 const User = require("../models/user");
 const Address = require("../models/address");
@@ -13,52 +13,52 @@ const Order = require("../models/order");
 
 //register
 exports.register = async (req, res) => {
-    const {errors, isValid} = validationRegisterInput(req.body);
-    if(!isValid) {
-        return res.status(400).json(errors);
+  const { errors, isValid } = validationRegisterInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  await User.findOne({ user_name: req.body.user_name }).then(async user => {
+    if (user) {
+      errors.user_name = "Username already exists";
+      return res.status(400).json(errors);
+    } else {
+      const address = req.body.address;
+      const newAddress = new Address({
+        address: address.address,
+        lat: address.lat,
+        lng: address.lng,
+        distance: address.distance,
+        delivery_fee: address.distance * 20,
+        owner: req.body.user_name
+      });
+      const newUser = new User({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        user_name: req.body.user_name,
+        email: req.body.email,
+        password: req.body.password1,
+        phonenumber: req.body.phonenumber,
+        //address : address_id,
+        type: req.body.type
+      });
+      await newAddress
+        .save()
+        .then(address => (newUser.address = address._id))
+        .catch(err => console.log(err));
+
+      await bcrytpt.genSalt(10, (err, salt) => {
+        bcrytpt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => res.json(user))
+            .catch(err => console.log(err));
+        });
+      });
     }
-    await User.findOne({user_name : req.body.user_name})
-        .then(async (user) => {
-            if(user){
-                errors.user_name = 'Username already exists'
-                return res.status(400).json(errors)
-            } else {
-                const address = req.body.address
-                const newAddress = new Address({
-                    address : address.address,
-                    lat : address.lat,
-                    lng : address.lng,
-                    distance : address.distance,
-                    delivery_fee : address.distance*20,
-                    owner : req.body.user_name
-                })
-                const newUser = new User({
-                    first_name : req.body.first_name,
-                    last_name : req.body.last_name,
-                    user_name : req.body.user_name,
-                    email : req.body.email,
-                    password : req.body.password1,
-                    phonenumber : req.body.phonenumber,
-                    //address : address_id,
-                    type : req.body.type
-                })
-                await newAddress.save()
-                    .then(address => newUser.address = address._id)
-                    .catch(err => console.log(err));
-                
-                
-                await bcrytpt.genSalt(10, (err, salt) => {
-                    bcrytpt.hash(newUser.password, salt, (err, hash) => {
-                        if(err) throw err;
-                        newUser.password = hash;
-                        newUser.save()
-                            .then(user => res.json(user))
-                            .catch(err => console.log(err));
-                    })
-                })
-            }
-        })
-}
+  });
+};
 
 //login
 exports.login = (req, res) => {
@@ -148,7 +148,7 @@ exports.editProfile = (req, res) => {
   const newUpdate = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-    email : req.body.email,
+    email: req.body.email,
     phonenumber: req.body.phonenumber,
     img_url: req.body.img_url
   };
@@ -162,7 +162,7 @@ exports.editProfile = (req, res) => {
         first_name: newUpdate.first_name,
         last_name: newUpdate.last_name,
         phonenumber: newUpdate.phonenumber,
-        email : newUpdate.email,
+        email: newUpdate.email,
         img_url: newUpdate.img_url
       }
     },
@@ -182,6 +182,7 @@ exports.editProfile = (req, res) => {
 };
 
 exports.addAddres = (req, res) => {
+  console.log(req.body.address);
   const errors = {};
   const tmpAddress = {};
   const address = req.body.address;

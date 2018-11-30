@@ -35,6 +35,8 @@ class EditProfile extends Component {
     this.setUser = this.setUser.bind(this);
     this.deleteAddr = this.deleteAddr.bind(this);
     this.handleDataAddr = this.handleDataAddr.bind(this);
+    this.createRenderAddr = this.createRenderAddr.bind(this);
+    this.updateAddress = this.updateAddress.bind(this);
   }
 
   componentDidMount() {
@@ -131,6 +133,7 @@ class EditProfile extends Component {
           distance: dist
         };
         this.state.newAddr.push(new_addr);
+        this.forceUpdate();
       }
     );
     console.log("address from handle: ", addr);
@@ -140,23 +143,43 @@ class EditProfile extends Component {
   }
 
   createRenderAddr(addr) {
-    const list_addr = this.state[addr].map((item, index) => (
-      <li className="edit-list__addr">
-        {item.address}
-        {/* <button
-          type="button"
-          className="btn btn-delete"
-          onClick={this.deleteAddr.bind(
-            this,
-            this.state.currentUser.address[index]._id
-          )}
-        >
-          <i class="fa fa-close" />
-        </button> */}
-      </li>
-    ));
+    if (this.state[addr] <= 0) {
+      return;
+    } else {
+      console.log("from create render", this.state[addr]);
+      const list_addr = this.state[addr].map((item, index) => (
+        <li className="edit-list__addr">
+          {item.address}
+          {/* <button
+            type="button"
+            className="btn btn-delete"
+            onClick={this.deleteAddr.bind(this, this.state[addr][index]._id)}
+          >
+            <i class="fa fa-close" />
+          </button> */}
+        </li>
+      ));
 
-    return list_addr;
+      return list_addr;
+    }
+  }
+
+  async updateAddress() {
+    var len = Object.keys(this.state.newAddr).length;
+    for (var i = 0; i < len; i++) {
+      console.log(this.state.newAddr[i]);
+      const newAddress = {
+        address: {
+          address: this.state.newAddr[i].address,
+          lat: this.state.newAddr[i].lat,
+          lng: this.state.newAddr[i].lng,
+          distance: this.state.newAddr[i].distance
+        }
+      };
+      await axios.put("/api/users/add/address", newAddress).then(res => {
+        console.log(res.data);
+      });
+    }
   }
 
   render() {
@@ -287,40 +310,7 @@ class EditProfile extends Component {
                   <ul>
                     {this.createRenderAddr("address")}
                     {this.createRenderAddr("newAddr")}
-
-                    {/* {currentUser.address.map((item, index) => (
-                      <li className="edit-list__addr">
-                        {item.address}
-                        <button
-                          type="button"
-                          className="btn btn-delete"
-                          onClick={this.deleteAddr.bind(
-                            this,
-                            currentUser.address[index]._id
-                          )}
-                        >
-                          <i class="fa fa-close" />
-                        </button>
-                      </li>
-                    ))} */}
                   </ul>
-                  {/* {currentUser.address.map((item, index) => (
-                    <ul>
-                      <li className="edit-list__addr">
-                        {item.address}
-                        <button
-                          type="button"
-                          className="btn btn-delete"
-                          onClick={this.deleteAddr.bind(
-                            this,
-                            currentUser.address[index]._id
-                          )}
-                        >
-                          <i class="fa fa-close" />
-                        </button>
-                      </li>
-                    </ul>
-                  ))} */}
                 </div>
                 <ModalMap
                   handleFromEditProfile={this.handleDataAddr}
@@ -331,7 +321,7 @@ class EditProfile extends Component {
             <br />
             <button
               width="auto"
-              type="submit"
+              type="button"
               className="btn button-confirm"
               onClick={this.updateAddress}
             >
