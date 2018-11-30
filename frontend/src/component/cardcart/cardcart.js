@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import "../cardcart/cardcart.css";
-import { increaseAmount, decreaseAmount, deleteFoodOrder, deleteSnackOrder, deletePackageOrder} from "../api/api"
+import { increaseAmount, decreaseAmount, deleteOrder} from "../api/api"
 
 class CardCart extends Component {
   constructor(props) {
@@ -33,35 +33,40 @@ class CardCart extends Component {
   increment() {
     const increase = increaseAmount.bind(this, this.props.type_order, this.props.id);
     increase();
-    this.state.inputField += 1
+    this.setState({
+      inputField: this.state.inputField+1
+    })
   }
 
   decrement() {
     const decrease = decreaseAmount.bind(this, this.props.type_order, this.props.id);
-    
     if (this.state.inputField > 1) {
-      this.state.inputField -= 1
       decrease();
+      this.setState({
+        inputField: this.state.inputField-1
+      })
     }
     
   }
 
   deleteOrder(){
-    const deleteFoodFromCart = deleteFoodOrder.bind(this, this.props.type_order, this.props.id)
-    const deleteSnackFromCart = deleteSnackOrder.bind(this, this.props.type_order, this.props.id)
-    const deletePackageFromCart = deletePackageOrder.bind(this, this.props.type_order, this.props.id)
-    if(this.props.type_order == "food"){
+    const deleteFoodFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
+    const deleteSnackFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
+    const deletePackageFromCart = deleteOrder.bind(this, this.props.type_order, this.props.id)
+    if (this.props.type_order === "food") {
       deleteFoodFromCart();
     }
-    else if(this.props.type_order == "snack"){
+    else if (this.props.type_order === "snack") {
       deleteSnackFromCart();
     }
-    else{
+    else {
       deletePackageFromCart();
     }
-    
-    this.state.inputField = 0;
+    this.setState({
+      inputField: 0
+    })
     this.forceUpdate();
+    this.props.onOrderDeleted(this.props.id,this.props.type_order);
   }
 
   render() {

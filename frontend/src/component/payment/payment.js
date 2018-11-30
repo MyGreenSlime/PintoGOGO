@@ -33,7 +33,7 @@ export default class Payment extends Component {
       .then(res => {
         // console.log("final!! ", this.state.bill);
         
-    })
+    }).then( () => {window.location.href = '/payment'})
 }
 
   componentDidMount() {
@@ -103,11 +103,21 @@ export default class Payment extends Component {
     });
   }
 
+  checkSelectAddr(){
+    console.log("select?",this.state.distSelected)
+    if(this.state.distSelected){
+      return <button type="ฺ๊button" className="btn btn-lg button__confirm" onClick={this.updateBill.bind(this)}> Confirm Order </button>;
+    }
+    else{
+      return <button type="ฺ๊button" className="btn btn-lg button__confirm" disabled> Confirm Order </button>;
+    }
+  }
+
   render() {
     const { bill, address, isLoaded } = this.state;
 
     if (!!!isLoaded) {
-      return <React.Fragment />;
+      return <div className="loader" />;
     }
     console.log("here addr: ", address);
     console.log("here bill: ", bill);
@@ -235,7 +245,7 @@ export default class Payment extends Component {
                     {address.map((it, index) => (
                       <a
                         key={index}
-                        className="dropdown-item dd__addr-choice"
+                        className="dropdown-item dd__addr-choice break__word"
                         onClick={this.calculateDeliveryFee.bind(this, index)}
                       >
                         {it.address}
@@ -277,11 +287,7 @@ export default class Payment extends Component {
                   </div>
                 </div>
                 <div className="row box__confirm" onClick={this.updateBill}>
-                  <a href="/payment">
-                    <button type="ฺ๊button" className="btn btn-lg button__confirm" >
-                        Confirm Order
-                    </button>
-                  </a>
+                  {this.checkSelectAddr()}
                 </div>
             </div>
           </div>

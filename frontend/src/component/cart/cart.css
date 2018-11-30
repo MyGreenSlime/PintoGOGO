@@ -69,4 +69,8 @@
     margin-bottom: 2%;
 }
 
+.button--confirm:disabled{
+    background-color: #c0c0c0;
+}
+
 

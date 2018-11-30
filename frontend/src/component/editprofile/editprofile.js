@@ -118,7 +118,7 @@ class EditProfile extends Component {
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>
             <div className="center">
-              <img className="userpic-edit" src={this.state.imagePreviewUrl} />
+              <img className="userpic-edit" src={"\\"+this.state.imagePreviewUrl} alt="profile picture"/>
               <br />
               <div className="upload-btn-wrapper">
                 <button className="btn-upload">Change Picture</button>

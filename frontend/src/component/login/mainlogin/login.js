@@ -9,7 +9,7 @@ class Login extends Component {
       <React.Fragment>
         <div className="login__box__container">
           <div className="login__box">
-            <img className="logo" src="img/login/icon.png" />
+            <img className="logo" src="img/login/icon.png" alt="logo"/>
             <div className="login__input">
             <Userpass />
             </div>

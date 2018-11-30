@@ -13,9 +13,7 @@ class Cart extends Component {
       order: null,
       isLoaded: false
     };
-    this.createCardCartFood = this.createCardCartFood.bind(this);
-    this.createCardCartSnack = this.createCardCartSnack.bind(this);
-    this.createCardPackage = this.createCardPackage.bind(this);
+    this.createCardCart = this.createCardCart.bind(this);
     this.confirmButtonClicked = this.confirmButtonClicked.bind(this);
   }
 
@@ -37,64 +35,68 @@ class Cart extends Component {
     getOrder();
   }
 
-  createCardCartFood() {
-    let card_food;
-    if (!this.state.order.food_order) {
-      card_food = <div />;
-    } else {
-      card_food = this.state.order.food_order.map((ord, index) => (
-        <CardCart
-          handlerFromParant={this.handleData}
-          picture={ord.food_id.img_url}
-          name={ord.food_name}
-          price={ord.price}
-          amount={ord.amount}
-          id={ord.food_id._id}
-          type_order="food"
-        />
-      ));
-    }
-    return card_food;
+  onOrderDeleted(index,type) {
+    console.log(this.state.order)
+    const getOrder = getCurrentOrder.bind(this,"order","isLoaded")
+    getOrder();
   }
 
-  createCardCartSnack() {
-    let card_snack;
-    if (!this.state.order.snack_order) {
-      card_snack = <div />;
+  createCardCart(type) {
+    let card_cart;
+    let img_url;
+    if (type === "package") {
+      img_url = "";
     } else {
-      card_snack = this.state.order.snack_order.map((ord, index) => (
+      img_url = "img_url";
+    }
+    if (!this.state.order[type + "_order"]) {
+      card_cart = <div />;
+    } else {
+      card_cart = this.state.order[type + "_order"].map((ord, index) => (
         <CardCart
           handlerFromParant={this.handleData}
-          picture={ord.snack_id.img_url}
-          name={ord.snack_name}
+          picture={ord[type + "_id"][img_url]}
+          name={ord[type + "_name"]}
           price={ord.price}
           amount={ord.amount}
-          id={ord.snack_id._id}
-          type_order="snack"
+          id={ord[type + "_id"]._id}
+          type_order={type}
+          onOrderDeleted={this.onOrderDeleted.bind(this, index, type)}
         />
       ));
     }
-    return card_snack;
+    return card_cart;
   }
 
-  createCardPackage() {
-    let card_package;
-    if (!this.state.order.package_order) {
-      card_package = <div />;
-    } else {
-      card_package = this.state.order.package_order.map((ord, index) => (
-        <CardCart
-          handlerFromParant={this.handleData}
-          picture={""}
-          name={ord.package_name}
-          price={ord.price}
-          amount={ord.amount}
-          id={ord.package_id._id}
-          type_order="package"
-        />
-      ));
+  checkOrder() {
+    let is_no_order = true;
+    for (let data in this.state.order) {
+      if (
+        this.state.order.hasOwnProperty(data) &&
+        typeof this.state.order[data] === "object"
+      ) {
+        if (this.state.order[data].length !== 0) {
+          is_no_order = false;
+        }
+      }
     }
-    return card_package;
+    if (is_no_order) {
+      return (
+        <button className="btn button--confirm" disabled>
+          {" "}
+          CONFIRM{" "}
+        </button>
+      );
+    }
+    return (
+      <button
+        className="btn button--confirm"
+        onClick={this.confirmButtonClicked}
+      >
+        {" "}
+        CONFIRM{" "}
+      </button>
+    );
   }
 
   confirmButtonClicked() {
@@ -174,23 +176,16 @@ class Cart extends Component {
               </div>
             </div>
             <div>
-              {this.createCardCartFood()}
-              {this.createCardCartSnack()}
-              {this.createCardPackage()}
+              {this.createCardCart("food")}
+              {this.createCardCart("snack")}
+              {this.createCardCart("package")}
             </div>
             <hr />
             <div>
               <div className="total">
                 <p>TOTAL: {this.state.fromChild}</p>
               </div>
-              <a href="/bill">
-                <button
-                  className="btn button--confirm"
-                  onClick={this.confirmButtonClicked}
-                >
-                  CONFIRM
-                </button>
-              </a>
+              {this.checkOrder()}
             </div>
           </div>
         </div>

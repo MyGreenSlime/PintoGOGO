@@ -12,7 +12,7 @@ import { Elements, StripeProvider } from "react-stripe-elements";
 //---------------don--------------------------------
 import Addmenu from "./component/add/addmenu";
 import Addsnack from "./component/add/addsnack";
-import Snack from "./component/menuandsnack/snack.js";
+import Snack from "./component/show/showsnack.js";
 import CheckoutForm from "./component/checkout/CheckoutForm.js";
 import UnderConstruct from "./component/underconstruct/index.js";
 //---------------name-------------------------------
@@ -22,14 +22,13 @@ import Choice from "./component/choice/choice";
 import Recommend from "./component/recommend/recommend";
 import Payment from "./component/payment/payment";
 //---------------boo---------------------------------
-import Menu from "./component/menuandsnack/menu.js";
+import Menu from "./component/show/showmenu.js";
 import Cart from "./component/cart/cart.js";
 import MenuDetail from "./component/detail/menudetail.js";
 import SnackDetail from "./component/detail/snackdetail.js";
 import EditMenuDetail from "./component/editdetail/editmenudetail/editmenudetail.js";
 import EditSnackDetail from "./component/editdetail/editsnackdetail/editsnackdetail.js";
 import Enjoy from "./component/enjoy/enjoy.js";
-import Payment2 from "./component/payment2/payment2.js";
 //---------------been-----------------------------------
 import Register from "./component/register/register.js";
 import Package from "./component/package/package.js";
@@ -106,7 +105,6 @@ class App extends Component {
               <Route path="/profile" component={Profile} />
               <Route path="/edit/profile" component={EditProfile} />
               <Route path="/cart" component={Cart} />
-              <Route path="/payment2" component={Payment2} />
               <Route path="/detail/menu" component={MenuDetail} />
               {/* <Route path="/3days" component={Pack3days} />
                 <Route path="/5days" component={Pack5days} />

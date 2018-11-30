@@ -152,6 +152,7 @@ class EditMenuDetail extends Component {
                   src={this.state.imagePreviewUrl}
                   alt={this.state.name}
                   className="editmenudetail__imgpreview"
+                  alt="preview"
                 />
                 <br />
                 <div className="upload-btn-wrapper">

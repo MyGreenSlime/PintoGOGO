@@ -10,11 +10,6 @@ class MenuAndSnack extends Component {
       menus: {},
       isLoaded: false,
       firstImg: 0,
-      secondImg: 1,
-      thirdImg: 2,
-      forthImg: 3,
-      fifthImg: 4,
-      sixthImg: 5,
     };
     console.log("props",this.props.path)
     this.checkFirstMenuSet = this.checkFirstMenuSet.bind(this);
@@ -88,7 +83,7 @@ class MenuAndSnack extends Component {
       for(let i = firstImg; i<firstImg+3; i++){
         if(i < menus.length){
           const card_col1 = 
-            <div className="col-4 menuzone__image--fix">
+            <div className="col-sm-4 menuzone__image--fix">
               <CardMenu
                 name={menus[i][this.props.name]}
                 picture={menus[i].img_url}
@@ -103,7 +98,7 @@ class MenuAndSnack extends Component {
         }
         if(i+3 < menus.length){
           const card_col2 = 
-            <div className="col-4 menuzone__image--fix">
+            <div className="col-sm-4 menuzone__image--fix">
               <CardMenu
                 name={menus[i+3][this.props.name]}
                 picture={menus[i+3].img_url}
@@ -128,11 +123,11 @@ class MenuAndSnack extends Component {
             {this.checkFirstMenuSet()}</div>
         </div>
 
-        <div className="row">
-          <div className="row">
+        <div>
+          <div className="row full">
             {col1}
           </div>
-          <div className="row">
+          <div className="row full">
            {col2}
           </div>
         </div>

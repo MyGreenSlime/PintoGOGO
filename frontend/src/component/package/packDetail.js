@@ -50,6 +50,7 @@ export default class Package3DaysDetail extends Component {
         <img
           className="card-img img-responsive"
           src={"\\" + pack[0].day_meal[day]["meal_" + meal].img_url}
+          alt={pack[0].day_meal[day]["meal_"+meal].menu_name}
         />
         <div className="overlay">
           <h2>{pack[0].day_meal[day]["meal_" + meal].menu_name}</h2>

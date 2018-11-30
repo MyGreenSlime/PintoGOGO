@@ -16,6 +16,7 @@ import "../navbar/style-navbar.css";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { getCurrentOrder } from "../api/api";
 class Navigationbar extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,8 @@ class Navigationbar extends Component {
     this.state = {
       isOpen: false,
       dropdownOpen: false,
-      currentUser: []
+      currentUser: [],
+      order: [],
     };
   }
 
@@ -41,9 +43,27 @@ class Navigationbar extends Component {
     });
   }
 
+  countOrder(){
+    const getOrder = getCurrentOrder.bind(this, "order", "");
+    getOrder();
+    let sum_amt = 0
+    for (let data in this.state.order) {
+      if (this.state.order.hasOwnProperty(data) && typeof this.state.order[data] === 'object') {
+        for(let i=0; i<this.state.order[data].length; i++){
+          sum_amt += this.state.order[data][i].amount
+        }
+      }
+    }
+
+    if(sum_amt !== 0){
+      return <div className="circle__counter">{sum_amt}</div>;
+    }
+    return ;
+  }
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    {console.log("nav",user)}
+    // {console.log("nav",user)}
     const forAdmin = (
       <React.Fragment>
         <NavItem className="navbar__item">
@@ -87,7 +107,9 @@ class Navigationbar extends Component {
         </NavItem>
         <NavItem className="navbar__item">
           <NavLink href="/cart" className="navbar__link">
+            {this.countOrder()}
             <img src="/img/navbar/icon-cart2.png" className="navbar__icon" />
+            {/* <div className="circle__counter">52</div> */}
           </NavLink>
         </NavItem>
       </React.Fragment>
