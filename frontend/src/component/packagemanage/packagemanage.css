@@ -64,8 +64,9 @@
 {
     background-color: #e4dac2;
     color: #7b7b7b;
-    /* font-size: 16px; */
-    font-size: 1.35vw;
+    font-size: 16px;
+    white-space: normal;
+    word-break: break-word;
     margin: 0 10px 20px 10px;
     font-weight: bold;
 }
