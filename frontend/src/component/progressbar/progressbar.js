@@ -7,9 +7,7 @@ class Progress extends Component {
       <div className="grid-menubar cart__menubar center">
         {/* <div className="col" /> */}
         <div>
-          <a href="/">
             <img src="/img/cart/plan.png" alt="plan icon" width="50%" />
-          </a>
           <p>PLAN</p>
         </div>
         <div>
@@ -21,9 +19,7 @@ class Progress extends Component {
         </div>
 
         <div>
-          <a href="/cart">
             <img src="/img/cart/cart.png" alt="cart icon" width="50%" />
-          </a>
           <p>CART</p>
         </div>
         <div>
