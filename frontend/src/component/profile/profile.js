@@ -31,18 +31,6 @@ class Profile extends Component {
     get_user();
   }
 
-  componentDidUpdate() {
-    if (this.state.isLoaded) {
-      const $ = window.$;
-      this.dropdownDOM = $(this.dropdownDOM.current);
-      this.dropdownDOM.dropdown();
-
-      $(".dd__profile-addr").click(function() {
-        var txt = $(this).text();
-      });
-    }
-  }
-
   render() {
     if (!!!this.state.isLoaded) {
       return <div className="loader" />;
