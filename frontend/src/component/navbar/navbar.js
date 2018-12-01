@@ -16,7 +16,6 @@ import "../navbar/style-navbar.css";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { getCurrentOrder } from "../api/api";
 import { currentOrder } from "../../actions/authActions";
 class Navigationbar extends Component {
   constructor(props) {
@@ -67,7 +66,7 @@ class Navigationbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    // {console.log("nav",user)}
+    
     const showorder = (
       <div className="circle__counter">{this.state.amountorder}</div>
     );
@@ -116,8 +115,8 @@ class Navigationbar extends Component {
         <NavItem className="navbar__item">
           <NavLink href="/cart" className="navbar__link">
             {this.state.amountorder >= 1 ? showorder : ""}
-            <img src="/img/navbar/icon-cart2.png" className="navbar__icon" />
-            {/* <div className="circle__counter">52</div> */}
+            <img src="/img/navbar/icon-cart2.png" className="navbar__icon" alt="cart icon"/>
+            
           </NavLink>
         </NavItem>
       </React.Fragment>

@@ -1,5 +1,4 @@
 import { SET_CURRENT_ORDER } from '../actions/types'
-import isEmpty from '../validation/is-empty'
 const initialState = {
     order : {}
 }
