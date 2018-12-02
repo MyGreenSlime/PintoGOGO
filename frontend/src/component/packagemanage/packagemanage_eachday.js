@@ -41,6 +41,11 @@ class PackagemanageEachdays extends Component {
     this.setPath = this.setPath.bind(this);
   }
 
+  componentDidUpdate() {
+    const $ = window.$;
+    $('[data-toggle="tooltip"]').tooltip();
+  }
+
   initDayImg(num_day, day_img) {
     const start_img = [
       <img className="card-img" src="../img/package/blank.PNG" alt="blank" />,
@@ -275,17 +280,21 @@ class PackagemanageEachdays extends Component {
 
     const login = (
       <div>
-        <button
-          className="btn btn-shownutrition"
-          onClick={() => (window.location.href = "/login")}
-        >
-          LOGIN
+        <div className="invalid-feedback d-block addmargin">Please login</div>
+        <button className="btn btn-shownutrition" disabled>
+          ADD TO CART
+        </button>
+        <button className="btn btn-shownutrition" disabled>
+          SAVE PACKAGE
         </button>
       </div>
     );
     const addAndSave = (
       <div>
         <button
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Have a good meal :)"
           className="btn btn-shownutrition"
           onClick={() => this.setPath("addcart")}
         >
@@ -329,7 +338,7 @@ class PackagemanageEachdays extends Component {
                         required
                       />
                       <div className="invalid-feedback">
-                        Please choose a username.
+                        Please name your package.
                       </div>
                     </div>
                   </div>

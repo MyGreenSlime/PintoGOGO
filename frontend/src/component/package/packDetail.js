@@ -65,6 +65,16 @@ class PackageDetail extends Component {
     const { packages, isLoaded } = this.state;
     const { isAuthenticated } = this.props.auth;
     let list_day = [];
+
+    const guess = (
+      <div>
+        <div className="invalid-feedback d-block addmargin">Please login</div>
+        <button className="btn btn-set" disabled>
+          ADD TO CART
+        </button>
+      </div>
+    );
+
     const addtoMyCart = (
       <button
         className="btn btn-set"
@@ -142,7 +152,7 @@ class PackageDetail extends Component {
                 <div className="package-box ">
                   <div className="name-pks">{packages[0].name_package}</div>
                   {list_day}
-                  {isAuthenticated ? addtoMyCart : ""}
+                  {isAuthenticated ? addtoMyCart : guess}
                 </div>
               </div>
               <div className="col-md">
