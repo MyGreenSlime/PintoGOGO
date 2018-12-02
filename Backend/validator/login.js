@@ -8,11 +8,11 @@ module.exports = function validatorLoginInput(data) {
     data.password = !isEmpty(data.password) ? data.password : '';
 
     if(Validator.isEmpty(data.user_name)) {
-        errors.user_name = 'Username filed is required';
+        errors.user_name = 'Username field is required';
     }
 
     if(Validator.isEmpty(data.password)) {
-        errors.password = 'Password filed is required';
+        errors.password = 'Password field is required';
     }
     return {
         errors, 
