@@ -4,7 +4,7 @@ import "../cart/cart.css";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Progress from '../progressbar/progressbar'
+import Progress from "../progressbar/progressbar";
 import { updateBill, getAddress, getBills } from "../api/api";
 
 class Payment extends Component {
@@ -31,25 +31,26 @@ class Payment extends Component {
       delivery_fee: this.state.deliveryFee,
       distance: this.state.distance,
       total_cost: this.state.totalCost
-    }
-    const update_bill = updateBill.bind(this,finalOrder)
+    };
+    const update_bill = updateBill.bind(this, finalOrder);
     update_bill();
-}
+  }
 
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
-    const get_bill = getBills.bind(this,"bill","history")
+    const get_bill = getBills.bind(this, "bill", "history");
     get_bill()
-    .then(() => {
-      if (this.state.bill === null || this.state.bill.order === null) {
-        this.props.history.push("/cart");
-      }
-    })
-    .then(() => 
-      {const get_addr = getAddress.bind(this,"address","isLoaded")
-        get_addr()});
+      .then(() => {
+        if (this.state.bill === null || this.state.bill.order === null) {
+          this.props.history.push("/cart");
+        }
+      })
+      .then(() => {
+        const get_addr = getAddress.bind(this, "address", "isLoaded");
+        get_addr();
+      });
   }
 
   componentDidUpdate() {
@@ -112,6 +113,59 @@ class Payment extends Component {
     }
   }
 
+  createOrderFood() {
+    const foodOrder = this.state.bill.order.food_order.map((it, index) => (
+      <div key={index}>
+        <div className="row" style={{ width: "100%" }}>
+          <div className="col-md-6 col-12 ">
+            <p>{it.food_name}</p>
+          </div>
+          <div className="col-md-3 col-6 box__content--center">
+            <p>{it.amount}</p>
+          </div>
+          <div className="col-md-3 col-6 box__content--center">
+            <p>{it.price}</p>
+          </div>
+        </div>
+      </div>
+    ));
+    return foodOrder;
+  }
+
+  createOrderSnack() {
+    const snackOrder = this.state.bill.order.snack_order.map(it => (
+      <div className="row" style={{ width: "100%" }}>
+        <div className="col-md-6 col-12">
+          <p>{it.snack_name}</p>
+        </div>
+        <div className="col-md-3 col-6 box__content--center">
+          <p>{it.amount}</p>
+        </div>
+        <div className="col-md-3 col-6 box__content--center">
+          <p>{it.price}</p>
+        </div>
+      </div>
+    ));
+    return snackOrder;
+  }
+
+  createOrderPackage() {
+    const packageOrder = this.state.bill.order.package_order.map(it => (
+      <div className="row" style={{ width: "100%" }}>
+        <div className="col-md-6 col-12">
+          <p>{it.package_name}</p>
+        </div>
+        <div className="col-md-3 col-6 box__content--center">
+          <p>{it.amount}</p>
+        </div>
+        <div className="col-md-3 col-6 box__content--center">
+          <p>{it.price}</p>
+        </div>
+      </div>
+    ));
+    return packageOrder;
+  }
+
   render() {
     const { bill, address, isLoaded } = this.state;
 
@@ -139,47 +193,9 @@ class Payment extends Component {
                   </div>
                 </div>
                 <hr />
-                {bill.order.food_order.map((it,index) => (
-                  <div key={index}>
-                    <div className="row" style={{ width: "100%" }}>
-                      <div className="col-md-6 col-12 ">
-                        <p>{it.food_name}</p>
-                      </div>
-                      <div className="col-md-3 col-6 box__content--center">
-                        <p>{it.amount}</p>
-                      </div>
-                      <div className="col-md-3 col-6 box__content--center">
-                        <p>{it.price}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {bill.order.snack_order.map(it => (
-                  <div className="row" style={{ width: "100%" }}>
-                    <div className="col-md-6 col-12">
-                      <p>{it.snack_name}</p>
-                    </div>
-                    <div className="col-md-3 col-6 box__content--center">
-                      <p>{it.amount}</p>
-                    </div>
-                    <div className="col-md-3 col-6 box__content--center">
-                      <p>{it.price}</p>
-                    </div>
-                  </div>
-                ))}
-                {bill.order.package_order.map(it => (
-                  <div className="row" style={{ width: "100%" }}>
-                    <div className="col-md-6 col-12">
-                      <p>{it.package_name}</p>
-                    </div>
-                    <div className="col-md-3 col-6 box__content--center">
-                      <p>{it.amount}</p>
-                    </div>
-                    <div className="col-md-3 col-6 box__content--center">
-                      <p>{it.price}</p>
-                    </div>
-                  </div>
-                ))}
+                {this.createOrderFood()}
+                {this.createOrderSnack()}
+                {this.createOrderPackage()}
                 <hr />
               </div>
               <br />
@@ -191,7 +207,7 @@ class Payment extends Component {
                   type="button"
                   data-toggle="dropdown"
                 >
-                  Selected
+                  Please Select
                 </button>
                 <div className="dropdown-menu btn-block">
                   {address.map((it, index) => (
@@ -207,7 +223,7 @@ class Payment extends Component {
               </div>
               <div className="row">
                 <div className="col-md-6 col-6">
-                  <p>Food cost</p>
+                  <p>Food cost (Baht)</p>
                 </div>
                 <div className="col-md-6 col-6 box__content--center">
                   <p>{bill.order_cost}</p>
@@ -215,7 +231,7 @@ class Payment extends Component {
               </div>
               <div className="row">
                 <div className="col-md-6 col-6">
-                  <p>Distance (kilometer)</p>
+                  <p>Distance (Kilometer)</p>
                 </div>
                 <div className="col-md-6 col-6 box__content--center">
                   <p>{this.state.distance}</p>
@@ -223,7 +239,7 @@ class Payment extends Component {
               </div>
               <div className="row">
                 <div className="col-md-6 col-6">
-                  <p>Delivery Fee</p>
+                  <p>Delivery Fee (Baht)</p>
                 </div>
                 <div className="col-md-6 col-6 box__content--center">
                   <p>{this.state.deliveryFee}</p>
@@ -232,7 +248,7 @@ class Payment extends Component {
               <hr />
               <div className="row txt__total">
                 <div className="col-md-6 col-6">
-                  <p>Order Total</p>
+                  <p>Order Total (Baht)</p>
                 </div>
                 <div className="col-md-6 col-6 box__content--center">
                   <p>{this.state.totalCost}</p>
