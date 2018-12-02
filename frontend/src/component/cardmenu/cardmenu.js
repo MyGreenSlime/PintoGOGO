@@ -60,7 +60,6 @@ class cardMenu extends Component {
     );
     return (
       <section className="menu">
-        {/* block__element--modify */}
         <div className="grid-cardmenu">
           <div className="cardmenu__image center">
             <Link to={"/menudetail/" + this.props.id}>

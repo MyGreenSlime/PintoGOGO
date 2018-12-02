@@ -3,62 +3,55 @@
   margin: 10px 0 20px 0;
   max-width: 500px;
   padding: 10px 14px;
-  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+    rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
   background: white;
 }
 
 .StripeElement--focus {
-  box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
+  box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
+    rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
-} 
+}
 
 .outer__container{
   background: url("/img/cart/bg2.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 1% 0 10% 0 ;
+  padding: 1% 0 10% 0;
   background-attachment: fixed;
-  background-position :  top left; 
+  background-position: top left;
   min-height: calc(100vh - 155px);
 }
 
-.payment__box__container{
-  font-family: 'Quicksand', sans-serif;
+.payment__box__container {
+  font-family: "Quicksand", sans-serif;
   font-size: 16px;
   width: 60%;
   padding: 0;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 3%;
-  margin-bottom: 2%;
+  margin: 3% auto 2% auto;
   color: black;
   background-color: #f3ece7;
   border-radius: 8px;
-  
 }
 
-.payment__purchase--pad{
-  border-right: 0.5px solid #999999;
-  padding-left: 4%;
-}
-
-.payment__customer__detail--left{
+.payment__customer__detail--left {
   text-align: center;
 }
 
-.checkout__set__bg{
+.checkout__set__bg {
   background: url("/img/cart/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 1% 0 10% 0 ;
+  padding: 1% 0 10% 0;
   min-height: calc(100vh - 155px);
   background-attachment: fixed;
-  background-position :  top left; 
+  background-position: top left;
 }
 
-.button--pay{
+.button--pay {
   width: 50%;
   margin: 5% auto;
 }
@@ -73,9 +66,8 @@
   background: url("/img/bg/food-background-light.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 1% 0 5% 0 ;
+  padding: 1% 0 5% 0;
   background-attachment: fixed;
-  background-position :  top left; 
+  background-position: top left;
   min-height: calc(100vh - 155px);
-
 }

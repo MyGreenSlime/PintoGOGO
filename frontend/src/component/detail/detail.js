@@ -101,7 +101,7 @@ class Detail extends Component {
               {user.type ? admin : ""}
             </div>
             <div className="col-md-7">
-              <div className="row menudetail__detail__description break__word">
+              <div className="row menudetail__detail__description breakword">
                 <p>{this.state.menu.description}</p>
               </div>
               <div className="row">
@@ -129,7 +129,7 @@ class Detail extends Component {
                 <p>{this.state.menu.sodium} mg</p>
               </div>
               <div className="row">
-                <div className="col-9 break__word">
+                <div className="col-9 breakword">
                   <p>CARBOHYDRATE</p>
                 </div>
                 <p> {this.state.menu.carbohydrate} g</p>
@@ -161,7 +161,7 @@ class Detail extends Component {
                 CALORIES
               </div>
             </div>
-            <div className="col-md-4 col-12 menudetaiil__summary--col break__word">
+            <div className="col-md-4 col-12 menudetaiil__summary--col breakword">
               <div className="menudetail__summary--bg">
                 <p> {this.state.menu.carbohydrate} G</p>
                 CARBOHYDRATE

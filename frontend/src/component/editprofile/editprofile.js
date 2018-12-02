@@ -72,12 +72,10 @@ class EditProfile extends Component {
     let reader = new FileReader();
     let file = e.target.files[0];
     reader.onloadend = () => {
-      this.setState(
-        {
-          profilepic: file,
-          imagePreviewUrl: reader.result
-        },
-      );
+      this.setState({
+        profilepic: file,
+        imagePreviewUrl: reader.result
+      });
     };
     reader.readAsDataURL(file);
   }
@@ -159,7 +157,7 @@ class EditProfile extends Component {
           distance: this.state.newAddr[i].distance
         }
       };
-     
+
       const addAddr = addAddress.bind(this, newAddress);
       await addAddr();
     }
@@ -205,7 +203,6 @@ class EditProfile extends Component {
     return (
       <div className="set-screen">
         {" "}
-        {/*bg*/}
         <div className="editprofile-box">
           <form noValidate onSubmit={this.handleSubmit}>
             <h2> PROFILE </h2>

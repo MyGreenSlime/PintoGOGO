@@ -1,102 +1,100 @@
-.menudetail{
-    font-family: 'Quicksand', sans-serif;
-    overflow-x: hidden;
-    padding-bottom: 5%;
-    /* margin-top: 9%; */
+.menudetail {
+  font-family: "Quicksand", sans-serif;
+  overflow-x: hidden;
+  padding-bottom: 5%;
 }
-.menudetail__outside{
-    margin-top: 6%;
-}
-
-.menudetail__homebutton{
-    padding-left: 5%;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: left;
+.menudetail__outside {
+  margin-top: 6%;
 }
 
-.menudetail__menuname{
-    font-size: 25px;
-    font-weight: bold;
-    color: #7b7b7b;
-    padding-bottom: 2%;
+.menudetail__homebutton {
+  padding-left: 5%;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
 }
 
-.menudetail__detail--foodimg{
-    border-radius: 10px;
-    text-align: center;
-    padding-bottom: 5%;
+.menudetail__menuname {
+  font-size: 25px;
+  font-weight: bold;
+  color: #7b7b7b;
+  padding-bottom: 2%;
 }
 
-.menudetail__detail--line{
-    border-top: 2px solid #999999;
-    padding-bottom: 2%;
-    margin-bottom: 3%;
-    text-align: left;
+.menudetail__detail--foodimg {
+  border-radius: 10px;
+  text-align: center;
+  padding-bottom: 5%;
 }
 
-.menudetail__detail{
-    padding-left: 10%;
-    padding-right: 10%;
-    /* padding-bottom: 2%; */
+.menudetail__detail--line {
+  border-top: 2px solid #999999;
+  padding-bottom: 2%;
+  margin-bottom: 3%;
+  text-align: left;
 }
 
-.menudetail__detail--addtocartbutton{
-    background-color:#e4dac2;
-    border: none;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: bold;
-    width: 250px;
-    height: 40px;
-    cursor: pointer;
-    margin-top : 2%;
-    margin-bottom: 2%;
+.menudetail__detail {
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
-.menudetail__detail--addtocartbutton:hover{
-    opacity: 0.8;
+.menudetail__detail--addtocartbutton {
+  background-color: #e4dac2;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  width: 250px;
+  height: 40px;
+  cursor: pointer;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
-.menudetail__detail__description{
-    text-align: left;
-    padding-right: 10%;
-    padding-bottom: 2%;
+.menudetail__detail--addtocartbutton:hover {
+  opacity: 0.8;
 }
 
-.menudetail__detail__calories{
-    padding-bottom: 2%;
-}
-.menudetaiil__summary--row{
-    padding-top: 2%;
-}
-
-.menudetaiil__summary--col{
-    border-right: 2px solid #999999;
-    height: 70px;
-    font-weight: bold;
-    margin-bottom: 4%;
+.menudetail__detail__description {
+  text-align: left;
+  padding-right: 10%;
+  padding-bottom: 2%;
 }
 
-a{
-    color: black;
+.menudetail__detail__calories {
+  padding-bottom: 2%;
+}
+.menudetaiil__summary--row {
+  padding-top: 2%;
 }
 
-.menudetail__detail__price{
-    font-weight: bold;
+.menudetaiil__summary--col {
+  border-right: 2px solid #999999;
+  height: 70px;
+  font-weight: bold;
+  margin-bottom: 4%;
 }
 
-.break__word{
-    white-space: normal !important;
-    word-break: break-word;
+a {
+  color: black;
 }
 
-.menudetail__summary--bg{
-    background-color: #f3ece7;
-    border-radius: 7px;
-    width: 70%;
-    height: 100%;
-    transform: translate(22%);
-    padding-top: 3%; 
-    padding-bottom: 1%; 
+.menudetail__detail__price {
+  font-weight: bold;
+}
+
+.breakword {
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+.menudetail__summary--bg {
+  background-color: #f3ece7;
+  border-radius: 7px;
+  width: 70%;
+  height: 100%;
+  transform: translate(22%);
+  padding-top: 3%;
+  padding-bottom: 1%;
 }
