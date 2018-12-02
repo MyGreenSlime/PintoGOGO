@@ -84,3 +84,7 @@
 .box__confirm {
   justify-content: center;
 }
+
+.txt__desc {
+  font-size: 10px;
+}

@@ -68,7 +68,7 @@ class Payment extends Component {
   calculateDeliveryFee(index) {
     let dist = this.state.address[index].distance;
     dist = dist / 1000;
-    let fee = dist * 2;
+    let fee = dist * 8;
     let packageOrder = this.state.bill.order.package_order;
 
     if (packageOrder != null) {
@@ -239,7 +239,11 @@ class Payment extends Component {
               </div>
               <div className="row">
                 <div className="col-md-6 col-6">
-                  <p>Delivery Fee (Baht)</p>
+                  <p>Delivery Fee (8 Baht/km)</p>
+                  <p className="txt__desc">
+                    *Shipping charges based on the destination and delivery
+                    day(s)
+                  </p>
                 </div>
                 <div className="col-md-6 col-6 box__content--center">
                   <p>{this.state.deliveryFee}</p>
