@@ -48,11 +48,11 @@ router.get('/profile', passport.authenticate('jwt', {
 
 router.get('/all', passport.authenticate('jwt', {
   session: false
-}), userControl.promoteUser);
+}), userControl.getAllUser);
 
 router.put('/promote/:id', passport.authenticate('jwt', {
   session: false
-}),userControl.getAllUser)
+}),userControl.promoteUser)
 
 //update profile
 router.put('/edit/profile', passport.authenticate('jwt', {
