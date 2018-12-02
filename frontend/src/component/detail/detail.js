@@ -21,7 +21,7 @@ class Detail extends Component {
       this,
       "menu",
       "isLoaded",
-      this.props.path_get_data + res[res.length - 1]
+      this.props.path_get_data + "/" + res[res.length - 1]
     );
     get_detail();
   }
@@ -32,8 +32,8 @@ class Detail extends Component {
 
   addToCartClick(e) {
     const newOrder = {
-      food_id: this.state.menu._id,
-      food_name: this.state.menu[this.props.name],
+      [this.props.path_get_data+"_id"]: this.state.menu._id,
+      [this.props.path_get_data + "_name"]: this.state.menu[this.props.name],
       price: this.state.menu.price
     };
     const addNewOrder = addToCart.bind(

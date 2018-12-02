@@ -8,7 +8,7 @@ class Snackdetail extends Component {
         <Detail
           name="snack_name"
           type = "SNACK"
-          path_get_data="snack/"
+          path_get_data="snack"
           path_to_edit="edit/detail/snack" />
       </React.Fragment>
     );
