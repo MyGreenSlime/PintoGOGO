@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
-/* @import url('https://fonts.googleapis.com/css?family=Prompt'); */
 
 .outside--box{
   background-color: #f3ece7;
@@ -8,11 +7,7 @@
   top: -10px;
   margin-top: 170px;
   margin-right: 10px;
-  /* z-index: -1; */
-  /* margin-bottom: 50px; */
-  /* margin-left: 5%; */
   width: 30%;
-  /* min-width: 120px; */
   height: 525px;
   border-radius: 10px;
   overflow-y: scroll;
@@ -20,26 +15,24 @@
   font-family: 'Quicksand', sans-serif;  
 }
 
-.menu--text{
+.box__text--display{
   text-align: left;
   margin: 5%;
 }
 
-.menu--image{
+.box__image--size{
   width: 80%;
   height: 80%;
   margin: 5%;
   border-radius: 10px;
 }
 
-.menu--image__drag{
+.box__image__drag--size{
   width: 150px;
   height: 150px;
-  /* margin: 5%; */
   border-radius: 10px;
   position: relative;
   display: inline-block;
-  /* z-index: 1; */
 }
 
 .hovereffect {

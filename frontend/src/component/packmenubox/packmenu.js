@@ -27,7 +27,7 @@ class Packmenu extends Component {
     img = (
       <figure>
         <div className="hovereffect">
-          <img src={url} className="menu--image" alt={name} />
+          <img src={url} className="box__image--size" alt={name} />
           <div className="overlay">
             <h2>{name}</h2>
           </div>
@@ -45,7 +45,7 @@ class Packmenu extends Component {
       <React.Fragment key={index}>
         <img
           src={menu.img_url}
-          className="menu--image__drag"
+          className="box__image__drag--size"
           alt={menu.menu_name}
         />
       </React.Fragment>
@@ -81,7 +81,7 @@ class Packmenu extends Component {
     return (
       <React.Fragment>
         <div className="outside--box">
-          <h4 className="menu--text">MENU</h4>
+          <h4 className="box__text--display">MENU</h4>
           <div className="row justify-content-end">
             <div className="col">{cols1}</div>
             <div className="col">{cols2}</div>
