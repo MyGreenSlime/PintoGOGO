@@ -66,16 +66,14 @@ class Register extends Component {
   }
 
   handleData(lat, lng, dest, dist) {
-    this.setState(
-      {
-        address: {
-          address: dest[0],
-          lat: lat,
-          lng: lng,
-          distance: dist
-        }
-      },
-    );
+    this.setState({
+      address: {
+        address: dest[0],
+        lat: lat,
+        lng: lng,
+        distance: dist
+      }
+    });
   }
 
   render() {
@@ -291,7 +289,7 @@ class Register extends Component {
             </div>
             <br />
             <button width="auto" type="submit" className="btn button-confirm">
-              {/* onClick={() => this.props.handleDataFromGmap */} CONFIRM{" "}
+              CONFIRM
             </button>
           </form>
         </div>

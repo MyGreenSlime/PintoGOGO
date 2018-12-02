@@ -18,10 +18,6 @@
   margin: 0 auto 0 auto;
 }
 
-.profilepic-edit {
-  width: 40%;
-}
-
 .userpic-edit {
   display: inline-block;
   width: 150px;
@@ -31,73 +27,14 @@
   object-fit: cover;
 }
 
-.choice-group {
-  width: 100%;
-}
-
-.choice {
-  background-color: #fff5ee;
-  padding: 10% 0 10% 0;
-}
-
 .editprofile-box {
   width: 40%;
-  /* margin: 0 auto 0 auto;  */
   background-color: #f3ece7;
   border-radius: 12px;
-  /* padding: 20px; */
   font-family: "Quicksand", sans-serif;
   min-width: 300px;
   padding: 3% 2% 4% 2%;
   margin: 0 auto 0 auto;
-}
-
-a {
-  color: #7b7b7b;
-}
-
-.menupro {
-  width: 200px;
-  border-radius: 8px;
-  background-color: #f3ece7;
-}
-
-.menulink:hover {
-  border-radius: 8px;
-  background-color: #e4dac2;
-}
-
-.form {
-  font-size: 18px;
-}
-
-.form-left {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-.text-form-left {
-  width: 40%;
-}
-
-.form-right {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-.text-form-right {
-  text-align: left;
-}
-
-.payment {
-  width: 41%;
-  text-align: left;
-  padding-left: 15px;
-}
-
-.exp {
-  width: 20%;
-  padding-left: 15px;
 }
 
 .button-confirm {
@@ -124,7 +61,7 @@ a {
 .btn-upload {
   border: none;
   color: gray;
-  background-color:#ffe6cc;
+  background-color: #ffe6cc;
   padding: 5px 8px;
   border-radius: 8px;
   font-size: 14px;
@@ -159,13 +96,6 @@ input[type="textarea"] {
 
 label {
   font-weight: bold;
-}
-
-.modal {
-  z-index: 20;
-}
-.modal-backdrop {
-  z-index: 10;
 }
 
 .edit-list__addr {

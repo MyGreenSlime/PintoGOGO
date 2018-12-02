@@ -52,11 +52,9 @@ class Add extends Component {
     let reader = new FileReader();
     let file = e.target.files[0];
 
-    this.setState(
-      {
-        img: e.target.files[0]
-      },
-    );
+    this.setState({
+      img: e.target.files[0]
+    });
 
     reader.onloadend = () => {
       this.setState({
@@ -206,16 +204,6 @@ class Add extends Component {
                   required
                 />
               </div>
-              {/* <div className="form-group">
-                <input
-                  className="form-control"
-                  type="file"
-                  name="img"
-                  accept="image/jpg"
-                  onChange={this.handleChangeImage}
-                  required
-                />
-              </div> */}
               <div className="upload-btn-wrapper">
                 <button className="btn btn-upload">Add Picture</button>
                 <input

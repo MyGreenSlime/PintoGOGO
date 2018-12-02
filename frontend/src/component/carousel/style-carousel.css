@@ -3,7 +3,6 @@
 .carousel {
   position: relative;
   background-color: transparent;
-  /* overflow: hidden; */
   font-family: "Quicksand", sans-serif;
 }
 
@@ -12,14 +11,18 @@
   font-weight: bold;
 }
 
-.linebreak {
-  width: 158%;
-  height: 6px;
-  background-color: white;
+.carousel-inner .carousel-item {
+  height: 400px;
 }
 
-.carousel-item {
-  height: 400px;
+.carousel-inner .carousel-item .carousel-caption {
+  opacity: 0;
+  transition: 0.8s all ease-in-out 0.1s;
+}
+
+.carousel-inner .carousel-item.active .carousel-caption {
+  opacity: 1;
+  transition: 0.8s all ease-in-out 0.1s;
 }
 
 .carousel-indicators li {
@@ -29,16 +32,28 @@
 }
 
 .carousel-image-1 {
-  background: url("../carousel/carousel_1.jpg") no-repeat center center fixed;
+  background: url("../carousel/carousel_4.png") no-repeat center center fixed;
   background-size: cover;
 }
 
 .carousel-image-2 {
-  background: url("../carousel/carousel_2.jpg") center center fixed;
+  background: url("../carousel/carousel_5.jpg") center center fixed;
   background-size: cover;
 }
 
 .carousel-image-3 {
-  background: url("../carousel/carousel_3.jpg") center center fixed;
+  background: url("../carousel/carousel_7.jpg") center center fixed;
   background-size: cover;
+}
+
+@media (max-width: 420px) {
+  .txt__slide {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 325px) {
+  .txt__slide {
+    font-size: 3rem;
+  }
 }

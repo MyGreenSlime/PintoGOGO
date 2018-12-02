@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
 .set-screen {
-    background: url("/img/register/bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 7% 0 10% 0 ;
-    background-attachment: fixed;
-    background-position :  top left; 
+  background: url("/img/register/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 7% 0 10% 0;
+  background-attachment: fixed;
+  background-position: top left;
 }
 
 .register-box {
@@ -14,7 +14,6 @@
   margin: 0 auto 0 auto;
   background-color: #f3ece7;
   border-radius: 18px;
-  /* padding: 20px; */
   font-family: "Quicksand", sans-serif;
   min-width: 393px;
   padding: 30px 30px 50px 30px;
@@ -59,7 +58,6 @@
   border: solid 0px;
   width: 100px;
   font-weight: bold;
-  /* margin-bottom: 20px; */
 }
 
 .address-box {

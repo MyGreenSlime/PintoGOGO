@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {getProfile, addPayment, getBills} from "../api/api";
-import {CardElement,
-    injectStripe,} from 'react-stripe-elements';
-import "../checkout/checkout.css"
-import "../checkout/enjoy.css"
+import React, { Component } from "react";
+import { getProfile, addPayment, getBills } from "../api/api";
+import { CardElement, injectStripe } from "react-stripe-elements";
+import "../checkout/checkout.css";
+import "../checkout/enjoy.css";
 import propTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { currentOrder} from "../../actions/authActions"
-import Progress from '../progressbar/progressbar'
+import { currentOrder } from "../../actions/authActions";
+import Progress from "../progressbar/progressbar";
+
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
@@ -29,36 +29,39 @@ class CheckoutForm extends Component {
     let { token } = await this.props.stripe.createToken({ name: "Name" });
     if (token === undefined) {
       this.setState({
-        alert: <div className="alert alert-danger" role="alert"> Invalid Card Number! </div>
-      })
+        alert: (
+          <div className="alert alert-danger" role="alert">
+            {" "}
+            Invalid Card Number!{" "}
+          </div>
+        )
+      });
     } else {
       var data = {
         token_id: token.id
       };
-        this.setState({
-            waiting: true
-        })
-        const add_payment = addPayment.bind(this,data,"status","waiting")
-        add_payment();
+      this.setState({
+        waiting: true
+      });
+      const add_payment = addPayment.bind(this, data, "status", "waiting");
+      add_payment();
     }
   }
 
-    componentDidMount() {
-        if (!this.props.auth.isAuthenticated) {
-            this.props.history.push("/");
-          }
-        const get_bill = getBills.bind(this,"bill");
-        get_bill()
-            .then( () => {
-                if (this.state.bill === null) {
-                    this.props.history.push("/cart");
-                }
-                else if (this.state.bill.destination === null) {
-                    this.props.history.push("/bill")
-                }
-                const get_user = getProfile.bind(this, "currentUser", "isLoaded");
-                get_user();
-            })
+  componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+    const get_bill = getBills.bind(this, "bill");
+    get_bill().then(() => {
+      if (this.state.bill === null) {
+        this.props.history.push("/cart");
+      } else if (this.state.bill.destination === null) {
+        this.props.history.push("/bill");
+      }
+      const get_user = getProfile.bind(this, "currentUser", "isLoaded");
+      get_user();
+    });
   }
 
   render() {
@@ -174,17 +177,18 @@ class CheckoutForm extends Component {
   }
 }
 CheckoutForm.propTypes = {
-    auth: propTypes.object.isRequired,
-    errors: propTypes.object.isRequired,
-    currentOrder : propTypes.func.isRequired
-  };
-  
-  const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors,
-    order : state.order
-  });
-  
-  export default connect(
-    mapStateToProps, {currentOrder}
-  )(withRouter(injectStripe(CheckoutForm)));
+  auth: propTypes.object.isRequired,
+  errors: propTypes.object.isRequired,
+  currentOrder: propTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors,
+  order: state.order
+});
+
+export default connect(
+  mapStateToProps,
+  { currentOrder }
+)(withRouter(injectStripe(CheckoutForm)));

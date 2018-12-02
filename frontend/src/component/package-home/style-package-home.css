@@ -3,20 +3,17 @@
   overflow-x: hidden;
 }
 
-.box{
+.box {
   background-color: #f3ece7;
   margin: 10% auto;
   border-radius: 10px;
   width: 80%;
   height: 80%;
   padding: 2%;
-  overflow-y: hidden
-  /* left: 50%;
-  transform: translateX(-50%); */
+  overflow-y: hidden;
 }
 
-
-.button--pack{
+.button--pack {
   font-size: large;
   font-weight: bold;
   margin: 5%;
@@ -24,14 +21,13 @@
   text-transform: uppercase;
   white-space: normal;
   word-break: break-word;
-  
 }
 
-.desc--text{
+.desc--text {
   margin: 5%;
 }
 
-.package__img__box{
+.package__img__box {
   margin-top: 5%;
   width: 70%;
 }

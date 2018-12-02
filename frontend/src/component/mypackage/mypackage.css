@@ -1,35 +1,30 @@
-
 .set-screen-mypack {
   background: url("/img/cart/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 1% 0 5% 0 ;
+  padding: 1% 0 5% 0;
   min-height: calc(100vh - 155px);
   background-attachment: fixed;
-  background-position :  top left; 
+  background-position: top left;
 }
 
-.addpack{
+.addpack {
   width: 15%;
   min-width: 80px;
   margin-top: 5%;
 }
 
-.set-frame-mypks
-{ 
-  /* margin-top: 70px  !important; */
+.set-frame-mypks {
   margin: 70px auto 0 auto;
   padding: 0 !important;
   width: 60%;
 }
 
-.set-frame-each-mypks
-{
+.set-frame-each-mypks {
   padding: 0 2% 0 2%;
 }
 
-.set-each-mypackage
-{
+.set-each-mypackage {
   margin: 30px auto 30px auto;
   background-color: #f3ece7;
   color: #7b7b7b;
@@ -37,48 +32,38 @@
   border-radius: 12px;
 }
 
-.dis-grid
-{
+.dis-grid {
   display: grid;
   grid-template-rows: 70% 50%;
 }
 
-.detail 
-{
-    margin-bottom: 8%;
+.detail {
+  margin-bottom: 8%;
 }
 
-.name-each-mypks
-{
+.name-each-mypks {
   font-weight: bold;
   margin: 0 auto 15px auto;
   font-size: 20px;
   border-radius: 50px;
-  /* background-color: #FAE5D3; */
-  /* width: 80%; */
   padding: 8px;
-  
 }
 
-.img-mypack
-{
+.img-mypack {
   width: 70%;
   border-radius: 10px;
   margin: 10px 0 10px 0;
 }
 
-.view-mypks
-{
+.view-mypks {
   color: #7b7b7b;
   font-size: 16px;
   font-weight: bold;
   background-color: #e4dac2;
-  /* width: auto; */
   margin: 5px;
 }
 
-.create-mypks
-{
+.create-mypks {
   position: relative;
   color: #7b7b7b;
   font-size: 16px;
@@ -88,9 +73,4 @@
   word-break: break-word;
   white-space: normal;
   margin: 20px;
-}
-
-.create-mypks:hover
-{
-  
 }
