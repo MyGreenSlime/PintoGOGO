@@ -28,9 +28,9 @@
   border-radius: 12px;
 }
 
-.dis-grid {
-  display: grid;
-  grid-template-rows: 70% 30%;
+.des-box {
+  white-space: normal;
+  word-break: break-word;
 }
 
 .name-each-pks {
