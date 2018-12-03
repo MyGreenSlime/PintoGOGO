@@ -157,7 +157,7 @@ class Detail extends Component {
             </div>
             <div className="col-md-4 col-12 menudetaiil__summary--col">
               <div className="menudetail__summary--bg">
-                <p>{this.state.menu.calories} G</p>
+                <p>{this.state.menu.calories} Kcal</p>
                 CALORIES
               </div>
             </div>

@@ -71,7 +71,7 @@ export default class NutritionManage extends Component {
 						<p>CHOLESTEROL</p>
 					</div>
 					<div className=' col-sm set-align'>
-					<p>{Math.round(this.compute("cholesterol"),2)} g/day</p>
+					<p>{Math.round(this.compute("cholesterol"),2)} mg/day</p>
 					</div>
 				</div>
 				<div className='row'>
@@ -79,7 +79,7 @@ export default class NutritionManage extends Component {
 						<p>SODIUM</p>
 					</div>
 					<div className=' col-sm set-align'>
-					<p>{Math.round(this.compute("sodium"))} g/day</p>
+					<p>{Math.round(this.compute("sodium"))} mg/day</p>
 					</div>
 				</div>
 				<div className='row'>

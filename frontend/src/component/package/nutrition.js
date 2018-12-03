@@ -66,7 +66,7 @@ export default class Nutrition extends Component {
               <p>CHOLESTEROL</p>
             </div>
             <div className="col">
-              <p>{Math.round(this.compute("cholesterol"), 2)} g/day</p>
+              <p>{Math.round(this.compute("cholesterol"), 2)} mg/day</p>
             </div>
           </div>
           <div className="row">
@@ -74,7 +74,7 @@ export default class Nutrition extends Component {
               <p>SODIUM</p>
             </div>
             <div className="col">
-              <p>{Math.round(this.compute("sodium"), 2)} g/day</p>
+              <p>{Math.round(this.compute("sodium"), 2)} mg/day</p>
             </div>
           </div>
           <div className="row">
