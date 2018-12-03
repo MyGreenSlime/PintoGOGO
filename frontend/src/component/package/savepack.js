@@ -20,24 +20,25 @@ export default class Savepack extends Component {
   }
 
   createDivPackage(curPack) {
-    let divpk =
-      <React.Fragment>
+    let divpk = <React.Fragment>
         <div className="set-each-package row">
-          <div className="col-sm-4">
-            <img className="img-pack" src={curPack.day_meal[0].meal_1.img_url} alt={curPack.day_meal[0].meal_1.menu_name}/>
+          <div className="col-md-4">
+            <img className="img-pack" src={curPack.day_meal[0].meal_1.img_url} alt={curPack.day_meal[0].meal_1.menu_name} />
           </div>
-          <div className="col-sm dis-grid">
-            <div>
+          <div className="col-md">
+            <div className="des-box">
               <p className="name-each-pks">{curPack.name_package}</p>
               <p>{curPack.description}</p>
             </div>
-            {/* <LinkWithPrev to={"/" + this.props.path + "/" + curPack._id}> */}
-            <LinkWithPrev to={"/detail/package/" + curPack._id}>
-              <button className="btn view-pks">View Package</button>
-            </LinkWithPrev>
+            <div>
+              {/* <LinkWithPrev to={"/" + this.props.path + "/" + curPack._id}> */}
+              <LinkWithPrev to={"/detail/package/" + curPack._id}>
+                <button className="btn view-pks">View Package</button>
+              </LinkWithPrev>
+            </div>
           </div>
         </div>
-      </React.Fragment>
+      </React.Fragment>;
     return divpk;
   }
 
