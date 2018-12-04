@@ -11,3 +11,11 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.modal {
+  z-index: 20;
+}
+
+.modal-backdrop {
+  z-index: 10;
+}
