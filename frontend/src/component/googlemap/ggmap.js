@@ -27,7 +27,7 @@ export default class Map extends Component {
     window.handleDataFromGmap = this.handleDataFromGmap.bind(this);
 
     loadJS(
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyBKOfI6E4o_jRc1K8qBb63RsUKwZAavGSs&libraries=places&callback=initMap"
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyDOmqLlm6CbVBRKXX7Z85K8jhr32pCxQ7M&libraries=places&callback=initMap"
     );
   }
 

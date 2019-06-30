@@ -1,4 +1,7 @@
+const DBname = process.env.DBNAME || localhost
+const DBport = process.env.DBNAME || 27017
+const databasePinto = "mongodb://"+DBname+":"+DBport+"/PintoGOGO"
 module.exports = {
-    database: "mongodb://localhost:27017/PintoGOGO",
+    database: databasePinto,
     secret: 'yoursecret'
 }

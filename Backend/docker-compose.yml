@@ -1,0 +1,24 @@
+version : "3"
+services :
+  database:
+    restart: always
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - /mongodata:/data/db
+  backend:
+    restart: always
+    build : .
+    ports: 
+      - "5000:4000"
+    environment:
+      - DBNAME=database
+      - DBPORT=27017
+    volumes:
+      - /public/uploads:/public/uploads
+volumes:
+  mongodata:
+    driver: local
+
+ 
